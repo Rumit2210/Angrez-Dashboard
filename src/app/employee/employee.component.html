@@ -1,0 +1,120 @@
+<div class="main-content">
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md-9">
+                    <h4 class="card-title">Add Employee</h4>
+                </div>
+                <div class="ml-md-auto">
+
+                    <button type="cancel" class="btn btn-danger btn-round" (click)="closeTeacherForm()">
+                        <i class="fa fa-arrow-left"></i> Back
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <form class="form-horizontal" name="employeeRegForm" #employeeRegForm="ngForm">
+                <div class="row">
+                    <label class="col-md-2 col-form-label">First Name</label>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="firstname" name="firstname"
+                                [(ngModel)]="employeeModel.firstname" placeholder=" Enter First Name " />
+                        </div>
+                    </div>
+                    <label class="col-md-2 col-form-label">Last Name</label>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="lastname" name="lastname"
+                                [(ngModel)]="employeeModel.lastname" placeholder=" Enter Last Name" />
+                        </div>
+                    </div>
+                    <label class="col-md-2 col-form-label">Contact Number</label>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="contact" [(ngModel)]="employeeModel.contact"
+                                name="contact" placeholder="Enter Contact Number" />
+                        </div>
+                    </div>
+                    <label class="col-md-2 col-form-label">Whatsapp Number</label>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="Whatsapp" [(ngModel)]="employeeModel.Whatsapp"
+                                name="Whatsapp" placeholder="Enter Whatsapp Number" />
+                        </div>
+                    </div>
+
+                    <label class="col-md-2 col-form-label">Address</label>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <textarea id="address" name="address" rows="4" cols="54" [(ngModel)]="employeeModel.address"
+                                placeholder="Enter Address"></textarea>
+                        </div>
+                    </div>
+                    <label class="col-md-2 col-form-label">City</label>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="city" [(ngModel)]="employeeModel.city"
+                                name="city" placeholder="Enter City" />
+                        </div>
+                    </div>
+                    <label class="col-md-2 col-form-label">Pincode</label>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="pincode" [(ngModel)]="employeeModel.pincode"
+                                name="pincode" placeholder="Enter Pincode" />
+                        </div>
+                    </div>
+                    <label class="col-sm-2 col-form-label">Select Gender</label>
+                    <div class="col-md-2">
+                        <div class="form-check-radio">
+                            <label class="form-check-label" style="color: black !important">
+                                <input #genm class="form-check-input" name="gender" [(ngModel)]="employeeModel.gender"
+                                    type="radio" value="male" ngModel />
+                                Male
+                                <span class="form-check-sign"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-check-radio">
+                            <label class="form-check-label" style="color: black !important">
+                                <input #genf class="form-check-input" name="gender" [(ngModel)]="employeeModel.gender"
+                                    type="radio" value="female" ngModel />
+                                Female
+                                <span class="form-check-sign"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <label class="col-md-2 col-form-label">Select Services</label>
+                    <div class="col-md-4">
+                        <div class="btn-group bootstrap-select w-100">
+                            <div style="border: 1px #dddddd solid !important">
+                                <angular2-multiselect [ngModelOptions]="{standalone: true}" [data]="stdData"
+                                    [(ngModel)]="selectedServices" [settings]="dropdownSettings"
+                                    (onSelect)="onItemSelect($event)" (onDeSelect)="OnItemDeSelect($event)"
+                                    (onSelectAll)="onSelectAll($event)" name="itemms"
+                                    (onDeSelectAll)="onDeSelectAll($event)">
+                                </angular2-multiselect>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+        <div class="card-footer">
+            <div class="row">
+                <div class="ml-md-auto">
+                    <button type="submit" class="btn btn-info btn-round" (click)="saveEmployeeDetail(employeeModel)">
+                        <i class="fa fa-paper-plane" aria-hidden="true"></i> Submit
+                    </button>
+                    <button type="submit" class="btn btn-danger btn-round">
+                        <i class="fa fa-times" aria-hidden="true"></i> Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

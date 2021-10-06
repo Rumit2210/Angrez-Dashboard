@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs/operators';
-import { HttpClient, HttpClientModule, HttpHeaders, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 declare var $: any;
 @Injectable({
   providedIn: 'root'
@@ -16,6 +15,9 @@ export class ApiService {
       'Content-Type': 'application/json'
     })
   }
+  public static saveEmployeeListURL: string = ApiService.HOST_URL + '/admin/saveEmployeeList';
+
+
 
   public static saveStdListURL: string = ApiService.HOST_URL + '/admin/SaveStdList';
   public static getStdListURL: string = ApiService.HOST_URL + '/admin/GetStdList';
@@ -32,7 +34,7 @@ export class ApiService {
   public static getQueAnswerURL: string = ApiService.HOST_URL + '/admin/getQueAnswer';
 
   public static removeQueListURL: string = ApiService.HOST_URL + '/admin/removeQueList';
-  public static saveTecaherListURL: string = ApiService.HOST_URL + '/authenticate/saveTeacherList';
+
   public static saveStudentListURL: string = ApiService.HOST_URL + '/authenticate/SaveStudentList';
   public static getStudentListListURL: string = ApiService.HOST_URL + '/admin/GetStudentList/';
   public static GetTeacherlistURL: string = ApiService.HOST_URL + '/admin/GetTeacherList';

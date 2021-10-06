@@ -24,7 +24,21 @@ export const ROUTES: RouteInfo[] = [{
     title: 'Dashboard',
     type: 'link',
     icontype: 'nc-icon nc-bank'
-}, {
+},
+{
+    path: '/customer',
+    title: 'Customer',
+    type: 'link',
+    icontype: 'fa fa-user'
+},
+{
+    path: '/employee',
+    title: 'Employee',
+    type: 'link',
+    icontype: 'fa fa-users'
+},
+
+{
     path: '/calendar',
     title: 'Calendar',
     type: 'link',

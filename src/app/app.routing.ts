@@ -19,7 +19,16 @@ export const AppRoutes: Routes = [{
     }, {
         path: '',
         loadChildren: './userpage/user.module#UserModule'
-    },]
+    },
+    {
+        path: '',
+        loadChildren: './employee/employee.module#EmployeeModule'
+    },
+    {
+        path: '',
+        loadChildren: './customer/customer.module#CustomerModule'
+    },
+    ]
 }, {
     path: '',
     component: AuthLayoutComponent,
