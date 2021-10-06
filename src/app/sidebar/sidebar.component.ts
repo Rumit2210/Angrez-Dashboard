@@ -37,6 +37,12 @@ export const ROUTES: RouteInfo[] = [{
     type: 'link',
     icontype: 'fa fa-users'
 },
+{
+    path: '/services',
+    title: 'Services',
+    type: 'link',
+    icontype: 'fa fa-scissors'
+},
 
 {
     path: '/calendar',

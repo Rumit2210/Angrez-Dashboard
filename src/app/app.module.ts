@@ -17,7 +17,7 @@ import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
 import { AppRoutes } from './app.routing';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
-
+import { NgxPaginationModule } from 'ngx-pagination';
 @NgModule({
     imports: [
         BrowserAnimationsModule,
@@ -32,6 +32,7 @@ import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
         NavbarModule,
         FooterModule,
         FixedPluginModule,
+        NgxPaginationModule,
         AngularMultiSelectModule
     ],
     declarations: [

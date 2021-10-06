@@ -1,0 +1,119 @@
+<div class="main-content">
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md-9">
+                    <h4 class="card-title">Add Services</h4>
+                </div>
+                <div class="ml-md-auto">
+
+                    <button type="cancel" class="btn btn-danger btn-round">
+                        <i class="fa fa-arrow-left"></i> Back
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <form class="form-horizontal" name="servicesRegForm" #servicesRegForm="ngForm">
+                <div class="row">
+                    <label class="col-md-2 col-form-label">Service Name</label>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="serviceName" name="serviceName"
+                                [(ngModel)]="servicesModel.serviceName" placeholder=" Enter Service Name " />
+                        </div>
+                    </div>
+                    <label class="col-md-2 col-form-label">Service Price</label>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <input type="number" class="form-control" id="servicePrice"
+                                [(ngModel)]="servicesModel.servicePrice" name="servicePrice"
+                                placeholder="Enter Service Price " />
+                        </div>
+                    </div>
+                    <label class="col-md-2 col-form-label">Service Time Duration</label>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <input type="number" class="form-control" id="serviceTime" name="serviceTime"
+                                [(ngModel)]="servicesModel.serviceTime" placeholder=" Enter Time (Minute)" />
+                        </div>
+                    </div>
+                    <label class="col-md-2 col-form-label">Service Point</label>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <input type="number" class="form-control" id="servicePoint"
+                                [(ngModel)]="servicesModel.servicePoint" name="servicePoint"
+                                placeholder="Enter Service Point" />
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+        <div class="card-footer">
+            <div class="row">
+                <div class="ml-md-auto">
+                    <button type="submit" class="btn btn-info btn-round" (click)="saveServicesDetail(servicesModel)">
+                        <i class="fa fa-paper-plane" aria-hidden="true"></i> Submit
+                    </button>
+                    <button type="submit" class="btn btn-danger btn-round">
+                        <i class="fa fa-times" aria-hidden="true"></i> Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title"> Services List</h4>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class="text-primary">
+                                <th class="text-center">#</th>
+                                <th class="text-center">Services Name</th>
+                                <th class="text-center">Services Price</th>
+                                <th class="text-center">Time Duration</th>
+                                <th class="text-center">Service Point</th>
+                                <th class="text-right">Actions</th>
+                            </thead>
+                            <tbody>
+                                <tr
+                                    *ngFor="let item of servicesList | paginate: { itemsPerPage: 5, currentPage: p }; let i = index">
+                                    <td class="text-center">{{ item.index }}</td>
+                                    <td class="text-center">{{ item.name}} </td>
+                                    <td class="text-center">{{ item.price }}</td>
+                                    <td class="text-center">{{ item.time }}</td>
+                                    <td class="text-center">{{ item.point }}</td>
+
+                                    <td class="text-right">
+                                        <button type="button" rel="tooltip" class="btn btn-info  btn-icon btn-sm">
+                                            <i class="fa fa-eye" data-toggle="modal" data-target="#VisitorModal"
+                                                (click)="viewVisitorDetails(item)"></i>
+                                        </button>
+                                        &nbsp;
+                                        <button type="button" rel="tooltip" class="btn btn-danger btn-icon btn-sm"
+                                            (click)="removeSubject(item.id)">
+                                            <i class="fa fa-times"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="ml-md-auto">
+                            <pagination-controls (pageChange)="p = $event" autoHide="true" responsive="true">
+                            </pagination-controls>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

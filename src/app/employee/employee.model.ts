@@ -10,6 +10,10 @@ export class Employee {
         public city?: string,
         public pincode?: number,
         public gender?: any,
+        public services?: string,
+        public isactive?: boolean,
+        public createddate?: Date,
+        public updateddate?: Date
         // public dateofbirth?: string
     ) {
     }
