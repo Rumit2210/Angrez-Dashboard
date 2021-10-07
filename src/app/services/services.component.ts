@@ -11,6 +11,7 @@ import { ServicesService } from './services.service';
 export class ServicesComponent implements OnInit {
   public servicesModel: Services = new Services;
   public servicesList: Services[];
+  submitButton: Boolean = false;
   constructor(
     private servicesService: ServicesService,
     private apiService: ApiService
@@ -27,14 +28,31 @@ export class ServicesComponent implements OnInit {
     })
   }
   getAllServices() {
-    debugger
     this.servicesService.getAllServicesList().subscribe((data: any) => {
       this.servicesList = data;
-      debugger
-      // this.visitorList = data;
       for (let i = 0; i < this.servicesList.length; i++) {
         this.servicesList[i].index = i + 1;
       }
     });
+  }
+  viewServicesDetails(data) {
+    this.servicesModel = data;
+    this.submitButton = true;
+  }
+  cancelUpdateButton() {
+    this.submitButton = false;
+  }
+  updateServicesDetail() {
+    this.servicesModel
+    this.servicesService.updateServicesList(this.servicesModel).subscribe((req) => {
+      this.apiService.showNotification('top', 'right', 'Update Techer Successfully.', 'success');
+    })
+  }
+  removeServices(id) {
+    debugger
+    this.servicesService.removeServicesList(id).subscribe((req) => {
+      this.apiService.showNotification('top', 'right', 'Employee removed Successfully.', 'success');
+      this.getAllServices();
+    })
   }
 }

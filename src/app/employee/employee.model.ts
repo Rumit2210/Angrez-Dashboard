@@ -1,9 +1,9 @@
 export class Employee {
     constructor(
-
+        public index?: number,
         public id?: number,
-        public firstname?: string,
-        // public middlename?: string,
+        public fname?: string,
+        public lname?: string,
         public contact?: string,
         public whatsapp?: number,
         public address?: string,
@@ -13,7 +13,8 @@ export class Employee {
         public services?: string,
         public isactive?: boolean,
         public createddate?: Date,
-        public updateddate?: Date
+        public updateddate?: Date,
+        public service?: any
         // public dateofbirth?: string
     ) {
     }

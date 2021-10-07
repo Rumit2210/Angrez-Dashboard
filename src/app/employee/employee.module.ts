@@ -6,6 +6,7 @@ import { EmployeeRoutes } from './employee.routing';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 
@@ -15,6 +16,7 @@ import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
     CommonModule,
     FormsModule,
     NgbModule,
+    NgxPaginationModule,
     AngularMultiSelectModule,
     RouterModule.forChild(EmployeeRoutes)
   ]

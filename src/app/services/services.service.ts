@@ -20,17 +20,19 @@ export class ServicesService {
     getAllServicesList(): Observable<Services[]> {
         return this.httpClient.get<any>(ApiService.getAllServicesURL);
     }
-
+    updateServicesList(admin: Services): Observable<any[]> {
+        return this.httpClient.post<any>(ApiService.updateServicesListURL, admin);
+    }
+    removeServicesList(id) {
+        let data = {
+            id: id
+        }
+        return this.httpClient.post<any>(ApiService.removeEmployeeListURL, data);
+    }
     // saveStudentList(admin: Studentregister): Observable<any> {
     //     return this.httpClient.post<any>(ApiService.saveStudentListURL, admin);
     // }
-    // getStudentList(id): Observable<Studentregister[]> {
-    //     let data = {
-    //         id: id
-    //     }
 
-    //     return this.httpClient.post<any>(ApiService.getStudentListListURL, data);
-    // }
     // getStudentPicture(id) {
     //     let data = {
     //         id: id

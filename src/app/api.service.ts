@@ -15,9 +15,18 @@ export class ApiService {
       'Content-Type': 'application/json'
     })
   }
-  public static saveEmployeeListURL: string = ApiService.HOST_URL + '/admin/SaveEmployeeList';
+
   public static saveServicesListURL: string = ApiService.HOST_URL + '/admin/SaveServicesList';
   public static getAllServicesURL: string = ApiService.HOST_URL + '/admin/GetAllServices';
+  public static updateServicesListURL: string = ApiService.HOST_URL + '/admin/UpdateServicesList/';
+  public static removeServicesListURL: string = ApiService.HOST_URL + '/admin/RemoveServicesList/';
+  public static saveEmployeeListURL: string = ApiService.HOST_URL + '/admin/SaveEmployeeList';
+  public static getAllEmployeeURL: string = ApiService.HOST_URL + '/admin/GetAllEmployee';
+  public static removeEmployeeListURL: string = ApiService.HOST_URL + '/admin/RemoveEmployeeList/';
+
+
+
+
 
 
   public static saveStdListURL: string = ApiService.HOST_URL + '/admin/SaveStdList';
@@ -43,7 +52,7 @@ export class ApiService {
   public static saveLoginUserURL: string = ApiService.HOST_URL + '/authenticate/UserLogin';
   public static getTestforCheckingURL: string = ApiService.HOST_URL + '/admin/getTestforChecking';
   public static saveAdminLoginURL: string = ApiService.HOST_URL + '/admin/login';
-  public static removeStudentListURL: string = ApiService.HOST_URL + '/admin/removeStudentList';
+
   public static removeTeacherListURL: string = ApiService.HOST_URL + '/admin/removeTecaherList';
   public static updateTeacherListURL: string = ApiService.HOST_URL + '/admin/UpdateTecaherList/';
   public static updateStudentListURL: string = ApiService.HOST_URL + '/admin/UpdateStudentList/';
