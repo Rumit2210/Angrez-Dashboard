@@ -23,13 +23,21 @@ export class ApiService {
   public static saveEmployeeListURL: string = ApiService.HOST_URL + '/admin/SaveEmployeeList';
   public static getAllEmployeeURL: string = ApiService.HOST_URL + '/admin/GetAllEmployee';
   public static removeEmployeeListURL: string = ApiService.HOST_URL + '/admin/RemoveEmployeeList/';
+  public static saveCustomerListURL: string = ApiService.HOST_URL + '/admin/SaveCustomerList';
+  public static saveLoginUserURL: string = ApiService.HOST_URL + '/authenticate/UserLogin';
+  public static getAllCustomerURL: string = ApiService.HOST_URL + '/admin/GetAllCustomer';
+  public static saveAppointmentListURL: string = ApiService.HOST_URL + '/admin/SaveAppointmentList';
+  public static getAllAppointmentURL: string = ApiService.HOST_URL + '/admin/GetAllAppointment';
+  public static getViewAppointmentURL: string = ApiService.HOST_URL + '/admin/GetViewAppointment';
+  public static getAllEnquiryListURL: string = ApiService.HOST_URL + '/admin/GetAllEnquiryList';
+  public static getDailyTotalURL: string = ApiService.HOST_URL + '/admin/GetDailyTotal';
+  public static getMonthlyTotalURL: string = ApiService.HOST_URL + '/admin/GetMonthlyTotal';
 
 
 
 
 
 
-  public static saveStdListURL: string = ApiService.HOST_URL + '/admin/SaveStdList';
   public static getStdListURL: string = ApiService.HOST_URL + '/admin/GetStdList';
   public static saveSubjectURL: string = ApiService.HOST_URL + '/admin/saveSubject';
   public static getSubjectListURL: string = ApiService.HOST_URL + '/admin/GetSubjectList';
@@ -49,7 +57,7 @@ export class ApiService {
   public static getStudentListListURL: string = ApiService.HOST_URL + '/admin/GetStudentList/';
   public static GetTeacherlistURL: string = ApiService.HOST_URL + '/admin/GetTeacherList';
   public static GetAllStudentlistURL: string = ApiService.HOST_URL + '/admin/GetAllStudentList';
-  public static saveLoginUserURL: string = ApiService.HOST_URL + '/authenticate/UserLogin';
+
   public static getTestforCheckingURL: string = ApiService.HOST_URL + '/admin/getTestforChecking';
   public static saveAdminLoginURL: string = ApiService.HOST_URL + '/admin/login';
 

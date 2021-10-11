@@ -6,19 +6,19 @@
           <div class="row">
             <div class="col-5 col-md-4">
               <div class="icon-big text-center icon-warning">
-                <i class="fa fa-users text-warning"></i>
+                <i class="fa fa-user text-primary"></i>
               </div>
             </div>
             <div class="col-7 col-md-8">
               <div class="numbers">
-                <p class="card-category">Employee</p>
-                <p class="card-title">Total Employee: {{employeeReg.length}}
+                <p class="card-category">Customer</p>
+                <p class="card-title">Total Customers: {{customerList.length}}
                 </p>
               </div>
             </div>
           </div>
         </div>
-        <div class="card-footer" (click)="openEmployee()">
+        <div class="card-footer" (click)="openCustomer()">
           <hr>
           <div class="stats">
             <i class="fa fa-arrow-right"></i> View
@@ -26,6 +26,7 @@
         </div>
       </div>
     </div>
+
     <div class="col-lg-4 col-md-6 col-sm-6">
       <div class="card card-stats">
         <div class="card-body ">
@@ -52,54 +53,163 @@
         </div>
       </div>
     </div>
-    <div class="col-lg-3 col-md-6 col-sm-6">
+    <div class="col-lg-4 col-md-6 col-sm-6">
       <div class="card card-stats">
         <div class="card-body ">
           <div class="row">
             <div class="col-5 col-md-4">
               <div class="icon-big text-center icon-warning">
-                <i class="nc-icon nc-vector text-danger"></i>
+                <i class="fa fa-users text-warning"></i>
               </div>
             </div>
             <div class="col-7 col-md-8">
               <div class="numbers">
-                <p class="card-category">Errors</p>
-                <p class="card-title">23
+                <p class="card-category">Employee</p>
+                <p class="card-title">Total Employee: {{employeeReg.length}}
                 </p>
               </div>
             </div>
           </div>
         </div>
-        <div class="card-footer ">
+        <div class="card-footer" (click)="openEmployee()">
           <hr>
           <div class="stats">
-            <i class="fa fa-clock-o"></i> In the last hour
+            <i class="fa fa-arrow-right"></i> View
           </div>
         </div>
       </div>
     </div>
-    <div class="col-lg-3 col-md-6 col-sm-6">
+    <div class="col-lg-4 col-md-6 col-sm-6">
       <div class="card card-stats">
         <div class="card-body ">
           <div class="row">
             <div class="col-5 col-md-4">
               <div class="icon-big text-center icon-warning">
-                <i class="nc-icon nc-favourite-28 text-primary"></i>
+                <i class="fa fa-inr text-success"></i>
               </div>
             </div>
             <div class="col-7 col-md-8">
               <div class="numbers">
-                <p class="card-category">Followers</p>
-                <p class="card-title">+45K
+                <p class="card-category">Daily Earnings</p>
+                <p class="card-title">Total: {{dailytotal}} ₹
                 </p>
               </div>
             </div>
           </div>
         </div>
-        <div class="card-footer ">
+        <div class="card-footer" (click)="openEmployee()">
           <hr>
           <div class="stats">
-            <i class="fa fa-refresh"></i> Update now
+            <i class="fa fa-arrow-right"></i> View
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-6 col-sm-6">
+      <div class="card card-stats">
+        <div class="card-body ">
+          <div class="row">
+            <div class="col-5 col-md-4">
+              <div class="icon-big text-center icon-warning">
+                <i class="fa fa-inr text-success"></i>
+              </div>
+            </div>
+            <div class="col-7 col-md-8">
+              <div class="numbers">
+                <p class="card-category">Monthly Earnings</p>
+                <p class="card-title">Total: {{monthlytotal}} ₹
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer" (click)="openEmployee()">
+          <hr>
+          <div class="stats">
+            <i class="fa fa-arrow-right"></i> View
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-6 col-sm-6">
+      <div class="card card-stats">
+        <div class="card-body ">
+          <div class="row">
+            <div class="col-5 col-md-4">
+              <div class="icon-big text-center icon-warning">
+                <i class="fa fa-question text-danger"></i>
+              </div>
+            </div>
+            <div class="col-7 col-md-8">
+              <div class="numbers">
+                <p class="card-category">Enquiry</p>
+                <p class="card-title">Enquiry List: {{enquiryList.length}}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer" (click)="openEniquiry()">
+          <hr>
+          <div class="stats">
+            <i class="fa fa-arrow-right"></i> View
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-md-8">
+              <h4 class="card-title"> Active Service List</h4>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table">
+              <thead class="text-primary">
+                <th class="text-center">#</th>
+                <th class="text-center">Customer Name</th>
+                <th class="text-center">Assign Team Member </th>
+                <th class="text-center">Status</th>
+                <th class="text-right">Actions</th>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of appointmentList | paginate: { itemsPerPage: 5, currentPage: p }; let i = index">
+
+                  <td class="text-center">{{ item.index }}</td>
+                  <td class="text-center">{{ item.fname}} {{ item.lname}} </td>
+                  <td class="text-center">{{ item.empname }}</td>
+                  <td class="text-center">
+                    <button class="btn btn-success" *ngIf="item.isactive==true" (click)="deactiveBanners(item.index)">
+                      Processing
+                    </button>
+                    <button class="btn btn-danger" *ngIf="item.isactive==false" (click)="activeBanners(item.index)">
+                      Pending
+                    </button>
+                  </td>
+                  <td class="text-right">
+
+                    <button type="button" rel="tooltip" class="btn btn-danger btn-icon btn-sm"
+                      (click)="removeEmployee(item.id)">
+                      <i class="fa fa-times"></i>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="row">
+            <div class="ml-md-auto">
+              <pagination-controls (pageChange)="p= $event" autoHide="true" responsive="true">
+              </pagination-controls>
+            </div>
           </div>
         </div>
       </div>

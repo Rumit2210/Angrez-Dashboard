@@ -13,10 +13,8 @@ export const AppRoutes: Routes = [{
     children: [{
         path: '',
         loadChildren: './dashboard/dashboard.module#DashboardModule'
-    }, {
-        path: 'calendar',
-        loadChildren: './calendar/calendar.module#CalendarModule'
-    }, {
+    },
+    {
         path: '',
         loadChildren: './userpage/user.module#UserModule'
     },
@@ -31,6 +29,10 @@ export const AppRoutes: Routes = [{
     {
         path: '',
         loadChildren: './services/services.module#ServicesModule'
+    },
+    {
+        path: '',
+        loadChildren: './enquiry/enquiry.module#EnquiryModule'
     },
     ]
 }, {

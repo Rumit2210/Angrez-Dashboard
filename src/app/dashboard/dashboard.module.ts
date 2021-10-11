@@ -8,18 +8,20 @@ import {
 import { DashboardComponent } from './dashboard.component';
 
 import { DashboardRoutes } from './dashboard.routing';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        RouterModule.forChild(DashboardRoutes),
-        FormsModule,
-        AgmCoreModule.forRoot({
-          apiKey: 'YOUR_GOOGLE_MAPS_API_KEY'
-        })
-    ],
-    declarations: [DashboardComponent],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  imports: [
+    CommonModule,
+    RouterModule.forChild(DashboardRoutes),
+    FormsModule,
+    NgxPaginationModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'YOUR_GOOGLE_MAPS_API_KEY'
+    })
+  ],
+  declarations: [DashboardComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 
-export class DashboardModule {}
+export class DashboardModule { }

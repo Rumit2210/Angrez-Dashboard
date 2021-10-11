@@ -1,4 +1,5 @@
 import { Component, OnInit, AfterViewInit, AfterViewChecked, AfterContentInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 //Metadata
 export interface RouteInfo {
@@ -43,26 +44,13 @@ export const ROUTES: RouteInfo[] = [{
     type: 'link',
     icontype: 'fa fa-scissors'
 },
-
 {
-    path: '/calendar',
-    title: 'Calendar',
+    path: '/enquiry',
+    title: 'Enquiry',
     type: 'link',
-    icontype: 'nc-icon nc-calendar-60'
-}, {
-    path: '/pages',
-    title: 'Pages',
-    collapse: 'pages',
-    type: 'sub',
-    icontype: 'nc-icon nc-book-bookmark',
-    children: [
-        { path: 'timeline', title: 'Timeline Page', ab: 'T' },
-        { path: 'user', title: 'User Page', ab: 'UP' },
-        { path: 'login', title: 'Login Page', ab: 'LP' },
-        { path: 'register', title: 'Register Page', ab: 'RP' },
-        { path: 'lock', title: 'Lock Screen Page', ab: 'LSP' }
-    ]
-}
+    icontype: 'fa fa-question'
+},
+
 ];
 
 @Component({
@@ -73,16 +61,27 @@ export const ROUTES: RouteInfo[] = [{
 
 export class SidebarComponent {
     public menuItems: any[];
+    public userName = localStorage.getItem("UserName");
+
     isNotMobileMenu() {
         if (window.outerWidth > 991) {
             return false;
         }
         return true;
     }
+    constructor(
+        private router: Router,
+    ) {
+
+    }
 
     ngOnInit() {
         this.menuItems = ROUTES.filter(menuItem => menuItem);
     }
     ngAfterViewInit() {
+    }
+    logout() {
+        localStorage.clear();
+        this.router.navigate(['pages/login'])
     }
 }

@@ -1,10 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Appointment } from 'app/customer/appointment.model';
+import { Customer } from 'app/customer/customer.model';
+import { CustomerService } from 'app/customer/customer.service';
 import { Employee } from 'app/employee/employee.model';
 import { EmployeeService } from 'app/employee/employee.service';
+import { Enquiry } from 'app/enquiry/enquiry.model';
+import { EnquiryService } from 'app/enquiry/enquiry.service';
 import { Services } from 'app/services/services.model';
 import { ServicesService } from 'app/services/services.service';
 import Chart from 'chart.js';
+import { element } from 'protractor';
 
 declare const $: any;
 
@@ -709,19 +715,32 @@ export class DashboardComponent implements OnInit {
 
   public employeeReg: Employee[];
   public servicesList: Services[];
+  public customerList: Customer[];
+  public dailyTotal: Customer[];
+  public monthlyTotal: Customer[];
+  public enquiryList: Enquiry[];
+  public appointmentList: Appointment[];
+  dailytotal: number = 0;
+  monthlytotal: number = 0;
   constructor(
     private servicesService: ServicesService,
     private employeeService: EmployeeService,
+    private customerService: CustomerService,
+    private enquiryService: EnquiryService,
     private router: Router
   ) {
     this.getAllServices();
     this.getAllEmployee();
+    this.getCustomerDetails();
+    this.getAllEnquiry();
+    this.GetDailyTotal();
+    this.GetMonthlyTotal();
+    this.getAllAppointment();
 
   }
   getAllEmployee() {
     this.employeeService.getAllEmployeeList().subscribe((data: any) => {
       this.employeeReg = data;
-      debugger
     });
   }
   openEmployee() {
@@ -735,4 +754,51 @@ export class DashboardComponent implements OnInit {
   openServices() {
     this.router.navigate(['services']);
   }
+  getCustomerDetails() {
+    this.customerService.getAllCustomerList().subscribe((data: any) => {
+      this.customerList = data;
+    });
+  }
+  openCustomer() {
+    this.router.navigate(['customer']);
+  }
+
+  getAllEnquiry() {
+    this.enquiryService.getAllEnquiryList().subscribe((data: any) => {
+      this.enquiryList = data;
+    })
+  }
+  openEniquiry() {
+    this.router.navigate(['enquiry']);
+  }
+  GetDailyTotal() {
+    this.customerService.getDailyTotalList().subscribe((data: any) => {
+      this.dailyTotal = data;
+      this.dailyTotal.forEach(element => {
+        if ((element.totalprice != undefined)) {
+          this.dailytotal = this.dailytotal + element.totalprice;
+        }
+      })
+    })
+  }
+  GetMonthlyTotal() {
+    this.customerService.getMonthlyTotalList().subscribe((data: any) => {
+      this.monthlyTotal = data;
+      this.monthlyTotal.forEach(element => {
+        if ((element.totalprice != undefined)) {
+          this.monthlytotal = this.monthlytotal + element.totalprice;
+        }
+      })
+    })
+  }
+  getAllAppointment() {
+    this.customerService.getAllAppointmentList().subscribe((data: any) => {
+      this.appointmentList = data;
+      debugger
+      for (let i = 0; i < this.appointmentList.length; i++) {
+        this.appointmentList[i].index = i + 1;
+      }
+    });
+  }
+
 }

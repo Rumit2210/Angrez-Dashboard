@@ -8,7 +8,7 @@ export class Employee {
         public whatsapp?: number,
         public address?: string,
         public city?: string,
-        public pincode?: number,
+        public pincode?: string,
         public gender?: any,
         public services?: string,
         public isactive?: boolean,
