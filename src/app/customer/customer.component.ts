@@ -241,4 +241,18 @@ export class CustomerComponent implements OnInit {
 
     });
   }
+  updateCustomerDetails() {
+    this.customerService.updateCustomerList(this.customerModel).subscribe((req) => {
+      this.getCustomerDetails();
+      this.apiService.showNotification('top', 'right', 'Test Link Sent Successfully.', 'success');
+    })
+  }
+  removeCustomerList(id) {
+    this.customerService.removeCustomerDetails(id).subscribe((req) => {
+      this.apiService.showNotification('top', 'right', 'Standard removed Successfully.', 'success');
+      this.getCustomerDetails();
+
+    })
+  }
+
 }

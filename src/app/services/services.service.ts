@@ -24,11 +24,12 @@ export class ServicesService {
         return this.httpClient.post<any>(ApiService.updateServicesListURL, admin);
     }
     removeServicesList(id) {
-        let data = {
-            id: id
-        }
-        return this.httpClient.post<any>(ApiService.removeEmployeeListURL, data);
+        return this.httpClient.get<any>(ApiService.removeServicesListURL + id);
     }
+    removeCustomerDetails(id) {
+        return this.httpClient.get<any>(ApiService.removeCustomerDetailsURL + id);
+    }
+
     // saveStudentList(admin: Studentregister): Observable<any> {
     //     return this.httpClient.post<any>(ApiService.saveStudentListURL, admin);
     // }

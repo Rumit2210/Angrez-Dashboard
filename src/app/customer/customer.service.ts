@@ -40,4 +40,10 @@ export class CustomerService {
     getMonthlyTotalList(): Observable<Customer[]> {
         return this.httpClient.get<any>(ApiService.getMonthlyTotalURL);
     }
+    updateCustomerList(admin: Customer): Observable<any> {
+        return this.httpClient.post<any>(ApiService.updateCustomerListURL, admin);
+    }
+    removeCustomerDetails(id) {
+        return this.httpClient.get<any>(ApiService.removeCustomerDetailsURL + id);
+    }
 }

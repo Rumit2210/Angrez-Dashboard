@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { ApiService } from 'app/api.service';
 import { Observable } from 'rxjs';
+import { ForgotPwd } from '../forgot-pwd/forgotpwd.model';
 import { Loginuser } from './login.model';
 
 
@@ -36,22 +37,22 @@ export class LoginService {
 
 
     }
-    // forgotPwd(admin: ForgotPwd): Observable<any> {
+    forgotPwd(admin: ForgotPwd): Observable<any> {
 
-    //     return this.httpClient.post<any>(ApiService.forgetPasswordURL, admin);
-    // }
-    // getOneTimePwd(admin: ForgotPwd): Observable<any> {
+        return this.httpClient.post<any>(ApiService.forgotPasswordURL, admin);
+    }
+    getOneTimePwd(admin: ForgotPwd): Observable<any> {
+        return this.httpClient.post<any>(ApiService.getOneTimePasswordURL, admin)
+    }
+    // changePassword(admin: ForgotPwd): Observable<any> {
     //     return this.httpClient.post<any>(ApiService.getOneTimePasswordURL, admin)
     // }
-    // // changePassword(admin: ForgotPwd): Observable<any> {
-    // //     return this.httpClient.post<any>(ApiService.getOneTimePasswordURL, admin)
-    // // }
-    // updatePassword(admin: ForgotPwd): Observable<any> {
+    updatePassword(admin: ForgotPwd): Observable<any> {
 
-    //     return this.httpClient.post<any>(ApiService.updatePasswordURL, admin);
-    // }
-    // changePassword(admin) {
-    //     return this.httpClient.post<any>(ApiService.updatePasswordURL, admin);
-    // }
+        return this.httpClient.post<any>(ApiService.updatePasswordURL, admin);
+    }
+    changePassword(admin) {
+        return this.httpClient.post<any>(ApiService.updatePasswordURL, admin);
+    }
 
 }

@@ -147,7 +147,7 @@
                                         </button>
                                         &nbsp;
                                         <button type="button" rel="tooltip" class="btn btn-danger btn-icon btn-sm"
-                                            (click)="removeEmployee(item.id)">
+                                            (click)="removeCustomerList(item.id)">
                                             <i class="fa fa-times"></i>
                                         </button>
                                     </td>
@@ -248,7 +248,8 @@
                     </div>
                 </div>
                 <div class="modal-footer justify-content-center">
-                    <button type="button" class="btn btn-info btn-round" data-dismiss="modal">
+                    <button type="button" class="btn btn-info btn-round" data-dismiss="modal"
+                        (click)="updateCustomerDetails()">
                         <i class="fa fa-paper-plane" aria-hidden="true"></i> Update
                     </button>
                     <button type="button" class="btn btn-secondary btn-round" data-dismiss="modal">

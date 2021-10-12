@@ -24,6 +24,7 @@ export class ServicesComponent implements OnInit {
   saveServicesDetail() {
     this.servicesService.saveServiceList(this.servicesModel).subscribe((data: any) => {
       this.servicesList = data;
+      this.getAllServices();
       this.apiService.showNotification('top', 'right', 'Services Added Successfully.', 'success');
     })
   }
@@ -45,13 +46,12 @@ export class ServicesComponent implements OnInit {
   updateServicesDetail() {
     this.servicesModel
     this.servicesService.updateServicesList(this.servicesModel).subscribe((req) => {
-      this.apiService.showNotification('top', 'right', 'Update Techer Successfully.', 'success');
+      this.apiService.showNotification('top', 'right', 'Update Services Successfully.', 'success');
     })
   }
   removeServices(id) {
-    debugger
     this.servicesService.removeServicesList(id).subscribe((req) => {
-      this.apiService.showNotification('top', 'right', 'Employee removed Successfully.', 'success');
+      this.apiService.showNotification('top', 'right', 'Service removed Successfully.', 'success');
       this.getAllServices();
     })
   }

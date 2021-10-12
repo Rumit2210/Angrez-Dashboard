@@ -19,7 +19,6 @@ export class ApiService {
   public static saveServicesListURL: string = ApiService.HOST_URL + '/admin/SaveServicesList';
   public static getAllServicesURL: string = ApiService.HOST_URL + '/admin/GetAllServices';
   public static updateServicesListURL: string = ApiService.HOST_URL + '/admin/UpdateServicesList/';
-  public static removeServicesListURL: string = ApiService.HOST_URL + '/admin/RemoveServicesList/';
   public static saveEmployeeListURL: string = ApiService.HOST_URL + '/admin/SaveEmployeeList';
   public static getAllEmployeeURL: string = ApiService.HOST_URL + '/admin/GetAllEmployee';
   public static removeEmployeeListURL: string = ApiService.HOST_URL + '/admin/RemoveEmployeeList/';
@@ -32,6 +31,24 @@ export class ApiService {
   public static getAllEnquiryListURL: string = ApiService.HOST_URL + '/admin/GetAllEnquiryList';
   public static getDailyTotalURL: string = ApiService.HOST_URL + '/admin/GetDailyTotal';
   public static getMonthlyTotalURL: string = ApiService.HOST_URL + '/admin/GetMonthlyTotal';
+  public static updateCustomerListURL: string = ApiService.HOST_URL + '/admin/UpdateCustomerList';
+  public static removeCustomerDetailsURL: string = ApiService.HOST_URL + '/admin/removeCustomerDetails/';
+  public static removeServicesListURL: string = ApiService.HOST_URL + '/admin/RemoveServicesList/';
+  public static forgotPasswordURL: string = ApiService.HOST_URL + '/admin/ForgotPassword';
+  public static getOneTimePasswordURL: string = ApiService.HOST_URL + '/admin/GetOneTimePassword';
+  public static updatePasswordURL: string = ApiService.HOST_URL + '/admin/updatePasswordAccordingRole';
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -43,24 +60,19 @@ export class ApiService {
   public static getSubjectListURL: string = ApiService.HOST_URL + '/admin/GetSubjectList';
   public static updateSubjectURL: string = ApiService.HOST_URL + '/admin/UpdateSujectList/';
   public static removeSubjectURL: string = ApiService.HOST_URL + '/admin/RemoveSubjectList/';
-  public static removeStdURL: string = ApiService.HOST_URL + '/admin/RemoveStandardList/';
   public static getStandardItemURL: string = ApiService.HOST_URL + '/admin/GetStdItem';
   public static getQueListURL: string = ApiService.HOST_URL + '/admin/GetQueType';
   public static saveQueListURL: string = ApiService.HOST_URL + '/admin/saveQueList';
   public static getAllQueListURL: string = ApiService.HOST_URL + '/admin/getAllQueList';
   public static getQueOptionListURL: string = ApiService.HOST_URL + '/admin/getQueOptionList';
   public static getQueAnswerURL: string = ApiService.HOST_URL + '/admin/getQueAnswer';
-
   public static removeQueListURL: string = ApiService.HOST_URL + '/admin/removeQueList';
-
   public static saveStudentListURL: string = ApiService.HOST_URL + '/authenticate/SaveStudentList';
   public static getStudentListListURL: string = ApiService.HOST_URL + '/admin/GetStudentList/';
   public static GetTeacherlistURL: string = ApiService.HOST_URL + '/admin/GetTeacherList';
   public static GetAllStudentlistURL: string = ApiService.HOST_URL + '/admin/GetAllStudentList';
-
   public static getTestforCheckingURL: string = ApiService.HOST_URL + '/admin/getTestforChecking';
   public static saveAdminLoginURL: string = ApiService.HOST_URL + '/admin/login';
-
   public static removeTeacherListURL: string = ApiService.HOST_URL + '/admin/removeTecaherList';
   public static updateTeacherListURL: string = ApiService.HOST_URL + '/admin/UpdateTecaherList/';
   public static updateStudentListURL: string = ApiService.HOST_URL + '/admin/UpdateStudentList/';
@@ -68,7 +80,6 @@ export class ApiService {
   public static saveTestURL: string = ApiService.HOST_URL + '/admin/SaveTest';
   public static GetAllTestURL: string = ApiService.HOST_URL + '/admin/GetAllTestList';
   public static getTestListURL: string = ApiService.HOST_URL + '/admin/GetTestList';
-  public static forgetPasswordURL: string = ApiService.HOST_URL + '/admin/ForgetPassword';
   public static GetAllSubjectURL: string = ApiService.HOST_URL + '/admin/GetAllSubjects';
   public static getViewTestURL: string = ApiService.HOST_URL + '/admin/GetViewTestList';
   public static GetViewVisitorTestListURL: string = ApiService.HOST_URL + '/admin/GetViewVisitorTestList';
@@ -101,14 +112,11 @@ export class ApiService {
   public static saveVisitorTestURL: string = ApiService.HOST_URL + '/admin/SaveVisitorTest';
   public static getSubmittedTestURL: string = ApiService.HOST_URL + '/admin/GetSubmittedTest';
   public static getSubjectByIdURL: string = ApiService.HOST_URL + '/admin/GetSubjectByIdURL';
-
   public static updateVisitorInformURL: string = ApiService.HOST_URL + '/admin/UpdateVisitorInform';
   public static getStudentSubmittedTestURL: string = ApiService.HOST_URL + '/admin/GetSubmittedTest';
   public static savetestresultURL: string = ApiService.HOST_URL + '/admin/SaveTestResult';
   public static getVisitorTestListURL: string = ApiService.HOST_URL + '/admin/GetVisitorTestList';
   public static saveVisitorStudentTestURL: string = ApiService.HOST_URL + '/admin/SaveVisitorStudentTest';
-  public static getOneTimePasswordURL: string = ApiService.HOST_URL + '/admin/GetOneTimePassword';
-  public static updatePasswordURL: string = ApiService.HOST_URL + '/admin/updatePasswordAccordingRole';
   public static UpdateVisitorResultURL: string = ApiService.HOST_URL + '/admin/UpdateVisitorResult';
   public static GetVisitorResultURL: string = ApiService.HOST_URL + '/admin/GetVisitorResult';
   public static ChackForPasswordURL: string = ApiService.HOST_URL + '/admin/ChackForPassword';

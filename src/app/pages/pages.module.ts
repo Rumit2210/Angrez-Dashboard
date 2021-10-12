@@ -7,6 +7,7 @@ import { PagesRoutes } from './pages.routing';
 
 
 import { LoginComponent } from './login/login.component';
+import { ForgotPwdComponent } from './forgot-pwd/forgot-pwd.component';
 
 @NgModule({
     imports: [
@@ -17,6 +18,7 @@ import { LoginComponent } from './login/login.component';
     ],
     declarations: [
         LoginComponent,
+        ForgotPwdComponent,
 
     ]
 })
