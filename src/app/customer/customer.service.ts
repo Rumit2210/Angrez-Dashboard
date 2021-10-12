@@ -46,4 +46,7 @@ export class CustomerService {
     removeCustomerDetails(id) {
         return this.httpClient.get<any>(ApiService.removeCustomerDetailsURL + id);
     }
+    updateActiveStatusList(admin: Appointment): Observable<any> {
+        return this.httpClient.post<any>(ApiService.updateActiveStatusURL, admin);
+    }
 }

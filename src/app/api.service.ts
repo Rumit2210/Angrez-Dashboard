@@ -37,7 +37,7 @@ export class ApiService {
   public static forgotPasswordURL: string = ApiService.HOST_URL + '/admin/ForgotPassword';
   public static getOneTimePasswordURL: string = ApiService.HOST_URL + '/admin/GetOneTimePassword';
   public static updatePasswordURL: string = ApiService.HOST_URL + '/admin/updatePasswordAccordingRole';
-
+  public static updateActiveStatusURL: string = ApiService.HOST_URL + '/admin/UpdateActiveStatus';
 
 
 

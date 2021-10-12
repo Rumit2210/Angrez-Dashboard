@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ApiService } from 'app/api.service';
 import { Appointment } from 'app/customer/appointment.model';
 import { Customer } from 'app/customer/customer.model';
 import { CustomerService } from 'app/customer/customer.service';
@@ -712,7 +713,7 @@ export class DashboardComponent implements OnInit {
       },
     });
   }
-
+  public appointmentModel: Appointment = new Appointment
   public employeeReg: Employee[];
   public servicesList: Services[];
   public customerList: Customer[];
@@ -727,6 +728,7 @@ export class DashboardComponent implements OnInit {
     private employeeService: EmployeeService,
     private customerService: CustomerService,
     private enquiryService: EnquiryService,
+    private apiService: ApiService,
     private router: Router
   ) {
     this.getAllServices();
@@ -799,6 +801,14 @@ export class DashboardComponent implements OnInit {
         this.appointmentList[i].index = i + 1;
       }
     });
+  }
+  paymentCompleted(id) {
+    this.appointmentModel.id = id;
+    this.appointmentModel.isactive = false;
+    this.customerService.updateActiveStatusList(this.appointmentModel).subscribe((req) => {
+      this.getAllAppointment();
+      this.apiService.showNotification('top', 'right', 'Payment accepted Successfully.', 'success');
+    })
   }
 
 }

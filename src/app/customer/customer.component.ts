@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ApiService } from 'app/api.service';
 import { Employee } from 'app/employee/employee.model';
 import { EmployeeService } from 'app/employee/employee.service';
@@ -36,7 +37,8 @@ export class CustomerComponent implements OnInit {
     private servicesService: ServicesService,
     private employeeService: EmployeeService,
     private customerService: CustomerService,
-    private apiService: ApiService
+    private apiService: ApiService,
+    private router: Router
   ) {
     this.getAllEmployee();
     this.getAllServices();
@@ -231,6 +233,7 @@ export class CustomerComponent implements OnInit {
     this.appointmentModel.custid = this.appointmentModel.id;
     this.customerService.saveAppointmentList(this.appointmentModel).subscribe((data: any) => {
       this.appointment = data;
+      this.router.navigate(['dashboard']);
       this.apiService.showNotification('top', 'right', 'Appointment Successfully Booked.', 'success');
     })
   }

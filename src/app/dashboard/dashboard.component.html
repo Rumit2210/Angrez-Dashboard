@@ -176,7 +176,9 @@
                 <th class="text-center">Customer Name</th>
                 <th class="text-center">Assign Team Member </th>
                 <th class="text-center">Status</th>
-                <th class="text-right">Actions</th>
+                <th class="text-center">Total Price</th>
+                <th class="text-center">Payment</th>
+                <!-- <th class="text-right">Actions</th> -->
               </thead>
               <tbody>
                 <tr *ngFor="let item of appointmentList | paginate: { itemsPerPage: 5, currentPage: p }; let i = index">
@@ -185,20 +187,30 @@
                   <td class="text-center">{{ item.fname}} {{ item.lname}} </td>
                   <td class="text-center">{{ item.empname }}</td>
                   <td class="text-center">
-                    <button class="btn btn-success" *ngIf="item.isactive==true" (click)="deactiveBanners(item.index)">
+                    <button class="btn btn-info" *ngIf="item.isactive==true">
                       Processing
                     </button>
-                    <button class="btn btn-danger" *ngIf="item.isactive==false" (click)="activeBanners(item.index)">
-                      Pending
+                    <button class="btn btn-success" *ngIf="item.isactive==false">
+                      Completed
                     </button>
                   </td>
-                  <td class="text-right">
+                  <td class="text-center" style="color: black; font-weight: 500 !important">{{ item.totalprice }} ₹
+                  </td>
+                  <td class="text-center">
+                    <button class="btn btn-success" *ngIf="item.isactive==true" (click)="paymentCompleted(item.id)">
+                      <i class="fa fa-inr" aria-hidden="true"></i> Accept
+                    </button>
+                    <button class="btn btn-danger" *ngIf="item.isactive==false" disabled>
+                      Completed !
+                    </button>
+                  </td>
+                  <!-- <td class="text-right">
 
                     <button type="button" rel="tooltip" class="btn btn-danger btn-icon btn-sm"
                       (click)="removeEmployee(item.id)">
                       <i class="fa fa-times"></i>
                     </button>
-                  </td>
+                  </td> -->
                 </tr>
               </tbody>
             </table>
