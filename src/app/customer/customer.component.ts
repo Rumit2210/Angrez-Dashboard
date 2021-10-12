@@ -30,6 +30,7 @@ export class CustomerComponent implements OnInit {
   search: string = '';
   totalPrice: any = 0;
   totalPoint: any = 0;
+  totalCustomerPoint: any = 0;
   totalTime: any = 0;
   custAppointment: boolean = false;
   selectCustomer: boolean = false;
@@ -167,9 +168,7 @@ export class CustomerComponent implements OnInit {
 
 
   }
-  totalServicesPrice() {
 
-  }
   saveCustomerDetail() {
     this.customerService.saveCustomerList(this.customerModel).subscribe((data: any) => {
       this.customerList = data;
@@ -239,9 +238,15 @@ export class CustomerComponent implements OnInit {
   }
 
   viewCustomerDetails(data) {
+    this.totalCustomerPoint = 0;
     this.customerModel = data;
-    this.customerService.getViewAppointment(data).subscribe((data: any) => {
-
+    this.customerService.getViewAppointment(data).subscribe((data1: any) => {
+      this.appointment = data1;
+      this.appointment.forEach(element => {
+        if (element.totalpoint != undefined) {
+          this.totalCustomerPoint = this.totalCustomerPoint + element.totalpoint;
+        }
+      });
     });
   }
   updateCustomerDetails() {
