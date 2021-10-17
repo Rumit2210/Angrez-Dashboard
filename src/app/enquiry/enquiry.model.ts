@@ -10,6 +10,7 @@ export class Enquiry {
         public service1?: string,
         public certification?: string,
         public time?: any,
+        public isactive?: boolean,
         public createddate?: Date,
         public updateddate?: Date,
         // public dateofbirth?: string

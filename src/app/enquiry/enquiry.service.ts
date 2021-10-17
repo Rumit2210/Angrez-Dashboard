@@ -23,5 +23,8 @@ export class EnquiryService {
         }
         return this.httpClient.post<any>(ApiService.removeEmployeeListURL, data);
     }
+    updateActiveStatusList(admin: Enquiry): Observable<any> {
+        return this.httpClient.post<any>(ApiService.updateEnquiryStatusURL, admin);
+    }
 
 }

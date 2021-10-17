@@ -723,6 +723,9 @@ export class DashboardComponent implements OnInit {
   public appointmentList: Appointment[];
   dailytotal: number = 0;
   monthlytotal: number = 0;
+  adminRole: any;
+
+
   constructor(
     private servicesService: ServicesService,
     private employeeService: EmployeeService,
@@ -731,6 +734,8 @@ export class DashboardComponent implements OnInit {
     private apiService: ApiService,
     private router: Router
   ) {
+    this.adminRole = localStorage.getItem('adminRole');
+    debugger
     this.getAllServices();
     this.getAllEmployee();
     this.getCustomerDetails();

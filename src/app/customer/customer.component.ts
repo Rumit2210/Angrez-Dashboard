@@ -8,7 +8,9 @@ import { ServicesService } from 'app/services/services.service';
 import { Appointment } from './appointment.model';
 import { Customer } from './customer.model';
 import { CustomerService } from './customer.service';
-
+import pdfMake from "pdfmake/build/pdfmake";
+import pdfFonts from "pdfmake/build/vfs_fonts";
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 @Component({
   selector: 'app-customer',
   templateUrl: './customer.component.html',
@@ -261,6 +263,89 @@ export class CustomerComponent implements OnInit {
       this.getCustomerDetails();
 
     })
+  }
+  generateInvoicePDF(action = 'open') {
+    debugger
+    let docDefinition = {
+      content: [
+        // {
+        //   text: 'ELECTRONIC SHOP',
+        //   fontSize: 16,
+        //   alignment: 'center',
+        //   color: '#047886'
+        // },
+        {
+          text: 'INVOICE',
+          fontSize: 20,
+          bold: true,
+          alignment: 'center',
+          decoration: 'underline',
+          color: 'skyblue'
+        }, {}, {}, {},
+        {
+          text: 'Customer Details',
+          style: 'sectionHeader'
+        },
+        {
+          columns: [
+            [
+              {
+                text: this.customerModel.fname + '' + this.customerModel.lname,
+                bold: true
+              },
+              { text: 'Whats App Number:' + this.customerModel.whatsapp },
+              { text: 'Contact Number:' + this.customerModel.contact },
+            ],
+            [
+              // {
+              //   text: 'delivery Date: ' + this.Orderview.deliverydate,
+              //   alignment: 'right'
+              // },
+              {
+                text: `Bill No : ${((Math.random() * 1000).toFixed(0))}`,
+                alignment: 'right'
+              }
+            ]
+          ]
+        }, {}, {},
+        {
+          text: 'Order Details',
+          style: 'sectionHeader'
+        },
+        {
+          table: {
+            headerRows: 1,
+            widths: ['*', 'auto', 'auto', 'auto'],
+            body: [
+              ['Product', 'Price', 'Quantity', 'Amount'],
+
+              ([this.customerModel.itemName, this.customerModel.price, this.customerModel.point,]),
+              // [{ text: 'Total Amount', colSpan: 3 }, {}, {}, (this.Orderview.productPrice * this.Orderview.quantity).toFixed(2)]
+            ]
+          }
+        },
+        {
+          columns: [
+            // [{ qr: `${this.Orderview.username}`, fit: '50' }],
+            [{ text: 'Signature', alignment: 'right', italics: true }],
+          ]
+        },
+        {
+          ul: [
+            'Order can be return in max 10 days.',
+            'Warrenty of the product will be subject to the manufacturer terms and conditions.',
+            'This is system generated invoice.',
+          ],
+        },
+      ]
+    };
+    if (action === 'download') {
+      pdfMake.createPdf(docDefinition).download();
+    } else if (action === 'print') {
+      pdfMake.createPdf(docDefinition).print();
+    } else {
+      pdfMake.createPdf(docDefinition).open();
+    }
   }
 
 }
