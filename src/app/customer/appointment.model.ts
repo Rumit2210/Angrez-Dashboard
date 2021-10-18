@@ -6,12 +6,14 @@ export class Appointment {
         public emp?: string,
         public selectedService?: any,
         public totalprice?: bigint,
-        public totalpoint?: string,
+        public totalpoint?: number,
         public totaltime?: string,
         public isactive?: boolean,
         public createddate?: Date,
         public updateddate?: Date,
-
+        public redeempoints: number = 0,
+        public lessPoints?: number,
+        public tCustPoint?: number
     ) {
     }
 }

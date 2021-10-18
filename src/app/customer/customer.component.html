@@ -380,9 +380,21 @@
         </div>
         <div class="card-footer">
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-2">
+                    <label class="col-form-label" style="font-size: 20px;color: black;">Total Points</label>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="tPoints" name="tPoints" disabled
+                            value="{{tCustPoint}}" />
+                    </div>
                 </div>
                 <div class="col-md-3">
+                    <label class="col-form-label" style="font-size: 20px;color: black;">Enter Points </label>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="redeemPoint" name="redeemPoint"
+                            [(ngModel)]="appointmentModel.redeempoints" placeholder="Enter Redeem Point" />
+                    </div>
+                </div>
+                <div class="col-md-2">
                     <label class="col-form-label" style="font-size: 20px;color: black;">Total
                         Price</label>
                     <div class="form-group">
@@ -390,17 +402,16 @@
                             value="{{totalPrice}} ₹" />
                     </div>
                 </div>
-                <div class="col-md-3">
-                    <label class="col-form-label" style="font-size: 20px;color: black;">Total
-                        Point</label>
+                <div class="col-md-2">
+                    <label class="col-form-label" style="font-size: 20px;color: black;">Today
+                        Points</label>
                     <div class="form-group">
                         <input type="text" class="form-control" id="fname" name="fname" disabled
                             value="{{totalPoint}} Point" />
                     </div>
                 </div>
-                <div class="col-md-3">
-                    <label class="col-form-label" style="font-size: 20px;color: black;">Total
-                        Approx Time</label>
+                <div class="col-md-2">
+                    <label class="col-form-label" style="font-size: 20px;color: black;">Approx Time</label>
                     <div class="form-group">
                         <input type="text" class="form-control" id="fname" name="fname" disabled
                             value="{{totalTime}} minute" />
@@ -410,7 +421,7 @@
             <br>
             <div class="row">
                 <div class="ml-md-auto">
-                    <button type="button" class="btn btn-info btn-round" (click)="generateInvoicePDF(selServiceData)"><i
+                    <button type="button" class="btn btn-info btn-round" (click)="generateInvoicePDF()"><i
                             class="fa fa-file-pdf-o"></i>
                         Invoice(PDF)</button>
                     <button type="submit" class="btn btn-info btn-round" (click)="saveAppointmentDetails()">

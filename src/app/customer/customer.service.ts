@@ -49,4 +49,10 @@ export class CustomerService {
     updateActiveStatusList(admin: Appointment): Observable<any> {
         return this.httpClient.post<any>(ApiService.updateActiveStatusURL, admin);
     }
+    getCustAllPoint(id) {
+        let data = {
+            id: id
+        }
+        return this.httpClient.post<any>(ApiService.getCustomerTotalPointsURL, data);
+    }
 }

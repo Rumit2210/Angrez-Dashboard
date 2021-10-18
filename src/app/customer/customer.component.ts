@@ -36,6 +36,9 @@ export class CustomerComponent implements OnInit {
   totalTime: any = 0;
   custAppointment: boolean = false;
   selectCustomer: boolean = false;
+  selectedCustId: any;
+  totalCustPoint: any[];
+  tCustPoint: any = 0;
   constructor(
     private servicesService: ServicesService,
     private employeeService: EmployeeService,
@@ -43,12 +46,14 @@ export class CustomerComponent implements OnInit {
     private apiService: ApiService,
     private router: Router
   ) {
+
     this.getAllEmployee();
     this.getAllServices();
     this.getCustomerDetails();
   }
 
   ngOnInit(): void {
+
   }
   getAllEmployee() {
     this.employeeService.getAllEmployeeList().subscribe((data: any) => {
@@ -218,13 +223,30 @@ export class CustomerComponent implements OnInit {
     this.custAppointment = false;
     this.selectCustomer = false;
   }
+  getCustomerPoints() {
+    this.customerService.getCustAllPoint(this.selectedCustId).subscribe((data: any) => {
+      this.totalCustPoint = data;
+      this.tCustPoint = 0;
+      this.totalCustPoint.forEach(element => {
+        if (element.totalcustpoint != undefined) {
+          this.tCustPoint = element.totalcustpoint;
+        }
+      });
+    });
+  }
   seletedCustomerDetails(data) {
-
+    this.selectedCustId = data.id;
     this.appointmentModel = data;
     this.custAppointment = true;
     this.selectCustomer = true;
+    this.getCustomerPoints();
+    this.appointmentModel.redeempoints = 0;
   }
   saveAppointmentDetails() {
+    this.appointmentModel.lessPoints = 0;
+    this.appointmentModel.tCustPoint = this.tCustPoint;
+    this.appointmentModel.lessPoints = this.tCustPoint - this.appointmentModel.redeempoints;
+    this.appointmentModel.lessPoints = this.appointmentModel.lessPoints + this.appointmentModel.totalpoint;
     this.appointmentModel.selectedService = this.selServiceData;
     this.appointmentModel.emp = this.selectedEmp;
     this.appointmentModel.totalprice = this.totalPrice;
@@ -232,55 +254,34 @@ export class CustomerComponent implements OnInit {
     this.appointmentModel.totaltime = this.totalTime;
     this.appointmentModel.isactive = true;
     this.appointmentModel.custid = this.appointmentModel.id;
+    debugger
     this.customerService.saveAppointmentList(this.appointmentModel).subscribe((data: any) => {
       this.appointment = data;
       this.router.navigate(['dashboard']);
       this.apiService.showNotification('top', 'right', 'Appointment Successfully Booked.', 'success');
     })
   }
-
-  viewCustomerDetails(data) {
-    this.totalCustomerPoint = 0;
-    this.customerModel = data;
-    this.customerService.getViewAppointment(data).subscribe((data1: any) => {
-      this.appointment = data1;
-      this.appointment.forEach(element => {
-        if (element.totalpoint != undefined) {
-          this.totalCustomerPoint = this.totalCustomerPoint + element.totalpoint;
-        }
-      });
-    });
-  }
-  updateCustomerDetails() {
-    this.customerService.updateCustomerList(this.customerModel).subscribe((req) => {
-      this.getCustomerDetails();
-      this.apiService.showNotification('top', 'right', 'Test Link Sent Successfully.', 'success');
-    })
-  }
-  removeCustomerList(id) {
-    this.customerService.removeCustomerDetails(id).subscribe((req) => {
-      this.apiService.showNotification('top', 'right', 'Standard removed Successfully.', 'success');
-      this.getCustomerDetails();
-
-    })
-  }
   generateInvoicePDF(action = 'open') {
     debugger
     let docDefinition = {
       content: [
-        // {
-        //   text: 'ELECTRONIC SHOP',
-        //   fontSize: 16,
-        //   alignment: 'center',
-        //   color: '#047886'
-        // },
+        {
+          image: 'testImage'
+        },
+
+        {
+          text: 'Angrez The Salon',
+          fontSize: 16,
+          alignment: 'center',
+          color: '#047886'
+        },
         {
           text: 'INVOICE',
           fontSize: 20,
           bold: true,
           alignment: 'center',
           decoration: 'underline',
-          color: 'skyblue'
+          color: '#ef8157'
         }, {}, {}, {},
         {
           text: 'Customer Details',
@@ -293,8 +294,8 @@ export class CustomerComponent implements OnInit {
                 text: this.customerModel.fname + '' + this.customerModel.lname,
                 bold: true
               },
-              { text: 'Whats App Number:' + this.customerModel.whatsapp },
-              { text: 'Contact Number:' + this.customerModel.contact },
+              // { text: 'Whats App Number:' + this.customerModel.whatsapp },
+              // { text: 'Contact Number:' + this.customerModel.contact },
             ],
             [
               // {
@@ -309,17 +310,17 @@ export class CustomerComponent implements OnInit {
           ]
         }, {}, {},
         {
-          text: 'Order Details',
+          text: 'Service Details',
           style: 'sectionHeader'
         },
         {
           table: {
             headerRows: 1,
-            widths: ['*', 'auto', 'auto', 'auto'],
+            widths: ['*', 'auto', 'auto'],
             body: [
-              ['Product', 'Price', 'Quantity', 'Amount'],
+              ['Service', 'Price', 'Amount'],
 
-              ([this.customerModel.itemName, this.customerModel.price, this.customerModel.point,]),
+              // ([this.customerModel.itemName, this.customerModel.price, this.customerModel.point,]),
               // [{ text: 'Total Amount', colSpan: 3 }, {}, {}, (this.Orderview.productPrice * this.Orderview.quantity).toFixed(2)]
             ]
           }
@@ -347,5 +348,31 @@ export class CustomerComponent implements OnInit {
       pdfMake.createPdf(docDefinition).open();
     }
   }
+  viewCustomerDetails(data) {
+    this.totalCustomerPoint = 0;
+    this.customerModel = data;
+    this.customerService.getViewAppointment(data).subscribe((data1: any) => {
+      this.appointment = data1;
+      this.appointment.forEach(element => {
+        if (element.totalpoint != undefined) {
+          this.totalCustomerPoint = this.totalCustomerPoint + element.totalpoint;
+        }
+      });
+    });
+  }
+  updateCustomerDetails() {
+    this.customerService.updateCustomerList(this.customerModel).subscribe((req) => {
+      this.getCustomerDetails();
+      this.apiService.showNotification('top', 'right', 'Test Link Sent Successfully.', 'success');
+    })
+  }
+  removeCustomerList(id) {
+    this.customerService.removeCustomerDetails(id).subscribe((req) => {
+      this.apiService.showNotification('top', 'right', 'Standard removed Successfully.', 'success');
+      this.getCustomerDetails();
+
+    })
+  }
+
 
 }
