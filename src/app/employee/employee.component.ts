@@ -14,6 +14,7 @@ export class EmployeeComponent implements OnInit {
   public employeeModel: Employee = new Employee;
   public employeeReg: Employee[];
   public servicesList: Services[];
+  public updateEmployeeModel: Employee = new Employee;
   serviceData: any = [];
   selServiceData: any = [];
   showEmp: Boolean = false;
@@ -84,26 +85,35 @@ export class EmployeeComponent implements OnInit {
     this.employeeService.saveEmployeeList(this.employeeModel).subscribe((data: any) => {
       this.employeeReg = data;
       this.getAllEmployee();
+      location.reload();
       this.apiService.showNotification('top', 'right', 'Employee Added Successfully.', 'success');
     })
   }
   getAllEmployee() {
     this.employeeService.getAllEmployeeList().subscribe((data: any) => {
       this.employeeReg = data;
-      debugger
+
       for (let i = 0; i < this.employeeReg.length; i++) {
         this.employeeReg[i].index = i + 1;
       }
     });
   }
   viewEmpDetails(data) {
-    this.showEmp = true;
-    this.employeeModel = data;
+
+    // this.showEmp = true;
+    this.updateEmployeeModel = data;
   }
   removeEmployee(id) {
     this.employeeService.removeEmployeeList(id).subscribe((req) => {
       this.apiService.showNotification('top', 'right', 'Employee removed Successfully.', 'success');
       this.getAllEmployee();
+    })
+  }
+  updateEmployeeDetails() {
+
+    this.employeeService.updateEmpList(this.updateEmployeeModel).subscribe((req) => {
+      this.getAllEmployee();
+      this.apiService.showNotification('top', 'right', 'Test Link Sent Successfully.', 'success');
     })
   }
 

@@ -40,7 +40,7 @@ export class ApiService {
   public static updateActiveStatusURL: string = ApiService.HOST_URL + '/admin/UpdateActiveStatus';
   public static updateEnquiryStatusURL: string = ApiService.HOST_URL + '/admin/UpdateEnquiryStatus';
   public static getCustomerTotalPointsURL: string = ApiService.HOST_URL + '/admin/GetCustomerTotalPoints';
-
+  public static updateEmployeeListURL: string = ApiService.HOST_URL + '/admin/UpdateEmployeeList';
 
 
 

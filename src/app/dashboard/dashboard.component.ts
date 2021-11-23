@@ -735,7 +735,7 @@ export class DashboardComponent implements OnInit {
     private router: Router
   ) {
     this.adminRole = localStorage.getItem('adminRole');
-    debugger
+
     this.getAllServices();
     this.getAllEmployee();
     this.getCustomerDetails();
@@ -781,6 +781,7 @@ export class DashboardComponent implements OnInit {
   GetDailyTotal() {
     this.customerService.getDailyTotalList().subscribe((data: any) => {
       this.dailyTotal = data;
+
       this.dailyTotal.forEach(element => {
         if ((element.totalprice != undefined)) {
           this.dailytotal = this.dailytotal + element.totalprice;
@@ -801,7 +802,7 @@ export class DashboardComponent implements OnInit {
   getAllAppointment() {
     this.customerService.getAllAppointmentList().subscribe((data: any) => {
       this.appointmentList = data;
-      debugger
+
       for (let i = 0; i < this.appointmentList.length; i++) {
         this.appointmentList[i].index = i + 1;
       }

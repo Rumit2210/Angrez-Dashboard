@@ -36,7 +36,7 @@
 
                                     <td class="text-right">
                                         <button type="button" rel="tooltip" class="btn btn-success btn-icon btn-sm">
-                                            <i class="fa fa-edit" data-toggle="modal" data-target="#VisitorModal"
+                                            <i class="fa fa-edit" data-toggle="modal" data-target="#employeeModal"
                                                 (click)="viewEmpDetails(item)"></i>
                                         </button>
                                         &nbsp;
@@ -61,6 +61,129 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="employeeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-notice">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <i class="nc-icon nc-simple-remove"></i>
+                    </button>
+                    <h5 class="modal-title" id="myModalLabel">View/Edit Customer</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="instruction">
+                        <form class="form-horizontal" name="employeeRegForm" #employeeRegForm="ngForm">
+                            <div class="row">
+                                <label class="col-md-2 col-form-label">First Name</label>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="fname" name="fname"
+                                            [(ngModel)]="updateEmployeeModel.fname" placeholder=" Enter First Name " />
+                                    </div>
+                                </div>
+                                <label class="col-md-2 col-form-label">Last Name</label>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="lname" name="lname"
+                                            [(ngModel)]="updateEmployeeModel.lname" placeholder=" Enter Last Name" />
+                                    </div>
+                                </div>
+
+                                <label class="col-md-2 col-form-label">Contact Number</label>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="contact"
+                                            [(ngModel)]="updateEmployeeModel.contact" name="contact"
+                                            placeholder="Enter Contact Number" />
+                                    </div>
+                                </div>
+                                <label class="col-md-2 col-form-label">Whatsapp Number</label>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="whatsapp"
+                                            [(ngModel)]="updateEmployeeModel.whatsapp" name="whatsapp"
+                                            placeholder="Enter Whatsapp Number" />
+                                    </div>
+                                </div>
+                                <label class="col-md-2 col-form-label">Address</label>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <textarea id="address" name="address" rows="3" cols="40"
+                                            [(ngModel)]="updateEmployeeModel.address"
+                                            placeholder="Enter Address"> </textarea>
+                                    </div>
+                                </div>
+                                <label class="col-md-2 col-form-label">City</label>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="city"
+                                            [(ngModel)]="updateEmployeeModel.city" name="city"
+                                            placeholder="Enter City" />
+                                    </div>
+                                </div>
+                                <label class="col-md-2 col-form-label">Pincode</label>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="pincode"
+                                            [(ngModel)]="updateEmployeeModel.pincode" name="pincode"
+                                            placeholder="Enter Pincode" />
+                                    </div>
+                                </div>
+                                <label class="col-sm-2 col-form-label">Select Gender</label>
+                                <div class="col-md-2">
+                                    <div class="form-check-radio">
+                                        <label class="form-check-label" style="color: black !important">
+                                            <input #genm class="form-check-input" name="gender"
+                                                [(ngModel)]="updateEmployeeModel.gender" type="radio" value="male"
+                                                ngModel />
+                                            Male
+                                            <span class="form-check-sign"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-check-radio">
+                                        <label class="form-check-label" style="color: black !important">
+                                            <input #genf class="form-check-input" name="gender"
+                                                [(ngModel)]="updateEmployeeModel.gender" type="radio" value="female"
+                                                ngModel />
+                                            Female
+                                            <span class="form-check-sign"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <!-- <label class="col-md-2 col-form-label">Select Services</label>
+                                <div class="col-md-4">
+                                    <div class="btn-group bootstrap-select w-100">
+                                        <div style="border: 1px #DDDDDD solid !important">
+                                            <angular2-multiselect [ngModelOptions]="{standalone: true}"
+                                                [data]="serviceData" [(ngModel)]="selectedServices"
+                                                [settings]="dropdownSettings" (onSelect)="onItemSelect($event)"
+                                                (onDeSelect)="OnItemDeSelect($event)"
+                                                (onSelectAll)="onSelectAll($event)" name="items"
+                                                (onDeSelectAll)="onDeSelectAll($event)">
+                                            </angular2-multiselect>
+                                        </div>
+                                    </div>
+                                </div> -->
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-info btn-round" data-dismiss="modal"
+                        (click)="updateEmployeeDetails()">
+                        <i class="fa fa-paper-plane" aria-hidden="true"></i> Update
+                    </button>
+                    <button type="button" class="btn btn-secondary btn-round" data-dismiss="modal">
+                        <i class="fa fa-times" aria-hidden="true"></i> Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="card" *ngIf="showEmp">
         <div class="card-header">
             <div class="row">
@@ -80,52 +203,114 @@
                 <div class="row">
                     <label class="col-md-2 col-form-label">First Name</label>
                     <div class="col-md-4">
-                        <div class="form-group">
+                        <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
                             <input type="text" class="form-control" id="fname" name="fname"
-                                [(ngModel)]="employeeModel.fname" placeholder=" Enter First Name " />
+                                [(ngModel)]="employeeModel.fname" placeholder=" Enter First Name " required value=""
+                                pattern="^[a-zA-Z]+$" (focus)="focus = true" #fname="ngModel" />
+                        </div>
+                        <div *ngIf="fname.errors && (fname.dirty || fname.touched)" class="alert alert-danger">
+                            <div *ngIf="fname.errors.required">
+                                First Name is required
+                            </div>
+                            <div [hidden]="!fname.errors('pattern')">
+                                Enter Only Characters.
+                            </div>
                         </div>
                     </div>
                     <label class="col-md-2 col-form-label">Last Name</label>
                     <div class="col-md-4">
-                        <div class="form-group">
+                        <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
                             <input type="text" class="form-control" id="lname" name="lname"
-                                [(ngModel)]="employeeModel.lname" placeholder=" Enter Last Name" />
+                                [(ngModel)]="employeeModel.lname" placeholder=" Enter Last Name" required value=""
+                                pattern="^[a-zA-Z]+$" (focus)="focus = true" #lname="ngModel" />
+                        </div>
+                        <div *ngIf="lname.errors && (lname.dirty || lname.touched)" class="alert alert-danger">
+                            <div *ngIf="lname.errors.required">
+                                Last Name is required
+                            </div>
+                            <div [hidden]="!lname.errors('pattern')">
+                                Enter Only Characters.
+                            </div>
                         </div>
                     </div>
                     <label class="col-md-2 col-form-label">Contact Number</label>
                     <div class="col-md-4">
-                        <div class="form-group">
+                        <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
                             <input type="text" class="form-control" id="contact" [(ngModel)]="employeeModel.contact"
-                                name="contact" placeholder="Enter Contact Number" />
+                                name="contact" placeholder="Enter Contact Number" required value=""
+                                pattern="^[0-9].{9,9}$" (focus)="focus = true" #contact="ngModel" />
+                        </div>
+                        <div *ngIf="contact.errors && (contact.dirty || contact.touched)" class="alert alert-danger">
+                            <div *ngIf="contact.errors.required">
+                                Last Name is required
+                            </div>
+                            <div [hidden]="!contact.errors('pattern')">
+                                Enter Only Characters.
+                            </div>
                         </div>
                     </div>
                     <label class="col-md-2 col-form-label">Whatsapp Number</label>
                     <div class="col-md-4">
-                        <div class="form-group">
+                        <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
                             <input type="text" class="form-control" id="whatsapp" [(ngModel)]="employeeModel.whatsapp"
-                                name="whatsapp" placeholder="Enter Whatsapp Number" />
+                                name="whatsapp" placeholder="Enter Whatsapp Number" required value=""
+                                pattern="^[0-9].{9,9}$" (focus)="focus = true" #whatsapp="ngModel" />
+                        </div>
+                        <div *ngIf="whatsapp.errors && (whatsapp.dirty || whatsapp.touched)" class="alert alert-danger">
+                            <div *ngIf="whatsapp.errors.required">
+                                Whatsapp Number is required
+                            </div>
+                            <div [hidden]="!whatsapp.errors('pattern')">
+                                Enter Only Numbers.
+                            </div>
                         </div>
                     </div>
-
                     <label class="col-md-2 col-form-label">Address</label>
                     <div class="col-md-4">
-                        <div class="form-group">
+                        <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
                             <textarea id="address" name="address" rows="4" cols="54" [(ngModel)]="employeeModel.address"
-                                placeholder="Enter Address"></textarea>
+                                placeholder="Enter Address" required value="" pattern="[A-Za-z0-9'\.\-\s\,]"
+                                (focus)="focus = true" #address="ngModel"> </textarea>
+                        </div>
+                        <div *ngIf="address.errors && (address.dirty || address.touched)" class="alert alert-danger">
+                            <div *ngIf="address.errors.required">
+                                Address is required
+                            </div>
+                            <div [hidden]="!address.errors('pattern')">
+                                Enter Only Numbers, Characters.
+                            </div>
                         </div>
                     </div>
                     <label class="col-md-2 col-form-label">City</label>
                     <div class="col-md-4">
-                        <div class="form-group">
+                        <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
                             <input type="text" class="form-control" id="city" [(ngModel)]="employeeModel.city"
-                                name="city" placeholder="Enter City" />
+                                name="city" placeholder="Enter City" required value="" pattern="^[a-zA-Z]+$"
+                                (focus)="focus = true" #city="ngModel" />
+                        </div>
+                        <div *ngIf="city.errors && (city.dirty || city.touched)" class="alert alert-danger">
+                            <div *ngIf="city.errors.required">
+                                City Name is required
+                            </div>
+                            <div [hidden]="!city.errors('pattern')">
+                                Enter Only Characters.
+                            </div>
                         </div>
                     </div>
                     <label class="col-md-2 col-form-label">Pincode</label>
                     <div class="col-md-4">
-                        <div class="form-group">
+                        <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
                             <input type="text" class="form-control" id="pincode" [(ngModel)]="employeeModel.pincode"
-                                name="pincode" placeholder="Enter Pincode" />
+                                name="pincode" placeholder="Enter Pincode" required value="" pattern="^[1-9][0-9]{5}$"
+                                (focus)="focus = true" #pincode="ngModel" />
+                        </div>
+                        <div *ngIf="pincode.errors && (pincode.dirty || pincode.touched)" class="alert alert-danger">
+                            <div *ngIf="pincode.errors.required">
+                                Pincode is required
+                            </div>
+                            <div [hidden]="!pincode.errors('pattern')">
+                                Enter Only Numbers.
+                            </div>
                         </div>
                     </div>
                     <label class="col-sm-2 col-form-label">Select Gender</label>
@@ -169,7 +354,8 @@
         <div class="card-footer">
             <div class="row">
                 <div class="ml-md-auto">
-                    <button type="submit" class="btn btn-info btn-round" (click)="saveEmployeeDetail(employeeModel)">
+                    <button type="submit" class="btn btn-info btn-round" [disabled]="!employeeRegForm.form.valid"
+                        (click)="saveEmployeeDetail(employeeModel)">
                         <i class="fa fa-paper-plane" aria-hidden="true"></i> Submit
                     </button>
                     <button type="submit" class="btn btn-danger btn-round" (click)="closeEmpForm()">
@@ -179,4 +365,5 @@
             </div>
         </div>
     </div>
+
 </div>

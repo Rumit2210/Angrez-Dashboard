@@ -13,41 +13,87 @@
             </div>
         </div>
         <div class="card-body">
-            <form class="form-horizontal" name="employeeRegForm" #employeeRegForm="ngForm">
+            <form class="form-horizontal" name="CustForm" #CustForm="ngForm">
                 <div class="row">
                     <label class="col-md-2 col-form-label">First Name</label>
                     <div class="col-md-4">
-                        <div class="form-group">
+                        <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
                             <input type="text" class="form-control" id="fname" name="fname"
-                                [(ngModel)]="customerModel.fname" placeholder=" Enter First Name " />
+                                [(ngModel)]="customerModel.fname" placeholder=" Enter First Name " required value=""
+                                pattern="^[a-zA-Z]+$" (focus)="focus = true" #fname="ngModel" />
+                        </div>
+                        <div *ngIf="fname.errors && (fname.dirty || fname.touched)" class="alert alert-danger">
+                            <div *ngIf="fname.errors.required">
+                                First Name is required
+                            </div>
+                            <div [hidden]="!fname.errors('pattern')">
+                                Enter Only Characters.
+                            </div>
                         </div>
                     </div>
                     <label class="col-md-2 col-form-label">Last Name</label>
                     <div class="col-md-4">
-                        <div class="form-group">
+                        <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
                             <input type="text" class="form-control" id="lname" name="lname"
-                                [(ngModel)]="customerModel.lname" placeholder=" Enter Last Name" />
+                                [(ngModel)]="customerModel.lname" placeholder=" Enter Last Name" required value=""
+                                pattern="^[a-zA-Z]+$" (focus)="focus = true" #lname="ngModel" />
+                        </div>
+                        <div *ngIf="lname.errors && (lname.dirty || lname.touched)" class="alert alert-danger">
+                            <div *ngIf="lname.errors.required">
+                                Last Name is required
+                            </div>
+                            <div [hidden]="!lname.errors('pattern')">
+                                Enter Only Characters.
+                            </div>
                         </div>
                     </div>
                     <label class="col-md-2 col-form-label">Email</label>
                     <div class="col-md-4">
-                        <div class="form-group">
+                        <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
                             <input type="text" class="form-control" id="email" name="email"
-                                [(ngModel)]="customerModel.email" placeholder=" Enter Email Address" />
+                                [(ngModel)]="customerModel.email" placeholder=" Enter Email Address" required value=""
+                                pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" (focus)="focus = true"
+                                #email="ngModel" />
+                        </div>
+                        <div *ngIf="email.errors && (email.dirty || email.touched)" class="alert alert-danger">
+                            <div *ngIf="email.errors.required">
+                                Email Address is required.
+                            </div>
+                            <div [hidden]="!email.hasError('pattern')">Email format should be
+                                <small><b>joe@abc.com</b></small>
+                            </div>
                         </div>
                     </div>
                     <label class="col-md-2 col-form-label">Contact Number</label>
                     <div class="col-md-4">
-                        <div class="form-group">
+                        <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
                             <input type="text" class="form-control" id="contact" [(ngModel)]="customerModel.contact"
-                                name="contact" placeholder="Enter Contact Number" />
+                                name="contact" placeholder="Enter Contact Number" required value=""
+                                pattern="^[0-9].{9,9}$" (focus)="focus = true" #contact="ngModel" />
+                        </div>
+                        <div *ngIf="contact.errors && (contact.dirty || contact.touched)" class="alert alert-danger">
+                            <div *ngIf="contact.errors.required">
+                                contact Address is required.
+                            </div>
+                            <div [hidden]="!contact.errors('pattern')">
+                                Enter Only Numbers.
+                            </div>
                         </div>
                     </div>
                     <label class="col-md-2 col-form-label">Whatsapp Number</label>
                     <div class="col-md-4">
-                        <div class="form-group">
+                        <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
                             <input type="text" class="form-control" id="whatsapp" [(ngModel)]="customerModel.whatsapp"
-                                name="whatsapp" placeholder="Enter Whatsapp Number" />
+                                name="whatsapp" placeholder="Enter Whatsapp Number" required value=""
+                                pattern="^[0-9].{9,9}$" (focus)="focus = true" #whatsapp="ngModel" />
+                        </div>
+                        <div *ngIf="whatsapp.errors && (whatsapp.dirty || whatsapp.touched)" class="alert alert-danger">
+                            <div *ngIf="whatsapp.errors.required">
+                                whatsapp Address is required.
+                            </div>
+                            <div [hidden]="!whatsapp.errors('pattern')">
+                                Enter Only Numbers.
+                            </div>
                         </div>
                     </div>
 
@@ -79,7 +125,8 @@
         <div class="card-footer">
             <div class="row">
                 <div class="ml-md-auto">
-                    <button type="submit" class="btn btn-info btn-round" (click)="saveCustomerDetail(customerModel)">
+                    <button type="submit" class="btn btn-info btn-round" (click)="saveCustomerDetail(customerModel)"
+                        [disabled]="!CustForm.form.valid">
                         <i class="fa fa-paper-plane" aria-hidden="true"></i> Submit
                     </button>
                     <button type="submit" class="btn btn-danger btn-round" routerLink='/dashboard'>
@@ -159,7 +206,8 @@
                 <div class="card-footer">
                     <div class="row">
                         <div class="ml-md-auto">
-                            <pagination-controls (pageChange)="p = $event" autoHide="true" responsive="true">
+                            <pagination-controls (pageChange)="p = $event" maxSize="5" autoHide="true"
+                                responsive="true">
                             </pagination-controls>
                         </div>
                     </div>
@@ -421,10 +469,11 @@
             <br>
             <div class="row">
                 <div class="ml-md-auto">
-                    <button type="button" class="btn btn-info btn-round" (click)="generateInvoicePDF()"><i
+                    <button type="button" class="btn btn-info btn-round" (click)="generateInvoicePDF()" hidden><i
                             class="fa fa-file-pdf-o"></i>
                         Invoice(PDF)</button>
-                    <button type="submit" class="btn btn-info btn-round" (click)="saveAppointmentDetails()">
+                    <button type="submit" class="btn btn-info btn-round" (click)="saveAppointmentDetails()"
+                        [disabled]="!selectedServices||!selectedEmp ">
                         <i class="fa fa-paper-plane" aria-hidden="true"></i> Submit
                     </button>
                     <button type="submit" class="btn btn-danger btn-round" (click)="backToCustomer()">

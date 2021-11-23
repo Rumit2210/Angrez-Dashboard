@@ -97,7 +97,7 @@ export class CustomerComponent implements OnInit {
       servicesId: $event.id,
     }
     this.selServiceData.push(data);
-    debugger
+
     this.totalPrice = 0;
     this.totalPoint = 0; this.totalTime = 0;
     this.selServiceData.forEach(element => {
@@ -181,6 +181,7 @@ export class CustomerComponent implements OnInit {
       this.customerList = data;
       this.apiService.showNotification('top', 'right', 'Employee Added Successfully.', 'success');
       this.getCustomerDetails();
+      location.reload();
     })
   }
 
@@ -254,7 +255,7 @@ export class CustomerComponent implements OnInit {
     this.appointmentModel.totaltime = this.totalTime;
     this.appointmentModel.isactive = true;
     this.appointmentModel.custid = this.appointmentModel.id;
-    debugger
+
     this.customerService.saveAppointmentList(this.appointmentModel).subscribe((data: any) => {
       this.appointment = data;
       this.router.navigate(['dashboard']);
@@ -262,7 +263,7 @@ export class CustomerComponent implements OnInit {
     })
   }
   generateInvoicePDF(action = 'open') {
-    debugger
+
     let docDefinition = {
       content: [
         {

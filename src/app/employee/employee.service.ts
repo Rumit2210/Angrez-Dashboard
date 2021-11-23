@@ -26,5 +26,8 @@ export class EmployeeService {
         }
         return this.httpClient.post<any>(ApiService.removeEmployeeListURL, data);
     }
+    updateEmpList(admin: Employee): Observable<any> {
+        return this.httpClient.post<any>(ApiService.updateEmployeeListURL, admin);
+    }
 
 }

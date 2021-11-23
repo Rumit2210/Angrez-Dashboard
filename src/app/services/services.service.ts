@@ -63,7 +63,7 @@ export class ServicesService {
     //         testid: testid,
     //         stuid: stuid
     //     };
-    //     debugger
+    //      
     //     return this.httpClient.post(ApiService.getTestforCheckingURL, data);
     // }
     // savetestresult(data) {
