@@ -244,7 +244,9 @@ export class CustomerComponent implements OnInit {
     this.appointmentModel.redeempoints = 0;
   }
   saveAppointmentDetails() {
+    debugger
     this.appointmentModel.lessPoints = 0;
+    this.appointmentModel.totalpoint = this.totalPoint;
     this.appointmentModel.tCustPoint = this.tCustPoint;
     this.appointmentModel.lessPoints = this.tCustPoint - this.appointmentModel.redeempoints;
     this.appointmentModel.lessPoints = this.appointmentModel.lessPoints + this.appointmentModel.totalpoint;
@@ -255,7 +257,7 @@ export class CustomerComponent implements OnInit {
     this.appointmentModel.totaltime = this.totalTime;
     this.appointmentModel.isactive = true;
     this.appointmentModel.custid = this.appointmentModel.id;
-
+    debugger
     this.customerService.saveAppointmentList(this.appointmentModel).subscribe((data: any) => {
       this.appointment = data;
       this.router.navigate(['dashboard']);
@@ -352,8 +354,10 @@ export class CustomerComponent implements OnInit {
   viewCustomerDetails(data) {
     this.totalCustomerPoint = 0;
     this.customerModel = data;
+    debugger
     this.customerService.getViewAppointment(data).subscribe((data1: any) => {
       this.appointment = data1;
+      debugger
       this.appointment.forEach(element => {
         if (element.totalpoint != undefined) {
           this.totalCustomerPoint = this.totalCustomerPoint + element.totalpoint;
