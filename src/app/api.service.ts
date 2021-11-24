@@ -6,6 +6,7 @@ declare var $: any;
 })
 export class ApiService {
   public static HOST_URL: string = "http://localhost:8090";
+  // public static HOST_URL: string = "http://31.220.59.174:4500";
 
   constructor(
     private http: HttpClient,
