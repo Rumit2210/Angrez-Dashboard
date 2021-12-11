@@ -188,6 +188,10 @@
                                     <td class="text-center">{{ item.whatsapp }}</td>
                                     <td class="text-center">{{ item.gender }}</td>
                                     <td class="text-right">
+                                        <button type="button" rel="tooltip" class="btn btn-info btn-icon btn-sm">
+                                            <i class="fa fa-eye" (click)="onlyViewCustomerDetails(item.id)"></i>
+                                        </button>
+                                        &nbsp;
                                         <button type="button" rel="tooltip" class="btn btn-success btn-icon btn-sm">
                                             <i class="fa fa-edit" data-toggle="modal" data-target="#customerModal"
                                                 (click)="viewCustomerDetails(item)"></i>
@@ -482,6 +486,105 @@
                 </div>
             </div>
 
+        </div>
+    </div>
+    <div class="card" *ngIf="viewCustomerAllData">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md-8">
+                    <h4 class="card-title">Customer Appointment List</h4>
+                </div>
+                <div class="ml-md-auto">
+                    <button type="cancel" class="btn btn-danger btn-round" (click)="backToList()">
+                        <i class="fa fa-arrow-left"></i> Back
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead class="text-primary">
+                        <th class="text-center">#</th>
+                        <th class="text-center">Employee Name</th>
+                        <th class="text-center">Total Price</th>
+                        <th class="text-center">Total Point</th>
+                        <th class="text-center">Appointment Date</th>
+                        <th class="text-right">Actions</th>
+                    </thead>
+                    <tbody>
+                        <tr
+                            *ngFor="let item of customerData |  paginate: { id:'listing_pagination',itemsPerPage: 5, currentPage: page,totalItems:totalRecords }">
+                            <td class="text-center">{{ item.index }}</td>
+                            <td class="text-center">{{ item.empname}}</td>
+                            <td class="text-center">{{ item.totalprice }}</td>
+                            <td class="text-center">{{ item.totalpoint }}</td>
+                            <td class="text-center">{{ item.createddate | date }}</td>
+                            <td class="text-right">
+                                <button type="button" rel="tooltip" class="btn btn-info btn-icon btn-sm">
+                                    <i class="fa fa-eye" data-toggle="modal" data-target="#customerServicesModal"
+                                        (click)="openUsedServiceList(item.id)"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="card-footer">
+            <div class="row">
+                <div class="ml-md-auto">
+                    <pagination-controls id="listing_pagination" maxSize="5" directionLinks="true"
+                        (pageChange)="page= $event" autoHide="true" responsive="true">
+                    </pagination-controls>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="customerServicesModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-notice">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <i class="nc-icon nc-simple-remove"></i>
+                    </button>
+                    <h5 class="modal-title" id="myModalLabel">Services List</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class="text-primary">
+                                <th class="text-center">#</th>
+                                <th class="text-center">Service Name</th>
+                                <th class="text-center">Service Price</th>
+                                <th class="text-center">Service Point</th>
+                            </thead>
+                            <tbody>
+                                <tr
+                                    *ngFor="let item of usedServices |  paginate: { id:'model_pagination',itemsPerPage: 10, currentPage: modelPage,totalItems:totalModelRecords }">
+                                    <td class="text-center">{{ item.index }}</td>
+                                    <td class="text-center">{{ item.servicesname}}</td>
+                                    <td class="text-center">{{ item.price }}</td>
+                                    <td class="text-center">{{ item.point }}</td>
+                                </tr>
+                                <!-- <div class="row">
+                                    <div class="ml-md-auto">
+                                        <pagination-controls id="model_pagination" maxSize="5" directionLinks="true"
+                                            (pageChange)="page= $event" autoHide="true" responsive="true">
+                                        </pagination-controls>
+                                    </div>
+                                </div> -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-secondary btn-round" data-dismiss="modal">
+                        <i class="fa fa-times" aria-hidden="true"></i> Close
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 </div>

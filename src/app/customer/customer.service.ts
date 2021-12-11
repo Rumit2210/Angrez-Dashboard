@@ -56,4 +56,16 @@ export class CustomerService {
         }
         return this.httpClient.post<any>(ApiService.getCustomerTotalPointsURL, data);
     }
+    getAllCustomerDataList(id) {
+        let data = {
+            id: id
+        }
+        return this.httpClient.post<any>(ApiService.getAllCustomerDataListURL, data);
+    }
+    getServicesListUsingId(id) {
+        let data = {
+            id: id
+        }
+        return this.httpClient.post<any>(ApiService.getUsedServicesByCustomerURL, data);
+    }
 }

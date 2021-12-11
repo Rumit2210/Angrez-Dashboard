@@ -1,4 +1,5 @@
-<nav #navbar class="navbar navbar-expand-lg navbar-absolute" [ngClass]="{ 'bg-white': open === true , 'navbar-transparent': open === false}">
+<nav #navbar class="navbar navbar-expand-lg navbar-absolute"
+  [ngClass]="{ 'bg-white': open === true , 'navbar-transparent': open === false}">
   <div class="container-fluid">
     <div class="navbar-wrapper">
       <div class="navbar-minimize">
@@ -16,13 +17,13 @@
       </div>
       <a class="navbar-brand" href="javascript:void(0)">{{getTitle()}}</a>
     </div>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation" (click)="open = !open"
-      >
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
+      aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation" (click)="open = !open">
       <span class="navbar-toggler-bar navbar-kebab"></span>
       <span class="navbar-toggler-bar navbar-kebab"></span>
       <span class="navbar-toggler-bar navbar-kebab"></span>
     </button>
-    <div class="collapse navbar-collapse justify-content-end" id="navigation">
+    <!-- <div class="collapse navbar-collapse justify-content-end" id="navigation">
       <form>
         <div class="input-group no-border">
           <input type="text" value="" class="form-control" placeholder="Search...">
@@ -64,6 +65,6 @@
           </a>
         </li>
       </ul>
-    </div>
+    </div> -->
   </div>
 </nav>

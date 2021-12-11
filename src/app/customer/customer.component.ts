@@ -10,6 +10,7 @@ import { Customer } from './customer.model';
 import { CustomerService } from './customer.service';
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
+import Swal from 'sweetalert2';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 @Component({
   selector: 'app-customer',
@@ -36,9 +37,16 @@ export class CustomerComponent implements OnInit {
   totalTime: any = 0;
   custAppointment: boolean = false;
   selectCustomer: boolean = false;
+  viewCustomerAllData: boolean = false;
   selectedCustId: any;
   totalCustPoint: any[];
   tCustPoint: any = 0;
+  customerData: any[];
+  usedServices: any[];
+  totalRecords: string;
+  totalModelRecords: string;
+  page: Number = 1;
+  modelPage: number = 1;
   constructor(
     private servicesService: ServicesService,
     private employeeService: EmployeeService,
@@ -372,11 +380,65 @@ export class CustomerComponent implements OnInit {
     })
   }
   removeCustomerList(id) {
-    this.customerService.removeCustomerDetails(id).subscribe((req) => {
-      this.apiService.showNotification('top', 'right', 'Standard removed Successfully.', 'success');
-      this.getCustomerDetails();
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You want to delete! If you delete Customer then all the customer data will be delete.",
+      icon: 'warning',
+      showCancelButton: true,
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger',
+      },
+      confirmButtonText: 'Yes',
+      buttonsStyling: false
+    }).then((result) => {
+      if (result.value == true) {
+        this.customerService.removeCustomerDetails(id).subscribe((req) => {
+          this.apiService.showNotification('top', 'right', 'Customer removed Successfully.', 'success');
 
+
+        })
+        Swal.fire(
+          {
+            title: 'Deleted!',
+            text: 'Your Customer has been deleted.',
+            icon: 'success',
+            customClass: {
+              confirmButton: "btn btn-success",
+            },
+            buttonsStyling: false
+          }
+        )
+        this.getCustomerDetails();
+      }
     })
+
+  }
+  onlyViewCustomerDetails(id) {
+    this.selectCustomer = true;
+    this.custAppointment = false;
+    this.viewCustomerAllData = true;
+    this.customerService.getAllCustomerDataList(id).subscribe((data: any) => {
+      this.customerData = data;
+      debugger
+      for (let i = 0; i < this.customerData.length; i++) {
+        this.customerData[i].index = i + 1;
+      }
+    });
+  }
+  backToList() {
+    this.selectCustomer = false;
+    this.custAppointment = false;
+    this.viewCustomerAllData = false;
+  }
+  openUsedServiceList(id) {
+    this.customerService.getServicesListUsingId(id).subscribe((data: any) => {
+      this.usedServices = data;
+      debugger
+      for (let i = 0; i < this.usedServices.length; i++) {
+        this.usedServices[i].index = i + 1;
+      }
+    });
   }
 
 
