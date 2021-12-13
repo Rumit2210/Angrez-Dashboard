@@ -18,6 +18,7 @@ import { AppRoutes } from './app.routing';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { MaterialModule } from './material/material.module';
 @NgModule({
     imports: [
         BrowserAnimationsModule,
@@ -33,6 +34,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
         FooterModule,
         FixedPluginModule,
         NgxPaginationModule,
+        MaterialModule,
         AngularMultiSelectModule
     ],
     declarations: [

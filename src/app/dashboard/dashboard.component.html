@@ -307,8 +307,8 @@
         <div class="card-footer">
           <div class="row">
             <div class="ml-md-auto">
-              <pagination-controls (pageChange)="p= $event" autoHide="true" responsive="true">
-              </pagination-controls>
+              <mat-paginator #paginator [pageSize]="4" [pageSizeOptions]="[4, 8, 12]">
+              </mat-paginator>
             </div>
           </div>
         </div>

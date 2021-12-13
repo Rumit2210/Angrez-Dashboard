@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { ApiService } from 'app/api.service';
 import { Appointment } from 'app/customer/appointment.model';
@@ -20,6 +22,9 @@ declare const $: any;
   templateUrl: './dashboard.component.html'
 })
 export class DashboardComponent implements OnInit {
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  
   public gradientStroke;
   public chartColor;
   public canvas: any;
@@ -34,7 +39,7 @@ export class DashboardComponent implements OnInit {
   public activeUsersChartOptions: any;
   public activeUsersChartLabels: Array<any>;
   public activeUsersChartColors: Array<any>
-
+ 
   public chartClicked(e: any): void {
     console.log(e);
   }
@@ -721,7 +726,8 @@ export class DashboardComponent implements OnInit {
   public monthlyTotal: Customer[];
   public enquiryList: Enquiry[];
   public appointmentList: Appointment[];
-  public completedAppointment: Appointment[];
+   public completedAppointment: any=[];
+ 
   dailytotal: number = 0;
   monthlytotal: number = 0;
   adminRole: any;
@@ -815,7 +821,9 @@ export class DashboardComponent implements OnInit {
   }
   getAllCompletedAppointment() {
     this.customerService.getCompletedServices().subscribe((data: any) => {
-      this.completedAppointment = data;
+      // this.completedAppointment = data;
+      this.completedAppointment = new MatTableDataSource<Element>(data);
+      this.completedAppointment.paginator = this.paginator;
       for (let i = 0; i < this.completedAppointment.length; i++) {
         this.completedAppointment[i].index = i + 1;
       }
