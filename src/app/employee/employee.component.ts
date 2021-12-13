@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'app/api.service';
 import { Services } from 'app/services/services.model';
 import { ServicesService } from 'app/services/services.service';
+import Swal from 'sweetalert2';
 import { Employee } from './employee.model';
 import { EmployeeService } from './employee.service';
 
@@ -104,10 +105,38 @@ export class EmployeeComponent implements OnInit {
     this.updateEmployeeModel = data;
   }
   removeEmployee(id) {
-    this.employeeService.removeEmployeeList(id).subscribe((req) => {
-      this.apiService.showNotification('top', 'right', 'Employee removed Successfully.', 'success');
-      this.getAllEmployee();
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You want to delete! If you delete Employee then all the employee data will be delete.",
+      icon: 'warning',
+      showCancelButton: true,
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger',
+      },
+      confirmButtonText: 'Yes',
+      buttonsStyling: false
+    }).then((result) => {
+      if (result.value == true) {
+        this.employeeService.removeEmployeeList(id).subscribe((req) => {
+          this.apiService.showNotification('top', 'right', 'Employee removed Successfully.', 'success');
+
+        })
+        Swal.fire(
+          {
+            title: 'Deleted!',
+            text: 'Your Employee has been deleted.',
+            icon: 'success',
+            customClass: {
+              confirmButton: "btn btn-success",
+            },
+            buttonsStyling: false
+          }
+        )
+        this.getAllEmployee();
+      }
     })
+
   }
   updateEmployeeDetails() {
 

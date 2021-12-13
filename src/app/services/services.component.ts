@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'app/api.service';
+import Swal from 'sweetalert2';
 import { Services } from './services.model';
 import { ServicesService } from './services.service';
 
@@ -51,9 +52,38 @@ export class ServicesComponent implements OnInit {
     })
   }
   removeServices(id) {
-    this.servicesService.removeServicesList(id).subscribe((req) => {
-      this.apiService.showNotification('top', 'right', 'Service removed Successfully.', 'success');
-      this.getAllServices();
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You want to delete! If you delete Services then all the Service Price and list will be delete.",
+      icon: 'warning',
+      showCancelButton: true,
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger',
+      },
+      confirmButtonText: 'Yes',
+      buttonsStyling: false
+    }).then((result) => {
+      if (result.value == true) {
+        this.servicesService.removeServicesList(id).subscribe((req) => {
+          this.apiService.showNotification('top', 'right', 'Service removed Successfully.', 'success');
+
+        })
+        Swal.fire(
+          {
+            title: 'Deleted!',
+            text: 'Your Service has been deleted.',
+            icon: 'success',
+            customClass: {
+              confirmButton: "btn btn-success",
+            },
+            buttonsStyling: false
+          }
+        )
+        this.getAllServices();
+      }
     })
+
+
   }
 }
