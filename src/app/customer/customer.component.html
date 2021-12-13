@@ -523,7 +523,7 @@
                             <td class="text-right">
                                 <button type="button" rel="tooltip" class="btn btn-info btn-icon btn-sm">
                                     <i class="fa fa-eye" data-toggle="modal" data-target="#customerServicesModal"
-                                        (click)="openUsedServiceList(item.id)"></i>
+                                        (click)="openUsedServiceList(item)"></i>
                                 </button>
                             </td>
                         </tr>
@@ -537,6 +537,7 @@
                     <pagination-controls id="listing_pagination" maxSize="5" directionLinks="true"
                         (pageChange)="page= $event" autoHide="true" responsive="true">
                     </pagination-controls>
+
                 </div>
             </div>
         </div>
@@ -579,10 +580,36 @@
                         </table>
                     </div>
                 </div>
-                <div class="modal-footer justify-content-center">
-                    <button type="button" class="btn btn-secondary btn-round" data-dismiss="modal">
-                        <i class="fa fa-times" aria-hidden="true"></i> Close
-                    </button>
+                <div class="modal-footer">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label class="col-form-label" style="font-size: 18px;color: black;">Total
+                                Price</label>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="fname" name="fname" disabled
+                                    value="{{totalPriceForDetails}} ₹" />
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <label class="col-form-label" style="font-size: 18px;color: black;">Total
+                                Points</label>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="tPoints" name="tPoints" disabled
+                                    value="{{totalPointForDetails}}" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <button type="button" class="btn btn-secondary btn-round" data-dismiss="modal">
+                                <i class="fa fa-times" aria-hidden="true"></i> Close
+                            </button>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>

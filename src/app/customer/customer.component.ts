@@ -47,6 +47,8 @@ export class CustomerComponent implements OnInit {
   totalModelRecords: string;
   page: Number = 1;
   modelPage: number = 1;
+  totalPriceForDetails: any;
+  totalPointForDetails: any;
   constructor(
     private servicesService: ServicesService,
     private employeeService: EmployeeService,
@@ -420,7 +422,6 @@ export class CustomerComponent implements OnInit {
     this.viewCustomerAllData = true;
     this.customerService.getAllCustomerDataList(id).subscribe((data: any) => {
       this.customerData = data;
-      debugger
       for (let i = 0; i < this.customerData.length; i++) {
         this.customerData[i].index = i + 1;
       }
@@ -431,10 +432,11 @@ export class CustomerComponent implements OnInit {
     this.custAppointment = false;
     this.viewCustomerAllData = false;
   }
-  openUsedServiceList(id) {
-    this.customerService.getServicesListUsingId(id).subscribe((data: any) => {
+  openUsedServiceList(obj) {
+    this.totalPriceForDetails = obj.totalprice
+    this.totalPointForDetails = obj.totalpoint
+    this.customerService.getServicesListUsingId(obj.id).subscribe((data: any) => {
       this.usedServices = data;
-      debugger
       for (let i = 0; i < this.usedServices.length; i++) {
         this.usedServices[i].index = i + 1;
       }
