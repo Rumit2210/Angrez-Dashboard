@@ -29,6 +29,9 @@ export class CustomerService {
     getAllAppointmentList(): Observable<Appointment[]> {
         return this.httpClient.get<any>(ApiService.getAllAppointmentURL);
     }
+    getCompletedServices(): Observable<Appointment[]> {
+        return this.httpClient.get<any>(ApiService.getAllCompletedServicesURL);
+    }
     getViewAppointment(admin) {
         let data = {
             id: admin.id

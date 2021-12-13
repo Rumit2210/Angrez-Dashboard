@@ -44,8 +44,8 @@ export class ApiService {
   public static updateEmployeeListURL: string = ApiService.HOST_URL + '/admin/UpdateEmployeeList';
   public static getAllCustomerDataListURL: string = ApiService.HOST_URL + '/admin/GetAllCustomerDataList';
   public static getUsedServicesByCustomerURL: string = ApiService.HOST_URL + '/admin/GetUsedServicesByCustomer';
-
-
+  public static getAllCompletedServicesURL: string = ApiService.HOST_URL + '/admin/GetAllCompletedServices';
+  public static saveAdminLoginURL: string = ApiService.HOST_URL + '/admin/login';
 
 
 
@@ -73,7 +73,7 @@ export class ApiService {
   public static GetTeacherlistURL: string = ApiService.HOST_URL + '/admin/GetTeacherList';
   public static GetAllStudentlistURL: string = ApiService.HOST_URL + '/admin/GetAllStudentList';
   public static getTestforCheckingURL: string = ApiService.HOST_URL + '/admin/getTestforChecking';
-  public static saveAdminLoginURL: string = ApiService.HOST_URL + '/admin/login';
+
   public static removeTeacherListURL: string = ApiService.HOST_URL + '/admin/removeTecaherList';
   public static updateTeacherListURL: string = ApiService.HOST_URL + '/admin/UpdateTecaherList/';
   public static updateStudentListURL: string = ApiService.HOST_URL + '/admin/UpdateStudentList/';

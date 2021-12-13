@@ -721,6 +721,7 @@ export class DashboardComponent implements OnInit {
   public monthlyTotal: Customer[];
   public enquiryList: Enquiry[];
   public appointmentList: Appointment[];
+  public completedAppointment: Appointment[];
   dailytotal: number = 0;
   monthlytotal: number = 0;
   adminRole: any;
@@ -743,6 +744,7 @@ export class DashboardComponent implements OnInit {
     this.GetDailyTotal();
     this.GetMonthlyTotal();
     this.getAllAppointment();
+    this.getAllCompletedAppointment();
 
   }
   getAllEmployee() {
@@ -773,6 +775,9 @@ export class DashboardComponent implements OnInit {
   getAllEnquiry() {
     this.enquiryService.getAllEnquiryList().subscribe((data: any) => {
       this.enquiryList = data;
+      for (let i = 0; i < this.enquiryList.length; i++) {
+        this.enquiryList[i].index = i + 1;
+      }
     })
   }
   openEniquiry() {
@@ -808,11 +813,22 @@ export class DashboardComponent implements OnInit {
       }
     });
   }
+  getAllCompletedAppointment() {
+    this.customerService.getCompletedServices().subscribe((data: any) => {
+      this.completedAppointment = data;
+      for (let i = 0; i < this.completedAppointment.length; i++) {
+        this.completedAppointment[i].index = i + 1;
+      }
+    });
+  }
+
+
   paymentCompleted(id) {
     this.appointmentModel.id = id;
     this.appointmentModel.isactive = false;
     this.customerService.updateActiveStatusList(this.appointmentModel).subscribe((req) => {
       this.getAllAppointment();
+      this.getAllCompletedAppointment();
       this.apiService.showNotification('top', 'right', 'Payment accepted Successfully.', 'success');
     })
   }
