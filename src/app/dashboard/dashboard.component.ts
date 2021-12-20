@@ -25,6 +25,7 @@ export class DashboardComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   
+  
   public gradientStroke;
   public chartColor;
   public canvas: any;
@@ -39,6 +40,9 @@ export class DashboardComponent implements OnInit {
   public activeUsersChartOptions: any;
   public activeUsersChartLabels: Array<any>;
   public activeUsersChartColors: Array<any>
+  activePageDataChunk:any = [];
+  pageSize = 5;
+  pageSizeOptions: number[] = [5, 10, 15, 20];
  
   public chartClicked(e: any): void {
     console.log(e);
@@ -727,6 +731,8 @@ export class DashboardComponent implements OnInit {
   public enquiryList: Enquiry[];
   public appointmentList: Appointment[];
    public completedAppointment: any=[];
+   activePageDataChunkComApp:any=[];
+   activePageDataChunkAppo:any=[];
  
   dailytotal: number = 0;
   monthlytotal: number = 0;
@@ -781,11 +787,22 @@ export class DashboardComponent implements OnInit {
   getAllEnquiry() {
     this.enquiryService.getAllEnquiryList().subscribe((data: any) => {
       this.enquiryList = data;
+      this.activePageDataChunk = this.enquiryList.slice(0,this.pageSize);
       for (let i = 0; i < this.enquiryList.length; i++) {
         this.enquiryList[i].index = i + 1;
       }
     })
   }
+  setPageSizeOptions(setPageSizeOptionsInput: string) {
+    
+    this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
+  }
+  onPageChangedEnquiry(e) {
+    let firstCut = e.pageIndex * e.pageSize;
+    let secondCut = firstCut + e.pageSize;
+    this.activePageDataChunk = this.enquiryList.slice(firstCut, secondCut);
+  }
+ 
   openEniquiry() {
     this.router.navigate(['enquiry']);
   }
@@ -813,22 +830,34 @@ export class DashboardComponent implements OnInit {
   getAllAppointment() {
     this.customerService.getAllAppointmentList().subscribe((data: any) => {
       this.appointmentList = data;
+      this.activePageDataChunkAppo = this.appointmentList.slice(0,this.pageSize);
 
       for (let i = 0; i < this.appointmentList.length; i++) {
         this.appointmentList[i].index = i + 1;
       }
     });
   }
+  onPageChangedAppoi(e){
+    let firstCut = e.pageIndex * e.pageSize;
+    let secondCut = firstCut + e.pageSize;
+    this.activePageDataChunkAppo = this.enquiryList.slice(firstCut, secondCut);
+  }
   getAllCompletedAppointment() {
     this.customerService.getCompletedServices().subscribe((data: any) => {
-      // this.completedAppointment = data;
-      this.completedAppointment = new MatTableDataSource<Element>(data);
-      this.completedAppointment.paginator = this.paginator;
+
+      
+      this.completedAppointment = data;
+      this.activePageDataChunkComApp = this.completedAppointment.slice(0,this.pageSize);
       for (let i = 0; i < this.completedAppointment.length; i++) {
         this.completedAppointment[i].index = i + 1;
       }
     });
   }
+  onPageChangedComAp(e){
+    let firstCut = e.pageIndex * e.pageSize;
+    let secondCut = firstCut + e.pageSize;
+    this.activePageDataChunkComApp = this.enquiryList.slice(firstCut, secondCut);
+}
 
 
   paymentCompleted(id) {
@@ -837,6 +866,8 @@ export class DashboardComponent implements OnInit {
     this.customerService.updateActiveStatusList(this.appointmentModel).subscribe((req) => {
       this.getAllAppointment();
       this.getAllCompletedAppointment();
+      this.GetDailyTotal();
+      this.GetMonthlyTotal();
       this.apiService.showNotification('top', 'right', 'Payment accepted Successfully.', 'success');
     })
   }

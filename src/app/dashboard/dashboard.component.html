@@ -219,8 +219,7 @@
         <div class="card-footer">
           <div class="row">
             <div class="ml-md-auto">
-              <pagination-controls (pageChange)="p= $event" autoHide="true" responsive="true">
-              </pagination-controls>
+              <mat-paginator [length]="appointmentList.length" [pageSize]="pageSize" [pageSizeOptions]="[pageSizeOptions]" (page)="onPageChangedAppoi($event)"></mat-paginator>
             </div>
           </div>
         </div>
@@ -248,7 +247,7 @@
               </thead>
               <tbody>
                 <tr
-                  *ngFor="let item of completedAppointment | paginate: { itemsPerPage: 5, currentPage: p }; let i = index">
+                  *ngFor="let item of activePageDataChunkComApp  let i = index">
 
                   <td class="text-center">{{ item.index }}</td>
                   <td class="text-center">{{ item.fname}} {{ item.lname}} </td>
@@ -263,8 +262,7 @@
         <div class="card-footer">
           <div class="row">
             <div class="ml-md-auto">
-              <pagination-controls (pageChange)="p= $event" autoHide="true" responsive="true">
-              </pagination-controls>
+              <mat-paginator [length]="completedAppointment.length" [pageSize]="pageSize" [pageSizeOptions]="[pageSizeOptions]" (page)="onPageChangedComAp($event)"></mat-paginator>
             </div>
           </div>
         </div>
@@ -291,7 +289,7 @@
                 <th class="text-center">Date</th>
               </thead>
               <tbody>
-                <tr *ngFor="let item of enquiryList | paginate: { itemsPerPage: 5, currentPage: p }; let i = index">
+                <tr *ngFor="let item of activePageDataChunk ">
 
                   <td class="text-center">{{ item.index }}</td>
                   <td class="text-center">{{ item.name}} </td>
@@ -307,12 +305,14 @@
         <div class="card-footer">
           <div class="row">
             <div class="ml-md-auto">
-              <mat-paginator #paginator [pageSize]="4" [pageSizeOptions]="[4, 8, 12]">
-              </mat-paginator>
+              <mat-paginator [length]="enquiryList.length" [pageSize]="pageSize" [pageSizeOptions]="[pageSizeOptions]" (page)="onPageChangedEnquiry($event)"></mat-paginator>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+
+
+  
 </div>

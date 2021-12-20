@@ -267,12 +267,19 @@ export class CustomerComponent implements OnInit {
     this.appointmentModel.totaltime = this.totalTime;
     this.appointmentModel.isactive = true;
     this.appointmentModel.custid = this.appointmentModel.id;
+
+    if(this.appointmentModel.redeempoints > this.appointmentModel.tCustPoint){
+      this.apiService.showNotification('top', 'right', 'You can not redeem point more than total point.', 'danger');
+    }
+    else{
+      this.customerService.saveAppointmentList(this.appointmentModel).subscribe((data: any) => {
+        this.appointment = data;
+        this.router.navigate(['dashboard']);
+        this.apiService.showNotification('top', 'right', 'Appointment Successfully Booked.', 'success');
+      })
+    }
     debugger
-    this.customerService.saveAppointmentList(this.appointmentModel).subscribe((data: any) => {
-      this.appointment = data;
-      this.router.navigate(['dashboard']);
-      this.apiService.showNotification('top', 'right', 'Appointment Successfully Booked.', 'success');
-    })
+    
   }
   generateInvoicePDF(action = 'open') {
 

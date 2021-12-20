@@ -442,7 +442,7 @@
                 <div class="col-md-3">
                     <label class="col-form-label" style="font-size: 20px;color: black;">Enter Points </label>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="redeemPoint" name="redeemPoint"
+                        <input type="text" class="form-control" id="redeemPoint" name="redeemPoint" [disabled]="tCustPoint ==0 "
                             [(ngModel)]="appointmentModel.redeempoints" placeholder="Enter Redeem Point" />
                     </div>
                 </div>
