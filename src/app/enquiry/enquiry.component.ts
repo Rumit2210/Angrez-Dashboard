@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'app/api.service';
 import { Enquiry } from './enquiry.model';
 import { EnquiryService } from './enquiry.service';
-
+declare const $: any;
 @Component({
   selector: 'app-enquiry',
   templateUrl: './enquiry.component.html',
@@ -19,6 +19,9 @@ export class EnquiryComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    $('#action_menu_btn').click(function () {
+      $('.action_menu').toggle();
+    });
   }
 
   getAllEnquiry() {
