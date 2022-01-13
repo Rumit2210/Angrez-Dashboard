@@ -30,7 +30,7 @@
                             </thead>
                             <tbody>
                                 <tr
-                                    *ngFor="let item of employeeReg | paginate: { itemsPerPage: 5, currentPage: p }; let i = index">
+                                    *ngFor="let item of employeeReg | paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
                                     <td class="text-center">{{ item.index }}</td>
                                     <td class="text-center">{{ item.fname}} {{ item.lname}} </td>
                                     <td class="text-center">{{ item.contact }}</td>
@@ -272,7 +272,7 @@
                     <div class="col-md-4">
                         <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
                             <textarea id="address" name="address" rows="4" cols="54" [(ngModel)]="employeeModel.address"
-                                placeholder="Enter Address" required value="" pattern="[A-Za-z0-9'\.\-\s\,]"
+                                placeholder="Enter Address" required value="" pattern="[#\d+ ([^,]+), ([A-Z]{2}) (\d{5})]"
                                 (focus)="focus = true" #address="ngModel"> </textarea>
                         </div>
                         <div *ngIf="address.errors && (address.dirty || address.touched)" class="alert alert-danger">
@@ -280,7 +280,7 @@
                                 Address is required
                             </div>
                             <div [hidden]="!address.errors('pattern')">
-                                Enter Only Numbers, Characters.
+                                Enter Only Numbers, Characters and Special Charatcters.
                             </div>
                         </div>
                     </div>

@@ -385,7 +385,7 @@ export class CustomerComponent implements OnInit {
   updateCustomerDetails() {
     this.customerService.updateCustomerList(this.customerModel).subscribe((req) => {
       this.getCustomerDetails();
-      this.apiService.showNotification('top', 'right', 'Test Link Sent Successfully.', 'success');
+      this.apiService.showNotification('top', 'right', 'Customer Details Successfully Updated.', 'success');
     })
   }
   removeCustomerList(id) {

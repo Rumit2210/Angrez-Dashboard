@@ -21,14 +21,14 @@
                         <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
                             <input type="text" class="form-control" id="name" name="name"
                                 [(ngModel)]="servicesModel.name" placeholder=" Enter Service Name " required value=""
-                                pattern="^[a-zA-Z ]+$" (focus)="focus = true" #name="ngModel" />
+                                pattern="^[a-zA-Z0-9 !@#$%.^&*)(]{2,20}$" (focus)="focus = true" #name="ngModel" />
                         </div>
                         <div *ngIf="name.errors && (name.dirty || name.touched)" class="alert alert-danger">
                             <div *ngIf="name.errors.required">
                                 Service Name is required
                             </div>
                             <div [hidden]="!name.errors('pattern')">
-                                Enter Only Characters.
+                                Enter Only Characters, Numbers, Spacing and Some Special Charatcters Like (.@#$%).
                             </div>
                         </div>
                     </div>
