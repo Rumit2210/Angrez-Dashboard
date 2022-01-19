@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { AuthGuard } from './auth.guard';
 
 import { AdminLayoutComponent } from './layouts/admin/admin-layout.component';
 import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
@@ -12,27 +13,33 @@ export const AppRoutes: Routes = [{
     component: AdminLayoutComponent,
     children: [{
         path: '',
-        loadChildren: './dashboard/dashboard.module#DashboardModule'
+        loadChildren: './dashboard/dashboard.module#DashboardModule',
+        canActivate: [AuthGuard]
     },
     {
         path: '',
-        loadChildren: './userpage/user.module#UserModule'
+        loadChildren: './userpage/user.module#UserModule',
+        canActivate: [AuthGuard]
     },
     {
         path: '',
-        loadChildren: './employee/employee.module#EmployeeModule'
+        loadChildren: './employee/employee.module#EmployeeModule',
+        canActivate: [AuthGuard]
     },
     {
         path: '',
-        loadChildren: './customer/customer.module#CustomerModule'
+        loadChildren: './customer/customer.module#CustomerModule',
+        canActivate: [AuthGuard]
     },
     {
         path: '',
-        loadChildren: './services/services.module#ServicesModule'
+        loadChildren: './services/services.module#ServicesModule',
+        canActivate: [AuthGuard]
     },
     {
         path: '',
-        loadChildren: './enquiry/enquiry.module#EnquiryModule'
+        loadChildren: './enquiry/enquiry.module#EnquiryModule',
+        canActivate: [AuthGuard]
     },
     ]
 }, {

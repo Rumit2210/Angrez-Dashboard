@@ -807,6 +807,7 @@ export class DashboardComponent implements OnInit {
     this.router.navigate(['enquiry']);
   }
   GetDailyTotal() {
+    this.dailytotal =0;
     this.customerService.getDailyTotalList().subscribe((data: any) => {
       this.dailyTotal = data;
 
@@ -818,6 +819,7 @@ export class DashboardComponent implements OnInit {
     })
   }
   GetMonthlyTotal() {
+    this.monthlytotal = 0;
     this.customerService.getMonthlyTotalList().subscribe((data: any) => {
       this.monthlyTotal = data;
       this.monthlyTotal.forEach(element => {

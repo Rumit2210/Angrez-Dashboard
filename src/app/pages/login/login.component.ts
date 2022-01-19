@@ -39,6 +39,7 @@ export class LoginComponent implements OnInit {
     ) {
         this.nativeElement = element.nativeElement;
         this.sidebarVisible = false;
+        localStorage.clear();
     }
     checkFullPageBackgroundImage() {
         var $page = $('.full-page');
