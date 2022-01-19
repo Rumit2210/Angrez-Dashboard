@@ -41,8 +41,8 @@ export class DashboardComponent implements OnInit {
   public activeUsersChartLabels: Array<any>;
   public activeUsersChartColors: Array<any>
   activePageDataChunk:any = [];
-  pageSize = 5;
-  pageSizeOptions: number[] = [5, 10, 15, 20];
+  pageSize = 10;
+  pageSizeOptions: number[] = [10, 15, 20];
  
   public chartClicked(e: any): void {
     console.log(e);
@@ -840,6 +840,7 @@ export class DashboardComponent implements OnInit {
     });
   }
   onPageChangedAppoi(e){
+    debugger
     let firstCut = e.pageIndex * e.pageSize;
     let secondCut = firstCut + e.pageSize;
     this.activePageDataChunkAppo = this.enquiryList.slice(firstCut, secondCut);
