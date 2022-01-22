@@ -11,6 +11,9 @@ import { CustomerService } from './customer.service';
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 import Swal from 'sweetalert2';
+import { FormControl } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 @Component({
   selector: 'app-customer',
@@ -49,7 +52,7 @@ export class CustomerComponent implements OnInit {
   modelPage: number = 1;
   totalPriceForDetails: any;
   totalPointForDetails: any;
-  constructor(
+   constructor(
     private servicesService: ServicesService,
     private employeeService: EmployeeService,
     private customerService: CustomerService,
@@ -63,8 +66,8 @@ export class CustomerComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
-  }
+    }
+ 
   getAllEmployee() {
     this.employeeService.getAllEmployeeList().subscribe((data: any) => {
       this.employeeReg = data;
@@ -371,10 +374,8 @@ export class CustomerComponent implements OnInit {
   viewCustomerDetails(data) {
     this.totalCustomerPoint = 0;
     this.customerModel = data;
-    debugger
     this.customerService.getViewAppointment(data).subscribe((data1: any) => {
       this.appointment = data1;
-      debugger
       this.appointment.forEach(element => {
         if (element.totalpoint != undefined) {
           this.totalCustomerPoint = this.totalCustomerPoint + element.totalpoint;

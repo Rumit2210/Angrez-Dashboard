@@ -3,9 +3,10 @@ import { CommonModule } from '@angular/common';
 import { CustomerComponent } from './customer.component';
 import { CustomerRoutes } from './customer.routing';
 import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { MaterialModule } from 'app/material/material.module';
 
 
 
@@ -16,6 +17,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     FormsModule,
     NgxPaginationModule,
     AngularMultiSelectModule,
+    MaterialModule,
+    ReactiveFormsModule,
     RouterModule.forChild(CustomerRoutes)
   ]
 })

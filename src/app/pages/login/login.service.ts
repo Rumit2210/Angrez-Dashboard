@@ -54,5 +54,8 @@ export class LoginService {
     changePassword(admin) {
         return this.httpClient.post<any>(ApiService.updatePasswordURL, admin);
     }
+    CheckPassword(data) {
+        return this.httpClient.post(ApiService.ChackForPasswordURL, data);
+      }
 
 }

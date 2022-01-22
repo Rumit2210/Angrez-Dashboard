@@ -51,7 +51,7 @@
                     <div class="col-md-4">
                         <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
                             <input type="text" class="form-control" id="email" name="email"
-                                [(ngModel)]="customerModel.email" placeholder=" Enter Email Address" required value=""
+                                [(ngModel)]="customerModel.email" placeholder=" Enter Email Address" value=""
                                 pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" (focus)="focus = true"
                                 #email="ngModel" />
                         </div>
@@ -96,7 +96,22 @@
                             </div>
                         </div>
                     </div>
-
+                    <label class="col-md-2 col-form-label">Address</label>
+                    <div class="col-md-4">
+                        <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
+                            <textarea id="address" name="address" rows="4" cols="54" [(ngModel)]="customerModel.address"
+                                placeholder="Enter Address" value="" pattern="[#\d+ ([^,]+), ([A-Z]{2}) (\d{5})]"
+                                (focus)="focus = true" #address="ngModel"> </textarea>
+                        </div>
+                        <div *ngIf="address.errors && (address.dirty || address.touched)" class="alert alert-danger">
+                            <div *ngIf="address.errors.required">
+                                Address is required
+                            </div>
+                            <div [hidden]="!address.errors('pattern')">
+                                Enter Only Numbers, Characters and Special Charatcters.
+                            </div>
+                        </div>
+                    </div>
                     <label class="col-sm-2 col-form-label">Select Gender</label>
                     <div class="col-md-2">
                         <div class="form-check-radio">
@@ -168,11 +183,12 @@
                                 <th class="text-center">Contact NO</th>
                                 <th class="text-center">Whatsapp No</th>
                                 <th class="text-center">Gender</th>
+                                <th class="text-center">Created Date</th>
                                 <th class="text-right">Actions</th>
                             </thead>
                             <tbody>
                                 <tr
-                                    *ngFor="let item of customer | paginate: { itemsPerPage: 5, currentPage: p }; let i = index">
+                                    *ngFor="let item of customer | paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
                                     <td>
                                         <div class="form-check">
                                             <label class="form-check-label">
@@ -187,6 +203,7 @@
                                     <td class="text-center">{{ item.contact }}</td>
                                     <td class="text-center">{{ item.whatsapp }}</td>
                                     <td class="text-center">{{ item.gender }}</td>
+                                    <td class="text-center">{{ item.createddate | date }}</td>
                                     <td class="text-right">
                                         <button type="button" rel="tooltip" class="btn btn-info btn-icon btn-sm">
                                             <i class="fa fa-eye" (click)="onlyViewCustomerDetails(item.id)"></i>
@@ -210,7 +227,7 @@
                 <div class="card-footer">
                     <div class="row">
                         <div class="ml-md-auto">
-                            <pagination-controls (pageChange)="p = $event" maxSize="5" autoHide="true"
+                            <pagination-controls (pageChange)="p = $event" maxSize="10" autoHide="true"
                                 responsive="true">
                             </pagination-controls>
                         </div>
@@ -271,7 +288,14 @@
                                             placeholder="Enter Whatsapp Number" />
                                     </div>
                                 </div>
-
+                                <label class="col-md-2 col-form-label">Address</label>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <textarea id="address" name="address" rows="3" cols="40"
+                                            [(ngModel)]="customerModel.address" placeholder="Enter Address"
+                                            value=""> </textarea>
+                                    </div>
+                                </div>
                                 <label class="col-sm-2 col-form-label">Select Gender</label>
                                 <div class="col-md-2">
                                     <div class="form-check-radio">
@@ -294,6 +318,7 @@
                                         </label>
                                     </div>
                                 </div>
+
                                 <!-- <label class="col-md-2 col-form-label">Total Points</label>
                                 <div class="col-md-4">
                                     <div class="form-group">
@@ -400,7 +425,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
             <div class="table-responsive">
                 <table class="table">
@@ -442,8 +466,9 @@
                 <div class="col-md-3">
                     <label class="col-form-label" style="font-size: 20px;color: black;">Enter Points </label>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="redeemPoint" name="redeemPoint" [disabled]="tCustPoint ==0 "
-                            [(ngModel)]="appointmentModel.redeempoints" placeholder="Enter Redeem Point" />
+                        <input type="text" class="form-control" id="redeemPoint" name="redeemPoint"
+                            [disabled]="tCustPoint ==0 " [(ngModel)]="appointmentModel.redeempoints"
+                            placeholder="Enter Redeem Point" />
                     </div>
                 </div>
                 <div class="col-md-2">

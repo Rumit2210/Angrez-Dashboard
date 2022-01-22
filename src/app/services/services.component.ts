@@ -12,7 +12,9 @@ import { ServicesService } from './services.service';
 export class ServicesComponent implements OnInit {
   public servicesModel: Services = new Services;
   public servicesList: Services[];
+  public services:Services[];
   submitButton: Boolean = false;
+  search: string = '';
   constructor(
     private servicesService: ServicesService,
     private apiService: ApiService
@@ -33,10 +35,28 @@ export class ServicesComponent implements OnInit {
   getAllServices() {
     this.servicesService.getAllServicesList().subscribe((data: any) => {
       this.servicesList = data;
+      this.services=data;
       for (let i = 0; i < this.servicesList.length; i++) {
         this.servicesList[i].index = i + 1;
       }
     });
+  }
+  searchServicesList(val) {
+    if (this.search == '') {
+      this.services = this.servicesList;
+    } else {
+      this.transform(this.servicesList, val);
+    }
+
+  }
+  transform(services: Services[], searchValue: string) {
+
+    this.services = [];
+    services.forEach(element => {
+      if (element.name.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())) {
+        this.services.push(element);
+      }
+     })
   }
   viewServicesDetails(data) {
     this.servicesModel = data;
@@ -86,4 +106,5 @@ export class ServicesComponent implements OnInit {
 
 
   }
+
 }

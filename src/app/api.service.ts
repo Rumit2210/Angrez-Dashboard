@@ -47,7 +47,7 @@ export class ApiService {
   public static getUsedServicesByCustomerURL: string = ApiService.HOST_URL + '/admin/GetUsedServicesByCustomer';
   public static getAllCompletedServicesURL: string = ApiService.HOST_URL + '/admin/GetAllCompletedServices';
   public static saveAdminLoginURL: string = ApiService.HOST_URL + '/admin/login';
-
+  public static ChackForPasswordURL: string = ApiService.HOST_URL + '/admin/ChackForPassword';
 
 
 

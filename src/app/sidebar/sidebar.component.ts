@@ -8,6 +8,7 @@ export interface RouteInfo {
     type: string;
     collapse?: string;
     icontype: string;
+    roles: string;
     // icon: string;
     children?: ChildrenItems[];
 }
@@ -24,33 +25,61 @@ export const ROUTES: RouteInfo[] = [{
     path: '/dashboard',
     title: 'Dashboard',
     type: 'link',
-    icontype: 'nc-icon nc-bank'
+    icontype: 'nc-icon nc-bank',
+    roles: "Admin",
 },
 {
     path: '/customer',
     title: 'Customer',
     type: 'link',
-    icontype: 'fa fa-user'
+    icontype: 'fa fa-user',
+    roles: "Admin",
 },
 {
     path: '/employee',
     title: 'Employee',
     type: 'link',
-    icontype: 'fa fa-users'
+    icontype: 'fa fa-users',
+    roles: "Admin",
 },
 {
     path: '/services',
     title: 'Services',
     type: 'link',
-    icontype: 'fa fa-scissors'
+    icontype: 'fa fa-scissors',
+    roles: "Admin",
 },
 {
     path: '/enquiry',
     title: 'Enquiry',
     type: 'link',
-    icontype: 'fa fa-question'
+    icontype: 'fa fa-question',
+    roles: "Admin",
 },
 
+];
+export const Employee: RouteInfo[] = [
+    {
+        path: '/dashboard',
+        title: 'Dashboard',
+        type: 'link',
+        icontype: 'nc-icon nc-bank',
+        roles: "Admin",
+    },
+    {
+        path: '/customer',
+        title: 'Customer',
+        type: 'link',
+        icontype: 'fa fa-user',
+        roles: "Admin",
+    },
+    {
+        path: '/enquiry',
+        title: 'Enquiry',
+        type: 'link',
+        icontype: 'fa fa-question',
+        roles: "Admin",
+    },
 ];
 
 @Component({
@@ -61,8 +90,10 @@ export const ROUTES: RouteInfo[] = [{
 
 export class SidebarComponent {
     public menuItems: any[];
+    public subAdminMenuItems: any;
+    public Rolees = localStorage.getItem("role");
     public userName = localStorage.getItem("UserName");
-
+    Roles: any;
     isNotMobileMenu() {
         if (window.outerWidth > 991) {
             return false;
@@ -76,7 +107,9 @@ export class SidebarComponent {
     }
 
     ngOnInit() {
+        this.Roles = localStorage.getItem("adminRole");
         this.menuItems = ROUTES.filter(menuItem => menuItem);
+        this.subAdminMenuItems = Employee.filter((menuItem) => menuItem);
     }
     ngAfterViewInit() {
     }

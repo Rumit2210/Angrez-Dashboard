@@ -16,7 +16,8 @@ export class Customer {
         public monthlyprice?: number,
         public itemName?: string,
         public price?: number,
-        public point?: number
+        public point?: number,
+        public address?:string
 
     ) {
     }

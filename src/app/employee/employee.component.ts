@@ -142,7 +142,7 @@ export class EmployeeComponent implements OnInit {
 
     this.employeeService.updateEmpList(this.updateEmployeeModel).subscribe((req) => {
       this.getAllEmployee();
-      this.apiService.showNotification('top', 'right', 'Test Link Sent Successfully.', 'success');
+      this.apiService.showNotification('top', 'right', 'Employee Details Successfully Updated.', 'success');
     })
   }
 
