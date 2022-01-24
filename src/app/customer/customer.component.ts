@@ -11,9 +11,7 @@ import { CustomerService } from './customer.service';
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 import Swal from 'sweetalert2';
-import { FormControl } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
+
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 @Component({
   selector: 'app-customer',
@@ -29,9 +27,10 @@ export class CustomerComponent implements OnInit {
   public customerList: Customer[];
   selectedEmp: any;
   empId: any;
+  selectedServ: any;
+  servId: any;
   public employeeReg: Employee[];
   public servicesList: Services[];
-  selServiceData: any = [];
   serviceData: any = [];
   search: string = '';
   totalPrice: any = 0;
@@ -52,7 +51,9 @@ export class CustomerComponent implements OnInit {
   modelPage: number = 1;
   totalPriceForDetails: any;
   totalPointForDetails: any;
-   constructor(
+  addService: any = [];
+  valu: 0;
+  constructor(
     private servicesService: ServicesService,
     private employeeService: EmployeeService,
     private customerService: CustomerService,
@@ -66,127 +67,74 @@ export class CustomerComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    }
- 
+    this.addService = [{ sertime: null, serpoint: null, serprice: null, name1: this.valu, selectedServ: '', selectedEmp: '', selectedServid: null, selectedEmpid: null }]
+    this.valu++;
+  }
+  addServiceList() {
+    debugger
+    this.valu++;
+    this.addService.push({ sertime: null, serpoint: null, serprice: null, name1: this.valu, selectedServ: '', selectedEmp: '', selectedServid: null, selectedEmpid: null });
+  }
+  removeServiceList(valu) {
+    this.addService.splice(valu, 1);
+    this.addPoinInList();
+  }
+
   getAllEmployee() {
     this.employeeService.getAllEmployeeList().subscribe((data: any) => {
       this.employeeReg = data;
     });
   }
-  selectEmpList(id) {
+  selectEmpList(id, ind) {
     this.empId = id;
     this.employeeReg.forEach(element => {
       if (element.id == id) {
-        this.selectedEmp = element.fname + ' ' + element.lname;
+        this.addService[ind].selectedEmp = element.fname + ' ' + element.lname;
+        this.addService[ind].selectedEmpid = id;
       }
     })
   }
 
-
   getAllServices() {
     this.servicesService.getAllServicesList().subscribe((data: any) => {
       this.servicesList = data;
-      this.servicesList.forEach(element => {
-
-        let data = {
-          time: element.time,
-          price: element.price,
-          point: element.point,
-          itemName: element.name,
-          id: element.id,
-        }
-
-        this.serviceData.push(data)
-      });
     });
   }
+  selectServiceList(id, ind) {
+    this.servId = id;
 
-  onItemSelect($event) {
-    let data = {
-      time: $event.time,
-      price: $event.price,
-      point: $event.point,
-      itemName: $event.itemName,
-      servicesId: $event.id,
-    }
-    this.selServiceData.push(data);
+    this.servicesList.forEach(element => {
+      if (element.id == id) {
+        this.addService[ind].selectedServ = element.name;
+        this.addService[ind].selectedServid = id;
+        this.addService[ind].serprice = element.price;
+        this.addService[ind].serpoint = element.point;
+        this.addService[ind].sertime = element.time;
+        this.addPoinInList();
+      }
 
-    this.totalPrice = 0;
-    this.totalPoint = 0; this.totalTime = 0;
-    this.selServiceData.forEach(element => {
-      if (element.price != undefined) {
-        this.totalPrice = this.totalPrice + element.price;
-      }
-      if (element.point != undefined) {
-        this.totalPoint = this.totalPoint + element.point;
-      }
-      if (element.time != undefined) {
-        this.totalTime = this.totalTime + element.time;
-      }
-    });
+    })
   }
-
-  OnItemDeSelect(item: any) {
-    this.totalTime = 0;
+  addPoinInList() {
     this.totalPoint = 0;
     this.totalPrice = 0;
-    for (let i = 0; i < this.selServiceData.length; i++) {
-      if (this.selServiceData[i].servicesId == item.id) {
-        this.selServiceData.splice(i, 1);
-      }
-    }
-    this.selServiceData.forEach(element => {
-      if (element.price != undefined) {
-        this.totalPrice = this.totalPrice + element.price;
-      }
-      if (element.point != undefined) {
-        this.totalPoint = this.totalPoint + element.point;
-      }
-      if (element.time != undefined) {
-        this.totalTime = this.totalTime + element.time;
-      }
-    });
-
-
-
-  }
-  onSelectAll(items: any = []) {
-    items.forEach(element => {
-      let data1 = {
-        time: element.time,
-        price: element.price,
-        point: element.point,
-        itemName: element.itemName,
-        servicesId: element.id,
-      }
-      this.selServiceData.push(data1);
-    });
-    this.selServiceData.forEach(element => {
-      if (element.price != undefined) {
-        this.totalPrice = this.totalPrice + element.price;
-      }
-      if (element.point != undefined) {
-        this.totalPoint = this.totalPoint + element.point;
-      }
-      if (element.time != undefined) {
-        this.totalTime = this.totalTime + element.time;
-      }
-    });
-
-
-  }
-  onDeSelectAll(items: any) {
-    this.selServiceData = [];
-    this.totalPrice = 0;
-    this.totalPoint = 0;
     this.totalTime = 0;
+    this.addService.forEach(element => {
+      if (element.serprice != undefined) {
+        this.totalPrice = this.totalPrice + element.serprice;
+      }
+      if (element.serpoint != undefined) {
+        this.totalPoint = this.totalPoint + element.serpoint;
+      }
+      if (element.sertime != undefined) {
+        this.totalTime = this.totalTime + element.sertime;
+      }
+    });
   }
-  removeItem(id) {
-    if (this.selServiceData.servicesId == id) {
-      this.selServiceData.splice(1);
-    }
 
-
+  removeItem(i) {
+    this.addService.splice(i, 1);
+    this.addPoinInList();
   }
 
   saveCustomerDetail() {
@@ -257,13 +205,14 @@ export class CustomerComponent implements OnInit {
     this.appointmentModel.redeempoints = 0;
   }
   saveAppointmentDetails() {
-    debugger
+    
     this.appointmentModel.lessPoints = 0;
     this.appointmentModel.totalpoint = this.totalPoint;
     this.appointmentModel.tCustPoint = this.tCustPoint;
     this.appointmentModel.lessPoints = this.tCustPoint - this.appointmentModel.redeempoints;
     this.appointmentModel.lessPoints = this.appointmentModel.lessPoints + this.appointmentModel.totalpoint;
-    this.appointmentModel.selectedService = this.selServiceData;
+    this.appointmentModel.selectedService = this.addService;
+    debugger
     this.appointmentModel.emp = this.selectedEmp;
     this.appointmentModel.totalprice = this.totalPrice;
     this.appointmentModel.totalpoint = this.totalPoint;
@@ -271,10 +220,10 @@ export class CustomerComponent implements OnInit {
     this.appointmentModel.isactive = true;
     this.appointmentModel.custid = this.appointmentModel.id;
 
-    if(this.appointmentModel.redeempoints > this.appointmentModel.tCustPoint){
+    if (this.appointmentModel.redeempoints > this.appointmentModel.tCustPoint) {
       this.apiService.showNotification('top', 'right', 'You can not redeem point more than total point.', 'danger');
     }
-    else{
+    else {
       this.customerService.saveAppointmentList(this.appointmentModel).subscribe((data: any) => {
         this.appointment = data;
         this.router.navigate(['dashboard']);
@@ -282,7 +231,7 @@ export class CustomerComponent implements OnInit {
       })
     }
     debugger
-    
+
   }
   generateInvoicePDF(action = 'open') {
 

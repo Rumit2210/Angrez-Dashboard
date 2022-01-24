@@ -174,18 +174,18 @@
               <thead class="text-primary">
                 <th class="text-center">#</th>
                 <th class="text-center">Customer Name</th>
-                <th class="text-center">Assign Team Member </th>
+                <!-- <th class="text-center">Assign Team Member </th> -->
                 <th class="text-center">Status</th>
                 <th class="text-center">Total Price</th>
                 <th class="text-center">Payment</th>
-                <!-- <th class="text-right">Actions</th> -->
+                <th class="text-right">Actions</th>
               </thead>
               <tbody>
                 <tr *ngFor="let item of appointmentList | paginate: { itemsPerPage: 5, currentPage: p }; let i = index">
 
                   <td class="text-center">{{ item.index }}</td>
                   <td class="text-center">{{ item.fname}} {{ item.lname}} </td>
-                  <td class="text-center">{{ item.empname }}</td>
+                  <!-- <td class="text-center">{{ item.empname }}</td> -->
                   <td class="text-center">
                     <button class="btn btn-info" *ngIf="item.isactive==true">
                       Processing
@@ -203,6 +203,14 @@
                     <button class="btn btn-info" *ngIf="item.isactive==false" disabled>
                       Completed !
                     </button>
+
+                    
+                  </td>
+                  <td class="text-right">
+                    <button type="button" rel="tooltip" class="btn btn-info btn-icon btn-sm">
+                      <i class="fa fa-eye" data-toggle="modal" data-target="#customerServicesModal"
+                        (click)="openUsedServiceList(item)"></i>
+                    </button>
                   </td>
                   <!-- <td class="text-right">
 
@@ -219,7 +227,8 @@
         <div class="card-footer">
           <div class="row">
             <div class="ml-md-auto">
-              <mat-paginator [length]="appointmentList.length" [pageSize]="pageSize" [pageSizeOptions]="[pageSizeOptions]" (page)="onPageChangedAppoi($event)"></mat-paginator>
+              <mat-paginator [length]="appointmentList.length" [pageSize]="pageSize"
+                [pageSizeOptions]="[pageSizeOptions]" (page)="onPageChangedAppoi($event)"></mat-paginator>
             </div>
           </div>
         </div>
@@ -242,16 +251,15 @@
               <thead class="text-primary">
                 <th class="text-center">#</th>
                 <th class="text-center">Customer Name</th>
-                <th class="text-center">Assign Team Member </th>
+                <!-- <th class="text-center">Assign Team Member </th> -->
                 <th class="text-center">Total Price</th>
               </thead>
               <tbody>
-                <tr
-                  *ngFor="let item of activePageDataChunkComApp  let i = index">
+                <tr *ngFor="let item of activePageDataChunkComApp  let i = index">
 
                   <td class="text-center">{{ item.index }}</td>
                   <td class="text-center">{{ item.fname}} {{ item.lname}} </td>
-                  <td class="text-center">{{ item.empname }}</td>
+                  <!-- <td class="text-center">{{ item.empname }}</td> -->
                   <td class="text-center" style="color: black; font-weight: 500 !important">{{ item.totalprice }} ₹
                   </td>
                 </tr>
@@ -262,7 +270,8 @@
         <div class="card-footer">
           <div class="row">
             <div class="ml-md-auto">
-              <mat-paginator [length]="completedAppointment.length" [pageSize]="pageSize" [pageSizeOptions]="[pageSizeOptions]" (page)="onPageChangedComAp($event)"></mat-paginator>
+              <mat-paginator [length]="completedAppointment.length" [pageSize]="pageSize"
+                [pageSizeOptions]="[pageSizeOptions]" (page)="onPageChangedComAp($event)"></mat-paginator>
             </div>
           </div>
         </div>
@@ -305,7 +314,8 @@
         <div class="card-footer">
           <div class="row">
             <div class="ml-md-auto">
-              <mat-paginator [length]="enquiryList.length" [pageSize]="pageSize" [pageSizeOptions]="[pageSizeOptions]" (page)="onPageChangedEnquiry($event)"></mat-paginator>
+              <mat-paginator [length]="enquiryList.length" [pageSize]="pageSize" [pageSizeOptions]="[pageSizeOptions]"
+                (page)="onPageChangedEnquiry($event)"></mat-paginator>
             </div>
           </div>
         </div>
@@ -313,6 +323,77 @@
     </div>
   </div>
 
+  <div class="modal fade" id="customerServicesModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-notice">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+            <i class="nc-icon nc-simple-remove"></i>
+          </button>
+          <h5 class="modal-title" id="myModalLabel">Services List</h5>
+        </div>
+        <div class="modal-body">
+          <div class="table-responsive">
+            <table class="table">
+              <thead class="text-primary">
+                <th class="text-center">#</th>
+                <th class="text-center">Service Name</th>
+                <th class="text-center">Service Price</th>
+                <th class="text-center">Service Point</th>
+              </thead>
+              <tbody>
+                <tr
+                  *ngFor="let item of usedServices |  paginate: { id:'model_pagination',itemsPerPage: 10, currentPage: modelPage,totalItems:totalModelRecords }">
+                  <td class="text-center">{{ item.index }}</td>
+                  <td class="text-center">{{ item.servicesname}}</td>
+                  <td class="text-center">{{ item.price }}</td>
+                  <td class="text-center">{{ item.point }}</td>
+                </tr>
+                <!-- <div class="row">
+                              <div class="ml-md-auto">
+                                  <pagination-controls id="model_pagination" maxSize="5" directionLinks="true"
+                                      (pageChange)="page= $event" autoHide="true" responsive="true">
+                                  </pagination-controls>
+                              </div>
+                          </div> -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div class="row">
+            <div class="col-md-2">
+              <label class="col-form-label" style="font-size: 18px;color: black;">Total
+                Price</label>
+            </div>
+            <div class="col-md-2">
+              <div class="form-group">
+                <input type="text" class="form-control" id="fname" name="fname" disabled
+                  value="{{totalPriceForDetails}} ₹" />
+              </div>
+            </div>
+            <div class="col-md-2">
+              <label class="col-form-label" style="font-size: 18px;color: black;">Total
+                Points</label>
+            </div>
+            <div class="col-md-2">
+              <div class="form-group">
+                <input type="text" class="form-control" id="tPoints" name="tPoints" disabled
+                  value="{{totalPointForDetails}}" />
+              </div>
+            </div>
 
-  
+            <div class="col-md-4">
+              <button type="button" class="btn btn-secondary btn-round" data-dismiss="modal">
+                <i class="fa fa-times" aria-hidden="true"></i> Close
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>

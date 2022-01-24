@@ -737,8 +737,9 @@ export class DashboardComponent implements OnInit {
   dailytotal: number = 0;
   monthlytotal: number = 0;
   adminRole: any;
-
-
+  usedServices: any[];
+  totalPriceForDetails: any;
+  totalPointForDetails: any;
   constructor(
     private servicesService: ServicesService,
     private employeeService: EmployeeService,
@@ -874,5 +875,16 @@ export class DashboardComponent implements OnInit {
       this.apiService.showNotification('top', 'right', 'Payment accepted Successfully.', 'success');
     })
   }
-
+  openUsedServiceList(obj) {
+    debugger
+    this.totalPriceForDetails = obj.totalprice
+    this.totalPointForDetails = obj.totalpoint
+    this.customerService.getServicesListUsingId(obj.id).subscribe((data: any) => {
+      this.usedServices = data;
+      debugger
+      for (let i = 0; i < this.usedServices.length; i++) {
+        this.usedServices[i].index = i + 1;
+      }
+    });
+  }
 }
