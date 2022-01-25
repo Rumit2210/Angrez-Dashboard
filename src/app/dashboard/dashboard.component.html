@@ -80,8 +80,8 @@
       </div>
     </div>
     <div class="col-lg-4 col-md-6 col-sm-6">
-      <div class="card card-stats">
-        <div class="card-body ">
+      <div class="card card-stats" (click)="openDaily()">
+        <div class="card-body" >
           <div class="row">
             <div class="col-5 col-md-4">
               <div class="icon-big text-center icon-warning">
@@ -197,14 +197,15 @@
                   <td class="text-center" style="color: black; font-weight: 500 !important">{{ item.totalprice }} ₹
                   </td>
                   <td class="text-center">
-                    <button class="btn btn-success" *ngIf="item.isactive==true" (click)="paymentCompleted(item.id)">
+                    <button class="btn btn-success" *ngIf="item.isactive==true" data-toggle="modal"
+                      data-target="#customerPaymentModal" (click)="modeOfPayment(item)">
                       <i class="fa fa-inr" aria-hidden="true"></i> Accept
                     </button>
-                    <button class="btn btn-info" *ngIf="item.isactive==false" disabled>
+                    <!-- <button class="btn btn-info" *ngIf="item.isactive==false" disabled>
                       Completed !
-                    </button>
+                    </button> -->
 
-                    
+
                   </td>
                   <td class="text-right">
                     <button type="button" rel="tooltip" class="btn btn-info btn-icon btn-sm">
@@ -339,6 +340,7 @@
               <thead class="text-primary">
                 <th class="text-center">#</th>
                 <th class="text-center">Service Name</th>
+                <th class="text-center">Assigned Employee</th>
                 <th class="text-center">Service Price</th>
                 <th class="text-center">Service Point</th>
               </thead>
@@ -347,6 +349,7 @@
                   *ngFor="let item of usedServices |  paginate: { id:'model_pagination',itemsPerPage: 10, currentPage: modelPage,totalItems:totalModelRecords }">
                   <td class="text-center">{{ item.index }}</td>
                   <td class="text-center">{{ item.servicesname}}</td>
+                  <td class="text-center">{{ item.employeename}}</td>
                   <td class="text-center">{{ item.price }}</td>
                   <td class="text-center">{{ item.point }}</td>
                 </tr>
@@ -395,5 +398,47 @@
       </div>
     </div>
   </div>
+  <div class="modal fade" id="customerPaymentModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header justify-content-center">
+          <div class="modal-profile ml-auto mr-auto">
+            <i class="fa fa-inr"></i>
+          </div>
+        </div>
+        <div class="modal-body">
+          <div class="row justify-content-center">
+            <h3> Select Payment Method</h3>
+          </div>
+          <div class="row">
+            <div class="col-sm-12">
+              <h6>Customer Name: {{cName}} </h6>
+              <h6>Customer Contact: {{cContact}}</h6>
+              <h6>Customer Email: {{cEmail}}</h6>
+              <h6>Customer Point: {{cPoint}}</h6>
+              <h6>Service Price: {{cPrice}} ₹</h6>
+            </div>
+          </div>
+          <div class="row justify-content-center">
+            <div class="col-sm-4"><button class="btn btn-success btn-lg" data-dismiss="modal"
+                (click)="saveModeOfPaymentDetails('Cash')"><i class="fa fa-money" aria-hidden="true"></i> Cash</button>
+            </div>
 
+            <div class="col-sm-4"><button class="btn btn-success btn-lg" data-dismiss="modal"
+                (click)="saveModeOfPaymentDetails('GPay')"><i class="fa-google-pay" aria-hidden="true"></i>
+                GPay</button></div>
+            <div class="col-sm-4"><button class="btn btn-success btn-lg" data-dismiss="modal"
+                (click)="saveModeOfPaymentDetails('Account')"><i class="fa fa-bank" aria-hidden="true"></i>
+                Bank AC</button></div>
+          </div>
+
+        </div>
+        <div class="modal-footer justify-content-center">
+          <button type="button" class="btn btn-link btn-link" data-dismiss="modal"><i class="fa fa-times"
+              aria-hidden="true"></i> Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

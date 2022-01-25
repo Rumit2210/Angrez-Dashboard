@@ -9,7 +9,7 @@ export class ApiService {
   // public static HOST_URL: string = "http://31.220.59.174:4500";
 
   constructor(
-    
+
     private http: HttpClient,
   ) { }
   httpOption = {
@@ -48,6 +48,8 @@ export class ApiService {
   public static getAllCompletedServicesURL: string = ApiService.HOST_URL + '/admin/GetAllCompletedServices';
   public static saveAdminLoginURL: string = ApiService.HOST_URL + '/admin/login';
   public static ChackForPasswordURL: string = ApiService.HOST_URL + '/admin/ChackForPassword';
+  public static saveModeOfPayment: string = ApiService.HOST_URL + '/admin/SaveModeOfPayment';
+  public static getAllModeOfPayment: string = ApiService.HOST_URL + '/admin/GetAllModeOfPayment';
 
 
 

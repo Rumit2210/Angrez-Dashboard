@@ -6,6 +6,7 @@ import { ApiService } from 'app/api.service';
 import { Appointment } from 'app/customer/appointment.model';
 import { Customer } from 'app/customer/customer.model';
 import { CustomerService } from 'app/customer/customer.service';
+import { Payment } from 'app/customer/payment.model';
 import { Employee } from 'app/employee/employee.model';
 import { EmployeeService } from 'app/employee/employee.service';
 import { Enquiry } from 'app/enquiry/enquiry.model';
@@ -24,8 +25,8 @@ declare const $: any;
 export class DashboardComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  
-  
+
+
   public gradientStroke;
   public chartColor;
   public canvas: any;
@@ -40,10 +41,10 @@ export class DashboardComponent implements OnInit {
   public activeUsersChartOptions: any;
   public activeUsersChartLabels: Array<any>;
   public activeUsersChartColors: Array<any>
-  activePageDataChunk:any = [];
+  activePageDataChunk: any = [];
   pageSize = 10;
   pageSizeOptions: number[] = [10, 15, 20];
- 
+
   public chartClicked(e: any): void {
     console.log(e);
   }
@@ -722,7 +723,9 @@ export class DashboardComponent implements OnInit {
       },
     });
   }
-  public appointmentModel: Appointment = new Appointment
+  public appointmentModel: Appointment = new Appointment;
+  public paymentModel: Payment = new Payment;
+  public paymentList: Payment[];
   public employeeReg: Employee[];
   public servicesList: Services[];
   public customerList: Customer[];
@@ -730,16 +733,23 @@ export class DashboardComponent implements OnInit {
   public monthlyTotal: Customer[];
   public enquiryList: Enquiry[];
   public appointmentList: Appointment[];
-   public completedAppointment: any=[];
-   activePageDataChunkComApp:any=[];
-   activePageDataChunkAppo:any=[];
- 
+  public completedAppointment: any = [];
+  activePageDataChunkComApp: any = [];
+  activePageDataChunkAppo: any = [];
+
   dailytotal: number = 0;
   monthlytotal: number = 0;
   adminRole: any;
   usedServices: any[];
   totalPriceForDetails: any;
   totalPointForDetails: any;
+  cContact: any;
+  cEmail: any;
+  cName: any;
+  cPoint: any;
+  cPrice: any;
+  cId: any;
+  appId: any;
   constructor(
     private servicesService: ServicesService,
     private employeeService: EmployeeService,
@@ -788,14 +798,14 @@ export class DashboardComponent implements OnInit {
   getAllEnquiry() {
     this.enquiryService.getAllEnquiryList().subscribe((data: any) => {
       this.enquiryList = data;
-      this.activePageDataChunk = this.enquiryList.slice(0,this.pageSize);
+      this.activePageDataChunk = this.enquiryList.slice(0, this.pageSize);
       for (let i = 0; i < this.enquiryList.length; i++) {
         this.enquiryList[i].index = i + 1;
       }
     })
   }
   setPageSizeOptions(setPageSizeOptionsInput: string) {
-    
+
     this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
   }
   onPageChangedEnquiry(e) {
@@ -803,12 +813,15 @@ export class DashboardComponent implements OnInit {
     let secondCut = firstCut + e.pageSize;
     this.activePageDataChunk = this.enquiryList.slice(firstCut, secondCut);
   }
- 
+
   openEniquiry() {
     this.router.navigate(['enquiry']);
   }
+  openDaily() {
+    this.router.navigate(['reports']);
+  }
   GetDailyTotal() {
-    this.dailytotal =0;
+    this.dailytotal = 0;
     this.customerService.getDailyTotalList().subscribe((data: any) => {
       this.dailyTotal = data;
 
@@ -833,14 +846,15 @@ export class DashboardComponent implements OnInit {
   getAllAppointment() {
     this.customerService.getAllAppointmentList().subscribe((data: any) => {
       this.appointmentList = data;
-      this.activePageDataChunkAppo = this.appointmentList.slice(0,this.pageSize);
+      debugger
+      this.activePageDataChunkAppo = this.appointmentList.slice(0, this.pageSize);
 
       for (let i = 0; i < this.appointmentList.length; i++) {
         this.appointmentList[i].index = i + 1;
       }
     });
   }
-  onPageChangedAppoi(e){
+  onPageChangedAppoi(e) {
     debugger
     let firstCut = e.pageIndex * e.pageSize;
     let secondCut = firstCut + e.pageSize;
@@ -849,20 +863,58 @@ export class DashboardComponent implements OnInit {
   getAllCompletedAppointment() {
     this.customerService.getCompletedServices().subscribe((data: any) => {
 
-      
+
       this.completedAppointment = data;
-      this.activePageDataChunkComApp = this.completedAppointment.slice(0,this.pageSize);
+      this.activePageDataChunkComApp = this.completedAppointment.slice(0, this.pageSize);
       for (let i = 0; i < this.completedAppointment.length; i++) {
         this.completedAppointment[i].index = i + 1;
       }
     });
   }
-  onPageChangedComAp(e){
+  onPageChangedComAp(e) {
     let firstCut = e.pageIndex * e.pageSize;
     let secondCut = firstCut + e.pageSize;
     this.activePageDataChunkComApp = this.enquiryList.slice(firstCut, secondCut);
-}
+  }
+  modeOfPayment(obj) {
 
+    this.cContact = obj.contact;
+    this.cEmail = obj.email;
+    this.cName = obj.fname + ' ' + obj.lname;
+    this.cPoint = obj.totalpoint;
+    this.cPrice = obj.totalprice;
+    this.cId = obj.custid;
+    this.appId = obj.id;
+  }
+  saveModeOfPaymentDetails(val) {
+
+    if (val == 'Cash') {
+      this.paymentModel.modeofpayment = 'Cash';
+    }
+    else if (val == 'GPay') {
+      this.paymentModel.modeofpayment = 'GPay';
+    }
+    else {
+      this.paymentModel.modeofpayment = 'Account';
+    }
+    this.paymentModel.cname = this.cName;
+    this.paymentModel.tpoint = this.cPoint;
+    this.paymentModel.tprice = this.cPrice;
+    this.paymentModel.cid = this.cId;
+    this.paymentModel.appointmentid = this.appId;
+    this.customerService.savePaymentDetails(this.paymentModel).subscribe((data: any) => {
+
+      this.paymentList = data;
+      if (data == 'success') {
+        this.paymentCompleted(this.appId);
+        this.apiService.showNotification('top', 'right', 'Payment accepted Successfully.', 'success');
+      }
+      else {
+        this.apiService.showNotification('top', 'right', 'Payment Failed Please Resubmit.', 'danger');
+      }
+
+    });
+  }
 
   paymentCompleted(id) {
     this.appointmentModel.id = id;
@@ -872,19 +924,18 @@ export class DashboardComponent implements OnInit {
       this.getAllCompletedAppointment();
       this.GetDailyTotal();
       this.GetMonthlyTotal();
-      this.apiService.showNotification('top', 'right', 'Payment accepted Successfully.', 'success');
+
     })
   }
   openUsedServiceList(obj) {
-    debugger
     this.totalPriceForDetails = obj.totalprice
     this.totalPointForDetails = obj.totalpoint
     this.customerService.getServicesListUsingId(obj.id).subscribe((data: any) => {
       this.usedServices = data;
-      debugger
       for (let i = 0; i < this.usedServices.length; i++) {
         this.usedServices[i].index = i + 1;
       }
     });
   }
+
 }

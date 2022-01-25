@@ -6,6 +6,7 @@ import { data } from 'jquery';
 import { Observable } from 'rxjs';
 import { Appointment } from './appointment.model';
 import { Customer } from './customer.model';
+import { Payment } from './payment.model';
 
 @Injectable({
     providedIn: 'root'
@@ -70,5 +71,12 @@ export class CustomerService {
             id: id
         }
         return this.httpClient.post<any>(ApiService.getUsedServicesByCustomerURL, data);
+    }
+    savePaymentDetails(admin: Payment) {
+
+        return this.httpClient.post<any>(ApiService.saveModeOfPayment, admin);
+    }
+    getPaymentDetails(): Observable<Payment[]> {
+        return this.httpClient.get<any>(ApiService.getAllModeOfPayment);
     }
 }
