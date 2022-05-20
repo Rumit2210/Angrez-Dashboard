@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { ReportsRoutes } from './reports.routing';
 import { RouterModule } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -14,6 +15,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     FormsModule,
     RouterModule.forChild(ReportsRoutes),
     NgxPaginationModule,
+    NgbModule
   ]
 })
 export class ReportsModule { }

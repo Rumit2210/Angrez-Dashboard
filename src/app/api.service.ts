@@ -50,6 +50,7 @@ export class ApiService {
   public static ChackForPasswordURL: string = ApiService.HOST_URL + '/admin/ChackForPassword';
   public static saveModeOfPayment: string = ApiService.HOST_URL + '/admin/SaveModeOfPayment';
   public static getAllModeOfPayment: string = ApiService.HOST_URL + '/admin/GetAllModeOfPayment';
+  public static getMonthlyPayment: string = ApiService.HOST_URL + '/admin/GetMonthlyPayment';
 
 
 

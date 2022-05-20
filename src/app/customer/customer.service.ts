@@ -79,4 +79,7 @@ export class CustomerService {
     getPaymentDetails(): Observable<Payment[]> {
         return this.httpClient.get<any>(ApiService.getAllModeOfPayment);
     }
+    getMonthlyDetails(): Observable<Payment[]> {
+        return this.httpClient.get<any>(ApiService.getMonthlyPayment);
+    }
 }

@@ -1,5 +1,5 @@
 <div class="main-content">
-    <div class="card" *ngIf="!selectCustomer">
+    <div class="card" *ngIf="!selectCustomer && !isDashboard">
         <div class="card-header">
             <div class="row">
                 <div class="col-md-8">
@@ -156,8 +156,14 @@
             <div class="card">
                 <div class="card-header">
                     <div class="row">
-                        <div class="col-md-8">
+                        <div class="col-md-6">
                             <h4 class="card-title"> Customer List</h4>
+                        </div>
+                        <div class="ml-md-auto">
+                            <button type="submit" *ngIf="isDashboard" class="btn btn-info btn-round" data-toggle="modal"
+                                data-target="#addCustomerModal">
+                                <i class="fa fa-plus" aria-hidden="true"></i> Add Customer
+                            </button>
                         </div>
                         <div class="ml-md-auto">
                             <label class="col-form-label" style="margin-top: 5px;font-size: 18px;color: black;">Search
@@ -489,7 +495,7 @@
                         <th class="text-center">Approx Time</th>
                         <th class="text-right">Actions</th>
                     </thead>
-                    <tbody  *ngIf="addService[0].serpoint !=null">
+                    <tbody *ngIf="addService[0].serpoint !=null">
                         <tr *ngFor="let item of addService; let i = index">
                             <td class="text-center">{{ i+1 }}</td>
                             <td class="text-center">{{ item.selectedServ}} </td>
@@ -552,10 +558,10 @@
             <br>
             <div class="row">
                 <div class="ml-md-auto">
-                    <button type="button" class="btn btn-info btn-round" (click)="generateInvoicePDF()" hidden><i
+                    <button type="button" class="btn btn-info btn-round ml5" (click)="generateInvoicePDF()"><i
                             class="fa fa-file-pdf-o"></i>
                         Invoice(PDF)</button>
-                    <button type="submit" class="btn btn-info btn-round" (click)="saveAppointmentDetails()">
+                    <button type="submit" class="btn btn-info btn-round ml5" (click)="saveAppointmentDetails()">
                         <i class="fa fa-paper-plane" aria-hidden="true"></i> Submit
                     </button>
                     <button type="submit" class="btn btn-danger btn-round" (click)="backToCustomer()">
@@ -688,6 +694,165 @@
                         </div>
                     </div>
 
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="addCustomerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-notice">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <i class="nc-icon nc-simple-remove"></i>
+                    </button>
+                    <h5 class="modal-title" id="myModalLabel">Add New Customer</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="instruction">
+                        <form class="form-horizontal" name="CustForm" #CustForm="ngForm">
+                            <div class="row">
+                                <label class="col-md-2 col-form-label">First Name</label>
+                                <div class="col-md-4">
+                                    <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
+                                        <input type="text" class="form-control" id="fname" name="fname"
+                                            [(ngModel)]="customerModel.fname" placeholder=" Enter First Name " required
+                                            value="" pattern="^[a-zA-Z]+$" (focus)="focus = true" #fname="ngModel" />
+                                    </div>
+                                    <div *ngIf="fname.errors && (fname.dirty || fname.touched)"
+                                        class="alert alert-danger">
+                                        <div *ngIf="fname.errors.required">
+                                            First Name is required
+                                        </div>
+                                        <div [hidden]="!fname.errors('pattern')">
+                                            Enter Only Characters.
+                                        </div>
+                                    </div>
+                                </div>
+                                <label class="col-md-2 col-form-label">Last Name</label>
+                                <div class="col-md-4">
+                                    <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
+                                        <input type="text" class="form-control" id="lname" name="lname"
+                                            [(ngModel)]="customerModel.lname" placeholder=" Enter Last Name" required
+                                            value="" pattern="^[a-zA-Z]+$" (focus)="focus = true" #lname="ngModel" />
+                                    </div>
+                                    <div *ngIf="lname.errors && (lname.dirty || lname.touched)"
+                                        class="alert alert-danger">
+                                        <div *ngIf="lname.errors.required">
+                                            Last Name is required
+                                        </div>
+                                        <div [hidden]="!lname.errors('pattern')">
+                                            Enter Only Characters.
+                                        </div>
+                                    </div>
+                                </div>
+                                <label class="col-md-2 col-form-label">Email</label>
+                                <div class="col-md-4">
+                                    <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
+                                        <input type="text" class="form-control" id="email" name="email"
+                                            [(ngModel)]="customerModel.email" placeholder=" Enter Email Address"
+                                            value="" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+                                            (focus)="focus = true" #email="ngModel" />
+                                    </div>
+                                    <div *ngIf="email.errors && (email.dirty || email.touched)"
+                                        class="alert alert-danger">
+                                        <div *ngIf="email.errors.required">
+                                            Email Address is required.
+                                        </div>
+                                        <div [hidden]="!email.hasError('pattern')">Email format should be
+                                            <small><b>joe@abc.com</b></small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <label class="col-md-2 col-form-label">Contact Number</label>
+                                <div class="col-md-4">
+                                    <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
+                                        <input type="text" class="form-control" id="contact"
+                                            [(ngModel)]="customerModel.contact" name="contact"
+                                            placeholder="Enter Contact Number" required value="" pattern="^[0-9].{9,9}$"
+                                            (focus)="focus = true" #contact="ngModel" />
+                                    </div>
+                                    <div *ngIf="contact.errors && (contact.dirty || contact.touched)"
+                                        class="alert alert-danger">
+                                        <div *ngIf="contact.errors.required">
+                                            contact Address is required.
+                                        </div>
+                                        <div [hidden]="!contact.errors('pattern')">
+                                            Enter Only Numbers.
+                                        </div>
+                                    </div>
+                                </div>
+                                <label class="col-md-2 col-form-label">Whatsapp Number</label>
+                                <div class="col-md-4">
+                                    <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
+                                        <input type="text" class="form-control" id="whatsapp"
+                                            [(ngModel)]="customerModel.whatsapp" name="whatsapp"
+                                            placeholder="Enter Whatsapp Number" required value=""
+                                            pattern="^[0-9].{9,9}$" (focus)="focus = true" #whatsapp="ngModel" />
+                                    </div>
+                                    <div *ngIf="whatsapp.errors && (whatsapp.dirty || whatsapp.touched)"
+                                        class="alert alert-danger">
+                                        <div *ngIf="whatsapp.errors.required">
+                                            whatsapp Address is required.
+                                        </div>
+                                        <div [hidden]="!whatsapp.errors('pattern')">
+                                            Enter Only Numbers.
+                                        </div>
+                                    </div>
+                                </div>
+                                <label class="col-md-2 col-form-label">Address</label>
+                                <div class="col-md-4">
+                                    <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
+                                        <textarea id="address" name="address" rows="4" cols="40"
+                                            [(ngModel)]="customerModel.address" placeholder="Enter Address" value=""
+                                            pattern="[#\d+ ([^,]+), ([A-Z]{2}) (\d{5})]" (focus)="focus = true"
+                                            #address="ngModel"> </textarea>
+                                    </div>
+                                    <div *ngIf="address.errors && (address.dirty || address.touched)"
+                                        class="alert alert-danger">
+                                        <div *ngIf="address.errors.required">
+                                            Address is required
+                                        </div>
+                                        <div [hidden]="!address.errors('pattern')">
+                                            Enter Only Numbers, Characters and Special Charatcters.
+                                        </div>
+                                    </div>
+                                </div>
+                                <label class="col-sm-2 col-form-label">Select Gender</label>
+                                <div class="col-md-2">
+                                    <div class="form-check-radio">
+                                        <label class="form-check-label" style="color: black !important">
+                                            <input #genm class="form-check-input" name="gender"
+                                                [(ngModel)]="customerModel.gender" type="radio" value="male" ngModel />
+                                            Male
+                                            <span class="form-check-sign"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-check-radio">
+                                        <label class="form-check-label" style="color: black !important">
+                                            <input #genf class="form-check-input" name="gender"
+                                                [(ngModel)]="customerModel.gender" type="radio" value="female"
+                                                ngModel />
+                                            Female
+                                            <span class="form-check-sign"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="submit" class="btn btn-info btn-round" (click)="saveCustomerDetail(customerModel)"
+                        [disabled]="!CustForm.form.valid" data-dismiss="modal"> 
+                        <i class="fa fa-paper-plane" aria-hidden="true"></i> Submit
+                    </button>
+                    <button type="submit" class="btn btn-danger btn-round" data-dismiss="modal">
+                        <i class="fa fa-times" aria-hidden="true"></i> Cancel
+                    </button>
                 </div>
             </div>
         </div>

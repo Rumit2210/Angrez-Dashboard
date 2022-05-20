@@ -749,7 +749,8 @@ export class DashboardComponent implements OnInit {
   cPoint: any;
   cPrice: any;
   cId: any;
-  appId: any;
+  appId: any;;
+
   constructor(
     private servicesService: ServicesService,
     private employeeService: EmployeeService,
@@ -768,6 +769,8 @@ export class DashboardComponent implements OnInit {
     this.GetMonthlyTotal();
     this.getAllAppointment();
     this.getAllCompletedAppointment();
+   
+    
 
   }
   getAllEmployee() {
@@ -818,7 +821,19 @@ export class DashboardComponent implements OnInit {
     this.router.navigate(['enquiry']);
   }
   openDaily() {
-    this.router.navigate(['reports']);
+    this.router.navigate(['reports'],{
+      queryParams:{
+        id:'daily'
+      }
+    });
+  }
+  openMonthly(){
+    this.router.navigate(['reports'],{
+      queryParams:{
+        id:'month'
+      }
+    });
+   
   }
   GetDailyTotal() {
     this.dailytotal = 0;
@@ -928,6 +943,7 @@ export class DashboardComponent implements OnInit {
     })
   }
   openUsedServiceList(obj) {
+   
     this.totalPriceForDetails = obj.totalprice
     this.totalPointForDetails = obj.totalpoint
     this.customerService.getServicesListUsingId(obj.id).subscribe((data: any) => {

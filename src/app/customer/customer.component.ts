@@ -53,6 +53,7 @@ export class CustomerComponent implements OnInit {
   totalPointForDetails: any;
   addService: any = [];
   valu: 0;
+  isDashboard:boolean=false;
   constructor(
     private servicesService: ServicesService,
     private employeeService: EmployeeService,
@@ -64,6 +65,9 @@ export class CustomerComponent implements OnInit {
     this.getAllEmployee();
     this.getAllServices();
     this.getCustomerDetails();
+    if(this.router.routerState.snapshot.url ==='/dashboard'){
+      this.isDashboard=true;
+    }
   }
 
   ngOnInit(): void {
@@ -71,7 +75,7 @@ export class CustomerComponent implements OnInit {
     this.valu++;
   }
   addServiceList() {
-    debugger
+     
     this.valu++;
     this.addService.push({ sertime: null, serpoint: null, serprice: null, name1: this.valu, selectedServ: '', selectedEmp: '', selectedServid: null, selectedEmpid: null });
   }
@@ -212,7 +216,6 @@ export class CustomerComponent implements OnInit {
     this.appointmentModel.lessPoints = this.tCustPoint - this.appointmentModel.redeempoints;
     this.appointmentModel.lessPoints = this.appointmentModel.lessPoints + this.appointmentModel.totalpoint;
     this.appointmentModel.selectedService = this.addService;
-    debugger
     this.appointmentModel.emp = this.selectedEmp;
     this.appointmentModel.totalprice = this.totalPrice;
     this.appointmentModel.totalpoint = this.totalPoint;
@@ -227,10 +230,11 @@ export class CustomerComponent implements OnInit {
       this.customerService.saveAppointmentList(this.appointmentModel).subscribe((data: any) => {
         this.appointment = data;
         this.router.navigate(['dashboard']);
+        location.reload();
         this.apiService.showNotification('top', 'right', 'Appointment Successfully Booked.', 'success');
       })
     }
-    debugger
+     
 
   }
   generateInvoicePDF(action = 'open') {
@@ -390,6 +394,7 @@ export class CustomerComponent implements OnInit {
     this.viewCustomerAllData = false;
   }
   openUsedServiceList(obj) {
+     
     this.totalPriceForDetails = obj.totalprice
     this.totalPointForDetails = obj.totalpoint
     this.customerService.getServicesListUsingId(obj.id).subscribe((data: any) => {

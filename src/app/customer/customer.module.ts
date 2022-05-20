@@ -20,6 +20,9 @@ import { MaterialModule } from 'app/material/material.module';
     MaterialModule,
     ReactiveFormsModule,
     RouterModule.forChild(CustomerRoutes)
+  ],
+  exports:[
+    CustomerComponent
   ]
 })
 export class CustomerModule { }

@@ -106,7 +106,7 @@
       </div>
     </div>
     <div class="col-lg-4 col-md-6 col-sm-6" *ngIf="adminRole == 'Admin'">
-      <div class="card card-stats">
+      <div class="card card-stats" (click)="openMonthly()">
         <div class="card-body ">
           <div class="row">
             <div class="col-5 col-md-4">
@@ -441,4 +441,8 @@
       </div>
     </div>
   </div>
+</div>
+<div style="margin-top: -93px;">
+  <app-customer ></app-customer>
+
 </div>
