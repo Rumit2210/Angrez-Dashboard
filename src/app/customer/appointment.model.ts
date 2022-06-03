@@ -6,7 +6,7 @@ export class Appointment {
         public emp?: string,
         public selectedService?: any,
         public totalprice?: bigint,
-        public totalpoint?: number,
+        public totalpoint?: number, 
         public totaltime?: string,
         public isactive?: boolean,
         public createddate?: Date,
