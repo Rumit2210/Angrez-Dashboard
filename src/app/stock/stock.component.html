@@ -1,0 +1,221 @@
+<div class="main-content">
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md-9">
+                    <h4 class="card-title">Add Stocks</h4>
+                </div>
+                <div class="ml-md-auto">
+  
+                    <button type="cancel" class="btn btn-danger btn-round" routerLink='/dashboard'>
+                        <i class="fa fa-arrow-left"></i> Back
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <form class="form-horizontal" name="stocksRegForm" #stocksRegForm="ngForm">
+                <div class="row">
+
+                    <label class="col-md-2 col-form-label">Stock Name</label>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="sname" name="sname"
+                                [(ngModel)]="stockModel.sname" placeholder=" Enter Stock Name "/>
+                        </div>
+                        
+                    </div>
+
+                    <label class="col-md-2 col-form-label">Stock Price</label>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="sprice" [(ngModel)]="stockModel.sprice"
+                                name="sprice" placeholder="Enter Stock Price " />
+                        </div>
+                    
+                    </div>
+
+                    <label class="col-md-2 col-form-label">Serial Number</label>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="sserialnumber" name="sserialnumber"
+                                [(ngModel)]="stockModel.sserialnumber" placeholder=" Enter Serial Number" />
+                        </div>
+                        
+                    </div>
+                    <label class="col-md-2 col-form-label">Quantity</label>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="squality" [(ngModel)]="stockModel.squality"
+                                name="squality" placeholder="Enter Quantity" />
+                        </div>
+                        
+                    </div>
+
+                    <label class="col-md-2 col-form-label">Type</label>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="stype" name="stype"
+                                [(ngModel)]="stockModel.stype" placeholder=" Enter Type"/>
+                        </div>
+                        
+                    </div>
+                    
+
+                    <label class="col-md-2 col-form-label">Dealer Name</label>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="sdealername" name="sdealername"
+                                [(ngModel)]="stockModel.sdealername" placeholder=" Enter Dealer Name" />
+                        </div>
+                        
+                    </div>
+                    <label class="col-md-2 col-form-label">Dealer Contact</label>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="sdealercontact" [(ngModel)]="stockModel.sdealercontact"
+                                name="sdealercontact" placeholder="Enter Dealer Contact" />
+                        </div>
+                        
+                    </div>
+
+                    
+                    <label class="col-md-2 col-form-label">Deal Date</label>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <input type="date" class="form-control" id="sdealdate" [(ngModel)]="stockModel.sdealdate"
+                                name="sdealdate" placeholder="Enter Deal Date"/>
+                        </div>
+                        
+                    </div>
+
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-10"><p></p></div>
+                    <div class="col-md-2">
+                        <button type="submit" class="btn btn-info btn-round" [disabled]="!stocksRegForm.form.valid"
+                        (click)="saveStockDetail(stockModel)">
+                            <i class="fa fa-paper-plane" aria-hidden="true"></i> Submit
+                        </button>
+                    </div>
+                </div>
+  
+            </form>
+        
+
+        </div>
+        <!--<div class="card-footer" *ngIf="!submitButton">
+            <div class="row">
+                <div class="ml-md-auto">
+                    <button type="submit" class="btn btn-info btn-round" [disabled]="!stocksRegForm.form.valid"
+                        (click)="saveStockDetail(stockModel)">
+                        <i class="fa fa-paper-plane" aria-hidden="true"></i> Submit
+                    </button>
+                    <button type="submit" class="btn btn-danger btn-round">
+                        <i class="fa fa-times" aria-hidden="true"></i> Cancel
+                    </button>
+                </div>
+            </div>
+        </div>-->
+        <div class="card-footer" *ngIf="submitButton">
+            <div class="row">
+                <div class="ml-md-auto">
+                    <button type="submit" class="btn btn-info btn-round" (click)="updateStockDetail(stockModel)">
+                        <i class="fa fa-paper-plane" aria-hidden="true"></i> Update
+                    </button>
+                    <button type="submit" class="btn btn-danger btn-round" (click)="cancelUpdateButton()">
+                        <i class="fa fa-times" aria-hidden="true"></i> Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h4 class="card-title"> Stocks List</h4>
+                        </div>
+                        <div class="ml-md-auto">
+                            <label class="col-form-label" style="margin-top: 5px;font-size: 18px;color: black;">Search
+                                By</label>
+                        </div>
+                        <div class="col-md-3 ml-md-auto">
+                            <div class="form-group" style="margin-top: 8px !important;">
+                                <input type="search" id="form1" class="form-control"
+                                    placeholder="Stock Name, Type, Dealer" [(ngModel)]="search"
+                                    (keyup)="searchStockList($event.target.value)" aria-label="Search" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class="text-primary">
+                                <th class="text-center">#</th>
+                                <th class="text-center">Stocks Name</th>
+                                <th class="text-center">Stocks Price</th>
+                                <th class="text-center">Serial Number</th>
+                                <th class="text-center">Quantity</th>
+                                <th class="text-center">Type</th>
+                                <!-- <th class="text-center">Barcode</th> -->
+                                <th class="text-center">Dealer Name</th>
+                                <th class="text-center">Dealer Contact</th>
+                                <!-- <th class="text-center">Description</th> -->
+                                <th class="text-center">Deal Date</th>
+                                <!-- <th class="text-center">Mfc. Date</th> -->
+                                <!-- <th class="text-right">Exp. Date</th> -->
+                            </thead>
+                            <tbody>
+                                <tr
+                                    *ngFor="let item of stock | paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
+                                    <td class="text-center">{{ item.index }}</td>
+                                    <td class="text-center">{{ item.sname }} </td>
+                                    <td class="text-center">{{ item.sprice }} ₹</td>
+                                    <td class="text-center">{{ item.sserialnumber }} </td>
+                                    <td class="text-center">{{ item.squality }}</td>
+                                    <td class="text-center">{{ item.stype }} </td>
+                                    <!-- <td class="text-center">{{ item.sbarcode }} </td> -->
+                                    <td class="text-center">{{ item.sdealername }} </td>
+                                    <td class="text-center">{{ item.sdealercontact }}</td>
+                                    <!-- <td class="text-center">{{ item.sdescription }} </td> -->
+                                    <td class="text-center">{{ item.sdealdate |date }} </td>
+                                    <!-- <td class="text-center">{{ item.mfcdate }} </td> -->
+                                    <!-- <td class="text-center">{{ item.expdate }}</td> -->
+  
+                                    <td class="text-right">
+                                        <button type="button" rel="tooltip" class="btn btn-success btn-icon btn-sm">
+                                            <i class="fa fa-edit" data-toggle="model" data-target="#VisitorModal" (click)="viewStockDetails(item)"></i>
+                                        </button>
+                                        <!--<button type="button" rel="tooltip" class="btn btn-success btn-icon btn-sm">
+                                            <i class="fa fa-edit" data-toggle="modal" data-target="#VisitorModal"
+                                                (click)="viewStockDetails(item)"></i>
+                                        </button>-->
+                                        &nbsp;
+                                        <button type="button" rel="tooltip" class="btn btn-danger btn-icon btn-sm"
+                                            (click)="removeStock(item.id)">
+                                            <i class="fa fa-times"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="ml-md-auto">
+                            <pagination-controls (pageChange)="p = $event" autoHide="true" responsive="true">
+                            </pagination-controls>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>

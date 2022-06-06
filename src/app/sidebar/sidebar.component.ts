@@ -63,6 +63,14 @@ export const ROUTES: RouteInfo[] = [{
     icontype: 'fa fa-question',
     roles: "Admin",
 },
+{
+    path: '/stock',
+    title: 'Stock',
+    type: 'link',
+    icontype: 'fa fa-cubes',
+    roles: "Admin",
+},
+
 
 ];
 export const Employee: RouteInfo[] = [
@@ -85,6 +93,13 @@ export const Employee: RouteInfo[] = [
         title: 'Enquiry',
         type: 'link',
         icontype: 'fa fa-question',
+        roles: "Admin",
+    },
+    {
+        path: '/stock',
+        title: 'Stock',
+        type: 'link',
+        icontype: 'fa fa-cubes',
         roles: "Admin",
     },
 ];

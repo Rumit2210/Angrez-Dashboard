@@ -56,6 +56,13 @@ export class ApiService {
   public static removeexpensesDetailsURL: string = ApiService.HOST_URL + '/admin/RemoveExpensesDetails/';
   public static updateExpensesDetailsURL: string = ApiService.HOST_URL + '/admin/UpdateExpensesDetails';
   public static getMonthlyExpensesURL: string = ApiService.HOST_URL + '/admin/getMonthlyExpensesList';
+  public static saveStockListURL: string = ApiService.HOST_URL + '/admin/SaveStockList';
+  public static getAllStockURL: string = ApiService.HOST_URL + '/admin/GetAllStock';
+  public static updateStockListURL: string = ApiService.HOST_URL + '/admin/UpdateStockList/';
+  public static removeStockListURL: string = ApiService.HOST_URL + '/admin/RemoveStockList/';
+  //public static getAllSalaryListURL: string = ApiService.HOST_URL + '/admin/GetAllSalaryList';
+  //public static updateSalaryStatusURL: string = ApiService.HOST_URL + '/admin/UpdateSalaryStatus';
+
 
 
   showNotification(from, align, msg, color) {
