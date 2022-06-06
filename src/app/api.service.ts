@@ -51,7 +51,11 @@ export class ApiService {
   public static saveModeOfPayment: string = ApiService.HOST_URL + '/admin/SaveModeOfPayment';
   public static getAllModeOfPayment: string = ApiService.HOST_URL + '/admin/GetAllModeOfPayment';
   public static getMonthlyPayment: string = ApiService.HOST_URL + '/admin/GetMonthlyPayment';
-
+  public static saveExpensesListURL: string = ApiService.HOST_URL + '/admin/SaveExpensesList';
+  public static getAllExpensesURL : string = ApiService.HOST_URL + '/admin/GetAllExpenses';
+  public static removeexpensesDetailsURL: string = ApiService.HOST_URL + '/admin/RemoveExpensesDetails/';
+  public static updateExpensesDetailsURL: string = ApiService.HOST_URL + '/admin/UpdateExpensesDetails';
+  public static getMonthlyExpensesURL: string = ApiService.HOST_URL + '/admin/getMonthlyExpensesList';
 
 
   showNotification(from, align, msg, color) {

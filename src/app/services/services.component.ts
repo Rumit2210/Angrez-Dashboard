@@ -43,21 +43,24 @@ export class ServicesComponent implements OnInit {
   }
   searchServicesList(val) {
     if (this.search == '') {
+      console.log(val)
       this.services = this.servicesList;
     } else {
+      console.log(val)
       this.transform(this.servicesList, val);
     }
 
   }
   transform(services: Services[], searchValue: string) {
-
     this.services = [];
     services.forEach(element => {
       if (element.name.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())) {
         this.services.push(element);
       }
      })
+     console.log(this.services)
   }
+
   viewServicesDetails(data) {
     this.servicesModel = data;
     this.submitButton = true;
