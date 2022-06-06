@@ -48,9 +48,14 @@ export const AppRoutes: Routes = [{
     },
     {
         path: '',
-        loadChildren: './reports/reports.module#ReportsModule',
+        loadChildren: './stock/stock.module#StockModule',
         canActivate: [AuthGuard]
     },
+    {
+        path: '',
+        loadChildren: './reports/reports.module#ReportsModule',
+        canActivate: [AuthGuard]
+    },    
     ]
 }, {
     path: '',

@@ -51,6 +51,12 @@ export class ApiService {
   public static saveModeOfPayment: string = ApiService.HOST_URL + '/admin/SaveModeOfPayment';
   public static getAllModeOfPayment: string = ApiService.HOST_URL + '/admin/GetAllModeOfPayment';
   public static getMonthlyPayment: string = ApiService.HOST_URL + '/admin/GetMonthlyPayment';
+  public static saveStockListURL: string = ApiService.HOST_URL + '/admin/SaveStockList';
+  public static getAllStockURL: string = ApiService.HOST_URL + '/admin/GetAllStock';
+  public static updateStockListURL: string = ApiService.HOST_URL + '/admin/UpdateStockList/';
+  public static removeStockListURL: string = ApiService.HOST_URL + '/admin/RemoveStockList/';
+  //public static getAllSalaryListURL: string = ApiService.HOST_URL + '/admin/GetAllSalaryList';
+  //public static updateSalaryStatusURL: string = ApiService.HOST_URL + '/admin/UpdateSalaryStatus';
 
 
 
