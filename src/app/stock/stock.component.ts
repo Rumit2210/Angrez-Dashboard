@@ -34,9 +34,9 @@ export class StockComponent implements OnInit {
     debugger
     this.stockService.saveStockList(this.stockModel).subscribe((data: any) => {
       this.stockList = data;
+      this.apiService.showNotification('top', 'right', 'Stock Added Successfully.', 'success');
       //location.reload();
       this.getAllStock();
-      this.apiService.showNotification('top', 'right', 'Stock Added Successfully.', 'success');
     })
   }
 

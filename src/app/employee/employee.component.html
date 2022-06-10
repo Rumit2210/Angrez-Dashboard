@@ -1,5 +1,5 @@
 <div class="main-content">
-    <div class="row" *ngIf="!showEmp">
+    <div class="row" *ngIf="showEmp">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
@@ -8,7 +8,7 @@
                             <h4 class="card-title"> Employee List</h4>
                         </div>
                         <div class="ml-md-auto">
-                            <button type="Add" class="btn btn-danger btn-round" routerLink="/dashboard">
+                            <button type="cancel" class="btn btn-danger btn-round" routerLink="/dashboard">
                                 <i class="fa fa-arrow-left"></i> Back
                             </button>
                             <button type="Add" class="btn btn-info btn-round" (click)="addEmployee()">
@@ -36,8 +36,11 @@
                                     <td class="text-center">{{ item.contact }}</td>
                                     <td class="text-center">{{ item.address }} ,<br>{{item.city}}</td>
                                     <td class="text-center">{{ item.gender }}</td>
-
                                     <td class="text-right">
+                                        <button type="button" rel="tooltip" class="btn btn-primary btn-icon btn-sm">
+                                            <i class="fa fa-rupee" (click)="openSalary(item)"></i>
+                                        </button>
+                                        &nbsp;
                                         <button type="button" rel="tooltip" class="btn btn-success btn-icon btn-sm">
                                             <i class="fa fa-edit" data-toggle="modal" data-target="#employeeModal"
                                                 (click)="viewEmpDetails(item)"></i>
@@ -72,7 +75,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                         <i class="nc-icon nc-simple-remove"></i>
                     </button>
-                    <h5 class="modal-title" id="myModalLabel">View/Edit Customer</h5>
+                    <h5 class="modal-title" id="myModalLabel">View/Edit Employee</h5>
                 </div>
                 <div class="modal-body">
                     <div class="instruction">
@@ -187,7 +190,156 @@
             </div>
         </div>
     </div>
-    <div class="card" *ngIf="showEmp">
+    <div class="card" *ngIf="showSalary">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md-9">
+                    <h4 class="card-title">Employee Salary</h4>
+                </div>
+                <div class="ml-md-auto">
+
+                    <button type="cancel" class="btn btn-danger btn-round" (click)="openEmployee()">
+                        <i class="fa fa-arrow-left"></i> Back
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <label class="col-form-label">Employee Name</label>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="fname" [(ngModel)]="employeeModel.fname "
+                            name="fname" disabled />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label class="col-form-label">Contact Number</label>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="fname" [(ngModel)]="employeeModel.contact"
+                            name="fname" disabled />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label class="col-form-label">Whatsapp Number</label>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="fname" [(ngModel)]="employeeModel.whatsapp"
+                            name="fname" disabled />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label class="col-form-label">Gender</label>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="fname" [(ngModel)]="employeeModel.gender"
+                            name="fname" disabled />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label class="col-form-label">Salary</label>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="fname"
+                            name="fname" [(ngModel)]="salaryModel.salary"/>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label class="col-form-label">Date</label>
+                    <div class="form-group">
+                        <input type="date" class="form-control" id="fname"
+                            name="fname" [(ngModel)]="salaryModel.paiddate"/>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label class="col-form-label">Description</label>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="fname" 
+                            name="fname" [(ngModel)]="salaryModel.desc"/>
+                    </div>
+                </div>
+                <div class="ml-md-auto">
+                    <br>
+                    <button type="submit" class="btn btn-info btn-round" (click)="saveSalaryDetail(salaryModel)"
+                            data-dismiss="modal"> 
+                            <i class="fa fa-paper-plane" aria-hidden="true"></i> Submit
+                    </button>
+                </div>
+                
+                <!-- <div class="ml-md-auto">
+                    <button type="submit" class="btn btn-info btn-round"
+                        (click)="saveServicesDetail(servicesModel)">
+                        <i class="fa fa-paper-plane" aria-hidden="true"></i> Submit
+                    </button>
+                </div> -->
+                <!-- <div class="row">
+                    <div class="col-md-8">
+                        <h4 class="card-title"> Salary History</h4>
+                    </div>
+                    <div class="ml-md-auto">
+                        <label class="col-form-label" style="margin-top: 5px;font-size: 18px;color: black;">Search
+                            By</label>
+                    </div>
+                    <div class="col-md-3 ml-md-auto">
+                        <div class="form-group" style="margin-top: 8px !important;">
+                            <input type="search" id="form1" class="form-control"
+                                placeholder="Stock Name, Type, Dealer" [(ngModel)]="search"
+                                (keyup)="searchSalaryList($event.target.value)" aria-label="Search" />
+                        </div>
+                    </div>
+                </div> -->
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead class="text-primary">
+                            <th class="text-center">#</th>
+                            <!-- <th class="text-center">Employee Name</th>
+                            <th class="text-center">Contact</th> -->
+                            <th class="text-center">Employee Name</th>
+                            <th class="text-center">Employee Contact</th>
+                            <th class="text-center">Salary</th>
+                            <th class="text-center">Description</th>
+                            <th class="text-center">Paid date</th>
+                            <th class="text-right">Actions</th>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of salaryList | paginate: { itemsPerPage: 5, currentPage: p }; let i = index">
+                                <td class="text-center">{{ i+1 }}</td>
+                                <!-- <td class="text-center">{{ item.emp}} </td>
+                                <td class="text-center">{{item.cont}}</td> -->
+                                <td class="text-center">{{ item.fname}} {{ item.lname}} </td>
+                                <td class="text-center">{{ item.contact}} </td>
+                                <td class="text-center">{{ item.salary }} ₹</td>
+                                <td class="text-center">{{ item.desc }} </td>
+                                <td class="text-center">{{ item.paiddate | date }}</td>
+                                <td class="text-right">
+                                    <button type="button" rel="tooltip" class="btn btn-primary btn-icon btn-sm"
+                                        (click)="generaterecipt(item.index)">
+                                        <i class="fa fa-download"></i>
+                                    </button>
+                                    &nbsp;
+                                    <button type="button" rel="tooltip" class="btn btn-success btn-icon btn-sm">
+                                        <i class="fa fa-edit" data-toggle="modal" data-target="#salaryModal"
+                                        (click)="viewSalDetails(item)"></i>
+                                    </button>
+                                    &nbsp;
+                                    <button type="button" rel="tooltip" class="btn btn-danger btn-icon btn-sm"
+                                        (click)="removeSalary(item.id)">
+                                        <i class="fa fa-times"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="row">
+                    <div class="ml-md-auto">
+                        <pagination-controls (pageChange)="p = $event" autoHide="true" responsive="true">
+                        </pagination-controls>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card" *ngIf="addEmp">
         <div class="card-header">
             <div class="row">
                 <div class="col-md-9">
@@ -362,6 +514,61 @@
                         <i class="fa fa-paper-plane" aria-hidden="true"></i> Submit
                     </button>
                     <button type="submit" class="btn btn-danger btn-round" (click)="closeEmpForm()">
+                        <i class="fa fa-times" aria-hidden="true"></i> Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="salaryModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-notice">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <i class="nc-icon nc-simple-remove"></i>
+                    </button>
+                    <h5 class="modal-title" id="myModalLabel">View/Edit Salary</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="instruction">
+                        <form class="form-horizontal" name="employeeRegForm" #employeeRegForm="ngForm">
+                            <div class="row">
+                                <label class="col-md-2 col-form-label">Salary</label>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="fname" name="fname"
+                                            [(ngModel)]="updateSalaryModel.salary" placeholder=" Enter First Name " />
+                                    </div>
+                                </div>
+                                <label class="col-md-2 col-form-label">Description</label>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="lname" name="lname"
+                                            [(ngModel)]="updateSalaryModel.desc" placeholder=" Enter Last Name" />
+                                    </div>
+                                </div>
+
+                                <label class="col-md-2 col-form-label">Paid Date</label>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <input type="date" class="form-control" id="contact"
+                                            [(ngModel)]="updateSalaryModel.paiddate" name="contact"
+                                            placeholder="Enter Contact Number" />
+                                    </div>
+                                </div>
+                            
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-info btn-round" data-dismiss="modal"
+                        (click)="updateSalaryDetails()">
+                        <i class="fa fa-paper-plane" aria-hidden="true"></i> Update
+                    </button>
+                    <button type="button" class="btn btn-secondary btn-round" data-dismiss="modal">
                         <i class="fa fa-times" aria-hidden="true"></i> Cancel
                     </button>
                 </div>
