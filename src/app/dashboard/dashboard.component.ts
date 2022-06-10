@@ -16,10 +16,10 @@ import { Services } from 'app/services/services.model';
 import { ServicesService } from 'app/services/services.service';
 import { Salary } from 'app/salary/salary.model';
 import { SalaryService } from 'app/salary/salary.service';
-import { ExpensesService } from 'app/expenses/expenses.service';
-import { ExpensesService } from 'app/expenses/expenses.service';
+
 import Chart from 'chart.js';
 import { Router } from '@angular/router';
+import { ExpensesService } from 'app/expenses/expenses.service';
 
 declare const $: any;
 
