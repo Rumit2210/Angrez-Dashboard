@@ -50,6 +50,13 @@ export const ROUTES: RouteInfo[] = [{
     roles: "Admin",
 },
 {
+    path: '/expenses',
+    title: 'Expenses',
+    type: 'link',
+    icontype: 'fa fa-calculator',
+    roles: "Admin",
+},
+{
     path: '/enquiry',
     title: 'Enquiry',
     type: 'link',
