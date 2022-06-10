@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { Router } from '@angular/router';
 import { ApiService } from 'app/api.service';
 import { Appointment } from 'app/customer/appointment.model';
 import { Customer } from 'app/customer/customer.model';
@@ -15,7 +14,7 @@ import { Services } from 'app/services/services.model';
 import { ServicesService } from 'app/services/services.service';
 import { ExpensesService } from 'app/expenses/expenses.service';
 import Chart from 'chart.js';
-import { element } from 'protractor';
+import { Router } from '@angular/router';
 
 declare const $: any;
 
@@ -928,7 +927,7 @@ export class DashboardComponent implements OnInit {
     private apiService: ApiService,
     private router: Router
   ) {
-    this.adminRole = localStorage.getItem('adminRole');
+    this.adminRole = localStorage.getItem('role');
 
     this.getAllServices();
     this.getAllEmployee();

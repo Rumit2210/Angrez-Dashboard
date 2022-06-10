@@ -30,8 +30,6 @@ export class StockComponent implements OnInit {
   }
 
   saveStockDetail() {
-    this.stockModel
-    debugger
     this.stockService.saveStockList(this.stockModel).subscribe((data: any) => {
       this.stockList = data;
       //location.reload();

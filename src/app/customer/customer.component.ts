@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { ApiService } from 'app/api.service';
 import { Employee } from 'app/employee/employee.model';
 import { EmployeeService } from 'app/employee/employee.service';
@@ -11,6 +10,7 @@ import { CustomerService } from './customer.service';
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 @Component({

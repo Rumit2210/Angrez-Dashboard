@@ -1,6 +1,6 @@
 import { Component, OnInit, Renderer2, ViewChild, ElementRef, Directive } from '@angular/core';
 import { ROUTES } from '../.././sidebar/sidebar.component';
-import { Router, ActivatedRoute, NavigationEnd, NavigationStart } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { Subscription } from 'rxjs/Subscription';
 
@@ -21,6 +21,7 @@ export class NavbarComponent implements OnInit{
     location: Location;
     private nativeElement: Node;
     private toggleButton;
+    lastLogin: any = Date;
     private sidebarVisible: boolean;
     private _router: Subscription;
     public open: boolean = false;
@@ -31,6 +32,7 @@ export class NavbarComponent implements OnInit{
         this.location = location;
         this.nativeElement = element.nativeElement;
         this.sidebarVisible = false;
+        this.lastLogin = localStorage.getItem('lastOutTime');
     }
 
     ngOnInit(){

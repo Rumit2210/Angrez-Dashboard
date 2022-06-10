@@ -17,6 +17,9 @@ export class ApiService {
       'Content-Type': 'application/json'
     })
   }
+  public static getUserLoginURL: string = ApiService.HOST_URL + '/admin/GetUsersLogin';
+  public static updateLogoutDetailsURL: string = ApiService.HOST_URL + '/admin/UpdateLogoutDetails'
+
 
   public static saveServicesListURL: string = ApiService.HOST_URL + '/admin/SaveServicesList';
   public static getAllServicesURL: string = ApiService.HOST_URL + '/admin/GetAllServices';
