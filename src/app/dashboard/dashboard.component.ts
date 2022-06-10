@@ -14,12 +14,10 @@ import { Enquiry } from 'app/enquiry/enquiry.model';
 import { EnquiryService } from 'app/enquiry/enquiry.service';
 import { Services } from 'app/services/services.model';
 import { ServicesService } from 'app/services/services.service';
-<<<<<<< HEAD
 import { Salary } from 'app/salary/salary.model';
 import { SalaryService } from 'app/salary/salary.service';
-=======
 import { ExpensesService } from 'app/expenses/expenses.service';
->>>>>>> 5cfe9bbf8f99da76fdaf99da759ebffb2abcc8a7
+import { ExpensesService } from 'app/expenses/expenses.service';
 import Chart from 'chart.js';
 import { Router } from '@angular/router';
 

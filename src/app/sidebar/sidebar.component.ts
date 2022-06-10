@@ -105,13 +105,7 @@ export const Employee: RouteInfo[] = [
         icontype: 'fa fa-question',
         roles: "Admin",
     },
-    {
-        path: '/calendar',
-        title: 'Calendar',
-        type: 'link',
-        icontype: 'nc-icon nc-calendar-60',
-        roles: "Admin",
-    },
+    
     {
         path: '/offer',
         title: 'Offer',
@@ -119,13 +113,7 @@ export const Employee: RouteInfo[] = [
         icontype: 'fa fa-gift',
         roles: "Admin",
     },
-    {
-        path: '/salary',
-        title: 'Salary',
-        type: 'link',
-        icontype: 'fa fa-money',
-        roles: "Admin",
-    },
+    
     {
         path: '/stock',
         title: 'Stock',
