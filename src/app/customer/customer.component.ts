@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { ApiService } from 'app/api.service';
 import { Employee } from 'app/employee/employee.model';
 import { EmployeeService } from 'app/employee/employee.service';
@@ -11,6 +10,7 @@ import { CustomerService } from './customer.service';
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 @Component({
@@ -242,10 +242,6 @@ export class CustomerComponent implements OnInit {
     let docDefinition = {
       content: [
         {
-          image: 'testImage'
-        },
-
-        {
           text: 'Angrez The Salon',
           fontSize: 16,
           alignment: 'center',
@@ -270,8 +266,8 @@ export class CustomerComponent implements OnInit {
                 text: this.customerModel.fname + '' + this.customerModel.lname,
                 bold: true
               },
-              // { text: 'Whats App Number:' + this.customerModel.whatsapp },
-              // { text: 'Contact Number:' + this.customerModel.contact },
+              { text: 'Whats App Number:' + this.customerModel.whatsapp },
+              { text: 'Contact Number:' + this.customerModel.contact },
             ],
             [
               // {
@@ -297,7 +293,8 @@ export class CustomerComponent implements OnInit {
               ['Service', 'Price', 'Amount'],
 
               // ([this.customerModel.itemName, this.customerModel.price, this.customerModel.point,]),
-              // [{ text: 'Total Amount', colSpan: 3 }, {}, {}, (this.Orderview.productPrice * this.Orderview.quantity).toFixed(2)]
+              // (this.Orderview.productPrice * this.Orderview.quantity).toFixed(2)
+              // [{ text: 'Total Amount', colSpan: 3 }, {}, {}, {}]
             ]
           }
         },

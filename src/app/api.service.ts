@@ -17,6 +17,9 @@ export class ApiService {
       'Content-Type': 'application/json'
     })
   }
+  public static getUserLoginURL: string = ApiService.HOST_URL + '/admin/GetUsersLogin';
+  public static updateLogoutDetailsURL: string = ApiService.HOST_URL + '/admin/UpdateLogoutDetails'
+
 
   public static saveServicesListURL: string = ApiService.HOST_URL + '/admin/SaveServicesList';
   public static getAllServicesURL: string = ApiService.HOST_URL + '/admin/GetAllServices';
@@ -58,6 +61,21 @@ export class ApiService {
   public static getOfferTotalPointsURL: string = ApiService.HOST_URL + '/admin/GetOfferTotalPoints';
   public static updateOfferListURL: string = ApiService.HOST_URL + '/admin/UpdateOfferList';
   public static removeOfferDetailsURL: string = ApiService.HOST_URL + '/admin/removeOfferDetails/';
+  public static saveExpensesListURL: string = ApiService.HOST_URL + '/admin/SaveExpensesList';
+  public static getAllExpensesURL : string = ApiService.HOST_URL + '/admin/GetAllExpenses';
+  public static removeexpensesDetailsURL: string = ApiService.HOST_URL + '/admin/RemoveExpensesDetails/';
+  public static updateExpensesDetailsURL: string = ApiService.HOST_URL + '/admin/UpdateExpensesDetails';
+  public static getMonthlyExpensesURL: string = ApiService.HOST_URL + '/admin/getMonthlyExpensesList';
+  public static saveStockListURL: string = ApiService.HOST_URL + '/admin/SaveStockList';
+  public static getAllStockURL: string = ApiService.HOST_URL + '/admin/GetAllStock';
+  public static updateStockListURL: string = ApiService.HOST_URL + '/admin/UpdateStockList/';
+  public static removeStockListURL: string = ApiService.HOST_URL + '/admin/RemoveStockList/';
+  public static getAllSalaryListURL: string = ApiService.HOST_URL + '/admin/GetAllSalaryList';
+  public static updateSalaryStatusURL: string = ApiService.HOST_URL + '/admin/UpdateSalaryStatus';
+  public static updateSalaryListURL: string = ApiService.HOST_URL + '/admin/UpdateSalaryList';
+  public static saveSalaryListURL: string = ApiService.HOST_URL + '/admin/SaveSalaryList';
+  public static removeSalaryListURL: string = ApiService.HOST_URL + '/admin/RemoveSalaryList/';
+
 
   showNotification(from, align, msg, color) {
     var color = color;

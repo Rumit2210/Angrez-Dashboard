@@ -50,8 +50,16 @@ export const AppRoutes: Routes = [{
         path: '',
         loadChildren: './offer/offer.module#OfferModule',
         canActivate: [AuthGuard]
-    },
+    },{
     
+        loadChildren: './stock/stock.module#StockModule',
+        canActivate: [AuthGuard]
+    },
+    {
+        path: '',
+        loadChildren: './expenses/expenses.module#ExpensesModule',
+        canActivate: [AuthGuard]
+    },
     {
         path: '',
         loadChildren: './reports/reports.module#ReportsModule',
