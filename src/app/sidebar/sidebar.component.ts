@@ -66,6 +66,13 @@ export const ROUTES: RouteInfo[] = [{
     roles: "Admin",
 },
 {
+    path: '/offer',
+    title: 'Offer',
+    type: 'link',
+    icontype: 'fa fa-gift',
+    roles: "Admin",
+},
+{
     path: '/stock',
     title: 'Stock',
     type: 'link',
@@ -90,6 +97,7 @@ export const Employee: RouteInfo[] = [
         icontype: 'fa fa-user',
         roles: "Admin",
     },
+    
     {
         path: '/enquiry',
         title: 'Enquiry',
@@ -97,6 +105,15 @@ export const Employee: RouteInfo[] = [
         icontype: 'fa fa-question',
         roles: "Admin",
     },
+    
+    {
+        path: '/offer',
+        title: 'Offer',
+        type: 'link',
+        icontype: 'fa fa-gift',
+        roles: "Admin",
+    },
+    
     {
         path: '/stock',
         title: 'Stock',

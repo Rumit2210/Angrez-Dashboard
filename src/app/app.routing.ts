@@ -48,6 +48,10 @@ export const AppRoutes: Routes = [{
     },
     {
         path: '',
+        loadChildren: './offer/offer.module#OfferModule',
+        canActivate: [AuthGuard]
+    },{
+    
         loadChildren: './stock/stock.module#StockModule',
         canActivate: [AuthGuard]
     },

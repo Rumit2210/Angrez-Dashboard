@@ -54,6 +54,13 @@ export class ApiService {
   public static saveModeOfPayment: string = ApiService.HOST_URL + '/admin/SaveModeOfPayment';
   public static getAllModeOfPayment: string = ApiService.HOST_URL + '/admin/GetAllModeOfPayment';
   public static getMonthlyPayment: string = ApiService.HOST_URL + '/admin/GetMonthlyPayment';
+  public static saveOfferListURL: string = ApiService.HOST_URL + '/admin/SaveOfferList';
+  public static getAllOfferDataListURL: string = ApiService.HOST_URL + '/admin/GetAllOfferDataList';
+  public static getUsedServicesByOfferURL: string = ApiService.HOST_URL + '/admin/GetUsedServicesByOffer';
+  public static getAllOfferURL: string = ApiService.HOST_URL + '/admin/GetAllOffer';
+  public static getOfferTotalPointsURL: string = ApiService.HOST_URL + '/admin/GetOfferTotalPoints';
+  public static updateOfferListURL: string = ApiService.HOST_URL + '/admin/UpdateOfferList';
+  public static removeOfferDetailsURL: string = ApiService.HOST_URL + '/admin/removeOfferDetails/';
   public static saveExpensesListURL: string = ApiService.HOST_URL + '/admin/SaveExpensesList';
   public static getAllExpensesURL : string = ApiService.HOST_URL + '/admin/GetAllExpenses';
   public static removeexpensesDetailsURL: string = ApiService.HOST_URL + '/admin/RemoveExpensesDetails/';
@@ -71,10 +78,7 @@ export class ApiService {
 
 
   showNotification(from, align, msg, color) {
-
-
     var color = color;
-
     $.notify({
       icon: "",
       message: msg

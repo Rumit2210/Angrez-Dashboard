@@ -25,6 +25,71 @@
                     </div>
                 </div>
             </div>
+            <div class="col-7 col-md-8">
+              <div class="numbers">
+                <p class="card-category">Customer</p>
+                <p class="card-title">Total: {{customerList.length}}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <hr>
+          <div class="stats">
+            <i class="fa fa-arrow-right"></i> View
+          </div>
+          
+        </div>
+      </div>
+      
+    </div>
+
+        <div class="col-lg-4 col-md-6 col-sm-6" *ngIf="adminRole == 'Admin'">
+          <div class="card card-stats" (click)="openServices()">
+            <div class="card-body ">
+              <div class="row">
+                <div class="col-5 col-md-4">
+                  <div class="icon-big text-center icon-warning">
+                    <i class="fa fa-scissors text-success"></i>
+                  </div>
+                </div>
+                <div class="col-7 col-md-8">
+                  <div class="numbers">
+                    <p class="card-category">Services</p>
+                    <p class="card-title">Total: {{servicesList.length}}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+        <div class="card-footer">
+          <hr>
+          <div class="stats">
+            <i class="fa fa-arrow-right"></i> View        
+          </div>
+        </div>
+      </div>
+    </div> 
+    <div class="col-lg-4 col-md-6 col-sm-6" *ngIf="adminRole == 'Admin'">
+      <div class="card card-stats" (click)="openEmployee()">
+        <div class="card-body ">
+          <div class="row">
+            <div class="col-5 col-md-4">
+              <div class="icon-big text-center icon-warning">
+                <i class="fa fa-users text-warning"></i>
+              </div>
+            </div>
+            <div class="col-7 col-md-8">
+              <div class="numbers">
+                <p class="card-category">Employee</p>
+                <p class="card-title">Total: {{employeeReg.length}}
+                </p>
+              </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 col-sm-6" *ngIf="adminRole == 'Admin'">
+            <div class="card card-stats" (click)="openServices()">
         </div>
 
         <div class="col-lg-4 col-md-6 col-sm-6" *ngIf="adminRole == 'Admin'">
@@ -40,6 +105,35 @@
                             <div class="numbers">
                                 <p class="card-category">Services</p>
                                 <p class="card-title">Total: {{servicesList.length}}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <hr>
+                    <div class="stats">
+                        <i class="fa fa-arrow-right"></i> View
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-6" *ngIf="adminRole == 'Admin'">
+            <div class="card card-stats" (click)="openEmployee()">
+                <div class="card-body ">
+                    <div class="row">
+                        <div class="col-5 col-md-4">
+                            <div class="icon-big text-center icon-warning">
+                                <i class="fa fa-scissors text-success"></i>
+                                <i class="fa fa-users text-warning"></i>
+                            </div>
+                        </div>
+                        <div class="col-7 col-md-8">
+                            <div class="numbers">
+                                <p class="card-category">Services</p>
+                                <p class="card-title">Total: {{servicesList.length}}
+                                <p class="card-category">Employee</p>
+                                <p class="card-title">Total: {{employeeReg.length}}
                                 </p>
                             </div>
                         </div>
@@ -131,6 +225,122 @@
                 </div>
             </div>
         </div>
+        <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="card card-stats" (click)="openEniquiry()">
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-6" *ngIf="adminRole == 'Admin'">
+            <div class="card card-stats" (click)="openMonthly()">
+                <div class="card-body ">
+                    <div class="row">
+                        <div class="col-5 col-md-4">
+                            <div class="icon-big text-center icon-warning">
+                                <i class="fa fa-question text-danger"></i>
+                                <i class="fa fa-inr text-success"></i>
+                            </div>
+                        </div>
+                        <div class="col-7 col-md-8">
+                            <div class="numbers">
+                                <p class="card-category">Enquiry</p>
+                                <p class="card-title">Enquiry List: {{enquiryList.length}}
+                                <p class="card-category">Monthly Earnings</p>
+                                <p class="card-title">Total: {{monthlytotal}} ₹
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <hr>
+                    <div class="stats">
+                        <i class="fa fa-arrow-right"></i> View
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="card card-stats" (click)="openExpenses()">
+                <div class="card-body ">
+                    <div class="row">
+                        <div class="col-5 col-md-4">
+                            <div class="icon-big text-center icon-warning">
+                                <i class="fa fa-calculator text-success"></i>
+                            </div>
+                        </div>
+                        <div class="col-7 col-md-8">
+                            <div class="numbers">
+                                <p class="card-category">Daily Expenses</p>
+                                <p class="card-title">Total: {{expenseTotal}}₹
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <hr>
+                    <div class="stats">
+                        <i class="fa fa-arrow-right"></i> View
+                        <i class="fa fa-arrow-right"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card card-chart">
+                <div class="card-header">
+                    <h5 class="card-title">Views</h5>
+                    <p class="card-category">Bar Chart</p>
+                </div>
+                <div class="card-body">
+                    <canvas id="chartViews"></canvas>
+                </div>
+            </div>
+        </div>
+          <div class="card-footer">
+            <hr>
+            <div class="stats">
+              <i class="fa fa-arrow-right"></i> View
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6 col-sm-6" *ngIf="adminRole == 'Admin'">
+        <div class="card card-stats" (click)="openOffer()">
+          <div class="card-body ">
+            <div class="row">
+              <div class="col-5 col-md-4">
+                <div class="icon-big text-center icon-warning">
+                  <i class="fa fa-gift text-success"></i>
+                </div>
+              </div>
+              <div class="col-7 col-md-8">
+                <div class="numbers">
+                  <p class="card-category">Combo Offers</p>
+                  <p class="card-title">Total offer:{{offerList.length}}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+      <div class="card-footer">
+        <hr>
+        <div class="stats">
+          <i class="fa fa-arrow-right"></i> View        
+        </div>
+      </div>
+    </div>
+  </div> 
+      </div>
+      
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-md-8">
+              <h4 class="card-title"> Active Service List</h4>
         <div class="col-lg-4 col-md-6 col-sm-6">
             <div class="card card-stats" (click)="openEniquiry()">
                 <div class="card-body ">
@@ -284,6 +494,29 @@
             </div>
         </div>
     </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-md-8">
+              <h4 class="card-title">Completed Service List</h4>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table">
+              <thead class="text-primary">
+                <th class="text-center">#</th>
+                <th class="text-center">Customer Name</th>
+                <!-- <th class="text-center">Assign Team Member </th> -->
+                <th class="text-center">Total Price</th>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of activePageDataChunkComApp  let i = index">
     <div class="row">
         <div class="col-md-6">
             <div class="card">
@@ -368,6 +601,19 @@
                 </div>
             </div>
         </div>
+        
+      </div>
+    </div>
+    
+  </div>
+  
+  <div class="modal fade" id="customerServicesModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-notice">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+    </div>
     </div>
 
     <div class="modal fade" id="customerServicesModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

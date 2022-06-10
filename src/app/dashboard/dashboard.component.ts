@@ -5,6 +5,8 @@ import { ApiService } from 'app/api.service';
 import { Appointment } from 'app/customer/appointment.model';
 import { Customer } from 'app/customer/customer.model';
 import { CustomerService } from 'app/customer/customer.service';
+import { Offer } from 'app/offer/offer.model';
+import { OfferService } from 'app/offer/offer.service';
 import { Payment } from 'app/customer/payment.model';
 import { Employee } from 'app/employee/employee.model';
 import { EmployeeService } from 'app/employee/employee.service';
@@ -12,6 +14,9 @@ import { Enquiry } from 'app/enquiry/enquiry.model';
 import { EnquiryService } from 'app/enquiry/enquiry.service';
 import { Services } from 'app/services/services.model';
 import { ServicesService } from 'app/services/services.service';
+import { Salary } from 'app/salary/salary.model';
+import { SalaryService } from 'app/salary/salary.service';
+import { ExpensesService } from 'app/expenses/expenses.service';
 import { ExpensesService } from 'app/expenses/expenses.service';
 import Chart from 'chart.js';
 import { Router } from '@angular/router';
@@ -894,6 +899,7 @@ export class DashboardComponent implements OnInit {
   public employeeReg: Employee[];
   public servicesList: Services[];
   public customerList: Customer[];
+  public offerList: Customer[];
   public dailyTotal: Customer[];
   public monthlyTotal: Customer[];
   public enquiryList: Enquiry[];
@@ -922,6 +928,7 @@ export class DashboardComponent implements OnInit {
     private servicesService: ServicesService,
     private employeeService: EmployeeService,
     private customerService: CustomerService,
+    private offerService: OfferService,
     private enquiryService: EnquiryService,
     private expensesService: ExpensesService,
     private apiService: ApiService,
@@ -932,6 +939,7 @@ export class DashboardComponent implements OnInit {
     this.getAllServices();
     this.getAllEmployee();
     this.getCustomerDetails();
+    this.getOfferDetails();
     this.getAllEnquiry();
     this.GetDailyTotal();
     this.GetMonthlyTotal();
@@ -1016,6 +1024,14 @@ export class DashboardComponent implements OnInit {
 
   openEniquiry() {
     this.router.navigate(['enquiry']);
+  }
+  openOffer() {
+    this.router.navigate(['offer']);
+  }
+  getOfferDetails() {
+    this.offerService.getAllOfferList().subscribe((data: any) => {
+      this.offerList = data;
+    });
   }
   openDaily() {
     this.router.navigate(['reports'], {
