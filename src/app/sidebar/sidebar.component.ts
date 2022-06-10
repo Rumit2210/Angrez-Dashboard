@@ -56,6 +56,13 @@ export const ROUTES: RouteInfo[] = [{
     icontype: 'fa fa-question',
     roles: "Admin",
 },
+{
+    path: '/offer',
+    title: 'Offer',
+    type: 'link',
+    icontype: 'fa fa-gift',
+    roles: "Admin",
+},
 
 ];
 export const Employee: RouteInfo[] = [
@@ -73,11 +80,33 @@ export const Employee: RouteInfo[] = [
         icontype: 'fa fa-user',
         roles: "Admin",
     },
+    
     {
         path: '/enquiry',
         title: 'Enquiry',
         type: 'link',
         icontype: 'fa fa-question',
+        roles: "Admin",
+    },
+    {
+        path: '/calendar',
+        title: 'Calendar',
+        type: 'link',
+        icontype: 'nc-icon nc-calendar-60',
+        roles: "Admin",
+    },
+    {
+        path: '/offer',
+        title: 'Offer',
+        type: 'link',
+        icontype: 'fa fa-gift',
+        roles: "Admin",
+    },
+    {
+        path: '/salary',
+        title: 'Salary',
+        type: 'link',
+        icontype: 'fa fa-money',
         roles: "Admin",
     },
 ];
