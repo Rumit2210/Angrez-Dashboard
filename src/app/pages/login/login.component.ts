@@ -1,10 +1,9 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { ApiService } from 'app/api.service';
 import { LoginService } from './login.service';
 import { FormGroup } from '@angular/forms';
 import { Loginuser } from './login.model';
+import { Router } from '@angular/router';
 
 declare var $: any;
 
@@ -83,12 +82,40 @@ export class LoginComponent implements OnInit {
             body.classList.remove('nav-open');
         }
     }
+    // login(credentials) {
+
+    //     console.log("......data...." + credentials.email);
+    //     credentials.role = 'admin';
+
+    //     this.loginService.login(credentials).subscribe(data => {
+    //         if (data == 1) {
+    //             this.apiService.showNotification('top', 'right', 'Wrong Email!', 'danger');
+    //         }
+    //         else if (data == 2) {
+
+    //             this.apiService.showNotification('top', 'right', 'Wrong Password!', 'danger');
+
+    //         }
+    //         else {
+    //             this.apiService.showNotification('top', 'right', 'Admin successfully Login.', 'success');
+    //             localStorage.setItem('authenticationAdminToken', data[0].token);
+    //             localStorage.setItem('AdminId', data[0].id);
+    //             localStorage.setItem('UserName', data[0].firstname + ' ' + data[0].lastname);
+    //             localStorage.setItem('role', 'Admin');
+    //             localStorage.setItem('adminRole', data[0].adminrole);
+    //             this.router.navigate(['dashboard']);
+    //         }
+
+    //     });
+    // }
+
     login(credentials) {
-
+        localStorage.clear();
+        // credentials.role = this.selectedRole;
         console.log("......data...." + credentials.email);
-        credentials.role = 'admin';
 
-        this.loginService.login(credentials).subscribe(data => {
+        this.loginService.userLogin(credentials).subscribe(data => {
+             debugger
             if (data == 1) {
                 this.apiService.showNotification('top', 'right', 'Wrong Email!', 'danger');
             }
@@ -98,15 +125,96 @@ export class LoginComponent implements OnInit {
 
             }
             else {
-                this.apiService.showNotification('top', 'right', 'Admin successfully Login.', 'success');
-                localStorage.setItem('authenticationAdminToken', data[0].token);
-                localStorage.setItem('AdminId', data[0].id);
-                localStorage.setItem('UserName', data[0].firstname + ' ' + data[0].lastname);
-                localStorage.setItem('role', 'Admin');
-                localStorage.setItem('adminRole', data[0].adminrole);
-                this.router.navigate(['dashboard']);
+                if (data[0].role == 'Admin') {
+                     debugger
+                    this.apiService.showNotification('top', 'right', 'Admin successfully Login.', 'success');
+                    localStorage.setItem('authenticationToken', data[0].token);
+                    localStorage.setItem('UserId', data[0].id);
+                    localStorage.setItem('UserName', data[0].firstname + ' ' + data[0].lastname);
+                    localStorage.setItem('role', data[0].role);
+                    localStorage.setItem('lastOutTime',data[0].last_login);
+                    localStorage.setItem('lastInTime',data[0].last_login);
+                    this.router.navigate(['dashboard']);
+                }
+                else if (data[0].role == 'Customer') {
+                     debugger
+                    this.apiService.showNotification('top', 'right', 'Customer successfully Login.', 'success');
+                    localStorage.setItem('authenticationToken', data[0].token);
+                    localStorage.setItem('UserId', data[0].id);
+                    localStorage.setItem('UserName', data[0].fname + ' ' + data[0].lname);
+                    // localStorage.setItem('standardid', data[0].standard);
+                    // localStorage.setItem('gender', data[0].gender);
+                    localStorage.setItem('role', data[0].role);
+                    localStorage.setItem('lastOutTime',data[0].out_time);
+                    localStorage.setItem('lastInTime',data[0].last_login);
+                    this.router.navigate(['dashboard']);
+                }
+                else if (data[0].role == 'Student') {
+                     
+                    this.apiService.showNotification('top', 'right', 'Student successfully Login.', 'success');
+                    localStorage.setItem('authenticationToken', data[0].token);
+                    localStorage.setItem('UserId', data[0].id);
+                    localStorage.setItem('UserName', data[0].firstname + ' ' + data[0].lastname);
+                    localStorage.setItem('standardid', data[0].standard);
+                    localStorage.setItem('gender', data[0].gender);
+                    localStorage.setItem('role', data[0].role);
+                    localStorage.setItem('lastOutTime',data[0].out_time);
+                    localStorage.setItem('lastInTime',data[0].last_login);
+                    this.router.navigate(['dashboard']);
+                }
+                else if (data[0].role == 'Visitor') {
+                     
+                    if (data[0].detailsupdated == false) {
+                        localStorage.setItem('authenticationToken', data[0].token);
+                        localStorage.setItem('UserId', data[0].id);
+                        localStorage.setItem('UserName', data[0].firstname + ' ' + data[0].lastname);
+                        localStorage.setItem('role', data[0].role);
+                        localStorage.setItem('standardid', data[0].standard);
+                        localStorage.setItem('lastOutTime',data[0].out_time);
+                        localStorage.setItem('lastInTime',data[0].last_login);
+                        this.router.navigate(['visitor/visitorreg']);
+                        
+                    }
+                    else {
+                         
+                        localStorage.setItem('authenticationToken', data[0].token);
+                        localStorage.setItem('UserId', data[0].id);
+                        localStorage.setItem('UserName', data[0].firstname + ' ' + data[0].lastname);
+                        localStorage.setItem('role', data[0].role);
+                        localStorage.setItem('standardid', data[0].standard);
+                        localStorage.setItem('gender', data[0].gender);
+                        localStorage.setItem('lastOutTime',data[0].out_time);
+                        localStorage.setItem('lastInTime',data[0].last_login);
+                        this.router.navigate(['visitor/visitortest']);
+                    }
+                }
+                else if (data[0].role == 'Parents') {
+                     
+                    this.apiService.showNotification('top', 'right', 'Parent successfully Login.', 'success');
+                    localStorage.setItem('authenticationToken', data[0].token);
+                    localStorage.setItem('UserId', data[0].id);
+                    localStorage.setItem('UserName', data[0].fname );
+                    localStorage.setItem('stuid', data[0].stuid);
+                    localStorage.setItem('role', data[0].role);
+                    localStorage.setItem('lastOutTime',data[0].out_time);
+                    localStorage.setItem('lastInTime',data[0].last_login);
+                    this.router.navigate(['dashboard']);
+                }
+               else if (data[0].role == 'Sub-Admin') {
+                     
+                    this.apiService.showNotification('top', 'right', 'Admin successfully Login.', 'success');
+                    localStorage.setItem('authenticationToken', data[0].token);
+                    localStorage.setItem('UserId', data[0].id);
+                    localStorage.setItem('UserName', data[0].firstname + ' ' + data[0].lastname);
+                    localStorage.setItem('role', data[0].role);
+                    localStorage.setItem('lastOutTime',data[0].out_time);
+                    localStorage.setItem('lastInTime',data[0].last_login);
+                    this.router.navigate(['dashboard']);
+                }
+                // else {
+                //     this.router.navigate(['dashboard']);
+                // }
             }
-
         });
     }
 

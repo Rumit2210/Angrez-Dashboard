@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { ApiService } from 'app/api.service';
 import { LoginService } from '../login/login.service';
 import { ForgotPwd } from './forgotpwd.model';
-
+declare const $: any;
 @Component({
   selector: 'app-forgot-pwd',
   templateUrl: './forgot-pwd.component.html',
@@ -79,10 +79,13 @@ export class ForgotPwdComponent implements OnInit {
     }
   }
   forgotPassword() {
-    this.forgotPwdModel.role = this.selectedRole;
+    // this.forgotPwdModel.role = this.selectedRole;
+
     this.loginService.forgotPwd(this.forgotPwdModel).subscribe((data) => {
-      this.emailResp = data[0].id;
+
       this.apiService.showNotification('top', 'right', 'Email Sent Successfully on your Email Address.', 'success');
+      this.emailResp = data[0].userid;
+
       this.forgotBox = true;
       this.changePwd = false;
       this.otpBox = true;
@@ -92,6 +95,7 @@ export class ForgotPwdComponent implements OnInit {
     this.forgotPwdModel.id = this.emailResp;
 
     this.loginService.getOneTimePwd(this.forgotPwdModel).subscribe((data) => {
+
       this.otpResp = data[0].userid;
       this.changePwd = true;
       this.otpBox = false;

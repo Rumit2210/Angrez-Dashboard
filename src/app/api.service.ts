@@ -17,6 +17,9 @@ export class ApiService {
       'Content-Type': 'application/json'
     })
   }
+  public static getUserLoginURL: string = ApiService.HOST_URL + '/admin/GetUsersLogin';
+  public static updateLogoutDetailsURL: string = ApiService.HOST_URL + '/admin/UpdateLogoutDetails'
+
 
   public static saveServicesListURL: string = ApiService.HOST_URL + '/admin/SaveServicesList';
   public static getAllServicesURL: string = ApiService.HOST_URL + '/admin/GetAllServices';
@@ -51,6 +54,13 @@ export class ApiService {
   public static saveModeOfPayment: string = ApiService.HOST_URL + '/admin/SaveModeOfPayment';
   public static getAllModeOfPayment: string = ApiService.HOST_URL + '/admin/GetAllModeOfPayment';
   public static getMonthlyPayment: string = ApiService.HOST_URL + '/admin/GetMonthlyPayment';
+  public static saveOfferListURL: string = ApiService.HOST_URL + '/admin/SaveOfferList';
+  public static getAllOfferDataListURL: string = ApiService.HOST_URL + '/admin/GetAllOfferDataList';
+  public static getUsedServicesByOfferURL: string = ApiService.HOST_URL + '/admin/GetUsedServicesByOffer';
+  public static getAllOfferURL: string = ApiService.HOST_URL + '/admin/GetAllOffer';
+  public static getOfferTotalPointsURL: string = ApiService.HOST_URL + '/admin/GetOfferTotalPoints';
+  public static updateOfferListURL: string = ApiService.HOST_URL + '/admin/UpdateOfferList';
+  public static removeOfferDetailsURL: string = ApiService.HOST_URL + '/admin/removeOfferDetails/';
   public static saveExpensesListURL: string = ApiService.HOST_URL + '/admin/SaveExpensesList';
   public static getAllExpensesURL : string = ApiService.HOST_URL + '/admin/GetAllExpenses';
   public static removeexpensesDetailsURL: string = ApiService.HOST_URL + '/admin/RemoveExpensesDetails/';
@@ -60,16 +70,18 @@ export class ApiService {
   public static getAllStockURL: string = ApiService.HOST_URL + '/admin/GetAllStock';
   public static updateStockListURL: string = ApiService.HOST_URL + '/admin/UpdateStockList/';
   public static removeStockListURL: string = ApiService.HOST_URL + '/admin/RemoveStockList/';
-  //public static getAllSalaryListURL: string = ApiService.HOST_URL + '/admin/GetAllSalaryList';
-  //public static updateSalaryStatusURL: string = ApiService.HOST_URL + '/admin/UpdateSalaryStatus';
-
+  public static saveProductsListURL: string = ApiService.HOST_URL+'/admin/SaveProductsListURL';
+  public static getAllProductsListURL: string = ApiService.HOST_URL+'/admin/GetAllProductsListURL';
+  public static removeProductDetailsURL: string = ApiService.HOST_URL + '/admin/RemoveProductDetailsURL/';
+  public static getAllSalaryListURL: string = ApiService.HOST_URL + '/admin/GetAllSalaryList';
+  public static updateSalaryStatusURL: string = ApiService.HOST_URL + '/admin/UpdateSalaryStatus';
+  public static updateSalaryListURL: string = ApiService.HOST_URL + '/admin/UpdateSalaryList';
+  public static saveSalaryListURL: string = ApiService.HOST_URL + '/admin/SaveSalaryList';
+  public static removeSalaryListURL: string = ApiService.HOST_URL + '/admin/RemoveSalaryList/';
 
 
   showNotification(from, align, msg, color) {
-
-
     var color = color;
-
     $.notify({
       icon: "",
       message: msg

@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
 import { ApiService } from 'app/api.service';
 import { Observable } from 'rxjs';
 import { ForgotPwd } from '../forgot-pwd/forgotpwd.model';
@@ -14,7 +13,6 @@ export class LoginService {
 
 
     constructor(
-        private http: Http,
         private httpClient: HttpClient
     ) { }
     login(credentials: Loginuser): Observable<any> {
@@ -37,6 +35,14 @@ export class LoginService {
 
 
     }
+    userLogin(credentials: Loginuser): Observable<any> {
+        const data = {
+            email: credentials.email,
+            password: credentials.password,
+        };
+
+        return this.httpClient.post<any>(ApiService.getUserLoginURL, data);
+    }
     forgotPwd(admin: ForgotPwd): Observable<any> {
 
         return this.httpClient.post<any>(ApiService.forgotPasswordURL, admin);
@@ -56,6 +62,10 @@ export class LoginService {
     }
     CheckPassword(data) {
         return this.httpClient.post(ApiService.ChackForPasswordURL, data);
-      }
+    }
+    UpdateLogout(data) {
+        debugger
+        return this.httpClient.post(ApiService.updateLogoutDetailsURL, data);
+    }
 
 }
