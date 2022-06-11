@@ -60,6 +60,9 @@ export class ApiService {
   public static getAllStockURL: string = ApiService.HOST_URL + '/admin/GetAllStock';
   public static updateStockListURL: string = ApiService.HOST_URL + '/admin/UpdateStockList/';
   public static removeStockListURL: string = ApiService.HOST_URL + '/admin/RemoveStockList/';
+  public static saveProductsListURL: string = ApiService.HOST_URL+'/admin/SaveProductsListURL';
+  public static getAllProductsListURL: string = ApiService.HOST_URL+'/admin/GetAllProductsListURL';
+  public static removeProductDetailsURL: string = ApiService.HOST_URL + '/admin/RemoveProductDetailsURL/';
   //public static getAllSalaryListURL: string = ApiService.HOST_URL + '/admin/GetAllSalaryList';
   //public static updateSalaryStatusURL: string = ApiService.HOST_URL + '/admin/UpdateSalaryStatus';
 

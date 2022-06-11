@@ -1,0 +1,331 @@
+<div class="main-content">
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md-9">
+                    <h4 class="card-title">Add Products</h4>
+                </div>
+                <div class="row">
+                    <div class="col-xl-9 col-lg-10 col-md-12 col-sm-12 mx-auto">
+                        <div class="tm-bg-primary-dark tm-block tm-block-h-auto">
+                            <div class="row tm-edit-product-row">
+                                <div class="col-xl-6 col-lg-6 col-md-12 ">
+                                    <div class="form-group mb-3">
+                                        <label for="description">Description</label>
+                                        <textarea placeholder="Write about Product... " [(ngModel)]="productsModel.descripition" class="form-control validate"
+                                            rows="7" required="" #descripition="ngModel"></textarea>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label class="card-title">Date of Purchase</label>
+                                        <div class="form-group">
+                                            <input style="position:relative;" placeholder="Choose Date" [(ngModel)]="productsModel.purchasedate" class="form-control"
+                                                name="dp" ngbDatepicker #d="ngbDatepicker" (click)="d.toggle()"
+                                                #purchasedate="ngModel"  >
+                                                <i style="position:absolute; right:8px;top:8px;" class="fa fa-calendar "></i>
+                                            <!-- <input type="text" class="form-control datepicker" value="10/05/2018"> -->
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="name">Vendor's Name
+                                        </label>
+                                        <input placeholder="Enter Vendor's name" [(ngModel)]="productsModel.vendorname" id="name" name="name"
+                                            type="text" class="form-control validate" required=""
+                                            #vendorname="ngModel">
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="Phone">Vendor's Contact
+                                        </label>
+                                        <input placeholder="Enter Vendor's contact" [(ngModel)]="productsModel.vendorcontact" id="Phone" name="Phone"
+                                        type="tel" maxlength="10" pattern="[6789][0-9]{9}" class="form-control validate" required=""
+                                            #vendorcontact="ngModel">
+                                            <div *ngIf="vendorcontact.errors && (vendorcontact.dirty || vendorcontact.touched)" class="alert alert-danger">
+                                                <div *ngIf="vendorcontact.errors.required">
+                                                    Vendor's Number is required
+                                                </div>
+                                                <div [hidden]="!vendorcontact.errors('pattern')">
+                                                    Enter Only Valid Numbers.
+                                                </div>
+                                            </div>
+                                    </div>
+                                    <div>
+                                        <h6 class="card-title">Regular Image</h6>
+                                        <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                                            <div class="fileinput-new thumbnail">
+                                                <img src="./assets/img/image_placeholder.jpg" alt="...">
+                                            </div>
+                                            <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                                            <div>
+                                                <span class="btn btn-rose btn-round btn-file">
+                                                    <span class="fileinput-new">Select image</span>
+                                                    <span class="fileinput-exists">Change</span>
+                                                    <input [(ngModel)]="productsModel.image" type="file" name="..."
+                                                        #image="ngModel" />
+                                                </span>
+                                                <a href="javascript:void(0)"
+                                                    class="btn btn-danger btn-round fileinput-exists"
+                                                    data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-12">
+                                    <form action="" class="tm-edit-product-form">
+                                        <div class="form-group mb-3">
+                                            <label for="name">Product Name
+                                            </label>
+                                            <input placeholder="Enter name" [(ngModel)]="productsModel.name" id="name" name="name" type="text"
+                                                class="form-control validate" required="" #name="ngModel">
+                                        </div>
+
+                                        <div class="form-group mb-3">
+                                            <label for="category">Category</label>
+                                            <select 
+                                                class="custom-select tm-select-accounts" id="category"[(ngModel)]="productsModel.category"
+                                                #category="ngModel">
+                                                <option selected="">Select category</option>
+                                                <option value="New Arrival">New Arrival</option>
+                                                <option value="Most Popular">Most Popular</option>
+                                                <option value="Trending">Trending</option>
+                                            </select>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group mb-3 col-xs-12 col-sm-6">
+                                                <label for="expire_date">Price
+                                                </label>
+                                                <input placeholder="Enter Price" [(ngModel)]="productsModel.price" id="expire_date"
+                                                    name="expire_date" type="number"
+                                                    class="form-control validate hasDatepicker" data-large-mode="true"
+                                                    #price="ngModel">
+                                            </div>
+                                            <div class="form-group mb-3 col-xs-12 col-sm-6">
+                                                <label for="stock">Quantity
+                                                </label>
+                                                <input placeholder="Enter Quantity" [(ngModel)]="productsModel.quantity" id="stock" name="stock"
+                                                    type="number" class="form-control validate" required=""
+                                                    #quantity="ngModel">
+                                            </div>
+                                        </div>
+                                       
+                                        
+                                    </form>
+                                </div>
+
+
+                                <div class="col-6">
+                                    <button type="submit" (click)="saveProductsDetail()"
+                                        class="btn btn-info btn-round btn-block text-uppercase"> <i
+                                            class="fa fa-paper-plane" aria-hidden="true"></i> Add Product
+                                        Now</button>
+                                </div>
+                                <div class="col-6">
+                                    <button type="submit" class="btn btn-dark btn-round btn-block text-uppercase"><i
+                                            class="fa fa-times" aria-hidden="true"></i> <span></span> cancel</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="card-body">
+        </div>
+        <div class="card-footer">
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+        </div>
+        <div class="card-body">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title"> Product Table</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead class="text-primary">
+                                    <th>
+                                        Product Name
+                                    </th>
+                                    <th class="text-center">
+                                        Category
+                                    </th>
+                                    <th class="text-center">
+                                        Date of Purchase
+                                    </th>
+                                    <th class="text-center">
+                                        Qty
+                                    </th>
+                                    <th class="text-right">
+                                        Price
+                                    </th>
+                                    <th class="text-right">
+                                        Amount
+                                    </th>
+                                    <th class="text-right">Actions</th>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of products | paginate: { itemsPerPage: p, currentPage: p };">
+                                        <td class="text-center">{{ item.name }}  <br> DESCRIPITION--{{ item.descripition}}
+                                        </td>
+                                        <td class="text-center">{{ item.category}} </td>  
+                                        <td class="text-center">{{ item.purchasedate }}</td>
+                                        <td class="text-center">{{ item.quantity }}</td>
+                                        <td class="text-center">{{ item.price }}</td>
+                                        <td class="text-center">{{ item.price * item.quantity }}</td>  
+                                        <td class="text-right">
+                                            <button type="button" rel="tooltip" class="btn btn-info btn-icon btn-sm">
+                                                <i class="fa fa-eye" (click)="onlyViewCustomerDetails(item.id)"></i>
+                                            </button>
+                                            &nbsp;
+                                            <button type="button" rel="tooltip" class="btn btn-success btn-icon btn-sm">
+                                                <i class="fa fa-edit" data-toggle="modal" data-target="#employeeModal"
+                                                    (click)="viewProDetails(item)"></i>
+                                            </button>
+                                            &nbsp;
+                                            <button type="button" rel="tooltip" class="btn btn-danger btn-icon btn-sm"
+                                                (click)="removeProductList(item.id)">
+                                                <i class="fa fa-times"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+
+        </div>
+    </div>
+    <div class="modal fade" id="employeeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-notice">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <i class="nc-icon nc-simple-remove"></i>
+                    </button>
+                    <h5 class="modal-title" id="myModalLabel">View/Edit Products</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="instruction">
+                        <form class="form-horizontal" name="employeeRegForm" #employeeRegForm="ngForm">
+                            <div class="row">
+                                <label class="col-md-2 col-form-label">Product Name</label>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="fname" name="fname"
+                                            [(ngModel)]="updateProductModel.name" placeholder=" Enter Product Name " />
+                                    </div>
+                                </div>
+                                <label class="col-md-2 col-form-label">Description</label>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="lname" name="lname"
+                                            [(ngModel)]="updateProductModel.descripition" placeholder=" Enter Description" />
+                                    </div>
+                                </div>
+
+                                <label class="col-md-2 col-form-label">Category</label>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="contact"
+                                            [(ngModel)]="updateProductModel.category" name="contact"
+                                            placeholder="Enter Category" />
+                                    </div>
+                                </div>
+                                <label class="col-md-2 col-form-label">Purchase Date</label>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="whatsapp"
+                                            [(ngModel)]="updateProductModel.purchasedate" name="whatsapp"
+                                            placeholder="Enter Purchase Date" />
+                                    </div>
+                                </div>
+                                <label class="col-md-2 col-form-label">Quantity</label>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <textarea id="address" name="address" rows="3" cols="40"
+                                            [(ngModel)]="updateProductModel.quantity"
+                                            placeholder="Enter Quantity"> </textarea>
+                                    </div>
+                                </div>
+                                <label class="col-md-2 col-form-label">Price</label>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="city"
+                                            [(ngModel)]="updateProductModel.price" name="city"
+                                            placeholder="Enter Price" />
+                                    </div>
+                                </div>
+                                <!-- <label class="col-md-2 col-form-label">Pincode</label>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="pincode"
+                                            [(ngModel)]="updateProductModel.pincode" name="pincode"
+                                            placeholder="Enter Pincode" />
+                                    </div>
+                                </div> -->
+                                <!-- <label class="col-sm-2 col-form-label">Select Gender</label>
+                                <div class="col-md-2">
+                                    <div class="form-check-radio">
+                                        <label class="form-check-label" style="color: black !important">
+                                            <input #genm class="form-check-input" name="gender"
+                                                [(ngModel)]="updateProductModel.gender" type="radio" value="male"
+                                                ngModel />
+                                            Male
+                                            <span class="form-check-sign"></span>
+                                        </label>
+                                    </div>
+                                </div> -->
+                                <!-- <div class="col-md-2">
+                                    <div class="form-check-radio">
+                                        <label class="form-check-label" style="color: black !important">
+                                            <input #genf class="form-check-input" name="gender"
+                                                [(ngModel)]="updateProductModel.gender" type="radio" value="female"
+                                                ngModel />
+                                            Female
+                                            <span class="form-check-sign"></span>
+                                        </label>
+                                    </div>
+                                </div> -->
+                                <!-- <label class="col-md-2 col-form-label">Select Services</label>
+                                <div class="col-md-4">
+                                    <div class="btn-group bootstrap-select w-100">
+                                        <div style="border: 1px #DDDDDD solid !important">
+                                            <angular2-multiselect [ngModelOptions]="{standalone: true}"
+                                                [data]="serviceData" [(ngModel)]="selectedServices"
+                                                [settings]="dropdownSettings" (onSelect)="onItemSelect($event)"
+                                                (onDeSelect)="OnItemDeSelect($event)"
+                                                (onSelectAll)="onSelectAll($event)" name="items"
+                                                (onDeSelectAll)="onDeSelectAll($event)">
+                                            </angular2-multiselect>
+                                        </div>
+                                    </div>
+                                </div> -->
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-info btn-round" data-dismiss="modal"
+                        (click)="updateProductDetails()">
+                        <i class="fa fa-paper-plane" aria-hidden="true"></i> Update
+                    </button>
+                    <button type="button" class="btn btn-secondary btn-round" data-dismiss="modal">
+                        <i class="fa fa-times" aria-hidden="true"></i> Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
