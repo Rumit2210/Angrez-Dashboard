@@ -46,6 +46,7 @@ export class CustomerComponent implements OnInit {
   customerData: any[];
   usedServices: any[];
   totalRecords: string;
+  vip: boolean = false;
   totalModelRecords: string;
   page: Number = 1;
   modelPage: number = 1;
@@ -73,6 +74,8 @@ export class CustomerComponent implements OnInit {
   ngOnInit(): void {
     this.addService = [{ sertime: null, serpoint: null, serprice: null, name1: this.valu, selectedServ: '', selectedEmp: '', selectedServid: null, selectedEmpid: null }]
     this.valu++;
+    this.vip;
+    debugger
   }
   addServiceList() {
      

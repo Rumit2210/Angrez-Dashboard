@@ -133,6 +133,12 @@
                             </label>
                         </div>
                     </div>
+                    <label class="col-sm-2 col-form-label">VIP</label>
+                         <label class="switch">
+                                <input type="checkbox" checked class="switch-input" [switch-on-color]="'primary'" [switch-off-color]="'primary'" id="vip"
+                                     name="vip" [(ngModel)]="customerModel.vip">
+                                <span class="slider round"></span>
+                          </label>
                 </div>
 
             </form>
@@ -206,7 +212,7 @@
                                         </div>
                                     </td>
                                     <td class="text-center">{{ item.index }}</td>
-                                    <td class="text-center">{{ item.fname}} {{ item.lname}} </td>
+                                    <td class="text-center"><div class="text-center" ><span class="fa fa-star checked" *ngIf="item.vip==true"></span> {{ item.fname}} {{ item.lname}}</div></td>
                                     <!-- <td class="text-center">{{ item.contact }}</td> -->
                                     <td class="text-center">{{ item.whatsapp }}</td>
                                     <td class="text-center">{{ item.gender }}</td>
@@ -326,6 +332,14 @@
                                         </label>
                                     </div>
                                 </div>
+                                
+                                <label class="col-sm-2 col-form-label">VIP</label>
+                
+                                    <label class="switch">
+                                        <input type="checkbox" checked class="switch-input" [switch-on-color]="'primary'" [switch-off-color]="'primary'" id="vip"
+                                        name="vip" [(ngModel)]="customerModel.vip">
+                                        <span class="slider round"></span>
+                                 </label>
 
                                 <!-- <label class="col-md-2 col-form-label">Total Points</label>
                                 <div class="col-md-4">
