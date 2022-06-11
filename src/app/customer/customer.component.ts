@@ -53,7 +53,7 @@ export class CustomerComponent implements OnInit {
   totalPointForDetails: any;
   addService: any = [];
   valu: 0;
-  isDashboard:boolean=false;
+  isDashboard: boolean = false;
   constructor(
     private servicesService: ServicesService,
     private employeeService: EmployeeService,
@@ -65,8 +65,8 @@ export class CustomerComponent implements OnInit {
     this.getAllEmployee();
     this.getAllServices();
     this.getCustomerDetails();
-    if(this.router.routerState.snapshot.url ==='/dashboard'){
-      this.isDashboard=true;
+    if (this.router.routerState.snapshot.url === '/dashboard') {
+      this.isDashboard = true;
     }
   }
 
@@ -75,7 +75,7 @@ export class CustomerComponent implements OnInit {
     this.valu++;
   }
   addServiceList() {
-     
+
     this.valu++;
     this.addService.push({ sertime: null, serpoint: null, serprice: null, name1: this.valu, selectedServ: '', selectedEmp: '', selectedServid: null, selectedEmpid: null });
   }
@@ -114,6 +114,9 @@ export class CustomerComponent implements OnInit {
         this.addService[ind].serprice = element.price;
         this.addService[ind].serpoint = element.point;
         this.addService[ind].sertime = element.time;
+        for (let i = 0; i < this.addService.length; i++) {
+          this.addService[i].index = i + 1;
+        }
         this.addPoinInList();
       }
 
@@ -202,6 +205,7 @@ export class CustomerComponent implements OnInit {
   }
   seletedCustomerDetails(data) {
     this.selectedCustId = data.id;
+    this.customerModel = data;
     this.appointmentModel = data;
     this.custAppointment = true;
     this.selectCustomer = true;
@@ -209,7 +213,6 @@ export class CustomerComponent implements OnInit {
     this.appointmentModel.redeempoints = 0;
   }
   saveAppointmentDetails() {
-    
     this.appointmentModel.lessPoints = 0;
     this.appointmentModel.totalpoint = this.totalPoint;
     this.appointmentModel.tCustPoint = this.tCustPoint;
@@ -234,92 +237,151 @@ export class CustomerComponent implements OnInit {
         this.apiService.showNotification('top', 'right', 'Appointment Successfully Booked.', 'success');
       })
     }
-     
+
 
   }
-  generateInvoicePDF(action = 'open') {
-
+  generateInvoicePDF(customer, service) {
     let docDefinition = {
+      pageSize: 'A5',
+      footer: function (currentPage, pageCount) {
+        return { text: "Page " + currentPage.toString() + ' of ' + pageCount, alignment: 'center', fontSize: 10, margin: [0, 20, 0, 0] }
+      },
+      info: {
+        title: 'Angrez the salon'
+      },
       content: [
         {
-          text: 'Angrez The Salon',
-          fontSize: 16,
-          alignment: 'center',
-          color: '#047886'
+          columns: [
+            {
+              image: 'webimg',
+              width: 140,
+              height: 60,
+              alignment: 'left',
+              margin: [0, 0, 0, 10],
+              color: 'black',
+            },
+            [
+              {
+                text: 'Invoice:   Billing',
+                bold: true,
+                style: 'companydetail'
+              },
+              {
+                text: 'Address:   14-Commerce Complex',
+                style: 'companydetail'
+              },
+              {
+                text: 'City: Anand,  State: Gujarat',
+                style: 'companydetail'
+              },
+              {
+                text: 'Contact No: +91 942-731-8581',
+                style: 'companydetail'
+              },
+
+            ]
+
+          ],
+
         },
         {
-          text: 'INVOICE',
-          fontSize: 20,
-          bold: true,
-          alignment: 'center',
-          decoration: 'underline',
-          color: '#ef8157'
-        }, {}, {}, {},
+          text: ' ',
+          margin: [0, 10, 0, 0]
+        },
         {
-          text: 'Customer Details',
-          style: 'sectionHeader'
+          text: 'Bill to,',
+          alignment: 'left',
+          margin: [0, 10, 0, 10]
         },
         {
           columns: [
             [
-              {
-                text: this.customerModel.fname + '' + this.customerModel.lname,
-                bold: true
-              },
-              { text: 'Whats App Number:' + this.customerModel.whatsapp },
-              { text: 'Contact Number:' + this.customerModel.contact },
+              { text: ('Customer Name:  ' + customer.fname + '  ' + customer.lname), bold: true, style: 'customerdetail' },
+              { text: 'Gender:  ' + customer.gender, style: 'customerdetail' },
+              { text: 'Email:  ' + customer.email, style: 'customerdetail' },
+              { text: 'Contact Number:  ' + customer.contact, style: 'customerdetail' },
             ],
-            [
-              // {
-              //   text: 'delivery Date: ' + this.Orderview.deliverydate,
-              //   alignment: 'right'
-              // },
+            [,
               {
-                text: `Bill No : ${((Math.random() * 1000).toFixed(0))}`,
-                alignment: 'right'
-              }
+                text: `Invoice:  ${((Math.random() * 1000).toFixed(0))}`,
+                alignment: 'right',
+                style: 'customerdetail'
+              },
+              {
+                text: `Date:  ${new Date().toLocaleString()}`,
+                alignment: 'right',
+                style: 'customerdetail'
+              },
             ]
           ]
-        }, {}, {},
-        {
-          text: 'Service Details',
-          style: 'sectionHeader'
         },
         {
+          text: ' ',
+          margin: [0, 10, 0, 0]
+        },
+        {
+          layout: 'headerLineOnly',
           table: {
             headerRows: 1,
-            widths: ['*', 'auto', 'auto'],
+            widths: ['auto', '*', '*', 'auto', 'auto'],
             body: [
-              ['Service', 'Price', 'Amount'],
-
-              // ([this.customerModel.itemName, this.customerModel.price, this.customerModel.point,]),
-              // (this.Orderview.productPrice * this.Orderview.quantity).toFixed(2)
-              // [{ text: 'Total Amount', colSpan: 3 }, {}, {}, {}]
+              [{ text: 'ITEMS', style: 'tablehead' }, { text: 'SERVICE', style: 'tablehead' }, { text: 'EMPLOYEE', style: 'tablehead' }, { text: 'TIME', style: 'tablehead' }, { text: 'PRICE', style: 'tablehead' }],
+              ...service.map(p => ([{ text: p.index, style: 'tablecell' }, { text: p.selectedServ, style: 'tablecell' }, { text: p.selectedEmp, style: 'tablecell' }, { text: p.sertime + " min", style: 'tablecell' }, { text: "₹" + p.serprice, style: 'tablecell' }])),
             ]
           }
         },
         {
           columns: [
-            // [{ qr: `${this.Orderview.username}`, fit: '50' }],
-            [{ text: 'Signature', alignment: 'right', italics: true }],
+            [
+              { text: 'Terms & Conditions', fontSize: 10, margin: [0, 50, 0, 0] },
+              { text: '*  Order can be return in max 10 days.', fontSize: 10, margin: [0, 10, 0, 0] },
+              { text: '*  This is system generated invoice.', fontSize: 10 },
+              // { text: '*  Warrenty of the product will be subject to the \t manufacturer terms and conditions.',fontSize: 10},
+
+            ],
+            [
+              { text: 'TOTAL', alignment: 'right', fontSize: 10, margin: [0, 50, 0, 0] },
+              { text: "₹" + service.reduce((sum, p) => sum + p.serprice, 0), alignment: 'right', fontSize: 28 }
+            ]
           ]
         },
-        {
-          ul: [
-            'Order can be return in max 10 days.',
-            'Warrenty of the product will be subject to the manufacturer terms and conditions.',
-            'This is system generated invoice.',
-          ],
+      ],
+
+      images: {
+        webimg: 'https://res.cloudinary.com/dfojt5f1l/image/upload/v1654778945/media/keryar/output-onlinepngtools_vysa26.png',
+      },
+      styles:
+      {
+        customerdetail: {
+          margin: [0, 0, 0, 5],
+          fontSize: 10
         },
-      ]
+        companydetail: {
+          alignment: 'left',
+          margin: [30, 0, 0, 5],
+          fontSize: 10
+        },
+        tablehead: {
+          bold: true,
+          fontSize: 10,
+          alignment: 'center',
+        },
+        tablecell: {
+          margin: [0, 0, 0, 5],
+          fontSize: 10,
+          alignment: 'center',
+        }
+      }
     };
-    if (action === 'download') {
-      pdfMake.createPdf(docDefinition).download();
-    } else if (action === 'print') {
-      pdfMake.createPdf(docDefinition).print();
-    } else {
-      pdfMake.createPdf(docDefinition).open();
-    }
+    pdfMake.createPdf(docDefinition).open();
+    pdfMake.createPdf(docDefinition).download('Angrez_Bill_' + `${new Date().toLocaleString()}` + '.pdf');
+    // if (action === 'download') {
+
+    // } else if (action === 'print') {
+    //   pdfMake.createPdf(docDefinition).print();
+    // } else {
+    //   pdfMake.createPdf(docDefinition).open();
+    // }
   }
   viewCustomerDetails(data) {
     this.totalCustomerPoint = 0;
@@ -391,7 +453,7 @@ export class CustomerComponent implements OnInit {
     this.viewCustomerAllData = false;
   }
   openUsedServiceList(obj) {
-     
+
     this.totalPriceForDetails = obj.totalprice
     this.totalPointForDetails = obj.totalpoint
     this.customerService.getServicesListUsingId(obj.id).subscribe((data: any) => {

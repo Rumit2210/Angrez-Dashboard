@@ -18,18 +18,18 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 export class ExpensesComponent implements OnInit {
   public ExpensesModel: Expenses = new Expenses;
   public expensesList: Expenses[];
-  public expenses: Expenses[]=[];
-  public Allexpenses: Expenses[]=[];
+  public expenses: Expenses[] = [];
+  public Allexpenses: Expenses[] = [];
   public expensesdate: Date;
   public expensesname: string;
   public expensesprices: number;
   public employeename: string;
   public paymenttype: string;
   apiService: any;
-  public search? : Date;
+  public search?: Date;
   public updateExpensesModel: Expenses = new Expenses;
   dailyTotal: number = 0;
-  formdate: Date= new Date();
+  formdate: Date = new Date();
   selectedMode: any;
   searchexpenses: boolean = false;
   searchmonth: boolean = false;
@@ -45,10 +45,10 @@ export class ExpensesComponent implements OnInit {
   }
 
 
-  saveExpensesDetail(){
+  saveExpensesDetail() {
     this.expensesService.saveExpensesList(this.ExpensesModel).subscribe((data: any) => {
-    this.expensesList = data;
-    this.getExpensesDetails();
+      this.expensesList = data;
+      this.getExpensesDetails();
     })
   }
 
@@ -64,13 +64,13 @@ export class ExpensesComponent implements OnInit {
       this.dailyTotal = 0;
       const curDate = new Date();
       data.forEach(element => {
-      var searchdate = new Date(curDate).getDate ()
-      var newdate = new Date(element.expensesdate).getDate ()
-      var searchmonth = new Date(curDate).getMonth ()
-      var newmonth = new Date(element.expensesdate).getMonth ()
-      var searchyear = new Date(curDate).getFullYear ()
-      var newyear = new Date(element.expensesdate).getFullYear ()
-      if (searchdate === newdate && searchmonth === newmonth && searchyear === newyear) {
+        var searchdate = new Date(curDate).getDate()
+        var newdate = new Date(element.expensesdate).getDate()
+        var searchmonth = new Date(curDate).getMonth()
+        var newmonth = new Date(element.expensesdate).getMonth()
+        var searchyear = new Date(curDate).getFullYear()
+        var newyear = new Date(element.expensesdate).getFullYear()
+        if (searchdate === newdate && searchmonth === newmonth && searchyear === newyear) {
           this.expenses.push(element);
           console.log(element)
           this.dailyTotal = this.dailyTotal + element.expensesprices;
@@ -78,8 +78,8 @@ export class ExpensesComponent implements OnInit {
         for (let i = 0; i < this.expenses.length; i++) {
           this.expenses[i].index = i + 1;
         }
-     
-        })
+
+      })
     });
   }
 
@@ -117,25 +117,26 @@ export class ExpensesComponent implements OnInit {
 
   }
 
-  viewExpensesDetails(data) { 
-    var newdates = new Date(data.expensesdate).getDate ()
-    var newmonth = new Date(data.expensesdate).getMonth ()
-    var newyear = new Date(data.expensesdate).getFullYear ()
+  viewExpensesDetails(data) {
+    var newdates = new Date(data.expensesdate).getDate()
+    var newmonth = new Date(data.expensesdate).getMonth()
+    var newyear = new Date(data.expensesdate).getFullYear()
     this.updateExpensesModel = data;
-    var newdate=new Date(newyear,newmonth,newdates)
-    data.set(data.expensesdate=newdate)
-    console.log(data,"After the view Expenses")
-   }
+    var newdate = new Date(newyear, newmonth, newdates)
+    data.set(data.expensesdate = newdate)
+    console.log(data, "After the view Expenses")
+  }
 
-   updateExpensesDetails(){
-     console.log(this.updateExpensesModel,"updatemodel")
+  updateExpensesDetails() {
+    console.log(this.updateExpensesModel, "updatemodel")
     this.expensesService.updateExpensesList(this.updateExpensesModel).subscribe((req) => {
       this.apiService.showNotification('top', 'right', 'Expenses Details Successfully Updated.', 'success');
     })
     this.getExpensesDetails();
-   }
+  }
 
-   searmonth(){
+  
+  searmonth(){
     this.searchexpenses = true;
      this.searchmonth = true;
      this.transform(this.formdate)
@@ -148,6 +149,7 @@ export class ExpensesComponent implements OnInit {
    }
    backToExpenses(){
      this.searchexpenses=false;
+     this.getExpensesDetails()
    }
    searchExpensesList(val) {
      this.searchexpenses = true;
@@ -196,75 +198,121 @@ export class ExpensesComponent implements OnInit {
       this.expenses[i].index = i + 1;
     } 
   }
-  
 
-  
 
-  generateInvoicePDF(action = 'open') {    
-    this.expenses.forEach(element =>{
-      this.expensesdate =element.expensesdate
-    })
-    var expendate = new Date(this.expensesdate).toLocaleString()
-    let docDefinition = {            
-        content: [
-          {
-            text: 'Angrez The Salon',
-            fontSize: 16,
-            alignment: 'center',
-            color: '#047886',
-            margin: [0, 0 ,0, 15] 
-          },
-          {
-            text: 'Expenses Details',
-            style: 'sectionHeader'
-          },
-          {
-            columns: [
-              [
-                {
-                  text: `Bill Date: ${new Date().toLocaleString()}`,
-                  alignment: 'right',
-                  margin: [0, 0 ,0, 15] 
-                },
-                { 
-                  text: `Bill No : ${((Math.random() *1000).toFixed(0))}`,
-                  alignment: 'right',
-                  margin: [0, 0 ,0, 15] 
-                }
-              ]
-            ]
-          },
-          {
-            text: 'Expenses Date : ',
-            alignment: 'left',
-            margin: [0, 0 ,0, 15] 
-          },
-          {
-            text: expendate,
-            alignment: 'left',
-            margin: [0, 0 ,0, 15] 
-          },
-          {
-            table: {
-              headerRows: 1,
-              widths: ['*', 'auto', 'auto', 'auto'],
-              body: [
-                ['Expenses Name', 'Employee Name', 'Payment Type','Expense Prices'],
-                ...this.expenses.map(p => ([p.expensesname, p.employeename, p.paymenttype, p.expensesprices + "₹"])),
-                [{text: 'Total Amount', colSpan: 3}, {}, {}, this.expenses.reduce((sum, p)=> sum + p.expensesprices, 0).toFixed(2) + "₹" ]
-              ]
+
+  generateInvoicePDF(action = 'open') {
+    var invoctype = String();
+    if(this.searchmonth === true){
+      invoctype = "Monthly";
+    }
+    else if(this.searchyear === true){
+      invoctype = "Yearly";
+    }
+    else{
+      invoctype = "Daily";
+    }
+    let docDefinition = {
+      content: [
+        {
+          columns: [
+            {
+              image: 'webimg',
+              fillColor: 'lightgrey',
+              width: 40,
+              height: 40,
+              alignment: 'left',
+              margin: [80, 5, 0, 10],
+
+            },
+            {
+              text: 'Angrez The Salon',
+              fontSize: 42,
+              alignment: 'center',
+              color: '#252b4f',
             }
-          }, 
-        ],     
-      };    
-    if(action==='download'){    
-      pdfMake.createPdf(docDefinition).download();    
-    }else if(action === 'print'){    
-      pdfMake.createPdf(docDefinition).print();          
-    }else{    
-      pdfMake.createPdf(docDefinition).open();          
-    }        
-  }  
+          ]
+        },
+        {
+          text: 'Invoice',
+          style: 'sectionHeader',
+          fontSize: 32,
+          alignment: 'center',
+          color: '#54575a',
+          margin: [30, 0, 35, 10]
+        },
+        {
+          columns: [
+            [
+              {
+                text: `DATE: ${new Date().toLocaleString()}`,
+                style: ['Bill']
+              },
+              {
+                text: `INVOICE : ${((Math.random() * 1000).toFixed(0))}`,
+                style: ['Bill']
+              }
+            ]
+          ]
+        },
+        {
+          text: 'Invoice Type:    Expenses ',
+          alignment: 'left',
+          fontSize: 14,
+        },
+        {
+          text: 'Expenses :    '+ invoctype,
+          alignment: 'left',
+          fontSize: 14,
+          margin: [0, 0, 0, 15]
+        },
+        {
+          layout: 'headerLineOnly',
+          table: {
+            headerRows: 1,
+            widths: ['*', 'auto', 'auto', 'auto', 'auto'],
+            body: [
+              [{text: 'Expenses name',style:'tablehead'}, {text:'Expenses Date',style:'tablehead'}, {text: 'Employee Name',style:'tablehead'}, {text:'Payment Type',style:'tablehead'}, {text:'Expense Prices',style:'tablehead'}],
+              ...this.expenses.map(p => ([{text:p.expensesname,style:'tablecell'},{ text: new Date(p.expensesdate).getDate() + "/" + (new Date(p.expensesdate).getMonth() + 1) + "/" + (new Date(p.expensesdate).getFullYear()),style:'tablecell'},{ text: p.employeename,style:'tablecell'}, {text: p.paymenttype,style:'tablecell'},{text: "₹" + p.expensesprices,style:'tablecell'}])),
+              [{}, {},{text: 'Total Entry: ',bold:true,fontSize: 14, colSpan:2,alignment: 'right',margin: [0,25,0,0]},{},{text: this.expenses.reduce((sum) => sum + 1, 0),bold:true,fontSize: 14,margin: [0,25,0,0],alignment: 'center'}],
+              [{}, {},{ text:'Total Expenses: ',bold: true,fontSize: 18,colSpan: 2,alignment: 'right'}, {},{text: "₹"+this.expenses.reduce((sum, p) => sum + p.expensesprices, 0),bold:true,fontSize: 18,alignment: 'center'}],
 
+            ],
+            margin: [0, 0, 0, 15]
+          }
+        },
+      ],
+
+      images: {
+        webimg: 'https://res.cloudinary.com/dfojt5f1l/image/upload/v1654686899/media/keryar/favicon1_maqlvr.png',
+      },
+      styles: {
+        Bill: {
+          fontSize: 10,
+          alignment: 'left',
+          margin: [380, 0, 0, 0],
+          fillColor: '#dedede',
+        },
+        tablehead:{
+          bold:true,
+          fontSize: 12,
+          alignment:'center',
+        },
+        tablecell:{
+          margin:[0,0,0,5],
+          alignment:'center',
+        }
+      }
+    };
+    pdfMake.createPdf(docDefinition).open();
+    pdfMake.createPdf(docDefinition).download('Angrez_Expenses_Invoices' + `${new Date().toLocaleString()}` + '.pdf');
+    // if (action === 'download') {
+    //   pdfMake.createPdf(docDefinition).download();
+    // } else if (action === 'print') {
+    //   pdfMake.createPdf(docDefinition).print();
+    // } else {
+    //   pdfMake.createPdf(docDefinition).open();
+    // }
+  }
 
 }
