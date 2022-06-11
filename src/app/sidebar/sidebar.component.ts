@@ -79,6 +79,13 @@ export const ROUTES: RouteInfo[] = [{
     icontype: 'fa fa-cubes',
     roles: "Admin",
 },
+{
+    path: '/products',
+    title: 'Products',
+    type: 'link',
+    icontype: 'fa fa-product-hunt',
+    roles: "Admin",
+}
 
 
 ];
@@ -151,6 +158,14 @@ export const Customer: RouteInfo[] = [
         icontype: 'fa fa-cubes',
         roles: "Admin",
     },
+    {
+        path: '/products',
+        title: 'Products',
+        type: 'link',
+        icontype: 'fa fa-cubes',
+        roles: "Admin",
+    }
+
 ];
 @Component({
     moduleId: module.id,
