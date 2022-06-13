@@ -13,6 +13,7 @@ export class ProductsComponent implements OnInit {
   public productsModel: Products = new Products;
   public products: Products[];
   public updateProductModel: Products = new Products;
+  formdate: Date = new Date();
 
   p: any;
   val = 0;
@@ -28,6 +29,7 @@ export class ProductsComponent implements OnInit {
     private apiService: ApiService,
   ) {
     this.getAllProducts();
+    this.formdate
   }
 
   ngOnInit(): void {

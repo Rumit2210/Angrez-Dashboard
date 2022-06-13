@@ -79,10 +79,9 @@
 
                     <label class="col-md-2 col-form-label">Date of Purchase</label>
                     <div class="col-md-4">
-                        <!-- <div class="form-group">
-                            <input type="date" [(ngModel)]="EproductsModel.purchasedate" [ngModelOptions]="{standalone: true}" class="form-control" value="{{ formdate }}" name="purchasedate" id="purchasedate">
-                        </div> -->
-
+                        <div class="form-group">
+                            <input type="date" [(ngModel)]="productsModel.purchasedate" class="form-control" value="{{ formdate }}" name="purchasedate" id="purchasedate">
+                        </div>
                     </div>
 
                     <label class="col-md-2 col-form-label">Description</label>
@@ -94,27 +93,6 @@
                                 required="" #descripition="ngModel"></textarea>
                         </div>
                     </div>
-
-
-                    <!-- <label class="col-md-2 col-form-label">Product Image</label>
-                    <div class="col-md-4">
-                        <div class="fileinput fileinput-new text-center" data-provides="fileinput">
-                            <div class="fileinput-new thumbnail">
-                                <img src="./assets/img/image_placeholder.jpg" alt="...">
-                            </div>
-                            <div class="fileinput-preview fileinput-exists thumbnail"></div>
-                            <div>
-                                <span class="btn btn-rose btn-round btn-file">
-                                    <span class="fileinput-new">Select image</span>
-                                    <span class="fileinput-exists">Change</span>
-                                    <input [(ngModel)]="productsModel.image" type="file" name="..." #image="ngModel" />
-                                </span>
-                                <a href="javascript:void(0)" class="btn btn-danger btn-round fileinput-exists"
-                                    data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
-                            </div>
-                        </div>
-                    </div> -->
-                    <!-- <div class="row"> -->
                     <label class="col-md-2 col-form-label">Product Image</label>
                     <div class="col-md-3">
                         <p class="card-title">Select Product Image</p>
@@ -192,9 +170,6 @@
                                 color: aqua;"></i> -->
 
                     </div>
-                    <!-- </div> -->
-
-
                 </div>
             </form>
         </div>
