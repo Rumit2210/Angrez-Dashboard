@@ -82,6 +82,11 @@ export class ApiService {
   public static getAllCategoryListURL: string = ApiService.HOST_URL + '/admin/GetAllCategoryList/';
   public static updateCategoryListURL: string = ApiService.HOST_URL + '/admin/UpdateCategoryList/';
   public static removeCategoryDetailsURL: string = ApiService.HOST_URL + '/admin/RemoveCategoryDetails/';
+  public static uploadMainImageURL: string = ApiService.HOST_URL + '/admin/UploadProductImage/';
+  public static uploadMultiImageURL: string = ApiService.HOST_URL + '/admin/UploadMultiProductImage/';
+  public static removeImageURL: string = ApiService.HOST_URL + '/admin/RemoveRecentUoloadImage/';
+
+
   showNotification(from, align, msg, color) {
     var color = color;
     $.notify({

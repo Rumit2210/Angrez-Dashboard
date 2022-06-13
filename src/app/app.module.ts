@@ -19,6 +19,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { MaterialModule } from './material/material.module';
+import { ServicescustmComponent } from './servicescustm/servicescustm.component';
 @NgModule({
     imports: [
         BrowserAnimationsModule,

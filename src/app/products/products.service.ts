@@ -42,4 +42,15 @@ export class ProductService {
     removeCategoryDetails(id) {
         return this.httpClient.get<any>(ApiService.removeCategoryDetailsURL + id);
     }
+    selectUploadImage(img): Observable<any> {
+        debugger
+        return this.httpClient.post<any>(ApiService.uploadMainImageURL, img);
+
+    }
+    selectMultiUploadImage(img): Observable<any> {
+        return this.httpClient.post<any>(ApiService.uploadMultiImageURL, img);
+    }
+    removeOrChanged() {
+        return this.httpClient.get<any>(ApiService.removeImageURL);
+    }
 }

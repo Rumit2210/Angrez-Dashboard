@@ -1,4 +1,4 @@
-export class Services {
+export class Servicescustm {
     constructor(
 
         public id?: number,
