@@ -78,8 +78,10 @@ export class ApiService {
   public static updateSalaryListURL: string = ApiService.HOST_URL + '/admin/UpdateSalaryList';
   public static saveSalaryListURL: string = ApiService.HOST_URL + '/admin/SaveSalaryList';
   public static removeSalaryListURL: string = ApiService.HOST_URL + '/admin/RemoveSalaryList/';
-
-
+  public static saveCategoryListURL: string = ApiService.HOST_URL + '/admin/SaveCategoryListURL/';
+  public static getAllCategoryListURL: string = ApiService.HOST_URL + '/admin/GetAllCategoryListURL/';
+  public static updateCategoryListURL: string = ApiService.HOST_URL + '/admin/UpdateCategoryListURL/';
+  public static removeCategoryDetailsURL: string = ApiService.HOST_URL + '/admin/RemoveCategoryDetailsURL/';
   showNotification(from, align, msg, color) {
     var color = color;
     $.notify({
