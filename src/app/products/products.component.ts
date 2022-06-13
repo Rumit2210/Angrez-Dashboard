@@ -3,7 +3,7 @@ import { ApiService } from 'app/api.service';
 import Swal from 'sweetalert2';
 import { Products } from './product.model';
 import { ProductService } from './products.service';
-
+import { Category } from './category.model';
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -16,6 +16,23 @@ export class ProductsComponent implements OnInit {
   formdate: Date = new Date();
 
   p: any;
+  showList:boolean=true;  
+  addProduct:boolean=true;
+  addc:boolean=false;
+  showCategoryList:boolean=false;
+  public updateCategoryModel: Category = new Category;
+  p:any;
+  public categoryModel:Category =new Category;
+  public category: Category[];
+  isDashboard:boolean=false;
+  public productList: Products[];
+  search: string = '';
+  name :any;
+  submitButton: boolean = false;
+  selectCustomer: boolean = false;
+  custAppointment: boolean = false;
+  viewCustomerAllData: boolean = false;
+  Productdata: any[];
   val = 0;
   addingprdtimg: any = [];
   imageError: string;
@@ -30,9 +47,12 @@ export class ProductsComponent implements OnInit {
   ) {
     this.getAllProducts();
     this.formdate
+    
+   
   }
 
   ngOnInit(): void {
+    
   }
   addImageUploader() {
     this.val++;
@@ -170,7 +190,19 @@ export class ProductsComponent implements OnInit {
       }
     });
   }
+  getAllCategory() {
+    this.productService.getAllCategoryList().subscribe((data: any) => {
+      this.category = data;
+      debugger
+      
+
+      for (let i = 0; i < this.category.length; i++) {
+        this.category[i].index = i + 1;
+      }
+    });
+  }
   saveProductsDetail() {
+   this.getAllProducts();
     this.productsModel.image = this.image;
     this.productsModel.multi = this.multi;
 
@@ -181,7 +213,55 @@ export class ProductsComponent implements OnInit {
       this.apiService.showNotification('top', 'right', 'Product Added Successfully.', 'success');
     })
   }
-  removeProductList(id) {
+  saveCategoryDetail() {
+   
+    debugger
+    this.productService.saveCategoryList(this.categoryModel).subscribe((data: any) => {
+      this.category = data;
+      // this.getAllEmployee();
+      location.reload();
+
+      this.apiService.showNotification('top', 'right', 'Product Added Successfully.', 'success');
+    })
+  }
+    
+  removeProductList(id: any) {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You want to delete! If you delete Product then all the Product data will be delete.",
+      icon: 'warning',
+      showCancelButton: true,
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger',
+      },
+      confirmButtonText: 'Yes',
+      buttonsStyling: false
+    }).then((result) => {
+      if (result.value == true) {
+        this.productService.removeProductDetails(id).subscribe((req) => {
+          this.apiService.showNotification('top', 'right', 'Product removed Successfully.', 'success');
+
+
+        })
+        Swal.fire(
+          {
+            title: 'Deleted!',
+            text: 'Your Product has been deleted.',
+            icon: 'success',
+            customClass: {
+              confirmButton: "btn btn-success",
+            },
+            buttonsStyling: false
+          }
+        )
+        this.getAllProducts();
+      }
+    })
+
+  }
+  removeCategoryList(id) {
+    debugger
     Swal.fire({
       title: 'Are you sure?',
       text: "You want to delete! If you delete Customer then all the customer data will be delete.",
@@ -195,7 +275,7 @@ export class ProductsComponent implements OnInit {
       buttonsStyling: false
     }).then((result) => {
       if (result.value == true) {
-        this.productService.removeProductDetails(id).subscribe((req) => {
+        this.productService.removeCategoryDetails(id).subscribe((req) => {
           this.apiService.showNotification('top', 'right', 'Customer removed Successfully.', 'success');
 
 
@@ -211,22 +291,79 @@ export class ProductsComponent implements OnInit {
             buttonsStyling: false
           }
         )
-        this.getAllProducts();
+        this.getAllCategory();
       }
     })
 
   }
   viewProDetails(data: Products) {
-
-    // this.showEmp = true;
+    // this.submitButton = true;
     this.updateProductModel = data;
   }
-  updateProductDetails() {
+  viewCategoryDetails(data: Products) {
 
-    this.productService.updateProList(this.updateProductModel).subscribe((req) => {
+    // this.showEmp = true;
+    this.updateCategoryModel = data;
+  }
+
+  UpdateProductDetails() {
+    this.updateProductModel
+    this.productService.updateProductList(this.updateProductModel).subscribe((req) =>{
       this.getAllProducts();
       this.apiService.showNotification('top', 'right', 'Product Details Successfully Updated.', 'success');
+    
     })
+  }
+  updateCategoryDetails() {
+    this.productService.updateCategoryList(this.updateCategoryModel).subscribe((req) => {
+      this.getAllCategory();
+      this.apiService.showNotification('top', 'right', 'Product Details Successfully Updated.', 'success');
+    })
+  }
+	addcategory()
+  {
+    this.showList=false;
+    this.addProduct=false;
+    this.addc=true;
+    this.showCategoryList=true;
+    this.getAllCategory();
+  }	
+		
+
+  
+
+  // Search(val) {
+  //   if (this.search == '') {
+  //     console.log(val)
+  //     this.products = this.productList;
+  //   } else {
+  //     console.log(val)
+  //     this.transform(this.productList, val);
+  //   }
+
+  // }
+  // transform(products: Products[], searchValue: string) {
+  //   this.products = [];
+  //   products.forEach(element => {
+  //     if (element.name.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())) {
+  //       this.products.push(element);
+  //     }
+  //    })
+  //    console.log(this.products)
+  // }
+  Search(){
+    if(this.search==""){
+      this.getAllProducts();
+    }else{
+      this.products=this.products.filter(res=>{
+        if(res.name.toLocaleLowerCase().match(this.search.toLocaleLowerCase())){
+            return res.name.toLocaleLowerCase().match(this.search.toLocaleLowerCase());
+        }
+        else{
+            return res.category.toLocaleLowerCase().match(this.search.toLocaleLowerCase());
+        }
+      });
+    }
   }
  
 }

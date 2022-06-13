@@ -78,6 +78,11 @@ export class ApiService {
   public static updateSalaryListURL: string = ApiService.HOST_URL + '/admin/UpdateSalaryList';
   public static saveSalaryListURL: string = ApiService.HOST_URL + '/admin/SaveSalaryList';
   public static removeSalaryListURL: string = ApiService.HOST_URL + '/admin/RemoveSalaryList/';
+  public static saveCategoryListURL: string = ApiService.HOST_URL + '/admin/SaveCategoryList/';
+  public static getAllCategoryListURL: string = ApiService.HOST_URL + '/admin/GetAllCategoryList/';
+  public static updateCategoryListURL: string = ApiService.HOST_URL + '/admin/UpdateCategoryList/';
+  public static removeCategoryDetailsURL: string = ApiService.HOST_URL + '/admin/RemoveCategoryDetails/';
+  public static updateProductListURL: string = ApiService.HOST_URL + '/admin/UpdateProductList';
   public static uploadMainImageURL: string = ApiService.HOST_URL + '/admin/UploadProductImage/';
   public static uploadMultiImageURL: string = ApiService.HOST_URL + '/admin/UploadMultiProductImage/';
   public static removeImageURL: string = ApiService.HOST_URL + '/admin/RemoveRecentUoloadImage/';
