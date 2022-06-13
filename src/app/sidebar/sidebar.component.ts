@@ -71,6 +71,13 @@ export const ROUTES: RouteInfo[] = [{
     roles: "Admin",
 },
 
+{
+    path: '/display-products',
+    title: 'Products',
+    type: 'link',
+    icontype: 'fa fa-shopping-cart',
+    roles: "Admin",
+}
 
 ];
 export const Employee: RouteInfo[] = [
@@ -103,7 +110,6 @@ export const Employee: RouteInfo[] = [
         roles: "Admin",
     },
 ];
-
 @Component({
     moduleId: module.id,
     selector: 'sidebar-cmp',
