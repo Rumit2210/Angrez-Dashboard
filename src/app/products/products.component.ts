@@ -21,7 +21,7 @@ export class ProductsComponent implements OnInit {
   addc:boolean=false;
   showCategoryList:boolean=false;
   public updateCategoryModel: Category = new Category;
-  p:any;
+
   public categoryModel:Category =new Category;
   public category: Category[];
   isDashboard:boolean=false;
