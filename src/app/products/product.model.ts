@@ -4,6 +4,7 @@ export class Products {
         public id?: number,
         public name?: string,
         public image?:string,
+        public listimages?: string,
         public category?: string,
         public price?:number,
         public quantity?: number,
@@ -14,6 +15,7 @@ export class Products {
         public isactive?: boolean,
         public createddate?: Date,
         public updateddate?: Date,
+        public multi?:any[],
     ) {
     }
 }

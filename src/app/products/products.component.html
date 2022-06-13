@@ -5,135 +5,210 @@
                 <div class="col-md-9">
                     <h4 class="card-title">Add Products</h4>
                 </div>
-                <div class="row">
-                    <div class="col-xl-9 col-lg-10 col-md-12 col-sm-12 mx-auto">
-                        <div class="tm-bg-primary-dark tm-block tm-block-h-auto">
-                            <div class="row tm-edit-product-row">
-                                <div class="col-xl-6 col-lg-6 col-md-12 ">
-                                    <div class="form-group mb-3">
-                                        <label for="description">Description</label>
-                                        <textarea placeholder="Write about Product... " [(ngModel)]="productsModel.descripition" class="form-control validate"
-                                            rows="7" required="" #descripition="ngModel"></textarea>
-                                    </div>
-                                    <div class="form-group mb-3">
-                                        <label class="card-title">Date of Purchase</label>
-                                        <div class="form-group">
-                                            <input style="position:relative;" placeholder="Choose Date" [(ngModel)]="productsModel.purchasedate" class="form-control"
-                                                name="dp" ngbDatepicker #d="ngbDatepicker" (click)="d.toggle()"
-                                                #purchasedate="ngModel"  >
-                                                <i style="position:absolute; right:8px;top:8px;" class="fa fa-calendar "></i>
-                                            <!-- <input type="text" class="form-control datepicker" value="10/05/2018"> -->
-                                        </div>
-                                    </div>
-                                    <div class="form-group mb-3">
-                                        <label for="name">Vendor's Name
-                                        </label>
-                                        <input placeholder="Enter Vendor's name" [(ngModel)]="productsModel.vendorname" id="name" name="name"
-                                            type="text" class="form-control validate" required=""
-                                            #vendorname="ngModel">
-                                    </div>
-                                    <div class="form-group mb-3">
-                                        <label for="Phone">Vendor's Contact
-                                        </label>
-                                        <input placeholder="Enter Vendor's contact" [(ngModel)]="productsModel.vendorcontact" id="Phone" name="Phone"
-                                        type="tel" maxlength="10" pattern="[6789][0-9]{9}" class="form-control validate" required=""
-                                            #vendorcontact="ngModel">
-                                            <div *ngIf="vendorcontact.errors && (vendorcontact.dirty || vendorcontact.touched)" class="alert alert-danger">
-                                                <div *ngIf="vendorcontact.errors.required">
-                                                    Vendor's Number is required
-                                                </div>
-                                                <div [hidden]="!vendorcontact.errors('pattern')">
-                                                    Enter Only Valid Numbers.
-                                                </div>
-                                            </div>
-                                    </div>
-                                    <div>
-                                        <h6 class="card-title">Regular Image</h6>
-                                        <div class="fileinput fileinput-new text-center" data-provides="fileinput">
-                                            <div class="fileinput-new thumbnail">
-                                                <img src="./assets/img/image_placeholder.jpg" alt="...">
-                                            </div>
-                                            <div class="fileinput-preview fileinput-exists thumbnail"></div>
-                                            <div>
-                                                <span class="btn btn-rose btn-round btn-file">
-                                                    <span class="fileinput-new">Select image</span>
-                                                    <span class="fileinput-exists">Change</span>
-                                                    <input [(ngModel)]="productsModel.image" type="file" name="..."
-                                                        #image="ngModel" />
-                                                </span>
-                                                <a href="javascript:void(0)"
-                                                    class="btn btn-danger btn-round fileinput-exists"
-                                                    data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    
-                                </div>
-                                <div class="col-xl-6 col-lg-6 col-md-12">
-                                    <form action="" class="tm-edit-product-form">
-                                        <div class="form-group mb-3">
-                                            <label for="name">Product Name
-                                            </label>
-                                            <input placeholder="Enter name" [(ngModel)]="productsModel.name" id="name" name="name" type="text"
-                                                class="form-control validate" required="" #name="ngModel">
-                                        </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <form class="form-horizontal" name="servicesRegForm" #servicesRegForm="ngForm">
+                <div class="row ">
 
-                                        <div class="form-group mb-3">
-                                            <label for="category">Category</label>
-                                            <select 
-                                                class="custom-select tm-select-accounts" id="category"[(ngModel)]="productsModel.category"
-                                                #category="ngModel">
-                                                <option selected="">Select category</option>
-                                                <option value="New Arrival">New Arrival</option>
-                                                <option value="Most Popular">Most Popular</option>
-                                                <option value="Trending">Trending</option>
-                                            </select>
-                                        </div>
-                                        <div class="row">
-                                            <div class="form-group mb-3 col-xs-12 col-sm-6">
-                                                <label for="expire_date">Price
-                                                </label>
-                                                <input placeholder="Enter Price" [(ngModel)]="productsModel.price" id="expire_date"
-                                                    name="expire_date" type="number"
-                                                    class="form-control validate hasDatepicker" data-large-mode="true"
-                                                    #price="ngModel">
-                                            </div>
-                                            <div class="form-group mb-3 col-xs-12 col-sm-6">
-                                                <label for="stock">Quantity
-                                                </label>
-                                                <input placeholder="Enter Quantity" [(ngModel)]="productsModel.quantity" id="stock" name="stock"
-                                                    type="number" class="form-control validate" required=""
-                                                    #quantity="ngModel">
-                                            </div>
-                                        </div>
-                                       
-                                        
-                                    </form>
-                                </div>
+                    <label class="col-md-2 col-form-label">Product Name</label>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <input placeholder="Enter name" [(ngModel)]="productsModel.name" id="name" name="name"
+                                type="text" class="form-control validate" [ngModelOptions]="{standalone: true}"
+                                required="" #name="ngModel">
+                        </div>
 
-
-                                <div class="col-6">
-                                    <button type="submit" (click)="saveProductsDetail()"
-                                        class="btn btn-info btn-round btn-block text-uppercase"> <i
-                                            class="fa fa-paper-plane" aria-hidden="true"></i> Add Product
-                                        Now</button>
-                                </div>
-                                <div class="col-6">
-                                    <button type="submit" class="btn btn-dark btn-round btn-block text-uppercase"><i
-                                            class="fa fa-times" aria-hidden="true"></i> <span></span> cancel</button>
-                                </div>
-
+                    </div>
+                    <label class="col-md-2 col-form-label">Category</label>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <select class="custom-select tm-select-accounts" id="category"
+                                [(ngModel)]="productsModel.category" #category="ngModel"
+                                [ngModelOptions]="{standalone: true}">
+                                <option selected="">Select category</option>
+                                <option value="New Arrival">New Arrival</option>
+                                <option value="Most Popular">Most Popular</option>
+                                <option value="Trending">Trending</option>
+                            </select>
+                        </div>
+                    </div>
+                    <label class="col-md-2 col-form-label">Price</label>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <input placeholder="Enter Price" [(ngModel)]="productsModel.price" id="expire_date"
+                                name="expire_date" type="number" [ngModelOptions]="{standalone: true}"
+                                class="form-control validate hasDatepicker" data-large-mode="true" #price="ngModel">
+                        </div>
+                    </div>
+                    <label class="col-md-2 col-form-label">Vendor's Name</label>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <input placeholder="Enter Vendor's name" [(ngModel)]="productsModel.vendorname" id="name"
+                                name="name" type="text" class="form-control validate"
+                                [ngModelOptions]="{standalone: true}" required="" #vendorname="ngModel">
+                        </div>
+                    </div>
+                    <label class="col-md-2 col-form-label">Vendor's Contact</label>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <input placeholder="Enter Vendor's contact" [(ngModel)]="productsModel.vendorcontact"
+                                id="Phone" name="Phone" type="tel" maxlength="10" pattern="[6789][0-9]{9}"
+                                class="form-control validate" required="" [ngModelOptions]="{standalone: true}"
+                                #vendorcontact="ngModel">
+                        </div>
+                        <div *ngIf="vendorcontact.errors && (vendorcontact.dirty || vendorcontact.touched)"
+                            class="alert alert-danger">
+                            <div *ngIf="vendorcontact.errors.required">
+                                Vendor's Number is required
+                            </div>
+                            <div [hidden]="!vendorcontact.errors('pattern')">
+                                Enter Only Valid Numbers.
                             </div>
                         </div>
                     </div>
+
+                    <label class="col-md-2 col-form-label">Quantity</label>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <input placeholder="Enter Quantity" [(ngModel)]="productsModel.quantity" id="stock"
+                                name="stock" type="number" [ngModelOptions]="{standalone: true}"
+                                class="form-control validate" required="" #quantity="ngModel">
+                        </div>
+                    </div>
+
+                    <label class="col-md-2 col-form-label">Date of Purchase</label>
+                    <div class="col-md-4">
+                        <!-- <div class="form-group">
+                            <input type="date" [(ngModel)]="EproductsModel.purchasedate" [ngModelOptions]="{standalone: true}" class="form-control" value="{{ formdate }}" name="purchasedate" id="purchasedate">
+                        </div> -->
+
+                    </div>
+
+                    <label class="col-md-2 col-form-label">Description</label>
+                    <div class="col-md-4">
+                        <div class="form-group">
+
+                            <textarea placeholder="Write about Product... " [ngModelOptions]="{standalone: true}"
+                                [(ngModel)]="productsModel.descripition" class="form-control validate" rows="7"
+                                required="" #descripition="ngModel"></textarea>
+                        </div>
+                    </div>
+
+
+                    <!-- <label class="col-md-2 col-form-label">Product Image</label>
+                    <div class="col-md-4">
+                        <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                            <div class="fileinput-new thumbnail">
+                                <img src="./assets/img/image_placeholder.jpg" alt="...">
+                            </div>
+                            <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                            <div>
+                                <span class="btn btn-rose btn-round btn-file">
+                                    <span class="fileinput-new">Select image</span>
+                                    <span class="fileinput-exists">Change</span>
+                                    <input [(ngModel)]="productsModel.image" type="file" name="..." #image="ngModel" />
+                                </span>
+                                <a href="javascript:void(0)" class="btn btn-danger btn-round fileinput-exists"
+                                    data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
+                            </div>
+                        </div>
+                    </div> -->
+                    <!-- <div class="row"> -->
+                    <label class="col-md-2 col-form-label">Product Image</label>
+                    <div class="col-md-3">
+                        <p class="card-title">Select Product Image</p>
+                        <span style="color: red;">*Image size must be 500X500</span>
+                        <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                            <div class="fileinput-new thumbnail">
+                                <img src="./assets/img/image_placeholder.jpg" alt="...">
+                            </div>
+                            <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                            <div>
+                                <span class="btn btn-rose btn-round btn-file">
+                                    <span class="fileinput-new">Select Product image</span>
+                                    <span class="fileinput-exists">Change</span>
+                                    <input type="file" id="image" name="image" [(ngModel)]="productsModel.image"
+                                        (change)="select($event)" />
+                                </span>
+                                <a href="javascript:void(0)" class="btn btn-danger btn-round fileinput-exists"
+                                    data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <p class="card-title">Select Product Detail Image</p>
+                        <span style="color: red;">*Image size must be 500X500</span>
+                        <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                            <div class="fileinput-new thumbnail">
+                                <img src="./assets/img/image_placeholder.jpg" alt="...">
+                            </div>
+                            <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                            <div>
+                                <span class="btn btn-rose btn-round btn-file">
+                                    <span class="fileinput-new">Select Detail Image</span>
+                                    <span class="fileinput-exists">Change</span>
+                                    <input type="file" id="listimages" name="listimages"
+                                        [(ngModel)]="productsModel.listimages" (change)="onSelect($event)" />
+                                </span>
+                                <a href="javascript:void(0)" (click)="removeOrChangedImage()"
+                                    class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i
+                                        class="fa fa-times"></i> Remove</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3" *ngFor="let i of addingprdtimg;let ind=index">
+                        <p class="card-title">Select Product Detail Image</p>
+                        <span style="color: red;">*Image size must be 500x500</span>
+                        <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+
+                            <div class="fileinput-new thumbnail">
+
+                                <img src="./assets/img/image_placeholder.jpg" alt="...">
+                            </div>
+                            <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                            <div>
+                                <span class="btn btn-rose btn-round btn-file">
+                                    <span class="fileinput-new">Select Detail Image</span>
+                                    <span class="fileinput-exists">Change</span>
+                                    <input type="file" id="listimages" name="listimages"
+                                        [(ngModel)]="productsModel.listimages" value={} (change)="onSelect($event)" />
+
+                                </span>
+                                <a class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"
+                                    (click)="removeOrChangedImage(id)"><i class="fa fa-times"></i> Remove</a>
+
+                                <i class="fa fa-times-circle-o" aria-hidden="true" (click)="removeImageUploader(ind)"
+                                    style="font-size:25px!important;padding-left:9px!important"></i>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-1">
+                        <i class="fa fa-plus-circle" aria-hidden="true"
+                            style="font-size: 50px !important;margin-top:130%!important;"
+                            (click)="addImageUploader()"></i>
+                        <!-- <i class="nc-icon nc-simple-add" style="font-size: 50px !important;
+                                color: aqua;"></i> -->
+
+                    </div>
+                    <!-- </div> -->
+
+
                 </div>
-            </div>
-        </div>
-        <hr>
-        <div class="card-body">
+            </form>
         </div>
         <div class="card-footer">
+            <div class="row">
+                <div class="ml-md-auto">
+                    <button type="submit" class="btn btn-info btn-round" (click)="saveProductsDetail()">
+                        <i class="fa fa-paper-plane" aria-hidden="true"></i> Submit
+                    </button>
+                    <button type="submit" class="btn btn-danger btn-round" routerLink='/dashboard'>
+                        <i class="fa fa-times" aria-hidden="true"></i> Cancel
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
     <div class="card">
@@ -149,7 +224,10 @@
                         <div class="table-responsive">
                             <table class="table table-striped">
                                 <thead class="text-primary">
-                                    <th>
+                                    <th class="text-left">
+                                        Product Image
+                                    </th>
+                                    <th class="text-center">
                                         Product Name
                                     </th>
                                     <th class="text-center">
@@ -161,23 +239,30 @@
                                     <th class="text-center">
                                         Qty
                                     </th>
-                                    <th class="text-right">
+                                    <th class="text-center">
                                         Price
                                     </th>
-                                    <th class="text-right">
+                                    <th class="text-center">
                                         Amount
                                     </th>
                                     <th class="text-right">Actions</th>
                                 </thead>
                                 <tbody>
                                     <tr *ngFor="let item of products | paginate: { itemsPerPage: p, currentPage: p };">
-                                        <td class="text-center">{{ item.name }}  <br> DESCRIPITION--{{ item.descripition}}
+
+
+                                        <td>
+                                            <div class="img-container" style="width: 120px;max-height: 160px;overflow: hidden;display: block;">
+                                                <img src="http://localhost:8090{{item.image}}">
+                                            </div>
                                         </td>
-                                        <td class="text-center">{{ item.category}} </td>  
-                                        <td class="text-center">{{ item.purchasedate }}</td>
+                                        <td class="text-center">{{ item.name }}
+                                        </td>
+                                        <td class="text-center">{{ item.category}} </td>
+                                        <td class="text-center">{{ item.purchasedate | date }}</td>
                                         <td class="text-center">{{ item.quantity }}</td>
                                         <td class="text-center">{{ item.price }}</td>
-                                        <td class="text-center">{{ item.price * item.quantity }}</td>  
+                                        <td class="text-center">{{ item.price * item.quantity }}</td>
                                         <td class="text-right">
                                             <button type="button" rel="tooltip" class="btn btn-info btn-icon btn-sm">
                                                 <i class="fa fa-eye" (click)="onlyViewCustomerDetails(item.id)"></i>
@@ -230,7 +315,8 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <input type="text" class="form-control" id="lname" name="lname"
-                                            [(ngModel)]="updateProductModel.descripition" placeholder=" Enter Description" />
+                                            [(ngModel)]="updateProductModel.descripition"
+                                            placeholder=" Enter Description" />
                                     </div>
                                 </div>
 
@@ -301,7 +387,7 @@
                                 <div class="col-md-4">
                                     <div class="btn-group bootstrap-select w-100">
                                         <div style="border: 1px #DDDDDD solid !important">
-                                            <angular2-multiselect [ngModelOptions]="{standalone: true}"
+                                            <angular2-multiselect [ngModelOptions]="{standalone: true}""
                                                 [data]="serviceData" [(ngModel)]="selectedServices"
                                                 [settings]="dropdownSettings" (onSelect)="onItemSelect($event)"
                                                 (onDeSelect)="OnItemDeSelect($event)"

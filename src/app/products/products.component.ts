@@ -14,20 +14,154 @@ export class ProductsComponent implements OnInit {
   public products: Products[];
   public updateProductModel: Products = new Products;
 
-  p:any;
+  p: any;
+  val = 0;
+  addingprdtimg: any = [];
+  imageError: string;
+  isImageSaved: boolean = true;
+  cardImageBase64: string;
+  image: any;
+  multi: any = [];
+
   constructor(
-    private productService:ProductService,
-    private apiService:ApiService
+    private productService: ProductService,
+    private apiService: ApiService,
   ) {
     this.getAllProducts();
-   }
+  }
 
   ngOnInit(): void {
   }
+  addImageUploader() {
+    this.val++;
+    this.addingprdtimg.push({ name: this.val });
+  }
+  removeImageUploader(val) {
+    this.addingprdtimg.splice(val, 1);
+  }
+  select(event) {
+    debugger
+    let max_height;
+    let max_width;
+    if (event.target.files && event.target.files[0]) {
+      const file = event.target.files[0];
+      const max_size = 20971520;
+      const allowed_types = ['image/png', 'image/jpeg'];
+      max_height = 500;
+      max_width = 500;
+
+      if (event.target.files[0].size > max_size) {
+        this.imageError =
+          'Maximum size allowed is ' + max_size / 1000 + 'Mb';
+
+        return false;
+      }
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        const image = new Image();
+        image.src = e.target.result;
+        image.onload = rs => {
+          const img_height = rs.currentTarget['height'];
+          const img_width = rs.currentTarget['width'];
+          console.log(img_height, img_width);
+          if (img_height > max_height && img_width > max_width) {
+            alert("image must be " + max_height + "*" + max_width);
+            this.isImageSaved = false;
+            this.imageError =
+              'Maximum dimentions allowed ' +
+              max_height +
+              '*' +
+              max_width +
+              'px';
+
+
+            return false;
+          }
+          else {
+            const imgBase64Path = e.target.result;
+            this.cardImageBase64 = imgBase64Path;
+
+            const formdata = new FormData();
+            formdata.append('file', file);
+
+            this.productService.selectUploadImage(formdata).subscribe((response) => {
+              this.image = response;
+              console.log(response);
+
+
+            })
+            // this.previewImagePath = imgBase64Path;
+          }
+        };
+      };
+
+      reader.readAsDataURL(event.target.files[0]);
+    }
+  }
+  onSelect(event) {
+    let max_height;
+    let max_width;
+    debugger
+    if (event.target.files && event.target.files[0]) {
+      const file = event.target.files[0];
+      const max_size = 20971520;
+      const allowed_types = ['image/png', 'image/jpeg'];
+      max_height = 500;
+      max_width = 500;
+
+      if (event.target.files[0].size > max_size) {
+        this.imageError =
+          'Maximum size allowed is ' + max_size / 1000 + 'Mb';
+
+        return false;
+      }
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        const image = new Image();
+        image.src = e.target.result;
+        image.onload = rs => {
+          const img_height = rs.currentTarget['height'];
+          const img_width = rs.currentTarget['width'];
+          console.log(img_height, img_width);
+          if (img_height > max_height && img_width > max_width) {
+            alert("image must be " + max_height + "*" + max_width);
+            this.isImageSaved = false;
+            this.imageError =
+              'Maximum dimentions allowed ' +
+              max_height +
+              '*' +
+              max_width +
+              'px';
+            return false;
+          }
+          else {
+            const imgBase64Path = e.target.result;
+            this.cardImageBase64 = imgBase64Path;
+            const formdata = new FormData();
+            formdata.append('file', file);
+            // formdata.append('catid', this.imagesModel.catid);
+            // formdata.append('subcatid', this.ImagesModel.categoryId);
+            // formdata.append('grandchild', this.ImagesModel.subCategoryId);
+
+
+            this.productService.selectMultiUploadImage(formdata).subscribe((response) => {
+              this.multi.push(response);
+              console.log(response);
+
+            })
+            // this.previewImagePath = imgBase64Path;
+          }
+        };
+      };
+
+      reader.readAsDataURL(event.target.files[0]);
+    }
+  }
+
   getAllProducts() {
     this.productService.getAllProductsList().subscribe((data: any) => {
       this.products = data;
-      
+
 
       for (let i = 0; i < this.products.length; i++) {
         this.products[i].index = i + 1;
@@ -35,11 +169,13 @@ export class ProductsComponent implements OnInit {
     });
   }
   saveProductsDetail() {
-   
+    this.productsModel.image = this.image;
+    this.productsModel.multi = this.multi;
+
     this.productService.saveProductsList(this.productsModel).subscribe((data: any) => {
       this.products = data;
-      // this.getAllEmployee();
-      location.reload();
+      this.getAllProducts();
+      // location.reload();
       this.apiService.showNotification('top', 'right', 'Product Added Successfully.', 'success');
     })
   }
@@ -90,7 +226,5 @@ export class ProductsComponent implements OnInit {
       this.apiService.showNotification('top', 'right', 'Product Details Successfully Updated.', 'success');
     })
   }
-			
-		
-
+ 
 }
