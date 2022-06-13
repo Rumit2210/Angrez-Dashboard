@@ -6,6 +6,8 @@ export class Services {
         public price?: number,
         public time?: number,
         public point?: number,
+        public epoint?: number,
+
         public isactive?: boolean,
         public createddate?: Date,
         public updateddate?: Date,
