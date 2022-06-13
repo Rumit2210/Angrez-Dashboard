@@ -13,8 +13,16 @@ export class ProductsComponent implements OnInit {
   public productsModel: Products = new Products;
   public products: Products[];
   public updateProductModel: Products = new Products;
-
+  isDashboard:boolean=false;
   p:any;
+  public productList: Products[];
+  search: string = '';
+  name :any;
+  submitButton: boolean = false;
+  selectCustomer: boolean = false;
+  custAppointment: boolean = false;
+  viewCustomerAllData: boolean = false;
+  Productdata: any[];
   constructor(
     private productService:ProductService,
     private apiService:ApiService
@@ -43,10 +51,10 @@ export class ProductsComponent implements OnInit {
       this.apiService.showNotification('top', 'right', 'Product Added Successfully.', 'success');
     })
   }
-  removeProductList(id) {
+  removeProductList(id: any) {
     Swal.fire({
       title: 'Are you sure?',
-      text: "You want to delete! If you delete Customer then all the customer data will be delete.",
+      text: "You want to delete! If you delete Product then all the Product data will be delete.",
       icon: 'warning',
       showCancelButton: true,
       customClass: {
@@ -58,14 +66,14 @@ export class ProductsComponent implements OnInit {
     }).then((result) => {
       if (result.value == true) {
         this.productService.removeProductDetails(id).subscribe((req) => {
-          this.apiService.showNotification('top', 'right', 'Customer removed Successfully.', 'success');
+          this.apiService.showNotification('top', 'right', 'Product removed Successfully.', 'success');
 
 
         })
         Swal.fire(
           {
             title: 'Deleted!',
-            text: 'Your Customer has been deleted.',
+            text: 'Your Product has been deleted.',
             icon: 'success',
             customClass: {
               confirmButton: "btn btn-success",
@@ -79,18 +87,50 @@ export class ProductsComponent implements OnInit {
 
   }
   viewProDetails(data: Products) {
-
-    // this.showEmp = true;
+    // this.submitButton = true;
     this.updateProductModel = data;
   }
-  updateProductDetails() {
-
-    this.productService.updateProList(this.updateProductModel).subscribe((req) => {
+  UpdateProductDetails() {
+    this.updateProductModel
+    this.productService.updateProductList(this.updateProductModel).subscribe((req) =>{
       this.getAllProducts();
       this.apiService.showNotification('top', 'right', 'Product Details Successfully Updated.', 'success');
+    
     })
   }
-			
-		
+  
 
+  // Search(val) {
+  //   if (this.search == '') {
+  //     console.log(val)
+  //     this.products = this.productList;
+  //   } else {
+  //     console.log(val)
+  //     this.transform(this.productList, val);
+  //   }
+
+  // }
+  // transform(products: Products[], searchValue: string) {
+  //   this.products = [];
+  //   products.forEach(element => {
+  //     if (element.name.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())) {
+  //       this.products.push(element);
+  //     }
+  //    })
+  //    console.log(this.products)
+  // }
+  Search(){
+    if(this.search==""){
+      this.getAllProducts();
+    }else{
+      this.products=this.products.filter(res=>{
+        if(res.name.toLocaleLowerCase().match(this.search.toLocaleLowerCase())){
+            return res.name.toLocaleLowerCase().match(this.search.toLocaleLowerCase());
+        }
+        else{
+            return res.category.toLocaleLowerCase().match(this.search.toLocaleLowerCase());
+        }
+      });
+    }
+  }
 }

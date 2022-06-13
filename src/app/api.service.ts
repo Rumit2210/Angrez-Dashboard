@@ -78,7 +78,7 @@ export class ApiService {
   public static updateSalaryListURL: string = ApiService.HOST_URL + '/admin/UpdateSalaryList';
   public static saveSalaryListURL: string = ApiService.HOST_URL + '/admin/SaveSalaryList';
   public static removeSalaryListURL: string = ApiService.HOST_URL + '/admin/RemoveSalaryList/';
-
+  public static updateProductListURL: string = ApiService.HOST_URL + '/admin/UpdateProductList';
 
   showNotification(from, align, msg, color) {
     var color = color;
