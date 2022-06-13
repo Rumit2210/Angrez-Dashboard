@@ -32,8 +32,8 @@ export class ProductService {
     removeProductDetails(id) {
         return this.httpClient.get<any>(ApiService.removeProductDetailsURL + id);
     }
-    updateProList(admin: Employee): Observable<any> {
-        return this.httpClient.post<any>(ApiService.updateEmployeeListURL, admin);
+    updateProductList(admin: Products): Observable<any[]> {
+        return this.httpClient.post<any>(ApiService.updateProductListURL, admin);
     }
     updateCategoryList(admin: Employee): Observable<any> {
         return this.httpClient.post<any>(ApiService.updateCategoryListURL, admin);

@@ -213,94 +213,99 @@
     </div>
     <div class="card" *ngIf="showList">
         <div class="card-header">
-        </div>
-        <div class="card-body">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <h4 class="card-title"> Product List</h4>
-                            </div>
-                            <div class="ml-md-auto">
-                                <button type="cancel" class="btn btn-danger btn-round" routerLink="/dashboard">
-                                    <i class="fa fa-arrow-left"></i> Back
-                                </button>
-                                <button type="Add" class="btn btn-info btn-round" (click)="addcategory()">
-                                    <i class="fa fa-plus"></i> Add Category
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <h4 class="card-title"> Product List</h4>
+                </div>
+                <div class="ml-md-auto">
 
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-striped">
-                                <thead class="text-primary">
-                                    <th class="text-left">
-                                        Product Image
-                                    </th>
-                                    <th class="text-center">
-                                        Product Name
-                                    </th>
-                                    <th class="text-center">
-                                        Category
-                                    </th>
-                                    <th class="text-center">
-                                        Date of Purchase
-                                    </th>
-                                    <th class="text-center">
-                                        Qty
-                                    </th>
-                                    <th class="text-center">
-                                        Price
-                                    </th>
-                                    <th class="text-center">
-                                        Amount
-                                    </th>
-                                    <th class="text-right">Actions</th>
-                                </thead>
-                                <tbody>
-                                    <tr *ngFor="let item of products | paginate: { itemsPerPage: p, currentPage: p };">
-
-
-                                        <td>
-                                            <div class="img-container" style="width: 120px;max-height: 160px;overflow: hidden;display: block;">
-                                                <img src="http://localhost:8090{{item.image}}">
-                                            </div>
-                                        </td>
-                                        <td class="text-center">{{ item.name }}
-                                        </td>
-                                        <td class="text-center">{{ item.category}} </td>
-                                        <td class="text-center">{{ item.purchasedate | date }}</td>
-                                        <td class="text-center">{{ item.quantity }}</td>
-                                        <td class="text-center">{{ item.price }}</td>
-                                        <td class="text-center">{{ item.price * item.quantity }}</td>
-                                        <td class="text-right">
-                                            <button type="button" rel="tooltip" class="btn btn-info btn-icon btn-sm">
-                                                <i class="fa fa-eye" (click)="onlyViewCustomerDetails(item.id)"></i>
-                                            </button>
-                                            &nbsp;
-                                            <button type="button" rel="tooltip" class="btn btn-success btn-icon btn-sm">
-                                                <i class="fa fa-edit" data-toggle="modal" data-target="#employeeModal"
-                                                    (click)="viewProDetails(item)"></i>
-                                            </button>
-                                            &nbsp;
-                                            <button type="button" rel="tooltip" class="btn btn-danger btn-icon btn-sm"
-                                                (click)="removeProductList(item.id)">
-                                                <i class="fa fa-times"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                <button type="Add" class="btn btn-info btn-round" (click)="addcategory()">
+                    <i class="fa fa-plus"></i> Add Category
+                </button>
+                </div>
+                <div class="ml-md-auto">
+                    <label class="col-form-label" style="margin-top: 5px;font-size: 18px;color: black;">Search
+                        By</label>
+                </div>
+                <div class="col-md-3 ml-md-auto">
+                    <div class="form-group" style="margin-top: 8px !important;">
+                        <input type="search" id="form1" class="form-control"
+                            placeholder="Product Name && Category" [(ngModel)]="search"
+                            (ngModelChange)="Search()" aria-label="Search" />
                     </div>
                 </div>
             </div>
+           
+        </div>
+        
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead class="text-primary">
+                        <th class="text-left">
+                            Product Image
+                        </th>
+                        <th class="text-center">
+                            Product Name
+                        </th>
+                        <th class="text-center">
+                            Category
+                        </th>
+                        <th class="text-center">
+                            Date of Purchase
+                        </th>
+                        <th class="text-center">
+                            Qty
+                        </th>
+                        <th class="text-center">
+                            Price
+                        </th>
+                        <th class="text-center">
+                            Amount
+                        </th>
+                        <th class="text-right">Actions</th>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of products | paginate: { itemsPerPage: p, currentPage: p };">
+
+
+                            <td>
+                                <div class="img-container"
+                                    style="width: 120px;max-height: 160px;overflow: hidden;display: block;">
+                                    <img src="http://localhost:8090{{item.image}}">
+                                </div>
+                            </td>
+                            <td class="text-center">{{ item.name }}
+                            </td>
+                            <td class="text-center">{{ item.category}} </td>
+                            <td class="text-center">{{ item.purchasedate | date }}</td>
+                            <td class="text-center">{{ item.quantity }}</td>
+                            <td class="text-center">{{ item.price }}</td>
+                            <td class="text-center">{{ item.price * item.quantity }}</td>
+                            <td class="text-right">
+                                <button type="button" rel="tooltip" class="btn btn-info btn-icon btn-sm">
+                                    <i class="fa fa-eye" (click)="onlyViewCustomerDetails(item.id)"></i>
+                                </button>
+                                &nbsp;
+                                <button type="button" rel="tooltip" class="btn btn-success btn-icon btn-sm">
+                                    <i class="fa fa-edit" data-toggle="modal" data-target="#employeeModal"
+                                        (click)="viewProDetails(item)"></i>
+                                </button>
+                                &nbsp;
+                                <button type="button" rel="tooltip" class="btn btn-danger btn-icon btn-sm"
+                                    (click)="removeProductList(item.id)">
+                                    <i class="fa fa-times"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
         <div class="card-footer">
-
+            <div class="ml-md-auto">
+            
+            </div>
         </div>
     </div>
     <div class="modal fade" id="employeeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
@@ -417,7 +422,7 @@
                 </div>
                 <div class="modal-footer justify-content-center">
                     <button type="button" class="btn btn-info btn-round" data-dismiss="modal"
-                        (click)="updateProductDetails()">
+                        (click)="UpdateProductDetails()">
                         <i class="fa fa-paper-plane" aria-hidden="true"></i> Update
                     </button>
                     <button type="button" class="btn btn-secondary btn-round" data-dismiss="modal">
