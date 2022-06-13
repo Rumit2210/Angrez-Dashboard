@@ -26,7 +26,7 @@ export class ProductService {
         return this.httpClient.get<any>(ApiService.getAllProductsListURL);
     }
    
-    getAllCategoryList(): Observable<Products[]> {
+    getAllCategoryList(): Observable<Category[]> {
         return this.httpClient.get<any>(ApiService.getAllCategoryListURL);
     }
     removeProductDetails(id) {
@@ -35,7 +35,7 @@ export class ProductService {
     updateProductList(admin: Products): Observable<any[]> {
         return this.httpClient.post<any>(ApiService.updateProductListURL, admin);
     }
-    updateCategoryList(admin: Employee): Observable<any> {
+    updateCategoryList(admin: Category): Observable<any> {
         return this.httpClient.post<any>(ApiService.updateCategoryListURL, admin);
     }
     
