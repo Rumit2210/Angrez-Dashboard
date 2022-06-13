@@ -21,7 +21,6 @@ export class ProductsComponent implements OnInit {
   addc:boolean=false;
   showCategoryList:boolean=false;
   public updateCategoryModel: Category = new Category;
-  p:any;
   public categoryModel:Category =new Category;
   public category: Category[];
   isDashboard:boolean=false;
@@ -47,11 +46,13 @@ export class ProductsComponent implements OnInit {
   ) {
     this.getAllProducts();
     this.formdate
+    this.getAllCategory();
     
    
   }
 
   ngOnInit(): void {
+    
     
   }
   addImageUploader() {
@@ -317,7 +318,7 @@ export class ProductsComponent implements OnInit {
   updateCategoryDetails() {
     this.productService.updateCategoryList(this.updateCategoryModel).subscribe((req) => {
       this.getAllCategory();
-      this.apiService.showNotification('top', 'right', 'Product Details Successfully Updated.', 'success');
+      this.apiService.showNotification('top', 'right', 'Category Details Successfully Updated.', 'success');
     })
   }
 	addcategory()
