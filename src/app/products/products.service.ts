@@ -27,4 +27,15 @@ export class ProductService {
     updateProductList(admin: Products): Observable<any[]> {
         return this.httpClient.post<any>(ApiService.updateProductListURL, admin);
     }
+    selectUploadImage(img): Observable<any> {
+        debugger
+        return this.httpClient.post<any>(ApiService.uploadMainImageURL, img);
+
+    }
+    selectMultiUploadImage(img): Observable<any> {
+        return this.httpClient.post<any>(ApiService.uploadMultiImageURL, img);
+    }
+    removeOrChanged() {
+        return this.httpClient.get<any>(ApiService.removeImageURL);
+    }
 }

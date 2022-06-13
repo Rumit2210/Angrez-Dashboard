@@ -164,7 +164,14 @@ export const Customer: RouteInfo[] = [
         type: 'link',
         icontype: 'fa fa-cubes',
         roles: "Admin",
-    }
+    },
+    {
+        path: '/servicescustm',
+        title: 'Ratecard',
+        type: 'link',
+        icontype: 'fa fa-rupee',
+        roles: "Admin",
+    },
 
 ];
 @Component({
