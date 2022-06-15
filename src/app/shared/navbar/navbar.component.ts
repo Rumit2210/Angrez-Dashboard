@@ -1,6 +1,6 @@
 import { Component, OnInit, Renderer2, ViewChild, ElementRef, Directive } from '@angular/core';
 import { ROUTES } from '../.././sidebar/sidebar.component';
-import { Router, ActivatedRoute, NavigationEnd, NavigationStart } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { Subscription } from 'rxjs/Subscription';
 
@@ -13,7 +13,8 @@ var misc:any ={
 @Component({
     moduleId: module.id,
     selector: 'navbar-cmp',
-    templateUrl: 'navbar.component.html'
+    templateUrl: 'navbar.component.html',
+    styleUrls: ['./navbar.component.css']
 })
 
 export class NavbarComponent implements OnInit{
@@ -21,16 +22,18 @@ export class NavbarComponent implements OnInit{
     location: Location;
     private nativeElement: Node;
     private toggleButton;
+    lastLogin: any = Date;
     private sidebarVisible: boolean;
     private _router: Subscription;
     public open: boolean = false;
-
+   quantity:number=0;
     @ViewChild("navbar-cmp", {static: false}) button;
 
     constructor(location:Location, private renderer : Renderer2, private element : ElementRef, private router: Router) {
         this.location = location;
         this.nativeElement = element.nativeElement;
         this.sidebarVisible = false;
+        this.lastLogin = localStorage.getItem('lastOutTime');
     }
 
     ngOnInit(){
@@ -144,4 +147,13 @@ export class NavbarComponent implements OnInit{
         // console.log(this.location);
         return this.location.prepareExternalUrl(this.location.path());
     }
+    incre(){
+        if(this.quantity!=10){
+          this.quantity++;
+        }
+      }
+      decre(){
+        if(this.quantity!=0)
+        this.quantity--;
+      }
 }

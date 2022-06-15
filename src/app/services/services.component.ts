@@ -27,8 +27,7 @@ export class ServicesComponent implements OnInit {
   saveServicesDetail() {
     this.servicesService.saveServiceList(this.servicesModel).subscribe((data: any) => {
       this.servicesList = data;
-      location.reload();
-      this.getAllServices();
+        this.getAllServices();
       this.apiService.showNotification('top', 'right', 'Services Added Successfully.', 'success');
     })
   }

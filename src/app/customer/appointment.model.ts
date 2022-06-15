@@ -15,5 +15,6 @@ export class Appointment {
         public lessPoints?: number,
         public tCustPoint?: number
     ) {
+
     }
 }
