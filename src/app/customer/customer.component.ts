@@ -150,7 +150,7 @@ export class CustomerComponent implements OnInit {
   saveCustomerDetail() {
     this.customerService.saveCustomerList(this.customerModel).subscribe((data: any) => {
       this.customerList = data;
-      this.apiService.showNotification('top', 'right', 'Employee Added Successfully.', 'success');
+      this.apiService.showNotification('top', 'right', 'Customer Added Successfully.', 'success');
       this.getCustomerDetails();
       location.reload();
     })
