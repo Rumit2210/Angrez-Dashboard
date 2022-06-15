@@ -42,7 +42,7 @@ export class CustomerRegisterComponent implements OnInit {
     private element: ElementRef,
     private customerService: CustomerService,
     private apiService: ApiService,
-    private router:Router
+    private router: Router
   ) {
     this.nativeElement = element.nativeElement;
     this.sidebarVisible = false;
@@ -94,27 +94,16 @@ export class CustomerRegisterComponent implements OnInit {
   }
   verification() {
     this.customerModel;
-    debugger;
     this.registerForm = true;
     this.otpBox = true;
     this.customerModel.role = this.selectedRole;
     this.customerService.emailVerify(this.customerModel).subscribe((data) => {
       debugger;
       if (data === "Error") {
-        this.apiService.showNotification(
-          "top",
-          "right",
-          "Email not Sent on your Email Address.",
-          "danger"
-        );
+        this.apiService.showNotification("top","right","Email not Sent on your Email Address.","danger");
       } else {
         this.emailResp = data[0].id;
-        this.apiService.showNotification(
-          "top",
-          "right",
-          "Email Sent Successfully on your Email Address.",
-          "success"
-        );
+        this.apiService.showNotification("top","right","Email Sent Successfully on your Email Address.","success");
       }
     });
   }
@@ -125,22 +114,17 @@ export class CustomerRegisterComponent implements OnInit {
   saveCustomerDetail() {
     this.customerModel.id = this.emailResp;
     this.customerService.getOtpforRegister(this.customerModel).subscribe((data) => {
-        if (data[0].otp === this.customerModel.otp) {
-          this.customerService.saveCustomerList(this.customerModel).subscribe((data: any) => {
-              this.customerList = data;
-              this.apiService.showNotification("top","right","Employee Added Successfully.","success");
-              this.router.navigate(['pages/login']);
-            });
-        } else {
-          this.apiService.showNotification(
-            "top",
-            "right",
-            "OTP doesnot matched.",
-            "danger"
-          );
-        }
-        this.otpResp = data[0].userid;
-        this.otpBox = true;
-      });
+      if (data[0].otp === this.customerModel.otp) {
+        this.customerService.saveUserCustomerList(this.customerModel).subscribe((data: any) => {
+          this.customerList = data;
+          this.apiService.showNotification("top", "right", "Employee Added Successfully.", "success");
+          this.router.navigate(['pages/login']);
+        });
+      } else {
+        this.apiService.showNotification("top","right","OTP doesnot matched.","danger");
+      }
+      this.otpResp = data[0].userid;
+      this.otpBox = true;
+    });
   }
 }
