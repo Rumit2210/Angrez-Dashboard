@@ -16,17 +16,17 @@ export class ProductsComponent implements OnInit {
   formdate: Date = new Date();
 
   p: any;
-  showList:boolean=true;  
-  addProduct:boolean=true;
-  addc:boolean=false;
-  showCategoryList:boolean=false;
+  showList: boolean = true;
+  addProduct: boolean = true;
+  addc: boolean = false;
+  showCategoryList: boolean = false;
   public updateCategoryModel: Category = new Category;
-  public categoryModel:Category =new Category;
+  public categoryModel: Category = new Category;
   public category: Category[];
-  isDashboard:boolean=false;
+  isDashboard: boolean = false;
   public productList: Products[];
   search: string = '';
-  name :any;
+  name: any;
   submitButton: boolean = false;
   selectCustomer: boolean = false;
   custAppointment: boolean = false;
@@ -39,7 +39,6 @@ export class ProductsComponent implements OnInit {
   cardImageBase64: string;
   image: any;
   multi: any = [];
-
   constructor(
     private productService: ProductService,
     private apiService: ApiService,
@@ -47,13 +46,13 @@ export class ProductsComponent implements OnInit {
     this.getAllProducts();
     this.formdate
     this.getAllCategory();
-    
-   
+
+
   }
 
   ngOnInit(): void {
-    
-    
+
+
   }
   addImageUploader() {
     this.val++;
@@ -194,8 +193,6 @@ export class ProductsComponent implements OnInit {
   getAllCategory() {
     this.productService.getAllCategoryList().subscribe((data: any) => {
       this.category = data;
-      debugger
-      
 
       for (let i = 0; i < this.category.length; i++) {
         this.category[i].index = i + 1;
@@ -203,7 +200,7 @@ export class ProductsComponent implements OnInit {
     });
   }
   saveProductsDetail() {
-   this.getAllProducts();
+    this.getAllProducts();
     this.productsModel.image = this.image;
     this.productsModel.multi = this.multi;
 
@@ -215,17 +212,16 @@ export class ProductsComponent implements OnInit {
     })
   }
   saveCategoryDetail() {
-   
-    debugger
+
     this.productService.saveCategoryList(this.categoryModel).subscribe((data: any) => {
       this.category = data;
-      // this.getAllEmployee();
-      location.reload();
+      // this.category.push(data);
 
-      this.apiService.showNotification('top', 'right', 'Product Added Successfully.', 'success');
+      this.apiService.showNotification('top', 'right', 'Category Added Successfully.', 'success');
+      this.getAllCategory();
     })
   }
-    
+
   removeProductList(id: any) {
     Swal.fire({
       title: 'Are you sure?',
@@ -301,7 +297,7 @@ export class ProductsComponent implements OnInit {
     // this.submitButton = true;
     this.updateProductModel = data;
   }
-  viewCategoryDetails(data: Products) {
+  viewCategoryDetails(data: Category) {
 
     // this.showEmp = true;
     this.updateCategoryModel = data;
@@ -309,62 +305,47 @@ export class ProductsComponent implements OnInit {
 
   UpdateProductDetails() {
     this.updateProductModel
-    this.productService.updateProductList(this.updateProductModel).subscribe((req) =>{
+    this.productService.updateProductList(this.updateProductModel).subscribe((req) => {
       this.getAllProducts();
       this.apiService.showNotification('top', 'right', 'Product Details Successfully Updated.', 'success');
-    
+
     })
   }
   updateCategoryDetails() {
+    this.updateCategoryModel
     this.productService.updateCategoryList(this.updateCategoryModel).subscribe((req) => {
       this.getAllCategory();
       this.apiService.showNotification('top', 'right', 'Category Details Successfully Updated.', 'success');
     })
   }
-	addcategory()
-  {
-    this.showList=false;
-    this.addProduct=false;
-    this.addc=true;
-    this.showCategoryList=true;
+  addcategory() {
+    this.showList = false;
+    this.addProduct = false;
+    this.addc = true;
+    this.showCategoryList = true;
     this.getAllCategory();
-  }	
-		
+  }
+  backToProduct() {
+    this.addProduct = true;
+    this.addc = false;
+    this.showCategoryList = false;
+    this.showList = true;
 
-  
-
-  // Search(val) {
-  //   if (this.search == '') {
-  //     console.log(val)
-  //     this.products = this.productList;
-  //   } else {
-  //     console.log(val)
-  //     this.transform(this.productList, val);
-  //   }
-
-  // }
-  // transform(products: Products[], searchValue: string) {
-  //   this.products = [];
-  //   products.forEach(element => {
-  //     if (element.name.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())) {
-  //       this.products.push(element);
-  //     }
-  //    })
-  //    console.log(this.products)
-  // }
-  Search(){
-    if(this.search==""){
+  }
+  Search() {
+    if (this.search == "") {
       this.getAllProducts();
-    }else{
-      this.products=this.products.filter(res=>{
-        if(res.name.toLocaleLowerCase().match(this.search.toLocaleLowerCase())){
-            return res.name.toLocaleLowerCase().match(this.search.toLocaleLowerCase());
+    } else {
+      this.products = this.products.filter(res => {
+        if (res.name.toLocaleLowerCase().match(this.search.toLocaleLowerCase())) {
+          return res.name.toLocaleLowerCase().match(this.search.toLocaleLowerCase());
         }
-        else{
-            return res.category.toLocaleLowerCase().match(this.search.toLocaleLowerCase());
+        else {
+          return res.category.toLocaleLowerCase().match(this.search.toLocaleLowerCase());
         }
       });
     }
   }
  
+
 }
