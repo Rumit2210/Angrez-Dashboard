@@ -227,12 +227,6 @@
                     <h4 class="card-title"> Product List</h4>
                 </div>
                 <div class="ml-md-auto">
-
-                    <button type="Add" class="btn btn-info btn-round" (click)="addcategory()">
-                        <i class="fa fa-plus"></i> Add Category
-                    </button>
-                </div>
-                <div class="ml-md-auto">
                     <label class="col-form-label" style="margin-top: 5px;font-size: 18px;color: black;">Search
                         By</label>
                 </div>
@@ -241,6 +235,12 @@
                         <input type="search" id="form1" class="form-control" placeholder="Product Name && Category"
                             [(ngModel)]="search" (ngModelChange)="Search()" aria-label="Search" />
                     </div>
+                </div>
+                <div class="ml-md-auto">
+
+                    <button type="Add" class="btn btn-info btn-round" (click)="addcategory()">
+                        <i class="fa fa-plus"></i> Add Category
+                    </button>
                 </div>
             </div>
 
@@ -443,18 +443,20 @@
     <div class="card" *ngIf="addc">
         <div class="card-header">
             <div class="row">
-                <div class="col-md-9">
+                <div class="col-md-10">
                     <h4 class="card-title">Add Category</h4>
                 </div>
-                <button type="cancel" class="btn btn-danger btn-round" routerLink="/dashboard">
-                    <i class="fa fa-arrow-left"></i> Back
-                </button>
+                <div class="ml-md-auto">
+                    <button type="cancel" class="btn btn-danger btn-round" (click)="backToProduct()">
+                        <i class="fa fa-arrow-left"></i> Back
+                    </button>
+                </div>
             </div>
             <hr>
             <div class="card-body">
                 <form class="form-horizontal" name="servicesRegForm" #servicesRegForm="ngForm">
                     <div class="row">
-                        <label class="col-md-2 col-form-label">Name</label>
+                        <label class="col-md-2 col-form-label">Enter Category Name</label>
                         <div class="col-md-4">
                             <input type="text" class="form-control" [(ngModel)]="categoryModel.name"
                                 [ngModelOptions]="{standalone: true}" placeholder="Enter name" #name="ngModel">
@@ -475,80 +477,82 @@
 
         </div>
     </div>
-    <div class="card-body" *ngIf="showCategoryList">
-        <div class="table-responsive">
-            <table class="table table-striped">
-                <thead class="text-primary">
-                    <th class="text-center">
-                        Id
-                    </th>
-                    <th class="text-center">
-                        Name
-                    </th>
-                    <th class="text-center">
-                        Date created
-                    </th>
+    <div class="card"*ngIf="showCategoryList">
+        <div class="card-body" >
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead class="text-primary">
+                        <th class="text-center">
+                            Id
+                        </th>
+                        <th class="text-center">
+                            Name
+                        </th>
+                        <th class="text-center">
+                            Date created
+                        </th>
 
-                    <th class="text-right">Actions</th>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let item of CategoryList | paginate: { itemsPerPage: p, currentPage: p };">
+                        <th class="text-right">Actions</th>
+                    </thead>
+                    <tbody>
+                        <tr
+                            *ngFor="let item of CategoryList |  paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
 
-                        <td class="text-center">{{ item.index}}</td>
-                        <td class="text-center">{{ item.name }}</td>
-                        <td class="text-center">{{ item.createddate|date }}</td>
-                        <td class="text-right">
+                            <td class="text-center">{{ item.index}}</td>
+                            <td class="text-center">{{ item.name }}</td>
+                            <td class="text-center">{{ item.createddate|date }}</td>
+                            <td class="text-right">
 
-                            <button type="button" rel="tooltip" class="btn btn-success btn-icon btn-sm">
-                                <i class="fa fa-edit" data-toggle="modal" data-target="#CategoryModal"
-                                    (click)="viewCategoryDetails(item)"></i>
-                            </button>
-                            &nbsp;
-                            <button type="button" rel="tooltip" class="btn btn-danger btn-icon btn-sm"
-                                (click)="removeCategoryList(item.id)">
-                                <i class="fa fa-times"></i>
-                            </button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                                <button type="button" rel="tooltip" class="btn btn-success btn-icon btn-sm">
+                                    <i class="fa fa-edit" data-toggle="modal" data-target="#CategoryModal"
+                                        (click)="viewCategoryDetails(item)"></i>
+                                </button>
+                                &nbsp;
+                                <button type="button" rel="tooltip" class="btn btn-danger btn-icon btn-sm"
+                                    (click)="removeCategoryList(item.id)">
+                                    <i class="fa fa-times"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="card-footer">
+            <div class="row">
+                <div class="ml-md-auto">
+                    <pagination-controls (pageChange)="p = $event" maxSize="10" autoHide="true" responsive="true">
+                    </pagination-controls>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="modal fade" id="CategoryModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-xl modal-notice">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                        <i class="nc-icon nc-simple-remove"></i>
-                    </button>
-                    <h5 class="modal-title" id="myModalLabel">View/Edit Products</h5>
-                </div>
-                <div class="modal-body">
-                    <div class="instruction">
-                        <form class="form-horizontal" name="employeeRegForm" #employeeRegForm="ngForm">
-                            <div class="row">
-                                <label class="col-md-2 col-form-label">Product Name</label>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" id="fname" name="fname"
-                                            [(ngModel)]="updateProductModel.name" placeholder=" Enter Product Name " />
-                                    </div>
+</div>
+<div class="modal fade" id="CategoryModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-md modal-notice">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    <i class="nc-icon nc-simple-remove"></i>
+                </button>
+                <h5 class="modal-title" id="myModalLabel">View/Edit Category</h5>
+            </div>
+            <div class="modal-body">
+                <div class="instruction">
+                    <form class="form-horizontal" name="employeeRegForm" #employeeRegForm="ngForm">
+                        <div class="row">
+                            <label class="col-md-4 col-form-label">Product Name</label>
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="fname" name="fname"
+                                        [(ngModel)]="updateCategoryModel.name" placeholder=" Enter Product Name " />
                                 </div>
-
                             </div>
 
-                        </form>
-                    </div>
-                </div>
-                <div class="modal-footer justify-content-center">
-                    <button type="button" class="btn btn-info btn-round" data-dismiss="modal"
-                        (click)="UpdateProductDetails()">
-                        <i class="fa fa-paper-plane" aria-hidden="true"></i> Update
-                    </button>
-                    <button type="button" class="btn btn-secondary btn-round" data-dismiss="modal">
-                        <i class="fa fa-times" aria-hidden="true"></i> Cancel
-                    </button>
+                        </div>
+
+                    </form>
                 </div>
             </div>
         </div>
