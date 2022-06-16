@@ -4,6 +4,8 @@ import Swal from 'sweetalert2';
 import { Products } from './product.model';
 import { ProductService } from './products.service';
 import { Category } from './category.model';
+import { Vendor } from 'app/vendor/vendor.model';
+import { VendorService } from 'app/vendor/vendor.service';
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -12,7 +14,10 @@ import { Category } from './category.model';
 export class ProductsComponent implements OnInit {
   public productsModel: Products = new Products;
   public products: Products[];
+  public vendorModel: Vendor = new Vendor;
+  public vendorReg: Vendor[];
   public updateProductModel: Products = new Products;
+  public  updateVendorModel: Vendor = new Vendor;
   formdate: Date = new Date();
   p: any;
   showList: boolean = true;
@@ -39,27 +44,62 @@ export class ProductsComponent implements OnInit {
   image: any;
   multi: any = [];
   CategoryList;
+  VendorList;
   addingcat: any[];
   modelValue: any;
   selectedName: any;
+  selectvendor: any;
+  selectedContact:any;
+ 
   constructor(
+    private vendorService: VendorService,
     private productService: ProductService,
     private apiService: ApiService,
   ) {
     this.getAllProducts();
     this.formdate
     this.getAllCategory();
+    this.getAllVendor();
   }
 
   ngOnInit(): void {
     this.getAllCategory();
+    this.getAllVendor();
+  }
+  saveVendorDetail() {
+    this.vendorModel.isactive = true;
+    this.vendorService.saveVendorList(this.vendorModel).subscribe((data: any) => {
+      this.VendorList = data;
+      this.getAllVendor();
+      // location.reload();
+      this.apiService.showNotification('top', 'right', 'Vendor Added Successfully.', 'success');
+    })
+  }
+  getAllVendor() {
+    this.vendorService.getAllVendorList().subscribe((data: any) => {
+      this.VendorList = data;
+    });
+  }
+  viewVenDetails(data) {
 
+    // this.showVen = true;
+    this.updateVendorModel = data;
   }
   selectedCategory(id) {
     this.CategoryList.forEach(element => {
       if (element.id == id) {
         this.selectedName = element.name;
       }
+    })
+
+  }
+  selectedVendor(id) {
+    this.VendorList.forEach(element => {
+      if (element.id == id) {
+        this.selectedContact=element.contact;
+        this.selectvendor = element.fname;
+      }
+      this.productsModel.vendorcontact=this.selectedContact;
     })
 
   }
