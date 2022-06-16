@@ -455,6 +455,9 @@
                             Price
                         </th>
                         <th class="text-center">
+                            Display
+                        </th>
+                        <th class="text-center">
                             Amount
                         </th>
                         <th class="text-right">Actions</th>
@@ -475,6 +478,14 @@
                             <td class="text-center">{{ item.purchasedate | date }}</td>
                             <td class="text-center">{{ item.quantity }}</td>
                             <td class="text-center">{{ item.price }}</td>
+                            <td class="text-center">
+                                <button class="btn btn-success" *ngIf="item.display==true">
+                                    Yes
+                                </button>
+                                <button class="btn btn-danger" hidden *ngIf="item.display==false">
+                                    NO
+                                </button>
+                            </td>
                             <td class="text-center">{{ item.price * item.quantity }}</td>
                             <td class="text-right">
                                 <button type="button" rel="tooltip" class="btn btn-info btn-icon btn-sm">
@@ -565,12 +576,12 @@
                                     </div>
                                 </div>
                                 <label class="col-sm-2 col-form-label">Show Products to customers</label>
-                
-                                    <label class="switch">
-                                        <input type="checkbox" checked class="switch-input"  id="vip"
-                                        name="vip" [(ngModel)]="updateProductModel.display">
-                                        <span class="slider round"></span>
-                                 </label>
+
+                                <label class="switch">
+                                    <input type="checkbox" checked class="switch-input" id="vip" name="vip"
+                                        [(ngModel)]="updateProductModel.display">
+                                    <span class="slider round"></span>
+                                </label>
                                 <!-- <label class="col-md-2 col-form-label">Pincode</label>
                                 <div class="col-md-4">
                                     <div class="form-group">
