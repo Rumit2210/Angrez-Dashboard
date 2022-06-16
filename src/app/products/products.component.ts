@@ -14,20 +14,18 @@ export class ProductsComponent implements OnInit {
   public products: Products[];
   public updateProductModel: Products = new Products;
   formdate: Date = new Date();
-
   p: any;
-  showList:boolean=true;  
-  addProduct:boolean=true;
-  addc:boolean=false;
-  showCategoryList:boolean=false;
+  showList: boolean = true;
+  addProduct: boolean = true;
+  addc: boolean = false;
+  showCategoryList: boolean = false;
   public updateCategoryModel: Category = new Category;
-  p:any;
-  public categoryModel:Category =new Category;
+  public categoryModel: Category = new Category;
   public category: Category[];
-  isDashboard:boolean=false;
+  isDashboard: boolean = false;
   public productList: Products[];
   search: string = '';
-  name :any;
+  name: any;
   submitButton: boolean = false;
   selectCustomer: boolean = false;
   custAppointment: boolean = false;
@@ -40,20 +38,40 @@ export class ProductsComponent implements OnInit {
   cardImageBase64: string;
   image: any;
   multi: any = [];
-
+  CategoryList;
+  addingcat: any[];
+  modelValue: any;
+  selectedName: any;
   constructor(
     private productService: ProductService,
     private apiService: ApiService,
   ) {
     this.getAllProducts();
     this.formdate
-    
-   
+    this.getAllCategory();
   }
 
   ngOnInit(): void {
-    
+    this.getAllCategory();
+
   }
+  selectedCategory(id) {
+    this.CategoryList.forEach(element => {
+      if (element.id == id) {
+        this.selectedName = element.name;
+      }
+    })
+
+  }
+  saveCategoryDetail() {
+
+    this.productService.saveCategoryList(this.categoryModel).subscribe((data: any) => {
+      this.category = data;
+      this.getAllCategory();
+      this.apiService.showNotification('top', 'right', 'Product Added Successfully.', 'success');
+    })
+  }
+
   addImageUploader() {
     this.val++;
     this.addingprdtimg.push({ name: this.val });
@@ -192,17 +210,15 @@ export class ProductsComponent implements OnInit {
   }
   getAllCategory() {
     this.productService.getAllCategoryList().subscribe((data: any) => {
-      this.category = data;
-      debugger
-      
+      this.CategoryList = data;
 
-      for (let i = 0; i < this.category.length; i++) {
-        this.category[i].index = i + 1;
+      for (let i = 0; i < this.CategoryList.length; i++) {
+        this.CategoryList[i].index = i + 1;
       }
     });
   }
   saveProductsDetail() {
-   this.getAllProducts();
+    this.getAllProducts();
     this.productsModel.image = this.image;
     this.productsModel.multi = this.multi;
 
@@ -213,18 +229,7 @@ export class ProductsComponent implements OnInit {
       this.apiService.showNotification('top', 'right', 'Product Added Successfully.', 'success');
     })
   }
-  saveCategoryDetail() {
-   
-    debugger
-    this.productService.saveCategoryList(this.categoryModel).subscribe((data: any) => {
-      this.category = data;
-      // this.getAllEmployee();
-      location.reload();
 
-      this.apiService.showNotification('top', 'right', 'Product Added Successfully.', 'success');
-    })
-  }
-    
   removeProductList(id: any) {
     Swal.fire({
       title: 'Are you sure?',
@@ -261,7 +266,6 @@ export class ProductsComponent implements OnInit {
 
   }
   removeCategoryList(id) {
-    debugger
     Swal.fire({
       title: 'Are you sure?',
       text: "You want to delete! If you delete Customer then all the customer data will be delete.",
@@ -300,7 +304,7 @@ export class ProductsComponent implements OnInit {
     // this.submitButton = true;
     this.updateProductModel = data;
   }
-  viewCategoryDetails(data: Products) {
+  viewCategoryDetails(data: Category) {
 
     // this.showEmp = true;
     this.updateCategoryModel = data;
@@ -308,29 +312,29 @@ export class ProductsComponent implements OnInit {
 
   UpdateProductDetails() {
     this.updateProductModel
-    this.productService.updateProductList(this.updateProductModel).subscribe((req) =>{
+    this.productService.updateProductList(this.updateProductModel).subscribe((req) => {
       this.getAllProducts();
       this.apiService.showNotification('top', 'right', 'Product Details Successfully Updated.', 'success');
-    
+
     })
   }
   updateCategoryDetails() {
+    this.updateCategoryModel
     this.productService.updateCategoryList(this.updateCategoryModel).subscribe((req) => {
       this.getAllCategory();
-      this.apiService.showNotification('top', 'right', 'Product Details Successfully Updated.', 'success');
+      this.apiService.showNotification('top', 'right', 'Category Details Successfully Updated.', 'success');
     })
   }
-	addcategory()
-  {
-    this.showList=false;
-    this.addProduct=false;
-    this.addc=true;
-    this.showCategoryList=true;
+  addcategory() {
+    this.showList = false;
+    this.addProduct = false;
+    this.addc = true;
+    this.showCategoryList = true;
     this.getAllCategory();
-  }	
-		
+  }
 
-  
+
+
 
   // Search(val) {
   //   if (this.search == '') {
@@ -351,19 +355,20 @@ export class ProductsComponent implements OnInit {
   //    })
   //    console.log(this.products)
   // }
-  Search(){
-    if(this.search==""){
+  Search() {
+    if (this.search == "") {
       this.getAllProducts();
-    }else{
-      this.products=this.products.filter(res=>{
-        if(res.name.toLocaleLowerCase().match(this.search.toLocaleLowerCase())){
-            return res.name.toLocaleLowerCase().match(this.search.toLocaleLowerCase());
+    } else {
+      this.products = this.products.filter(res => {
+        if (res.name.toLocaleLowerCase().match(this.search.toLocaleLowerCase())) {
+          return res.name.toLocaleLowerCase().match(this.search.toLocaleLowerCase());
         }
-        else{
-            return res.category.toLocaleLowerCase().match(this.search.toLocaleLowerCase());
+        else {
+          return res.category.toLocaleLowerCase().match(this.search.toLocaleLowerCase());
         }
       });
     }
   }
- 
+
+
 }

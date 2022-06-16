@@ -62,7 +62,7 @@ export class ApiService {
   public static updateOfferListURL: string = ApiService.HOST_URL + '/admin/UpdateOfferList';
   public static removeOfferDetailsURL: string = ApiService.HOST_URL + '/admin/removeOfferDetails/';
   public static saveExpensesListURL: string = ApiService.HOST_URL + '/admin/SaveExpensesList';
-  public static getAllExpensesURL : string = ApiService.HOST_URL + '/admin/GetAllExpenses';
+  public static getAllExpensesURL: string = ApiService.HOST_URL + '/admin/GetAllExpenses';
   public static removeexpensesDetailsURL: string = ApiService.HOST_URL + '/admin/RemoveExpensesDetails/';
   public static updateExpensesDetailsURL: string = ApiService.HOST_URL + '/admin/UpdateExpensesDetails';
   public static getMonthlyExpensesURL: string = ApiService.HOST_URL + '/admin/getMonthlyExpensesList';
@@ -70,8 +70,8 @@ export class ApiService {
   public static getAllStockURL: string = ApiService.HOST_URL + '/admin/GetAllStock';
   public static updateStockListURL: string = ApiService.HOST_URL + '/admin/UpdateStockList/';
   public static removeStockListURL: string = ApiService.HOST_URL + '/admin/RemoveStockList/';
-  public static saveProductsListURL: string = ApiService.HOST_URL+'/admin/SaveProductsListURL';
-  public static getAllProductsListURL: string = ApiService.HOST_URL+'/admin/GetAllProductsListURL';
+  public static saveProductsListURL: string = ApiService.HOST_URL + '/admin/SaveProductsListURL';
+  public static getAllProductsListURL: string = ApiService.HOST_URL + '/admin/GetAllProductsListURL';
   public static removeProductDetailsURL: string = ApiService.HOST_URL + '/admin/RemoveProductDetailsURL/';
   public static getAllSalaryListURL: string = ApiService.HOST_URL + '/admin/GetAllSalaryList';
   public static updateSalaryStatusURL: string = ApiService.HOST_URL + '/admin/UpdateSalaryStatus';
@@ -86,6 +86,13 @@ export class ApiService {
   public static uploadMainImageURL: string = ApiService.HOST_URL + '/admin/UploadProductImage/';
   public static uploadMultiImageURL: string = ApiService.HOST_URL + '/admin/UploadMultiProductImage/';
   public static removeImageURL: string = ApiService.HOST_URL + '/admin/RemoveRecentUoloadImage/';
+  public static verificationURL: string = ApiService.HOST_URL + '/admin/Verification';
+  public static getRegisterOtpURL: string = ApiService.HOST_URL + '/admin/GetRegisterOtp';
+  public static saveUserCustomerListURL: string = ApiService.HOST_URL + '/admin/SaveUserCustomerList';
+  public static saveVendorListURL: string = ApiService.HOST_URL + '/admin/SaveVendorList';
+  public static getAllVendorURL: string = ApiService.HOST_URL + '/admin/GetAllVendor';
+  public static removeVendorListURL: string = ApiService.HOST_URL + '/admin/RemoveVendorList/';
+  public static updateVendorListURL: string = ApiService.HOST_URL + '/admin/UpdateVendorList/';
 
 
   showNotification(from, align, msg, color) {
