@@ -17,8 +17,11 @@ export class Customer {
         public itemName?: string,
         public price?: number,
         public point?: number,
-        public address?:string,
-        public vip?:boolean,
+        public address?: string,
+        public vip?: boolean,
+        public otp?: number,
+        public password?: any,
+        public role?:any
 
     ) {
     }
