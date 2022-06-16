@@ -84,7 +84,11 @@ export const AppRoutes: Routes = [{
         path: '',
         loadChildren: './vendor/vendor.module#VendorModule',
         canActivate: [AuthGuard]
-    },
+    },{
+        path:'',
+        loadChildren: './attandance/attandance.module#AttandanceModule',
+        canActivate:[AuthGuard]
+    }
     ]
 }, {
     path: '',
