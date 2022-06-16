@@ -14,10 +14,9 @@ export class ProductsComponent implements OnInit {
   public products: Products[];
   public updateProductModel: Products = new Products;
   formdate: Date = new Date();
-
   p: any;
   showList:boolean=true;  
-  addProduct:boolean=true;
+  addProduct: any=[];
   addc:boolean=false;
   showCategoryList:boolean=false;
   public updateCategoryModel: Category = new Category;
@@ -27,10 +26,6 @@ export class ProductsComponent implements OnInit {
   public productList: Products[];
   search: string = '';
   name :any;
-  submitButton: boolean = false;
-  selectCustomer: boolean = false;
-  custAppointment: boolean = false;
-  viewCustomerAllData: boolean = false;
   Productdata: any[];
   val = 0;
   addingprdtimg: any = [];
@@ -39,7 +34,10 @@ export class ProductsComponent implements OnInit {
   cardImageBase64: string;
   image: any;
   multi: any = [];
-
+  CategoryList;
+  addingcat: any[];
+  modelValue: any;
+  selectedName:any;
   constructor(
     private productService: ProductService,
     private apiService: ApiService,
@@ -47,14 +45,31 @@ export class ProductsComponent implements OnInit {
     this.getAllProducts();
     this.formdate
     this.getAllCategory();
-    
-   
   }
 
   ngOnInit(): void {
+    this.getAllCategory();
+     
+  } 
+  selectedCategory(id) {
+    this.CategoryList.forEach(element => {
+      if (element.id == id) {
+        this.selectedName = element.name;
+      }
+    })
+
+  } 
+   saveCategoryDetail() {
+   
     
-    
+    this.productService.saveCategoryList(this.categoryModel).subscribe((data: any) => {
+      this.category = data;
+      this.getAllCategory();
+      this.apiService.showNotification('top', 'right', 'Product Added Successfully.', 'success');
+    })
   }
+
+
   addImageUploader() {
     this.val++;
     this.addingprdtimg.push({ name: this.val });
@@ -193,12 +208,10 @@ export class ProductsComponent implements OnInit {
   }
   getAllCategory() {
     this.productService.getAllCategoryList().subscribe((data: any) => {
-      this.category = data;
-      debugger
-      
+      this.CategoryList = data;
 
-      for (let i = 0; i < this.category.length; i++) {
-        this.category[i].index = i + 1;
+      for (let i = 0; i < this.CategoryList.length; i++) {
+        this.CategoryList[i].index = i + 1;
       }
     });
   }
@@ -210,21 +223,11 @@ export class ProductsComponent implements OnInit {
     this.productService.saveProductsList(this.productsModel).subscribe((data: any) => {
       this.products = data;
       this.getAllProducts();
-      // location.reload();
-      this.apiService.showNotification('top', 'right', 'Product Added Successfully.', 'success');
-    })
-  }
-  saveCategoryDetail() {
-   
-    debugger
-    this.productService.saveCategoryList(this.categoryModel).subscribe((data: any) => {
-      this.category = data;
-      // this.getAllEmployee();
       location.reload();
-
       this.apiService.showNotification('top', 'right', 'Product Added Successfully.', 'success');
     })
   }
+
     
   removeProductList(id: any) {
     Swal.fire({
@@ -262,7 +265,6 @@ export class ProductsComponent implements OnInit {
 
   }
   removeCategoryList(id) {
-    debugger
     Swal.fire({
       title: 'Are you sure?',
       text: "You want to delete! If you delete Customer then all the customer data will be delete.",
@@ -328,10 +330,10 @@ export class ProductsComponent implements OnInit {
     this.addc=true;
     this.showCategoryList=true;
     this.getAllCategory();
-  }	
-		
+  }
 
   
+
 
   // Search(val) {
   //   if (this.search == '') {
