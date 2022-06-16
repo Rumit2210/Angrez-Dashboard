@@ -75,6 +75,11 @@ export const AppRoutes: Routes = [{
         loadChildren: './reports/reports.module#ReportsModule',
         canActivate: [AuthGuard]
     },
+    {
+        path: '',
+        loadChildren: './attandance/attandance.module#AttandanceModule',
+        canActivate: [AuthGuard]
+    },
     ]
 }, {
     path: '',

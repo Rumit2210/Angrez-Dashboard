@@ -85,6 +85,13 @@ export const ROUTES: RouteInfo[] = [{
     type: 'link',
     icontype: 'fa fa-product-hunt',
     roles: "Admin",
+},
+{
+    path: '/attandance',
+    title: 'Attendance',
+    type: 'link',
+    icontype: 'fa fa-clock-o',
+    roles: "Admin",
 }
 
 
