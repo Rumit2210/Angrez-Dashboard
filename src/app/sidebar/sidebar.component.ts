@@ -93,7 +93,14 @@ export const ROUTES: RouteInfo[] = [{
     type: 'link',
     icontype: 'fa fa-shopping-cart',
     roles: "Admin",
-}
+},
+{
+    path: '/vendor',
+    title: 'Vendor',
+    type: 'link',
+    icontype: 'fa fa-product-hunt',
+    roles: "Admin",
+},
 
 ];
 export const Employee: RouteInfo[] = [

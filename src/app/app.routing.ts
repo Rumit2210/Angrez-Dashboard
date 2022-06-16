@@ -80,6 +80,11 @@ export const AppRoutes: Routes = [{
         loadChildren: './display-products/display-products.module#DisplayProductsModule',
         canActivate: [AuthGuard]
     },
+    {
+        path: '',
+        loadChildren: './vendor/vendor.module#VendorModule',
+        canActivate: [AuthGuard]
+    },
     ]
 }, {
     path: '',
