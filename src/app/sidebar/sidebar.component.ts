@@ -157,13 +157,6 @@ export const Customer: RouteInfo[] = [
         roles: "Admin",
     },
     {
-        path: '/stock',
-        title: 'Stock',
-        type: 'link',
-        icontype: 'fa fa-cubes',
-        roles: "Admin",
-    },
-    {
         path: '/products',
         title: 'Products',
         type: 'link',
