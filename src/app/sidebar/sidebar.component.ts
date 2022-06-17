@@ -2,7 +2,6 @@ import { Component, OnInit, AfterViewInit, AfterViewChecked, AfterContentInit } 
 import { Router } from '@angular/router';
 import { ApiService } from 'app/api.service';
 import { LoginService } from 'app/pages/login/login.service';
-
 //Metadata
 export interface RouteInfo {
     path: string;
@@ -213,6 +212,7 @@ export class SidebarComponent {
     visit: '';
     loginTotalTime: number;
     uid:any;
+    vip:any;
     isNotMobileMenu() {
         if (window.outerWidth > 991) {
             return false;
@@ -233,6 +233,7 @@ export class SidebarComponent {
         this.out_time = localStorage.getItem("lastInTime");
         this.Roles = localStorage.getItem("role");
         this.uid=localStorage.getItem("UserId");
+        this.vip=localStorage.getItem("VIP");
         this.menuItems = ROUTES.filter(menuItem => menuItem);
         this.customerMenuItems = Customer.filter((menuItem) => menuItem);
         this.subAdminMenuItems = Employee.filter((menuItem) => menuItem);
