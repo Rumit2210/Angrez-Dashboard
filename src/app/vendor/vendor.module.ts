@@ -1,19 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { StockComponent } from './stock.component';
-import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { StockRoutes } from './stock.routing';
+import { VendorComponent } from './vendor.component';
+import { VendorRoutes } from './vendor.routing';
+import { FormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
 
 
+
 @NgModule({
-  declarations: [StockComponent],
+  declarations: [VendorComponent],
   imports: [
     CommonModule,
+    RouterModule.forChild(VendorRoutes),   
     FormsModule,
     NgxPaginationModule,
-    RouterModule.forChild(StockRoutes)
   ]
 })
-export class StockModule { }
+export class VendorModule { }

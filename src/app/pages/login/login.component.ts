@@ -145,7 +145,7 @@ export class LoginComponent implements OnInit {
                     // localStorage.setItem('standardid', data[0].standard);
                     // localStorage.setItem('gender', data[0].gender);
                     localStorage.setItem('role', data[0].role);
-                    localStorage.setItem('lastOutTime',data[0].out_time);
+                    localStorage.setItem('lastOutTime',data[0].last_inTime);
                     localStorage.setItem('lastInTime',data[0].last_login);
                     this.router.navigate(['dashboard']);
                 }
