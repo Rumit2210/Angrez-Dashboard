@@ -90,7 +90,15 @@ export class ApiService {
   public static removeVendorListURL: string = ApiService.HOST_URL + '/admin/RemoveVendorList/';
   public static updateVendorListURL: string = ApiService.HOST_URL + '/admin/UpdateVendorList/';
   public static getCustomerDataByIdURL: string = ApiService.HOST_URL + '/admin/GetCustomerDataById/';
-
+  public static saveMembershipListURL: string = ApiService.HOST_URL + '/admin/SaveMembershipList';
+  public static getAllMembershipDataListURL: string = ApiService.HOST_URL + '/admin/GetAllMembershipDataList';
+  public static getUsedServicesByMembershipURL: string = ApiService.HOST_URL + '/admin/GetUsedServicesByMembership';
+  public static getAllOMembershipURL: string = ApiService.HOST_URL + '/admin/GetAllMembership';
+  public static getMembershipTotalPointsURL: string = ApiService.HOST_URL + '/admin/GetMembershipTotalPoints';
+  public static updateMembershipListURL: string = ApiService.HOST_URL + '/admin/UpdateMembershipList';
+  public static removeMembershipDetailsURL: string = ApiService.HOST_URL + '/admin/removeMembershipDetails/';
+  public static getAllMembershipURL: string = ApiService.HOST_URL + '/admin/getAllMembership/';
+  
   showNotification(from, align, msg, color) {
     var color = color;
     $.notify({

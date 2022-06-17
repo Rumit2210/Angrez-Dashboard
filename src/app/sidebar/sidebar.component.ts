@@ -100,6 +100,13 @@ export const ROUTES: RouteInfo[] = [{
     icontype: 'fa fa-product-hunt',
     roles: "Admin",
 },
+{
+    path: '/membership',
+    title: 'Membership',
+    type: 'link',
+    icontype: 'fa fa-handshake-o',
+    roles: "Admin",
+},
 
 ];
 export const Employee: RouteInfo[] = [

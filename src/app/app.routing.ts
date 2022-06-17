@@ -91,6 +91,11 @@ export const AppRoutes: Routes = [{
         loadChildren: './customerservice/customerservice.module#CustomerserviceModule',
         canActivate: [AuthGuard]
     },
+    {
+        path: '',
+        loadChildren: './membership/membership.module#MembershipModule',
+        canActivate: [AuthGuard]
+    },
     ]
 }, {
     path: '',
