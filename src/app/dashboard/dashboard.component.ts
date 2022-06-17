@@ -967,6 +967,9 @@ export class DashboardComponent implements OnInit {
   openServCustom() {
     this.router.navigate(['servicescustm']);
   }
+  openCustomerService(){
+    this.router.navigate(['customerservice']);
+  }
   getCustomerDetails() {
     this.customerService.getAllCustomerList().subscribe((data: any) => {
       this.customerList = data;
