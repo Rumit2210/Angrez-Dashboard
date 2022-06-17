@@ -89,6 +89,7 @@ export class ApiService {
   public static getAllVendorURL: string = ApiService.HOST_URL + '/admin/GetAllVendor';
   public static removeVendorListURL: string = ApiService.HOST_URL + '/admin/RemoveVendorList/';
   public static updateVendorListURL: string = ApiService.HOST_URL + '/admin/UpdateVendorList/';
+  public static getCustomerDetailsURL: string = ApiService.HOST_URL + '/admin/GetCustDetails';
 
 
   showNotification(from, align, msg, color) {

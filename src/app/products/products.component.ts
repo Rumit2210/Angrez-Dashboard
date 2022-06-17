@@ -363,6 +363,35 @@ export class ProductsComponent implements OnInit {
     this.showCategoryList = true;
     this.getAllCategory();
   }
+  backToProduct() {
+    this.showList = true;
+    this.addProduct = true;
+    this.addc = false;
+    this.showCategoryList = false;
+  }
+
+
+
+
+  // Search(val) {
+  //   if (this.search == '') {
+  //     console.log(val)
+  //     this.products = this.productList;
+  //   } else {
+  //     console.log(val)
+  //     this.transform(this.productList, val);
+  //   }
+
+  // }
+  // transform(products: Products[], searchValue: string) {
+  //   this.products = [];
+  //   products.forEach(element => {
+  //     if (element.name.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())) {
+  //       this.products.push(element);
+  //     }
+  //    })
+  //    console.log(this.products)
+  // }
   Search() {
     if (this.search == "") {
       this.getAllProducts();
