@@ -72,13 +72,6 @@ export const ROUTES: RouteInfo[] = [{
     roles: "Admin",
 },
 {
-    path: '/stock',
-    title: 'Stock',
-    type: 'link',
-    icontype: 'fa fa-cubes',
-    roles: "Admin",
-},
-{
     path: '/products',
     title: 'Products',
     type: 'link',
@@ -104,6 +97,13 @@ export const ROUTES: RouteInfo[] = [{
     title: 'Vendor',
     type: 'link',
     icontype: 'fa fa-product-hunt',
+    roles: "Admin",
+},
+{
+    path: '/membership',
+    title: 'Membership',
+    type: 'link',
+    icontype: 'fa fa-handshake-o',
     roles: "Admin",
 },
 
@@ -138,15 +138,7 @@ export const Employee: RouteInfo[] = [
         type: 'link',
         icontype: 'fa fa-gift',
         roles: "Admin",
-    },
-    
-    {
-        path: '/stock',
-        title: 'Stock',
-        type: 'link',
-        icontype: 'fa fa-cubes',
-        roles: "Admin",
-    },
+    }
 ];
 export const Customer: RouteInfo[] = [
     {
@@ -168,13 +160,6 @@ export const Customer: RouteInfo[] = [
         title: 'Enquiry',
         type: 'link',
         icontype: 'fa fa-question',
-        roles: "Admin",
-    },
-    {
-        path: '/stock',
-        title: 'Stock',
-        type: 'link',
-        icontype: 'fa fa-cubes',
         roles: "Admin",
     },
     {

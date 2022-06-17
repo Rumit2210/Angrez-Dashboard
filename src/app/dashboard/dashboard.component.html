@@ -209,6 +209,84 @@
                 </div>
             </div>
         </div>
+        <div class="col-lg-4 col-md-6 col-sm-6" *ngIf="adminRole == 'Customer'">
+            <div class="card card-stats" (click)="openCustomerService()">
+                <div class="card-body ">
+                    <div class="row">
+                        <div class="col-5 col-md-4">
+                            <div class="icon-big text-center icon-warning">
+                                <i class="fa fa-scissors text-primary"></i>
+                            </div>
+                        </div>
+                        <div class="col-7 col-md-8">
+                            <div class="numbers">
+                                <p class="card-category">Customer Service</p>
+                                <p class="card-title">Total: {{customerList.length}}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <hr>
+                    <div class="stats">
+                        <i class="fa fa-arrow-right"></i> View
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="card card-stats" (click)="openOffer()">
+                <div class="card-body ">
+                    <div class="row">
+                        <div class="col-5 col-md-4">
+                            <div class="icon-big text-center icon-warning">
+                                <i class="fa fa-gift text-success"></i>
+                            </div>
+                        </div>
+                        <div class="col-7 col-md-8">
+                            <div class="numbers">
+                                <p class="card-category">Combo Offer</p>
+                                <p class="card-title">Total: {{offerList.length}}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <hr>
+                    <div class="stats">
+                        <i class="fa fa-arrow-right"></i> View
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="card card-stats" (click)="openMembership()">
+                <div class="card-body ">
+                    <div class="row">
+                        <div class="col-5 col-md-4">
+                            <div class="icon-big text-center icon-warning">
+                                <i class="fa fa-handshake-o text-success"></i>
+                            </div>
+                        </div>
+                        <div class="col-7 col-md-8">
+                            <div class="numbers">
+                                <p class="card-category">Membership</p>
+                                <p class="card-title">Total: {{membershipList}}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <hr>
+                    <div class="stats">
+                        <i class="fa fa-arrow-right"></i> View
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="row">
         <div class="col-md-6">
@@ -257,25 +335,28 @@
                                 <th class="text-right">Actions</th>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let item of appointmentList | paginate: { itemsPerPage: 5, currentPage: p }; let i = index">
+                                <tr
+                                    *ngFor="let item of appointmentList | paginate: { itemsPerPage: 5, currentPage: p }; let i = index">
 
                                     <td class="text-center">{{ item.index }}</td>
                                     <td class="text-center">{{ item.fname}} {{ item.lname}} </td>
                                     <!-- <td class="text-center">{{ item.empname }}</td> -->
                                     <td class="text-center">
                                         <button class="btn btn-info" *ngIf="item.isactive==true">
-                      Processing
-                    </button>
+                                            Processing
+                                        </button>
                                         <button class="btn btn-success" *ngIf="item.isactive==false">
-                      Completed
-                    </button>
+                                            Completed
+                                        </button>
                                     </td>
-                                    <td class="text-center" style="color: black; font-weight: 500 !important">{{ item.totalprice }} ₹
+                                    <td class="text-center" style="color: black; font-weight: 500 !important">{{
+                                        item.totalprice }} ₹
                                     </td>
                                     <td class="text-center">
-                                        <button class="btn btn-success" *ngIf="item.isactive==true" data-toggle="modal" data-target="#customerPaymentModal" (click)="modeOfPayment(item)">
-                      <i class="fa fa-inr" aria-hidden="true"></i> Accept
-                    </button>
+                                        <button class="btn btn-success" *ngIf="item.isactive==true" data-toggle="modal"
+                                            data-target="#customerPaymentModal" (click)="modeOfPayment(item)">
+                                            <i class="fa fa-inr" aria-hidden="true"></i> Accept
+                                        </button>
                                         <!-- <button class="btn btn-info" *ngIf="item.isactive==false" disabled>
                       Completed !
                     </button> -->
@@ -284,9 +365,10 @@
                                     </td>
                                     <td class="text-right">
                                         <button type="button" rel="tooltip" class="btn btn-info btn-icon btn-sm">
-                      <i class="fa fa-eye" data-toggle="modal" data-target="#customerServicesModal"
-                        (click)="openUsedServiceList(item)"></i>
-                    </button>
+                                            <i class="fa fa-eye" data-toggle="modal"
+                                                data-target="#customerServicesModal"
+                                                (click)="openUsedServiceList(item)"></i>
+                                        </button>
                                     </td>
                                     <!-- <td class="text-right">
 
@@ -303,7 +385,9 @@
                 <div class="card-footer">
                     <div class="row">
                         <div class="ml-md-auto">
-                            <mat-paginator [length]="appointmentList.length" [pageSize]="pageSize" [pageSizeOptions]="[pageSizeOptions]" (page)="onPageChangedAppoi($event)"></mat-paginator>
+                            <mat-paginator [length]="appointmentList.length" [pageSize]="pageSize"
+                                [pageSizeOptions]="[pageSizeOptions]" (page)="onPageChangedAppoi($event)">
+                            </mat-paginator>
                         </div>
                     </div>
                 </div>
@@ -335,7 +419,8 @@
                                     <td class="text-center">{{ item.index }}</td>
                                     <td class="text-center">{{ item.fname}} {{ item.lname}} </td>
                                     <!-- <td class="text-center">{{ item.empname }}</td> -->
-                                    <td class="text-center" style="color: black; font-weight: 500 !important">{{ item.totalprice }} ₹
+                                    <td class="text-center" style="color: black; font-weight: 500 !important">{{
+                                        item.totalprice }} ₹
                                     </td>
                                 </tr>
                             </tbody>
@@ -345,7 +430,9 @@
                 <div class="card-footer">
                     <div class="row">
                         <div class="ml-md-auto">
-                            <mat-paginator [length]="completedAppointment.length" [pageSize]="pageSize" [pageSizeOptions]="[pageSizeOptions]" (page)="onPageChangedComAp($event)"></mat-paginator>
+                            <mat-paginator [length]="completedAppointment.length" [pageSize]="pageSize"
+                                [pageSizeOptions]="[pageSizeOptions]" (page)="onPageChangedComAp($event)">
+                            </mat-paginator>
                         </div>
                     </div>
                 </div>
@@ -388,7 +475,9 @@
                 <div class="card-footer">
                     <div class="row">
                         <div class="ml-md-auto">
-                            <mat-paginator [length]="enquiryList.length" [pageSize]="pageSize" [pageSizeOptions]="[pageSizeOptions]" (page)="onPageChangedEnquiry($event)"></mat-paginator>
+                            <mat-paginator [length]="enquiryList.length" [pageSize]="pageSize"
+                                [pageSizeOptions]="[pageSizeOptions]" (page)="onPageChangedEnquiry($event)">
+                            </mat-paginator>
                         </div>
                     </div>
                 </div>
@@ -396,13 +485,14 @@
         </div>
     </div>
 
-    <div class="modal fade" id="customerServicesModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade" id="customerServicesModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-xl modal-notice">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-            <i class="nc-icon nc-simple-remove"></i>
-          </button>
+                        <i class="nc-icon nc-simple-remove"></i>
+                    </button>
                     <h5 class="modal-title" id="myModalLabel">Services List</h5>
                 </div>
                 <div class="modal-body">
@@ -416,7 +506,8 @@
                                 <th class="text-center">Service Point</th>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let item of usedServices |  paginate: { id:'model_pagination',itemsPerPage: 10, currentPage: modelPage,totalItems:totalModelRecords }">
+                                <tr
+                                    *ngFor="let item of usedServices |  paginate: { id:'model_pagination',itemsPerPage: 10, currentPage: modelPage,totalItems:totalModelRecords }">
                                     <td class="text-center">{{ item.index }}</td>
                                     <td class="text-center">{{ item.servicesname}}</td>
                                     <td class="text-center">{{ item.employeename}}</td>
@@ -438,27 +529,29 @@
                     <div class="row">
                         <div class="col-md-2">
                             <label class="col-form-label" style="font-size: 18px;color: black;">Total
-                Price</label>
+                                Price</label>
                         </div>
                         <div class="col-md-2">
                             <div class="form-group">
-                                <input type="text" class="form-control" id="fname" name="fname" disabled value="{{totalPriceForDetails}} ₹" />
+                                <input type="text" class="form-control" id="fname" name="fname" disabled
+                                    value="{{totalPriceForDetails}} ₹" />
                             </div>
                         </div>
                         <div class="col-md-2">
                             <label class="col-form-label" style="font-size: 18px;color: black;">Total
-                Points</label>
+                                Points</label>
                         </div>
                         <div class="col-md-2">
                             <div class="form-group">
-                                <input type="text" class="form-control" id="tPoints" name="tPoints" disabled value="{{totalPointForDetails}}" />
+                                <input type="text" class="form-control" id="tPoints" name="tPoints" disabled
+                                    value="{{totalPointForDetails}}" />
                             </div>
                         </div>
 
                         <div class="col-md-4">
                             <button type="button" class="btn btn-secondary btn-round" data-dismiss="modal">
-                <i class="fa fa-times" aria-hidden="true"></i> Close
-              </button>
+                                <i class="fa fa-times" aria-hidden="true"></i> Close
+                            </button>
                         </div>
                     </div>
 
@@ -466,7 +559,8 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="customerPaymentModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade" id="customerPaymentModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header justify-content-center">
@@ -488,19 +582,25 @@
                         </div>
                     </div>
                     <div class="row justify-content-center">
-                        <div class="col-sm-4"><button class="btn btn-success btn-lg" data-dismiss="modal" (click)="saveModeOfPaymentDetails('Cash')"><i class="fa fa-money" aria-hidden="true"></i> Cash</button>
+                        <div class="col-sm-4"><button class="btn btn-success btn-lg" data-dismiss="modal"
+                                (click)="saveModeOfPaymentDetails('Cash')"><i class="fa fa-money"
+                                    aria-hidden="true"></i> Cash</button>
                         </div>
 
-                        <div class="col-sm-4"><button class="btn btn-success btn-lg" data-dismiss="modal" (click)="saveModeOfPaymentDetails('GPay')"><i class="fa-google-pay" aria-hidden="true"></i>
-                GPay</button></div>
-                        <div class="col-sm-4"><button class="btn btn-success btn-lg" data-dismiss="modal" (click)="saveModeOfPaymentDetails('Account')"><i class="fa fa-bank" aria-hidden="true"></i>
-                Bank AC</button></div>
+                        <div class="col-sm-4"><button class="btn btn-success btn-lg" data-dismiss="modal"
+                                (click)="saveModeOfPaymentDetails('GPay')"><i class="fa-google-pay"
+                                    aria-hidden="true"></i>
+                                GPay</button></div>
+                        <div class="col-sm-4"><button class="btn btn-success btn-lg" data-dismiss="modal"
+                                (click)="saveModeOfPaymentDetails('Account')"><i class="fa fa-bank"
+                                    aria-hidden="true"></i>
+                                Bank AC</button></div>
                     </div>
 
                 </div>
                 <div class="modal-footer justify-content-center">
                     <button type="button" class="btn btn-link btn-link" data-dismiss="modal"><i class="fa fa-times"
-              aria-hidden="true"></i> Close</button>
+                            aria-hidden="true"></i> Close</button>
                 </div>
             </div>
         </div>

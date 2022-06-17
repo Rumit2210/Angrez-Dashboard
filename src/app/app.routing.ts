@@ -55,10 +55,6 @@ export const AppRoutes: Routes = [{
         path: '',
         loadChildren: './offer/offer.module#OfferModule',
         canActivate: [AuthGuard]
-    },{
-        path: '',
-        loadChildren: './stock/stock.module#StockModule',
-        canActivate: [AuthGuard]
     },
     {
         path: '',
@@ -84,11 +80,22 @@ export const AppRoutes: Routes = [{
         path: '',
         loadChildren: './vendor/vendor.module#VendorModule',
         canActivate: [AuthGuard]
-    },{
+    },
+    {
         path:'',
         loadChildren: './attandance/attandance.module#AttandanceModule',
         canActivate:[AuthGuard]
-    }
+    },
+    {
+        path: '',
+        loadChildren: './customerservice/customerservice.module#CustomerserviceModule',
+        canActivate: [AuthGuard]
+    },
+    {
+        path: '',
+        loadChildren: './membership/membership.module#MembershipModule',
+        canActivate: [AuthGuard]
+    },
     ]
 }, {
     path: '',
