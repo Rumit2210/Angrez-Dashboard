@@ -372,6 +372,12 @@ export class ProductsComponent implements OnInit {
     this.showCategoryList = true;
     this.getAllCategory();
   }
+  backToProduct() {
+    this.showList = true;
+    this.addProduct = true;
+    this.addc = false;
+    this.showCategoryList = false;
+  }
 
 
 
