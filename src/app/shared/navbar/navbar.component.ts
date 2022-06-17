@@ -13,7 +13,8 @@ var misc:any ={
 @Component({
     // moduleId: module.id,
     selector: 'navbar-cmp',
-    templateUrl: 'navbar.component.html'
+    templateUrl: 'navbar.component.html',
+    styleUrls: ['./navbar.component.css']
 })
 
 export class NavbarComponent implements OnInit{
@@ -25,7 +26,7 @@ export class NavbarComponent implements OnInit{
     private sidebarVisible: boolean;
     private _router: Subscription;
     public open: boolean = false;
-
+   quantity:number=0;
     @ViewChild("navbar-cmp", {static: false}) button;
 
     constructor(location:Location, private renderer : Renderer2, private element : ElementRef, private router: Router) {
@@ -146,4 +147,13 @@ export class NavbarComponent implements OnInit{
         // console.log(this.location);
         return this.location.prepareExternalUrl(this.location.path());
     }
+    incre(){
+        if(this.quantity!=10){
+          this.quantity++;
+        }
+      }
+      decre(){
+        if(this.quantity!=0)
+        this.quantity--;
+      }
 }

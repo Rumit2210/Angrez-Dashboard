@@ -1,7 +1,9 @@
 import { Routes } from '@angular/router';
+import { CustomerRegisterComponent } from './customer-register/customer-register.component';
 import { ForgotPwdComponent } from './forgot-pwd/forgot-pwd.component';
-
 import { LoginComponent } from './login/login.component';
+
+
 
 export const PagesRoutes: Routes = [{
     path: '',
@@ -13,5 +15,11 @@ export const PagesRoutes: Routes = [{
         path: 'forgotpwd',
         component: ForgotPwdComponent
     },
+    {
+        path: 'customer-register',
+        component: CustomerRegisterComponent
+        
+    },
+   
     ]
 }];

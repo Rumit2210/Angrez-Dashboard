@@ -88,7 +88,7 @@
                     <label class="col-md-2 col-form-label">Address</label>
                     <div class="col-md-4">
                         <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
-                            <textarea id="address" name="address" rows="4" cols="54" [(ngModel)]="customerModel.address" placeholder="Enter Address" value="" pattern="[#\d+ ([^,]+), ([A-Z]{2}) (\d{5})]" (focus)="focus = true" #address="ngModel"> </textarea>
+                            <textarea id="address" class="form-control validate"name="address" rows="4" cols="54" [(ngModel)]="customerModel.address" placeholder="Enter Address" value="" pattern="[#\d+ ([^,]+), ([A-Z]{2}) (\d{5})]" (focus)="focus = true" #address="ngModel"> </textarea>
                         </div>
                         <div *ngIf="address.errors && (address.dirty || address.touched)" class="alert alert-danger">
                             <div *ngIf="address.errors.required">
@@ -275,7 +275,7 @@
                                 <label class="col-md-2 col-form-label">Address</label>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <textarea id="address" name="address" rows="3" cols="40" [(ngModel)]="customerModel.address" placeholder="Enter Address" value=""> </textarea>
+                                        <textarea id="address"class="form-control validate" name="address" rows="3" cols="40" [(ngModel)]="customerModel.address" placeholder="Enter Address" value=""> </textarea>
                                     </div>
                                 </div>
                                 <label class="col-sm-2 col-form-label">Select Gender</label>
@@ -304,7 +304,7 @@
                                 <label class="col-sm-2 col-form-label">VIP</label>
                 
                                     <label class="switch">
-                                        <input type="checkbox" checked class="switch-input" [switch-on-color]="'primary'" [switch-off-color]="'primary'" id="vip"
+                                        <input type="checkbox" checked class="switch-input"  id="vip"
                                         name="vip" [(ngModel)]="customerModel.vip">
                                         <span class="slider round"></span>
                                  </label>
@@ -740,7 +740,7 @@
                                 <label class="col-md-2 col-form-label">Address</label>
                                 <div class="col-md-4">
                                     <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
-                                        <textarea id="address" name="address" rows="4" cols="40" [(ngModel)]="customerModel.address" placeholder="Enter Address" value="" pattern="[#\d+ ([^,]+), ([A-Z]{2}) (\d{5})]" (focus)="focus = true" #address="ngModel"> </textarea>
+                                        <textarea id="address"class="form-control validate" name="address" rows="4" cols="40" [(ngModel)]="customerModel.address" placeholder="Enter Address" value="" pattern="[#\d+ ([^,]+), ([A-Z]{2}) (\d{5})]" (focus)="focus = true" #address="ngModel"> </textarea>
                                     </div>
                                     <div *ngIf="address.errors && (address.dirty || address.touched)" class="alert alert-danger">
                                         <div *ngIf="address.errors.required">
@@ -773,13 +773,20 @@
                                         </label>
                                     </div>
                                 </div>
+                                <label class="col-sm-2 col-form-label">VIP</label>
+                
+                                    <label class="switch">
+                                        <input type="checkbox" checked class="switch-input"  id="vip"
+                                        name="vip" [(ngModel)]="customerModel.vip">
+                                        <span class="slider round"></span>
+                                 </label>
                             </div>
 
                         </form>
                     </div>
                 </div>
                 <div class="modal-footer justify-content-center">
-                    <button type="submit" class="btn btn-info btn-round" (click)="saveCustomerDetail(customerModel)" [disabled]="!CustForm.form.valid" data-dismiss="modal"> 
+                    <button type="submit" class="btn btn-info btn-round" (click)="saveCustomerDetail()" [disabled]="!CustForm.form.valid" data-dismiss="modal"> 
                         <i class="fa fa-paper-plane" aria-hidden="true"></i> Submit
                     </button>
                     <button type="submit" class="btn btn-danger btn-round" data-dismiss="modal">

@@ -195,8 +195,9 @@ export class OfferComponent implements OnInit {
     })
   }
   backToOffer() {
-    this.custAppointment = false;
+    this.custAppointment=true;
     this.selectOffer = false;
+    this.viewOfferAllData=false;
   }
   getOfferPoints() {
     this.offerService.getCustAllPoint(this.selectedCustId).subscribe((data: any) => {

@@ -57,7 +57,10 @@
                 </div>
                 <div class="ml-md-auto">
 
-                    <button type="cancel" class="btn btn-danger btn-round" (click)="backToOffer()">
+                    <!-- <button type="cancel" class="btn btn-danger btn-round" (click)="backToOffer()">
+                        <i class="fa fa-arrow-left"></i> Back
+                    </button> -->
+                    <button type="cancel" class="btn btn-danger btn-round" routerLink='/dashboard'>
                         <i class="fa fa-arrow-left"></i> Back
                     </button>
                 </div>
@@ -286,9 +289,7 @@
         </div>
 
     </div>
-    <div class="card" *ngIf="!selectOffer && !isDashboard">
-        
-    </div>
+ 
     <div class="card" *ngIf="viewOfferAllData">
         <div class="card-header">
             <div class="row">
@@ -296,7 +297,7 @@
                     <h4 class="card-title">Offer Appointment List</h4>
                 </div>
                 <div class="ml-md-auto">
-                    <button type="cancel" class="btn btn-danger btn-round" (click)="backToList()">
+                    <button type="cancel" class="btn btn-danger btn-round" (click)="backToOffer()" routerLink='/offer'>
                         <i class="fa fa-arrow-left"></i> Back
                     </button>
                 </div>
@@ -307,7 +308,7 @@
                 <table class="table">
                     <thead class="text-primary">
                         <th class="text-center">#</th>
-                    
+                        <th class="text-center">Offer Id</th>
                         <th class="text-center">Services Name</th>
                         <th class="text-center">Offer Name</th>
                         <th class="text-center">Offer Price</th>
@@ -317,7 +318,7 @@
                         <tr
                             *ngFor="let item of offerData |  paginate: { id:'listing_pagination',itemsPerPage: 5, currentPage: page,totalItems:totalRecords }">
                             <td class="text-center">{{ item.index }}</td>
-                        
+                            <td class="text-center">{{ item.offerid }}</td>
                             <td class="text-center">{{ item.servicesname }}</td>
                             <td class="text-center">{{ item.offername }}</td>
                             <td class="text-center">{{ item.offerprice}}</td>
