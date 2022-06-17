@@ -104,7 +104,6 @@ export class ProductsComponent implements OnInit {
 
   }
   saveCategoryDetail() {
-
     this.productService.saveCategoryList(this.categoryModel).subscribe((data: any) => {
       this.category = data;
       this.getAllCategory();
@@ -120,7 +119,7 @@ export class ProductsComponent implements OnInit {
     this.addingprdtimg.splice(val, 1);
   }
   select(event) {
-    debugger
+     
     let max_height;
     let max_width;
     if (event.target.files && event.target.files[0]) {
@@ -167,8 +166,6 @@ export class ProductsComponent implements OnInit {
             this.productService.selectUploadImage(formdata).subscribe((response) => {
               this.image = response;
               console.log(response);
-
-
             })
             // this.previewImagePath = imgBase64Path;
           }
@@ -181,7 +178,7 @@ export class ProductsComponent implements OnInit {
   onSelect(event) {
     let max_height;
     let max_width;
-    debugger
+     
     if (event.target.files && event.target.files[0]) {
       const file = event.target.files[0];
       const max_size = 20971520;
@@ -321,8 +318,6 @@ export class ProductsComponent implements OnInit {
       if (result.value == true) {
         this.productService.removeCategoryDetails(id).subscribe((req) => {
           this.apiService.showNotification('top', 'right', 'Customer removed Successfully.', 'success');
-
-
         })
         Swal.fire(
           {
@@ -341,17 +336,13 @@ export class ProductsComponent implements OnInit {
 
   }
   viewProDetails(data: Products) {
-    // this.submitButton = true;
     this.updateProductModel = data;
   }
   viewCategoryDetails(data: Category) {
-
-    // this.showEmp = true;
     this.updateCategoryModel = data;
   }
 
   UpdateProductDetails() {
-    this.updateProductModel
     this.productService.updateProductList(this.updateProductModel).subscribe((req) => {
       this.getAllProducts();
       this.apiService.showNotification('top', 'right', 'Product Details Successfully Updated.', 'success');
@@ -372,29 +363,6 @@ export class ProductsComponent implements OnInit {
     this.showCategoryList = true;
     this.getAllCategory();
   }
-
-
-
-
-  // Search(val) {
-  //   if (this.search == '') {
-  //     console.log(val)
-  //     this.products = this.productList;
-  //   } else {
-  //     console.log(val)
-  //     this.transform(this.productList, val);
-  //   }
-
-  // }
-  // transform(products: Products[], searchValue: string) {
-  //   this.products = [];
-  //   products.forEach(element => {
-  //     if (element.name.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())) {
-  //       this.products.push(element);
-  //     }
-  //    })
-  //    console.log(this.products)
-  // }
   Search() {
     if (this.search == "") {
       this.getAllProducts();
