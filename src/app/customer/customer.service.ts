@@ -88,4 +88,13 @@ export class CustomerService {
         }
         return this.httpClient.post<any>(ApiService.getCustomerDataByIdURL, data);
     }
+    emailVerify(admin: Customer): Observable<any> {
+        return this.httpClient.post<any>(ApiService.verificationURL, admin);
+    }
+    getOtpforRegister(admin: Customer): Observable<any> {
+        return this.httpClient.post<any>(ApiService.getRegisterOtpURL, admin);
+    }
+    saveUserCustomerList(admin: Customer): Observable<any> {
+        return this.httpClient.post<any>(ApiService.saveUserCustomerListURL, admin);
+    }
 }

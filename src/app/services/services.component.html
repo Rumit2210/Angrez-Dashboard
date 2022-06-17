@@ -36,7 +36,7 @@
                     <div class="col-md-4">
                         <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
                             <input type="text" class="form-control" id="price" [(ngModel)]="servicesModel.price"
-                                name="price" placeholder="Enter Service Price " required value="" pattern="^[0-9]+$"
+                                name="price" placeholder="Enter Service Price " required value="" validators.pattern="/^-?(0|[1-9]\d*)?$/" pattern="^[0-9]+$"
                                 (focus)="focus = true" #price="ngModel" />
                         </div>
                         <div *ngIf="price.errors && (price.dirty || price.touched)" class="alert alert-danger">
@@ -52,7 +52,7 @@
                     <div class="col-md-4">
                         <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
                             <input type="text" class="form-control" id="time" name="time"
-                                [(ngModel)]="servicesModel.time" placeholder=" Enter Time (Minute)" required value=""
+                                [(ngModel)]="servicesModel.time" placeholder=" Enter Time (Minute)" required value="" validators.pattern="/^-?(0|[1-9]\d*)?$/"
                                 pattern="^[0-9]+$" (focus)="focus = true" #time="ngModel" />
                         </div>
                         <div *ngIf="time.errors && (time.dirty || time.touched)" class="alert alert-danger">
@@ -68,11 +68,28 @@
                     <div class="col-md-4">
                         <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
                             <input type="text" class="form-control" id="point" [(ngModel)]="servicesModel.point"
-                                name="point" placeholder="Enter Service Point" required value="" pattern="^[0-9]+$"
+                                name="point" placeholder="Enter Service Point" required value="" validators.pattern="/^-?(0|[1-9]\d*)?$/" pattern="^[0-9]+$"
                                 (focus)="focus = true" #point="ngModel" />
                         </div>
                         <div *ngIf="point.errors && (point.dirty || point.touched)" class="alert alert-danger">
                             <div *ngIf="point.errors.required">
+                                Point is required
+                            </div>
+                            <div [hidden]="!fname.errors('pattern')">
+                                Enter Only Numbers.
+                            </div>
+                        </div>
+                    </div>
+
+                    <label class="col-md-2 col-form-label">Employee Service Point</label>
+                    <div class="col-md-4">
+                        <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
+                            <input type="text" class="form-control" id="epoint" [(ngModel)]="servicesModel.epoint"
+                                name="epoint" placeholder="Enter Employee Service Point" required value="" validators.pattern="/^-?(0|[1-9]\d*)?$/" pattern="^[0-9]+$"
+                                (focus)="focus = true" #epoint="ngModel" />
+                        </div>
+                        <div *ngIf="epoint.errors && (epoint.dirty || epoint.touched)" class="alert alert-danger">
+                            <div *ngIf="epoint.errors.required">
                                 Point is required
                             </div>
                             <div [hidden]="!fname.errors('pattern')">
@@ -140,6 +157,7 @@
                                 <th class="text-center">Services Price</th>
                                 <th class="text-center">Time Duration</th>
                                 <th class="text-center">Service Point</th>
+                                <th class="text-center">Employee Service Point</th>
                                 <th class="text-right">Actions</th>
                             </thead>
                             <tbody>
@@ -150,6 +168,7 @@
                                     <td class="text-center">{{ item.price }} ₹</td>
                                     <td class="text-center">{{ item.time }} minutes</td>
                                     <td class="text-center">{{ item.point }}</td>
+                                    <td class="text-center">{{ item.epoint }}</td>
 
                                     <td class="text-right">
                                         <button type="button" rel="tooltip" class="btn btn-success btn-icon btn-sm">

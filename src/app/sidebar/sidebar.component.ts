@@ -73,20 +73,33 @@ export const ROUTES: RouteInfo[] = [{
     roles: "Admin",
 },
 {
-    path: '/stock',
-    title: 'Stock',
-    type: 'link',
-    icontype: 'fa fa-cubes',
-    roles: "Admin",
-},
-{
     path: '/products',
     title: 'Products',
     type: 'link',
     icontype: 'fa fa-product-hunt',
     roles: "Admin",
-}
-
+},
+{
+    path: '/attandance',
+    title: 'Attendance',
+    type: 'link',
+    icontype: 'fa fa-clock-o',
+    roles: "Admin",
+},
+{
+    path: '/display-products',
+    title: 'Products',
+    type: 'link',
+    icontype: 'fa fa-shopping-cart',
+    roles: "Admin",
+},
+{
+    path: '/vendor',
+    title: 'Vendor',
+    type: 'link',
+    icontype: 'fa fa-product-hunt',
+    roles: "Admin",
+},
 
 ];
 export const Employee: RouteInfo[] = [
@@ -119,15 +132,7 @@ export const Employee: RouteInfo[] = [
         type: 'link',
         icontype: 'fa fa-gift',
         roles: "Admin",
-    },
-    
-    {
-        path: '/stock',
-        title: 'Stock',
-        type: 'link',
-        icontype: 'fa fa-cubes',
-        roles: "Admin",
-    },
+    }
 ];
 export const Customer: RouteInfo[] = [
     {
@@ -152,19 +157,19 @@ export const Customer: RouteInfo[] = [
         roles: "Admin",
     },
     {
-        path: '/stock',
-        title: 'Stock',
-        type: 'link',
-        icontype: 'fa fa-cubes',
-        roles: "Admin",
-    },
-    {
         path: '/products',
         title: 'Products',
         type: 'link',
         icontype: 'fa fa-cubes',
         roles: "Admin",
-    }
+    },
+    {
+        path: '/servicescustm',
+        title: 'Ratecard',
+        type: 'link',
+        icontype: 'fa fa-rupee',
+        roles: "Admin",
+    },
 
 ];
 @Component({

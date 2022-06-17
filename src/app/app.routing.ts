@@ -43,16 +43,17 @@ export const AppRoutes: Routes = [{
     },
     {
         path: '',
+        loadChildren: './servicescustm/servicescustm.module#ServicescustmModule',
+        canActivate: [AuthGuard]
+    },
+    {
+        path: '',
         loadChildren: './enquiry/enquiry.module#EnquiryModule',
         canActivate: [AuthGuard]
     },
     {
         path: '',
         loadChildren: './offer/offer.module#OfferModule',
-        canActivate: [AuthGuard]
-    },{
-        path: '',
-        loadChildren: './stock/stock.module#StockModule',
         canActivate: [AuthGuard]
     },
     {
@@ -70,6 +71,20 @@ export const AppRoutes: Routes = [{
         loadChildren: './reports/reports.module#ReportsModule',
         canActivate: [AuthGuard]
     },
+    {
+        path: '',
+        loadChildren: './display-products/display-products.module#DisplayProductsModule',
+        canActivate: [AuthGuard]
+    },
+    {
+        path: '',
+        loadChildren: './vendor/vendor.module#VendorModule',
+        canActivate: [AuthGuard]
+    },{
+        path:'',
+        loadChildren: './attandance/attandance.module#AttandanceModule',
+        canActivate:[AuthGuard]
+    }
     ]
 }, {
     path: '',
