@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Console } from 'console';
 import { empty } from 'rxjs';
 import Swal from 'sweetalert2';
 import { Expenses } from './expenses.model';
