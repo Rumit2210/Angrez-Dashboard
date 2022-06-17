@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 declare var $: any;
 
 @Component({
-    moduleId: module.id,
+    // moduleId: module.id,
     selector: 'login-cmp',
     templateUrl: './login.component.html'
 })
@@ -132,6 +132,7 @@ export class LoginComponent implements OnInit {
                     localStorage.setItem('UserId', data[0].id);
                     localStorage.setItem('UserName', data[0].firstname + ' ' + data[0].lastname);
                     localStorage.setItem('role', data[0].role);
+                    
                     localStorage.setItem('lastOutTime',data[0].last_login);
                     localStorage.setItem('lastInTime',data[0].last_login);
                     this.router.navigate(['dashboard']);
@@ -144,8 +145,9 @@ export class LoginComponent implements OnInit {
                     localStorage.setItem('UserName', data[0].fname + ' ' + data[0].lname);
                     // localStorage.setItem('standardid', data[0].standard);
                     // localStorage.setItem('gender', data[0].gender);
+                    localStorage.setItem('VIP', data[0].vip);
                     localStorage.setItem('role', data[0].role);
-                    localStorage.setItem('lastOutTime',data[0].out_time);
+                    localStorage.setItem('lastOutTime',data[0].last_inTime);
                     localStorage.setItem('lastInTime',data[0].last_login);
                     this.router.navigate(['dashboard']);
                 }

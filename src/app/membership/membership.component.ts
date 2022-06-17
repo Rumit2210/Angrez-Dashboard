@@ -5,27 +5,27 @@ import { Employee } from 'app/employee/employee.model';
 import { EmployeeService } from 'app/employee/employee.service';
 import { Services } from 'app/services/services.model';
 import { ServicesService } from 'app/services/services.service';
-import { Appointment } from './offerappointment.model';
-import { Offer } from './offer.model';
-import { OfferService } from './offer.service';
+import { Appointment } from './membershipappointment.model';
+import { Membership } from './membership.model';
+import { MembershipService } from './membership.service';
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 import Swal from 'sweetalert2';
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 @Component({
-  selector: 'app-offer',
-  templateUrl: './offer.component.html',
-  styleUrls: ['./offer.component.css']
+  selector: 'app-membership',
+  templateUrl: './membership.component.html',
+  styleUrls: ['./membership.component.css']
 })
-export class OfferComponent implements OnInit {
-  public offerModel: Offer = new Offer;
+export class MembershipComponent implements OnInit {
+  public membershipModel: Membership = new Membership;
   public appointmentModel: Appointment = new Appointment
   public appointment: Appointment[];
   public appointmentList: Appointment[];
-  public offer: Offer[] = [];
+  public membership: Membership[] = [];
   disc: number;
-  public offerList: Offer[];
+  public membershipList: Membership[];
   selectedEmp: any;
   empId: any;
   selectedServ: any;
@@ -35,25 +35,29 @@ export class OfferComponent implements OnInit {
   serviceData: any = [];
   search: string = '';
   totalprice: any = 0;
+  finalprice: number = 0;
   totalPoint: any = 0;
-  totalOfferPoint: any = 0;
+  quantity: number;
+  totalMembershipPoint: any = 0;
   totalTime: any = 0;
   custAppointment: boolean = true;
-  selectOffer: boolean = false;
-  viewOfferAllData: boolean = false;
+  selectMembership: boolean = false;
+  viewMembershipAllData: boolean = false;
   selectedCustId: any;
   totalCustPoint: any[];
   tCustPoint: any = 0;
-  offerData: any[];
-  offername: string;
-  offerprice: number = 0;
+  membershipData: any[];
+  membershipname: string;
+  membershipprice: number = 0;
   usedServices: any[];
+  usedPrices: any[];
   totalRecords: string;
   totalModelRecords: string;
   page: Number = 1;
   modelPage: number = 1;
   totalPriceForDetails: any;
   totalPointForDetails: any;
+  finalPriceForDetails: any;
   addService: any = [];
   valu: 0;
   isDashboard: boolean = false;
@@ -61,14 +65,14 @@ export class OfferComponent implements OnInit {
   constructor(
     private servicesService: ServicesService,
     private employeeService: EmployeeService,
-    private offerService: OfferService,
+    private membershipService: MembershipService,
     private apiService: ApiService,
     private router: Router
   ) {
 
     this.getAllEmployee();
     this.getAllServices();
-    this.getOfferDetails();
+    this.getMembershipDetails();
     if (this.router.routerState.snapshot.url === '/dashboard') {
       this.isDashboard = true;
     }
@@ -130,8 +134,10 @@ export class OfferComponent implements OnInit {
       if (element.sertime != undefined) {
         this.totalTime = this.totalTime + element.sertime;
       }
-      this.disc = this.offerModel.percentage;
-      this.getOfferVal();
+      this.disc = this.membershipModel.percentage;
+      this.quantity = this.membershipModel.quantity;
+      this.getMembershipVal();
+      this.finalmembershipprice();
     });
   }
 
@@ -140,67 +146,71 @@ export class OfferComponent implements OnInit {
     this.addPoinInList();
   }
 
-  saveOfferDetail(data) {
+  saveMembershipDetail(data) {
     
-    this.offerModel.totalprice = this.totalprice;
-    this.offerModel.offerprice = this.offerprice;
+    this.membershipModel.totalprice = this.totalprice;
+    this.membershipModel.finalprice = this.finalprice;
+    this.membershipModel.membershipprice = this.membershipprice;
     var discount: number = +this.disc;
-    this.offerModel.percentage = discount;
-    this.offerModel.services=this.addService;
+    this.membershipModel.percentage = discount;
+    this.membershipModel.services=this.addService;
     debugger
-    this.offerService.saveOfferList(this.offerModel).subscribe((data: any) => {
-      this.offerList = data;
+    this.membershipService.saveMembershipList(this.membershipModel).subscribe((data: any) => {
+      this.membershipList = data;
       debugger
-      this.apiService.showNotification('top', 'right', 'Offer Added Successfully.', 'success');
-      this.getOfferDetails();
+      this.apiService.showNotification('top', 'right', 'Membership Added Successfully.', 'success');
+      this.getMembershipDetails();
       location.reload();
     })
   }
+finalmembershipprice() {
+  debugger
+  this.finalprice = Number(this.quantity) * this.totalprice;
+}
 
-  getOfferDetails() {
+  getMembershipDetails() {
 
-    this.offerService.getAllOfferList().subscribe((data: any) => {
-      this.offerList = data;
-      this.offer = data;
-      for (let i = 0; i < this.offer.length; i++) {
-        this.offer[i].index = i + 1;
+    this.membershipService.getAllMembershipList().subscribe((data: any) => {
+      this.membershipList = data;
+      this.membership = data;
+      for (let i = 0; i < this.membership.length; i++) {
+        this.membership[i].index = i + 1;
       }
     });
   }
-
-  getOfferVal() {
+  getMembershipVal() {
     debugger
-    this.offerprice = this.totalprice - (this.totalprice * (this.disc / 100));
+    this.membershipprice = this.totalprice - (this.totalprice * (this.disc / 100));
   }
-  searchOfferList(val) {
+  searchMembershipList(val) {
     if (this.search == '') {
-      this.offer = this.offerList;
+      this.membership = this.membershipList;
     } else {
-      this.transform(this.offerList, val);
+      this.transform(this.membershipList, val);
     }
   }
-  transform(offer: Offer[], searchValue: string) {
+  transform(membership: Membership[], searchValue: string) {
 
-    this.offer = [];
-    offer.forEach(element => {
+    this.membership = [];
+    membership.forEach(element => {
       if (element.contact.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())) {
-        this.offer.push(element);
+        this.membership.push(element);
       }
       else if (element.fname.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())) {
-        this.offer.push(element);
+        this.membership.push(element);
       }
       else if (element.lname.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())) {
-        this.offer.push(element);
+        this.membership.push(element);
       }
     })
   }
-  backToOffer() {
-    this.custAppointment=true;
-    this.selectOffer = false;
-    this.viewOfferAllData=false;
+  backToMembership() {
+    this.custAppointment = true;
+    this.selectMembership = false;
+    this.viewMembershipAllData=false;
   }
-  getOfferPoints() {
-    this.offerService.getCustAllPoint(this.selectedCustId).subscribe((data: any) => {
+  getMembershipPoints() {
+    this.membershipService.getCustAllPoint(this.selectedCustId).subscribe((data: any) => {
       this.totalCustPoint = data;
       this.tCustPoint = 0;
       this.totalCustPoint.forEach(element => {
@@ -210,10 +220,10 @@ export class OfferComponent implements OnInit {
       });
     });
   }
-  seletedOfferDetails(data) {
-    this.offerModel = data;
-    this.selectOffer = true;
-    this.getOfferPoints();
+  seletedMembershipDetails(data) {
+    this.membershipModel = data;
+    this.selectMembership = true;
+    this.getMembershipPoints();
   }
   saveAppointmentDetails() {
 
@@ -222,15 +232,15 @@ export class OfferComponent implements OnInit {
     this.appointmentModel.lessPoints = this.tCustPoint - this.appointmentModel.percentage;
     this.appointmentModel.lessPoints = this.appointmentModel.lessPoints + this.appointmentModel.totalpoint;
     this.appointmentModel.selectedService = this.addService;
-    this.appointmentModel.offerprice = this.offerprice;
-    this.appointmentModel.offername = this.offername;
+    this.appointmentModel.membershipprice = this.membershipprice;
+    this.appointmentModel.membershipname = this.membershipname;
     this.appointmentModel.totalpoint = this.totalPoint;
     this.appointmentModel.isactive = true;
     if (this.appointmentModel.percentage > this.appointmentModel.tCustPoint) {
       this.apiService.showNotification('top', 'right', 'You can not redeem point more than total point.', 'danger');
     }
     else {
-      this.offerService.saveAppointmentList(this.appointmentModel).subscribe((data: any) => {
+      this.membershipService.saveAppointmentList(this.appointmentModel).subscribe((data: any) => {
         this.appointment = data;
         this.router.navigate(['dashboard']);
         location.reload();
@@ -262,14 +272,14 @@ export class OfferComponent implements OnInit {
           color: '#ef8157'
         }, {}, {}, {},
         {
-          text: 'Offer Details',
+          text: 'Membership Details',
           style: 'sectionHeader'
         },
         {
           columns: [
             [
               {
-                text: this.offerModel.fname + '' + this.offerModel.lname,
+                text: this.membershipModel.fname + '' + this.membershipModel.lname,
                 bold: true
               },           
             ],
@@ -319,28 +329,28 @@ export class OfferComponent implements OnInit {
       pdfMake.createPdf(docDefinition).open();
     }
   }
-  viewOfferDetails(data) {
-    this.totalOfferPoint = 0;
-    this.offerModel = data;
-    this.offerService.getViewAppointment(data).subscribe((data1: any) => {
+  viewMembershipDetails(data) {
+    this.totalMembershipPoint = 0;
+    this.membershipModel = data;
+    this.membershipService.getViewAppointment(data).subscribe((data1: any) => {
       this.appointment = data1;
       this.appointment.forEach(element => {
         if (element.totalpoint != undefined) {
-          this.totalOfferPoint = this.totalOfferPoint + element.totalpoint;
+          this.totalMembershipPoint = this.totalMembershipPoint + element.totalpoint;
         }
       });
     });
   }
-  updateOfferDetails() {
-    this.offerService.updateOfferList(this.offerModel).subscribe((req) => {
-      this.getOfferDetails();
-      this.apiService.showNotification('top', 'right', 'Offer Details Successfully Updated.', 'success');
+  updateMembershipDetails() {
+    this.membershipService.updateMembershipList(this.membershipModel).subscribe((req) => {
+      this.getMembershipDetails();
+      this.apiService.showNotification('top', 'right', 'Membership Details Successfully Updated.', 'success');
     })
   }
-  removeOfferList(id) {
+  removeMembershipList(id) {
     Swal.fire({
       title: 'Are you sure?',
-      text: "You want to delete! If you delete Offer then all the offer data will be delete.",
+      text: "You want to delete! If you delete Membership then all the membership data will be delete.",
       icon: 'warning',
       showCancelButton: true,
       customClass: {
@@ -351,14 +361,14 @@ export class OfferComponent implements OnInit {
       buttonsStyling: false
     }).then((result) => {
       if (result.value == true) {
-        this.offerService.removeOfferDetails(id).subscribe((req) => {
-          this.apiService.showNotification('top', 'right', 'Offer removed Successfully.', 'success');
+        this.membershipService.removeMembershipDetails(id).subscribe((req) => {
+          this.apiService.showNotification('top', 'right', 'Membership removed Successfully.', 'success');
 
         })
         Swal.fire(
           {
             title: 'Deleted!',
-            text: 'Your Offer has been deleted.',
+            text: 'Your Membership has been deleted.',
             icon: 'success',
             customClass: {
               confirmButton: "btn btn-success",
@@ -366,37 +376,46 @@ export class OfferComponent implements OnInit {
             buttonsStyling: false
           }
         )
-        this.getOfferDetails();
+        this.getMembershipDetails();
       }
     })
 
   }
-  onlyViewOfferDetails(id) {
-    this.selectOffer = true;
+  onlyViewMembershipDetails(id) {
+    this.selectMembership = true;
     this.custAppointment = false;
-    this.viewOfferAllData = true;
-    this.offerService.getAllOfferDataList(id).subscribe((data: any) => {
-      this.offerData = data;
+    this.viewMembershipAllData = true;
+    this.membershipService.getAllMembershipDataList(id).subscribe((data: any) => {
+      this.membershipData = data;
 
-      for (let i = 0; i < this.offerData.length; i++) {
-        this.offerData[i].index = i + 1;
+      for (let i = 0; i < this.membershipData.length; i++) {
+        this.membershipData[i].index = i + 1;
       }
     });
   }
   backToList() {
-    this.selectOffer = false;
+    this.selectMembership = false;
     this.custAppointment = false;
-    this.viewOfferAllData = false;
+    this.viewMembershipAllData = false;
   }
   openUsedServiceList(obj) {
 
     this.totalPriceForDetails = obj.totalprice
     this.totalPointForDetails = obj.totalpoint
-    this.offerService.getServicesListUsingId(obj.id).subscribe((data: any) => {
+    this.finalPriceForDetails = obj.finalprice
+
+    this.membershipService.getServicesListUsingId(obj.id).subscribe((data: any) => {
       this.usedServices = data;
+      this.usedPrices = data;
+
 
       for (let i = 0; i < this.usedServices.length; i++) {
         this.usedServices[i].index = i + 1;
+
+      }
+      for (let i = 0; i < this.usedPrices.length; i++) {
+        this.usedServices[i].index = i + 1;
+
       }
     });
   }

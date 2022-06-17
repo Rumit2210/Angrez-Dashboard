@@ -82,6 +82,12 @@ export class CustomerService {
     getMonthlyDetails(): Observable<Payment[]> {
         return this.httpClient.get<any>(ApiService.getMonthlyPayment);
     }
+    getCustomerDataById(id){
+        let data = {
+            id: id
+        }
+        return this.httpClient.post<any>(ApiService.getCustomerDataByIdURL, data);
+    }
     emailVerify(admin: Customer): Observable<any> {
         return this.httpClient.post<any>(ApiService.verificationURL, admin);
     }
