@@ -11,7 +11,7 @@ var misc:any ={
 }
 
 @Component({
-    moduleId: module.id,
+    // moduleId: module.id,
     selector: 'navbar-cmp',
     templateUrl: 'navbar.component.html',
     styleUrls: ['./navbar.component.css']

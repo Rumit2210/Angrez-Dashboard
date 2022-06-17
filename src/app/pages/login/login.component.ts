@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 declare var $: any;
 
 @Component({
-    moduleId: module.id,
+    // moduleId: module.id,
     selector: 'login-cmp',
     templateUrl: './login.component.html'
 })

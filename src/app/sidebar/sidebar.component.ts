@@ -179,7 +179,7 @@ export const Customer: RouteInfo[] = [
 
 ];
 @Component({
-    moduleId: module.id,
+    // moduleId: module.id,
     selector: 'sidebar-cmp',
     templateUrl: 'sidebar.component.html',
 })
