@@ -33,39 +33,42 @@
                                 <div *ngFor="let pos of CategoryList">
                                     <a class="dropdown-item" (click)="selectedCategory(pos.id)">{{pos.name}}</a>
                                 </div>
-                                <a data-target="#exampleModal" data-toggle="modal" class="dropdown-item"><i class="fa fa-plus"
-                                        aria-hidden="true"> Add Category</i></a>
+                                <a data-target="#exampleModal" data-toggle="modal" class="dropdown-item"><i
+                                        class="fa fa-plus" aria-hidden="true"> Add Category</i></a>
                             </div>
                         </div>
                     </div>
                     <!-- Modal -->
-                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                                    <i class="nc-icon nc-simple-remove"></i>
-                                </button>
-                              <h5 class="modal-title" id="exampleModalLabel">ADD CATEGORY</h5>
-                            </div>
-                            <div class="modal-body">
-                                <form class="form-horizontal" name="servicesRegForm" #servicesRegForm="ngForm">
-                                    <div class="row">
-                                        <label class="col-md-4 col-form-label">Category Name</label>
-                                        <div class="col-md-8">
-                                            <input type="text" class="form-control" [(ngModel)]="categoryModel.name"
-                                                [ngModelOptions]="{standalone: true}" placeholder="Enter Category Name" #name="ngModel">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                        <i class="nc-icon nc-simple-remove"></i>
+                                    </button>
+                                    <h5 class="modal-title" id="exampleModalLabel">ADD CATEGORY</h5>
+                                </div>
+                                <div class="modal-body">
+                                    <form class="form-horizontal" name="servicesRegForm" #servicesRegForm="ngForm">
+                                        <div class="row">
+                                            <label class="col-md-4 col-form-label">Category Name</label>
+                                            <div class="col-md-8">
+                                                <input type="text" class="form-control" [(ngModel)]="categoryModel.name"
+                                                    [ngModelOptions]="{standalone: true}"
+                                                    placeholder="Enter Category Name" #name="ngModel">
+                                            </div>
                                         </div>
-                                    </div>
-                                </form>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary" (click)="saveCategoryDetail()"
+                                        data-dismiss="modal">Add category</button>
+                                </div>
                             </div>
-                            <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                              <button type="button" class="btn btn-primary" (click)="saveCategoryDetail()" data-dismiss="modal">Add category</button>
-                            </div>
-                          </div>
                         </div>
-                      </div>
+                    </div>
                     <label class="col-md-2 col-form-label">Price</label>
                     <div class="col-md-4">
                         <div class="form-group">
@@ -76,28 +79,202 @@
                     </div>
                     <label class="col-md-2 col-form-label">Vendor's Name</label>
                     <div class="col-md-4">
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <input placeholder="Enter Vendor's name" [(ngModel)]="productsModel.vendorname" id="name"
                                 name="name" type="text" class="form-control validate"
                                 [ngModelOptions]="{standalone: true}" required="" #vendorname="ngModel">
+                        </div> -->
+                        <div class="dropdown form-group">
+                            <button class="dropdown-toggle btn btn-primary btn-round btn-block" type="button"
+                                name="dropdownMenuButton" id="dropdownMenuButton" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                                {{ selectvendor }}
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                                <div class="dropdown-header">Select vendor</div>
+                                <div *ngFor="let pos of VendorList">
+                                    <a class="dropdown-item" (click)="selectedVendor(pos.id)">{{pos.fname}}</a>
+                                </div>
+                                <a data-target="#exampleModal1" data-toggle="modal" class="dropdown-item"><i
+                                        class="fa fa-plus" aria-hidden="true"> Add Vendor</i></a>
+                            </div>
                         </div>
                     </div>
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-xl modal-notice" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                        <i class="nc-icon nc-simple-remove"></i>
+                                    </button>
+                                    <h5 class="modal-title" id="exampleModalLabel">ADD VENDOR</h5>
+                                </div>
+                                <div class="modal-body">
+                                    <form class="form-horizontal" name="vendorRegForm" #vendorRegForm="ngForm">
+                                        <div class="row">
+                                            <label class="col-md-2 col-form-label">Company Name</label>
+                                            <div class="col-md-4">
+                                                <div class="form-group"
+                                                    [ngClass]="{ 'form-group-focus': focus === true }">
+                                                    <input type="text" class="form-control" id="fname" name="fname"
+                                                        [(ngModel)]="vendorModel.fname"
+                                                        placeholder=" Enter Company Name " required value=""
+                                                        pattern="^[a-zA-Z]+$" (focus)="focus = true" #fname="ngModel" />
+                                                </div>
+                                                <div *ngIf="fname.errors && (fname.dirty || fname.touched)"
+                                                    class="alert alert-danger">
+                                                    <div *ngIf="fname.errors.required">
+                                                        Company Name is required
+                                                    </div>
+                                                    <div [hidden]="!fname.errors('pattern')">
+                                                        Enter Only Characters.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <label class="col-md-2 col-form-label">GSTIN Numner</label>
+                                            <div class="col-md-4">
+                                                <div class="form-group"
+                                                    [ngClass]="{ 'form-group-focus': focus === true }">
+                                                    <input type="text" class="form-control" id="lname" name="lname"
+                                                        [(ngModel)]="vendorModel.gst" placeholder=" Enter GSTIN number"
+                                                        required value=""
+                                                        pattern="^([0][1-9]|[1-2][0-9]|[3][0-7])([a-zA-Z]{5}[0-9]{4}[a-zA-Z]{1}[1-9a-zA-Z]{1}[zZ]{1}[0-9a-zA-Z]{1})+$"
+                                                        (focus)="focus = true" #gst="ngModel" />
+                                                </div>
+                                                <div *ngIf="gst.errors && (gst.dirty || gst.touched)"
+                                                    class="alert alert-danger">
+                                                    <div *ngIf="gst.errors.required">
+                                                        GSTIN Number is required
+                                                    </div>
+                                                    <div [hidden]="!gst.errors('pattern')">
+                                                        Enter according format.
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                            <label class="col-md-2 col-form-label">Contact Number</label>
+                                            <div class="col-md-4">
+                                                <div class="form-group"
+                                                    [ngClass]="{ 'form-group-focus': focus === true }">
+                                                    <input type="text" class="form-control" id="contact"
+                                                        [(ngModel)]="vendorModel.contact" name="contact"
+                                                        placeholder="Enter Contact Number" required value=""
+                                                        pattern="^[0-9].{9,9}$" (focus)="focus = true"
+                                                        #contact="ngModel" />
+                                                </div>
+                                                <div *ngIf="contact.errors && (contact.dirty || contact.touched)"
+                                                    class="alert alert-danger">
+                                                    <div *ngIf="contact.errors.required">
+                                                        Contact Number is required
+                                                    </div>
+                                                    <div [hidden]="!contact.errors('pattern')">
+                                                        Enter Only Number.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <label class="col-md-2 col-form-label">Whatsapp Number</label>
+                                            <div class="col-md-4">
+                                                <div class="form-group"
+                                                    [ngClass]="{ 'form-group-focus': focus === true }">
+                                                    <input type="text" class="form-control" id="whatsapp"
+                                                        [(ngModel)]="vendorModel.whatsapp" name="whatsapp"
+                                                        placeholder="Enter Whatsapp Number" required value=""
+                                                        pattern="^[0-9].{9,9}$" (focus)="focus = true"
+                                                        #whatsapp="ngModel" />
+                                                </div>
+                                                <div *ngIf="whatsapp.errors && (whatsapp.dirty || whatsapp.touched)"
+                                                    class="alert alert-danger">
+                                                    <div *ngIf="whatsapp.errors.required">
+                                                        Whatsapp Number is required
+                                                    </div>
+                                                    <div [hidden]="!whatsapp.errors('pattern')">
+                                                        Enter Only Numbers.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <label class="col-md-2 col-form-label">Address</label>
+                                            <div class="col-md-4">
+                                                <div class="form-group"
+                                                    [ngClass]="{ 'form-group-focus': focus === true }">
+                                                    <textarea id="address" name="address" rows="4" cols="54"
+                                                        [(ngModel)]="vendorModel.address" placeholder="Enter Address"
+                                                        required value="" pattern="[#\d+ ([^,]+), ([A-Z]{2}) (\d{5})]"
+                                                        (focus)="focus = true" #address="ngModel"
+                                                        class="form-control"> </textarea>
+                                                </div>
+                                                <div *ngIf="address.errors && (address.dirty || address.touched)"
+                                                    class="alert alert-danger">
+                                                    <div *ngIf="address.errors.required">
+                                                        Address is required
+                                                    </div>
+                                                    <div [hidden]="!address.errors('pattern')">
+                                                        Enter Only Numbers, Characters and Special Charatcters.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <label class="col-md-2 col-form-label">City</label>
+                                            <div class="col-md-4">
+                                                <div class="form-group"
+                                                    [ngClass]="{ 'form-group-focus': focus === true }">
+                                                    <input type="text" class="form-control" id="city"
+                                                        [(ngModel)]="vendorModel.city" name="city"
+                                                        placeholder="Enter City" required value="" pattern="^[a-zA-Z]+$"
+                                                        (focus)="focus = true" #city="ngModel" />
+                                                </div>
+                                                <div *ngIf="city.errors && (city.dirty || city.touched)"
+                                                    class="alert alert-danger">
+                                                    <div *ngIf="city.errors.required">
+                                                        City Name is required
+                                                    </div>
+                                                    <div [hidden]="!city.errors('pattern')">
+                                                        Enter Only Characters.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <label class="col-md-2 col-form-label">Pincode</label>
+                                            <div class="col-md-4">
+                                                <div class="form-group"
+                                                    [ngClass]="{ 'form-group-focus': focus === true }">
+                                                    <input type="text" class="form-control" id="pincode"
+                                                        [(ngModel)]="vendorModel.pincode" name="pincode"
+                                                        placeholder="Enter Pincode" required value=""
+                                                        pattern="^[1-9][0-9]{5}$" (focus)="focus = true"
+                                                        #pincode="ngModel" />
+                                                </div>
+                                                <div *ngIf="pincode.errors && (pincode.dirty || pincode.touched)"
+                                                    class="alert alert-danger">
+                                                    <div *ngIf="pincode.errors.required">
+                                                        Pincode is required
+                                                    </div>
+                                                    <div [hidden]="!pincode.errors('pattern')">
+                                                        Enter Only Numbers.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary" (click)="saveVendorDetail()"
+                                        data-dismiss="modal">Add Vendor</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="col-md-4"> -->
+
+                    <!-- </div> -->
                     <label class="col-md-2 col-form-label">Vendor's Contact</label>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <input placeholder="Enter Vendor's contact" [(ngModel)]="productsModel.vendorcontact"
-                                id="Phone" name="Phone" type="tel" maxlength="10" pattern="[6789][0-9]{9}"
+                            <input placeholder="Enter Vendor's contact" [(ngModel)]="VendorList.contact" id="Phone"
+                                name="Phone" type="tel" maxlength="10" disabled value="{{selectedContact}}"
                                 class="form-control validate" required="" [ngModelOptions]="{standalone: true}"
                                 #vendorcontact="ngModel">
-                        </div>
-                        <div *ngIf="vendorcontact.errors && (vendorcontact.dirty || vendorcontact.touched)"
-                            class="alert alert-danger">
-                            <div *ngIf="vendorcontact.errors.required">
-                                Vendor's Number is required
-                            </div>
-                            <div [hidden]="!vendorcontact.errors('pattern')">
-                                Enter Only Valid Numbers.
-                            </div>
                         </div>
                     </div>
 
@@ -126,7 +303,14 @@
                                 [(ngModel)]="productsModel.descripition" class="form-control validate" rows="7"
                                 required="" #descripition="ngModel"></textarea>
                         </div>
+                        <label class="col-sm-2 col-form-label">Show products to customers</label>
+                        <label class="switch">
+                            <br><input type="checkbox" checked class="switch-input" [switch-on-color]="'primary'"
+                                [switch-off-color]="'primary'" id="vip" name="vip" [(ngModel)]="productsModel.display">
+                            <span class="slider round"></span>
+                        </label>
                     </div>
+
                     <label class="col-md-2 col-form-label">Product Image</label>
                     <div class="col-md-3">
                         <p class="card-title">Select Product Image</p>
@@ -169,6 +353,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="col-md-3" *ngFor="let i of addingprdtimg;let ind=index">
                         <p class="card-title">Select Product Detail Image</p>
                         <span style="color: red;">*Image size must be 500x500</span>
@@ -204,6 +389,7 @@
                                 color: aqua;"></i> -->
 
                     </div>
+
                 </div>
             </form>
         </div>
@@ -269,6 +455,9 @@
                             Price
                         </th>
                         <th class="text-center">
+                            Display
+                        </th>
+                        <th class="text-center">
                             Amount
                         </th>
                         <th class="text-right">Actions</th>
@@ -289,6 +478,14 @@
                             <td class="text-center">{{ item.purchasedate | date }}</td>
                             <td class="text-center">{{ item.quantity }}</td>
                             <td class="text-center">{{ item.price }}</td>
+                            <td class="text-center">
+                                <button class="btn btn-success" *ngIf="item.display==true">
+                                    Yes
+                                </button>
+                                <button class="btn btn-danger" hidden *ngIf="item.display==false">
+                                    NO
+                                </button>
+                            </td>
                             <td class="text-center">{{ item.price * item.quantity }}</td>
                             <td class="text-right">
                                 <button type="button" rel="tooltip" class="btn btn-info btn-icon btn-sm">
@@ -378,6 +575,13 @@
                                             placeholder="Enter Price" />
                                     </div>
                                 </div>
+                                <label class="col-sm-2 col-form-label">Show Products to customers</label>
+
+                                <label class="switch">
+                                    <input type="checkbox" checked class="switch-input" id="vip" name="vip"
+                                        [(ngModel)]="updateProductModel.display">
+                                    <span class="slider round"></span>
+                                </label>
                                 <!-- <label class="col-md-2 col-form-label">Pincode</label>
                                 <div class="col-md-4">
                                     <div class="form-group">
@@ -477,8 +681,8 @@
 
         </div>
     </div>
-    <div class="card"*ngIf="showCategoryList">
-        <div class="card-body" >
+    <div class="card" *ngIf="showCategoryList">
+        <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-striped">
                     <thead class="text-primary">

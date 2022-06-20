@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductsComponent } from 'app/products/products.component';
 import { ProductService } from './display-products.service';
 import { Products } from 'app/products/product.model';
+declare var $: any;
 @Component({
   selector: 'app-display-products',
   templateUrl: './display-products.component.html',
