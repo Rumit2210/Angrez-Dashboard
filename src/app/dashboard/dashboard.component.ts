@@ -21,6 +21,7 @@ import Chart from 'chart.js';
 import { Router } from '@angular/router';
 import { ExpensesService } from 'app/expenses/expenses.service';
 import { Membership } from 'app/membership/membership.model';
+import { MembershipService } from 'app/membership/membership.service';
 
 declare const $: any;
 
@@ -900,6 +901,7 @@ export class DashboardComponent implements OnInit {
   public employeeReg: Employee[];
   public servicesList: Services[];
   public customerList: Customer[];
+  public membershipList: Membership[];
   public offerList: Customer[];
   public dailyTotal: Customer[];
   public monthlyTotal: Customer[];
@@ -924,12 +926,11 @@ export class DashboardComponent implements OnInit {
   appId: any;;
   monthlyexpensestotal: number = 0;
   expenseTotal: number = 0;
-  membershipService: any;
-  public membershipList: Membership[];
   constructor(
     private servicesService: ServicesService,
     private employeeService: EmployeeService,
     private customerService: CustomerService,
+    public membershipService: MembershipService,
     private offerService: OfferService,
     private enquiryService: EnquiryService,
     private expensesService: ExpensesService,
@@ -941,6 +942,7 @@ export class DashboardComponent implements OnInit {
     this.getAllServices();
     this.getAllEmployee();
     this.getCustomerDetails();
+    this.getMembershipDetails();
     this.getOfferDetails();
     this.getAllEnquiry();
     this.GetDailyTotal();
@@ -980,13 +982,13 @@ export class DashboardComponent implements OnInit {
   openCustomer() {
     this.router.navigate(['customer']);
   }
-  openMembership() {
-    this.router.navigate(['membership']);
-  }
   getMembershipDetails() {
     this.membershipService.getAllMembershipList().subscribe((data: any) => {
       this.membershipList = data;
     });
+  }
+  openMembership() {
+    this.router.navigate(['membership']);
   }
   getAllEnquiry() {
     this.enquiryService.getAllEnquiryList().subscribe((data: any) => {
