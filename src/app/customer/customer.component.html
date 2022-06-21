@@ -178,6 +178,7 @@
                                 <!-- <th class="text-center">Contact NO</th> -->
                                 <th class="text-center">Whatsapp No</th>
                                 <th class="text-center">Gender</th>
+                                <th class="text-center">Status</th>
                                 <!-- <th class="text-center">Address</th> -->
                                 <!-- <th class="text-center">Created Date</th> -->
                                 <th class="text-right">Actions</th>
@@ -198,6 +199,14 @@
                                     <!-- <td class="text-center">{{ item.contact }}</td> -->
                                     <td class="text-center">{{ item.whatsapp }}</td>
                                     <td class="text-center">{{ item.gender }}</td>
+                                    <td class="text-center">
+                                        <button class="btn btn-success" *ngIf="item.status==1">
+                                            Active
+                                        </button>
+                                        <button class="btn btn-danger"  *ngIf="item.status==0">
+                                            Deactive
+                                        </button>
+                                    </td>
                                     <!-- <td class="text-center">{{ item.address }}</td> -->
                                     <!-- <td class="text-center">{{ item.createddate | date }}</td> -->
                                     <td class="text-right">
@@ -336,7 +345,7 @@
         <div class="card-header">
             <div class="row">
                 <div class="col-md-9">
-                    <h4 class="card-title">Customer Appointment</h4>
+                    <h4 class="card-title">Customer Appointment<span class="fa fa-star checked" *ngIf="customerModel.vip==true"></span></h4>
                 </div>
                 <div class="ml-md-auto">
 
@@ -349,9 +358,9 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-md-4">
-                    <label class="col-form-label">Customer Name</label>
+                    <label class="col-form-label">Customer Name</label> 
                     <div class="form-group">
-                        <input type="text" class="form-control" id="fname" [(ngModel)]="customerModel.fname " name="fname" disabled />
+                       <input type="text" class="form-control" id="fname" [(ngModel)]="customerModel.fname " name="fname" disabled />
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -491,7 +500,7 @@
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <label class="col-form-label" style="font-size: 20px;color: black;">Enter Points </label>
+                    <label class="col-form-label" style="font-size: 20px;color: black;">Enter Points to Redeem </label>
                     <div class="form-group">
                         <input type="text" class="form-control" id="redeemPoint" name="redeemPoint" [disabled]="tCustPoint ==0 " [(ngModel)]="appointmentModel.redeempoints" placeholder="Enter Redeem Point" />
                     </div>
@@ -514,6 +523,14 @@
                     <label class="col-form-label" style="font-size: 20px;color: black;">Approx Time</label>
                     <div class="form-group">
                         <input type="text" class="form-control" id="fname" name="fname" disabled value="{{totalTime}} minute" />
+                    </div>
+                </div>
+            </div>
+            <div class="row" >
+                <div class="col-md-2" *ngIf="customerModel.vip==true">
+                    <label class="col-form-label" style="font-size: 20px;color: black;">VIP Bonus</label>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="fname" name="vipbonus" disabled  value="-{{vipbonus}} ₹"/>
                     </div>
                 </div>
             </div>
