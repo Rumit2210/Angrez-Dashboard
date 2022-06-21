@@ -6,15 +6,16 @@ import {
   Location,
   LocationStrategy,
   PathLocationStrategy,
+  Time,
 } from "@angular/common";
 import { CustomerService } from "app/customer/customer.service";
 import { Customer } from "app/customer/customer.model";
 import { ApiService } from "app/api.service";
 
 declare var $: any;
-
+// moduleId: module.id,
 @Component({
-  moduleId: module.id,
+ 
   selector: "customer-register-cmp",
   templateUrl: "./customer-register.component.html",
 })
@@ -37,6 +38,8 @@ export class CustomerRegisterComponent implements OnInit {
   emailResp: any;
   otpResp: any;
   customerList: any;
+  public timeLeft: number = 120;
+  interval;
 
   constructor(
     private element: ElementRef,
@@ -47,6 +50,7 @@ export class CustomerRegisterComponent implements OnInit {
     this.nativeElement = element.nativeElement;
     this.sidebarVisible = false;
   }
+
   checkFullPageBackgroundImage() {
     var $page = $(".full-page");
     var image_src = $page.data("image");
@@ -98,14 +102,14 @@ export class CustomerRegisterComponent implements OnInit {
     this.otpBox = true;
     this.customerModel.role = this.selectedRole;
     this.customerService.emailVerify(this.customerModel).subscribe((data) => {
-      debugger;
       if (data === "Error") {
-        this.apiService.showNotification("top","right","Email not Sent on your Email Address.","danger");
+        this.apiService.showNotification("top", "right", "Email not Sent on your Email Address.", "danger");
       } else {
-        this.emailResp = data[0].id;
-        this.apiService.showNotification("top","right","Email Sent Successfully on your Email Address.","success");
+        this.emailResp = data.insertId;
+        this.apiService.showNotification("top", "right", "Email Sent Successfully on your Email Address.", "success");
       }
     });
+    this.startTimer();
   }
   cancelIt() {
     this.registerForm = false;
@@ -121,10 +125,25 @@ export class CustomerRegisterComponent implements OnInit {
           this.router.navigate(['pages/login']);
         });
       } else {
-        this.apiService.showNotification("top","right","OTP doesnot matched.","danger");
+        this.apiService.showNotification("top", "right", "OTP doesnot matched.", "danger");
       }
       this.otpResp = data[0].userid;
       this.otpBox = true;
     });
   }
+
+  startTimer() {
+    this.interval = setInterval(() => {
+      if (this.timeLeft == 0) {
+        alert("OTP EXPIRED!");
+        clearInterval(this.interval);
+
+
+      } else {
+        this.timeLeft--;
+
+      }
+    }, 1000)
+  }
 }
+

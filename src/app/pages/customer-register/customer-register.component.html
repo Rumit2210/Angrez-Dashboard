@@ -192,10 +192,11 @@
                   </div> -->
                   <div class="card-footer ">
                     <!-- <a href="javascript:void(0)" class="btn btn-info btn-round">Get Started</a> -->
-                    <button type="submit" (click)="verification()" class="btn btn-info btn-round"
-                      [disabled]="!forgotForm.form.valid || !selectedRole">
+                    <button type="submit" (click)="verification()" class="btn btn-info btn-round" [disabled]="!forgotForm.form.valid || !selectedRole" >
                       Get Started
                     </button>
+                    <!-- [disabled]="!forgotForm.form.valid || !selectedRole" -->
+
                   </div>
                 </form>
               </div>
@@ -211,7 +212,7 @@
                 <div class="input-group" [ngClass]="{ 'input-group-focus': focus === true }">
                   <input type="number" class="form-control" id="otp" name="otp" [(ngModel)]="customerModel.otp"
                     placeholder="Enter six digit OTP" required value="" pattern="0-9" (focus)="focus = true"
-                    #email="ngModel" />
+                    #otp="ngModel" />
 
                   <div class="input-group-append">
                     <span class="input-group-text" id="basic-addon1"><i class="fa fa-envelope"
@@ -228,6 +229,7 @@
                   </div>
                 </div>
               </div>
+              <div><strong>Resend OTP in: </strong>{{timeLeft}}</div>
               <div class="card-footer text-center">
                 <button type="cancel" (click)="cancelIt()" class="btn btn-default btn-round">
                   <i class="fa fa-times" aria-hidden="true"></i> Cancel
