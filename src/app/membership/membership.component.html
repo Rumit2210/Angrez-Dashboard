@@ -1,7 +1,5 @@
 <div class="main-content">
-    
-    
-    <div class="modal fade" id="offerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    <div class="modal fade" id="membershipModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-xl modal-notice">
             <div class="modal-content">
@@ -9,26 +7,26 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                         <i class="nc-icon nc-simple-remove"></i>
                     </button>
-                    <h5 class="modal-title" id="myModalLabel">View/Edit Offer</h5>
+                    <h5 class="modal-title" id="myModalLabel">View/Edit Membership</h5>
                 </div>
                 <div class="modal-body">
                     <div class="instruction">
                         <form class="form-horizontal" name="employeeRegForm" #employeeRegForm="ngForm">
                             <div class="row">
-                                <label class="col-md-2 col-form-label">Offer Name</label>
+                                <label class="col-md-2 col-form-label">Membership Package Name</label>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <input type="text" class="form-control" id="fname" name="fname"
-                                            [(ngModel)]="offerModel.fname" placeholder=" Enter First Name " />
+                                            [(ngModel)]="membershipModel.fname" placeholder=" Enter Membership Name " />
                                     </div>
                                 </div>
                                 
-                                <label class="col-md-2 col-form-label">Offer Price</label>
+                                <label class="col-md-2 col-form-label">Membership Price</label>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <input type="text" class="form-control" id="contact"
-                                            [(ngModel)]="offerModel.contact" name="contact"
-                                            placeholder="Enter Offer Price" />
+                                            [(ngModel)]="membershipModel.contact" name="contact"
+                                            placeholder="Enter Membership Price" />
                                     </div>
                                 </div>
                                 
@@ -39,7 +37,7 @@
                 </div>
                 <div class="modal-footer justify-content-center">
                     <button type="button" class="btn btn-info btn-round" data-dismiss="modal"
-                        (click)="updateOfferDetails()">
+                        (click)="updateMembershipDetails()">
                         <i class="fa fa-paper-plane" aria-hidden="true"></i> Update
                     </button>
                     <button type="button" class="btn btn-secondary btn-round" data-dismiss="modal">
@@ -53,7 +51,7 @@
         <div class="card-header">
             <div class="row">
                 <div class="col-md-9">
-                    <h4 class="card-title">Add Offer</h4>
+                    <h4 class="card-title">Add Membership</h4>
                 </div>
                 <div class="ml-md-auto">
 
@@ -69,14 +67,12 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-md-4">
-                    <label class="col-form-label">Offer Name</label>
+                    <label class="col-form-label">Membership Package Name</label>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="fname" [(ngModel)]="offerModel.offername"
+                        <input type="text" class="form-control" id="fname" [(ngModel)]="membershipModel.membershipname"
                             name="fname"  />
                     </div>
                 </div>
-                
-                
             </div> 
 
             <div class="row" *ngFor="let add of addService; let ind = index">
@@ -115,22 +111,34 @@
                 <table class="table">
                     <thead class="text-primary">
                         <th class="text-center">#</th>
-                        <th class="text-center">Services Name</th>
-                        
+                        <th class="text-center">Services Name</th>   
                         <th class="text-center">Price</th>
-                        
+                        <th class="text-center">Number Of Services</th> 
+                        <th class="text-center">Total Price</th>  
                         <th class="text-right">Actions</th>
                     </thead>
                     <tbody *ngIf="addService[0].serpoint !=null">
                         <tr *ngFor="let item of addService; let i = index">
                             <td class="text-center">{{ i+1 }}</td>
                             <td class="text-center">{{ item.selectedServ}} </td>
-                            
                             <td class="text-center">{{ item.serprice }} ₹</td>
-                            
+                            <div class="col-md-11">
+                                <label class="col-form-label" style="font-size: 20px;color: black;"></label>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="quantity" name="quantity"
+                                         [(ngModel)]="membershipModel.quantity"
+                                        placeholder="Enter Quantity" />
+                                </div>
+                            </div>
+                            <td class="text-center">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="fname" name="fname" disabled
+                                        value= "{{finalprice}} ₹" [(ngModel)]="membershipModel.finalprice"/>  
+                                </div>
+                            </td> 
                                 <td class="text-right">
                                     <button type="button" rel="tooltip" class="btn btn-info btn-icon btn-sm">
-                                        <i class="fa fa-eye" (click)="onlyViewOfferDetails(item.id)"></i>
+                                        <i class="fa fa-eye" (click)="onlyViewMembershipDetails(item.id)"></i>
                                     </button>
                                     &nbsp;
                                   
@@ -152,32 +160,26 @@
                     <label class="col-form-label" style="font-size: 20px;color: black;">Total
                         Price</label>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="fname" name="fname" disabled
-                            value="{{totalprice}} ₹" [(ngModel)]="offerModel.totalprice" />
+                        <input type="text" class="form-control" id="fname" name="fname" 
+                            value="{{finalprice}} ₹" [(ngModel)]="membershipModel.finalprice" />
                     </div>
                 </div>
                 <div class="col-md-3">
                     <label class="col-form-label" style="font-size: 20px;color: black;">Enter Percentage </label>
                     <div class="form-group">
                         <input type="text" class="form-control" id="percentage" name="percentage"
-                             [(ngModel)]="offerModel.percentage"
+                             [(ngModel)]="membershipModel.percentage"
                             placeholder="Enter Percentage" />
                     </div>
-                </div>
-               
-                  
+                </div>  
                 <div class="col-md-2">
-                    <label class="col-form-label" style="font-size: 20px;color: black;">Offer Price
+                    <label class="col-form-label" style="font-size: 20px;color: black;">Membership Price
                </label>
-               
-               
                     <div class="form-group">
                         <input type="text" class="form-control" id="fname" name="fname" disabled
-                            value= "{{offerprice}} ₹" [(ngModel)]="offerModel.offerprice"/>
-                            
+                            value= "{{membershipprice}} ₹" [(ngModel)]="membershipModel.membershipprice"/>  
                     </div>
                 </div>
-            
             </div>
             <br>
             <div class="row">
@@ -185,10 +187,10 @@
                     <button type="button" class="btn btn-info btn-round ml5" (click)="generateInvoicePDF()"><i
                             class="fa fa-file-pdf-o"></i>
                         Invoice(PDF)</button>
-                    <button type="submit" class="btn btn-info btn-round ml5" (click)="saveOfferDetail(offerModel)">
+                    <button type="submit" class="btn btn-info btn-round ml5" (click)="saveMembershipDetail(membershipModel)">
                         <i class="fa fa-paper-plane" aria-hidden="true"></i> Submit
                     </button>
-                    <button type="submit" class="btn btn-danger btn-round" (click)="backToOffer()">
+                    <button type="submit" class="btn btn-danger btn-round" (click)="backToMembership()">
                         <i class="fa fa-times" aria-hidden="true"></i> Cancel
                     </button>
                 </div>
@@ -196,18 +198,18 @@
 
         </div>
     </div>
-    <div class="row" *ngIf="!selectOffer">
+    <div class="row" *ngIf="!selectMembership">
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
                     <div class="row">
                         <div class="col-md-6">
-                            <h4 class="card-title"> Offer List</h4>
+                            <h4 class="card-title"> Membership List</h4>
                         </div>
                         <div class="ml-md-auto">
                             <button type="submit" *ngIf="isDashboard" class="btn btn-info btn-round" data-toggle="modal"
-                                data-target="#addOfferModal">
-                                <i class="fa fa-plus" aria-hidden="true"></i> Add Offer
+                                data-target="#addMembershipModal">
+                                <i class="fa fa-plus" aria-hidden="true"></i> Add Membership
                             </button>
                         </div>
                         <div class="ml-md-auto">
@@ -217,8 +219,8 @@
                         <div class="col-md-3 ml-md-auto">
                             <div class="form-group" style="margin-top: 8px !important;">
                                 <input type="search" id="form1" class="form-control"
-                                    placeholder="Offer Name" [(ngModel)]="search"
-                                    (keyup)="searchOfferList($event.target.value)" aria-label="Search" />
+                                    placeholder="Membership Name" [(ngModel)]="search"
+                                    (keyup)="searchMembershipList($event.target.value)" aria-label="Search" />
                             </div>
                         </div>
 
@@ -230,44 +232,47 @@
                             <thead class="text-primary">
                                 <th class="text-center"></th>
                                 <th class="text-center">#</th>
-                                <th class="text-center">Offer Name</th>
-                                <th class="text-center">Offer Price</th>
+                                <th class="text-center">Membership Package Name</th>
+                                <th class="text-center">Membership Price</th>
                                 <th class="text-center">Total Price</th>
-                                <th class="text-center"> Discount</th>
+                                <th class="text-center"> Quantity</th>
+                                <th class="text-right">Final Price</th>
                                 <th class="text-right">Actions</th>
                             </thead>
                             <tbody>
                                 <tr
-                                    *ngFor="let item of offer | paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
+                                    *ngFor="let item of membership | paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
                                     <td>
                                         <div class="form-check">
                                             <label class="form-check-label">
                                                 <input class="form-check-input" name="list_name"
-                                                    (change)="seletedOfferDetails(item)" type="checkbox" />
+                                                    (change)="seletedMembershipDetails(item)" type="checkbox" />
                                                 <span class="form-check-sign"></span>
                                             </label>
                                         </div>
                                     </td>
                                     
+                                    
                                  
                                     <td class="text-center">{{ item.index }}</td>
                                     
-                                    <td class="text-center">{{ item.offername }}</td>
-                                    <td class="text-center">{{ item.offerprice }}</td>
+                                    <td class="text-center">{{ item.membershipname }}</td>
+                                    <td class="text-center">{{ item.membershipprice }}</td>
                                     <td class="text-center">{{ item.totalprice }}</td>
-                                    <td class="text-center">{{ item.percentage }} %</td>
+                                    <td class="text-center">{{ item.quantity}}</td>
+                                    <td class="text-center">{{ item.finalprice}}</td>
                                     <td class="text-right">
                                         <button type="button" rel="tooltip" class="btn btn-info btn-icon btn-sm">
-                                            <i class="fa fa-eye" (click)="onlyViewOfferDetails(item.id)"></i>
+                                            <i class="fa fa-eye" (click)="onlyViewMembershipDetails(item.id)"></i>
                                         </button>
                                         &nbsp;
                                         <button type="button" rel="tooltip" class="btn btn-success btn-icon btn-sm">
-                                            <i class="fa fa-edit" data-toggle="modal" data-target="#offerModal"
-                                                (click)="viewOfferDetails(item)"></i>
+                                            <i class="fa fa-edit" data-toggle="modal" data-target="#membershipModal"
+                                                (click)="viewMembershipDetails(item)"></i>
                                         </button>
                                         &nbsp;
                                         <button type="button" rel="tooltip" class="btn btn-danger btn-icon btn-sm"
-                                            (click)="removeOfferList(item.id)">
+                                            (click)="removeMembershipList(item.id)">
                                             <i class="fa fa-times"></i>
                                         </button>
                                     </td>
@@ -289,15 +294,14 @@
         </div>
 
     </div>
- 
-    <div class="card" *ngIf="viewOfferAllData">
+    <div class="card" *ngIf="viewMembershipAllData">
         <div class="card-header">
             <div class="row">
                 <div class="col-md-8">
-                    <h4 class="card-title">Offer Appointment List</h4>
+                    <h4 class="card-title">Membership Appointment List</h4>
                 </div>
                 <div class="ml-md-auto">
-                    <button type="cancel" class="btn btn-danger btn-round" (click)="backToOffer()" routerLink='/offer'>
+                    <button type="cancel" class="btn btn-danger btn-round" (click)="backToMembership()" routerLink='/membership'>
                         <i class="fa fa-arrow-left"></i> Back
                     </button>
                 </div>
@@ -308,23 +312,25 @@
                 <table class="table">
                     <thead class="text-primary">
                         <th class="text-center">#</th>
-                        <th class="text-center">Offer Id</th>
+                        <th class="text-center">Membership Id</th>
                         <th class="text-center">Services Name</th>
-                        <th class="text-center">Offer Name</th>
-                        <th class="text-center">Offer Price</th>
+                        <th class="text-center">Membership Package Name</th>
+                        <th class="text-center">Membership Price</th>
+                        <th class="text-center">Final Price</th>
                         <th class="text-right">Actions</th>
                     </thead>
                     <tbody>
                         <tr
-                            *ngFor="let item of offerData |  paginate: { id:'listing_pagination',itemsPerPage: 5, currentPage: page,totalItems:totalRecords }">
+                            *ngFor="let item of membershipData |  paginate: { id:'listing_pagination',itemsPerPage: 5, currentPage: page,totalItems:totalRecords }">
                             <td class="text-center">{{ item.index }}</td>
-                            <td class="text-center">{{ item.offerid }}</td>
+                            <td class="text-center">{{ item.membershipid }}</td>
                             <td class="text-center">{{ item.servicesname }}</td>
-                            <td class="text-center">{{ item.offername }}</td>
-                            <td class="text-center">{{ item.offerprice}}</td>
+                            <td class="text-center">{{ item.membershipname }}</td>
+                            <td class="text-center">{{ item.membershipprice}}</td>
+                            <td class="text-center">{{ item.finalprice}}</td>
                             <td class="text-right">
                                 <button type="button" rel="tooltip" class="btn btn-info btn-icon btn-sm">
-                                    <i class="fa fa-eye" data-toggle="modal" data-target="#offerServicesModal"
+                                    <i class="fa fa-eye" data-toggle="modal" data-target="#membershipServicesModal"
                                         (click)="openUsedServiceList(item)"></i>
                                 </button>
                             </td>
@@ -344,7 +350,7 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="offerServicesModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    <div class="modal fade" id="membershipServicesModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-xl modal-notice">
             <div class="modal-content">
@@ -410,7 +416,7 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="addOfferModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    <div class="modal fade" id="addMembershipModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-xl modal-notice">
             <div class="modal-content">
@@ -418,17 +424,17 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                         <i class="nc-icon nc-simple-remove"></i>
                     </button>
-                    <h5 class="modal-title" id="myModalLabel">Add New Offer</h5>
+                    <h5 class="modal-title" id="myModalLabel">Add New Membership</h5>
                 </div>
                 <div class="modal-body">
                     <div class="instruction">
                         <form class="form-horizontal" name="CustForm" #CustForm="ngForm">
                             <div class="row">
-                                <label class="col-md-2 col-form-label">Offer Name</label>
+                                <label class="col-md-2 col-form-label">Membership Package Name</label>
                                 <div class="col-md-4">
                                     <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
                                         <input type="text" class="form-control" id="fname" name="fname"
-                                            [(ngModel)]="offerModel.fname" placeholder=" Enter First Name " required
+                                            [(ngModel)]="membershipModel.fname" placeholder=" Enter First Name " required
                                             value="" pattern="^[a-zA-Z]+$" (focus)="focus = true" #fname="ngModel" />
                                     </div>
                                     <div *ngIf="fname.errors && (fname.dirty || fname.touched)"
@@ -442,18 +448,18 @@
                                     </div>
                                 </div>
                                 
-                                <label class="col-md-2 col-form-label">Offer Price</label>
+                                <label class="col-md-2 col-form-label">Membership Price</label>
                                 <div class="col-md-4">
                                     <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
                                         <input type="text" class="form-control" id="contact"
-                                            [(ngModel)]="offerModel.contact" name="contact"
-                                            placeholder="Enter Offer price" required value="" pattern="^[0-9].{9,9}$"
+                                            [(ngModel)]="membershipModel.contact" name="contact"
+                                            placeholder="Enter Membership price" required value="" pattern="^[0-9].{9,9}$"
                                             (focus)="focus = true" #contact="ngModel" />
                                     </div>
                                     <div *ngIf="contact.errors && (contact.dirty || contact.touched)"
                                         class="alert alert-danger">
                                         <div *ngIf="contact.errors.required">
-                                            offer Price is required.
+                                            membership Price is required.
                                         </div>
                                         <div [hidden]="!contact.errors('pattern')">
                                             Enter Only Numbers.
@@ -467,7 +473,7 @@
                     </div>
                 </div>
                 <div class="modal-footer justify-content-center">
-                    <button type="submit" class="btn btn-info btn-round" (click)="saveOfferDetail(offerModel)"
+                    <button type="submit" class="btn btn-info btn-round" (click)="saveMembershipDetail(membershipModel)"
                         [disabled]="!CustForm.form.valid" data-dismiss="modal"> 
                         <i class="fa fa-paper-plane" aria-hidden="true"></i> Submit
                     </button>

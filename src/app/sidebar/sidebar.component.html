@@ -6,8 +6,8 @@
     </a>
 
     <a routerLink="/dashboard" class="simple-text logo-normal">
-    Angrez The Salon
-  </a>
+        Angrez The Salon
+    </a>
 </div>
 
 
@@ -19,10 +19,13 @@
         </div>
         <div class="info">
             <a data-toggle="collapse" href="#collapseExample" class="collapsed">
-                <span>{{ userName }} <br>
-          <span style="color:gold">(Members)</span>
-                <b class="caret"></b>
-                </span>
+                <div class="row">
+                    <span class="fa fa-star" style="color: gold" *ngIf="vip==1"></span>&nbsp;{{userName}}
+                </div>
+                <span style="color:gold">(Members)</span>
+               
+                    <!-- <b class="caret"></b> -->
+               
             </a>
             <div class="clearfix"></div>
             <div class="collapse" id="collapseExample">

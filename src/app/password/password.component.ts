@@ -22,7 +22,7 @@ export class PasswordComponent implements OnInit {
   }
   focusOutFunction(val) {
     let data = {
-      id: localStorage.getItem('AdminId'),
+      id: localStorage.getItem('UserId'),
       pass: val,
       role: localStorage.getItem('role')
     }
@@ -40,7 +40,7 @@ export class PasswordComponent implements OnInit {
 
   updatePassword(val){
     let data = {
-      id: localStorage.getItem('AdminId'),
+      id: localStorage.getItem('UserId'),
       role: localStorage.getItem('role'),
       password: val
     };
