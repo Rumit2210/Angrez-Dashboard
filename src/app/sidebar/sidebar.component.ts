@@ -106,7 +106,13 @@ export const ROUTES: RouteInfo[] = [{
     icontype: 'fa fa-handshake-o',
     roles: "Admin",
 },
-
+{
+    path: '/banners',
+    title: 'Banners',
+    type: 'link',
+    icontype: 'fa fa-rupee',
+    roles: "Admin",
+}
 ];
 export const Employee: RouteInfo[] = [
     {
@@ -176,6 +182,13 @@ export const Customer: RouteInfo[] = [
         icontype: 'fa fa-rupee',
         roles: "Admin",
     },
+    {
+        path: '/banners',
+        title: 'Banners',
+        type: 'link',
+        icontype: 'fa fa-rupee',
+        roles: "Admin",
+    }
 
 ];
 @Component({

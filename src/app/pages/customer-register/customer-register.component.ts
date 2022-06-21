@@ -13,9 +13,9 @@ import { Customer } from "app/customer/customer.model";
 import { ApiService } from "app/api.service";
 
 declare var $: any;
-
+// moduleId: module.id,
 @Component({
-  moduleId: module.id,
+ 
   selector: "customer-register-cmp",
   templateUrl: "./customer-register.component.html",
 })
