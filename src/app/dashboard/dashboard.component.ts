@@ -926,6 +926,8 @@ export class DashboardComponent implements OnInit {
   appId: any;;
   monthlyexpensestotal: number = 0;
   expenseTotal: number = 0;
+  customerData: any[];
+
   constructor(
     private servicesService: ServicesService,
     private employeeService: EmployeeService,
@@ -1180,6 +1182,14 @@ export class DashboardComponent implements OnInit {
       this.usedServices = data;
       for (let i = 0; i < this.usedServices.length; i++) {
         this.usedServices[i].index = i + 1;
+      }
+    });
+  }
+  onlyViewCustomerDetails(id) {
+    this.customerService.getAllCustomerDataList(id).subscribe((data: any) => {
+      this.customerData = data;
+      for (let i = 0; i < this.customerData.length; i++) {
+        this.customerData[i].index = i + 1;
       }
     });
   }
