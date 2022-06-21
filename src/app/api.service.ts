@@ -98,7 +98,14 @@ export class ApiService {
   public static updateMembershipListURL: string = ApiService.HOST_URL + '/admin/UpdateMembershipList';
   public static removeMembershipDetailsURL: string = ApiService.HOST_URL + '/admin/removeMembershipDetails/';
   public static getAllMembershipURL: string = ApiService.HOST_URL + '/admin/getAllMembership/';
-  
+  public static getWebBannersURL: string = ApiService.HOST_URL + '/admin/GetWebBanners';
+  public static uploadBannersImageURL: string = ApiService.HOST_URL + '/admin/UploadBannersImage';
+  public static saveWebBannersURL: string = ApiService.HOST_URL + '/admin/SaveWebBanners';
+  public static getWebBannerURL: string = ApiService.HOST_URL + '/admin/GetWebBanner';
+  public static removeWebBannersURL: string = ApiService.HOST_URL + '/admin/RemoveWebBanners';
+  public static updateActiveWebStatusURL: string = ApiService.HOST_URL + '/admin/UpdateActiveWebBanners';
+
+
   showNotification(from, align, msg, color) {
     var color = color;
     $.notify({

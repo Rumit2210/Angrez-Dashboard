@@ -90,6 +90,7 @@ export class ProductsComponent implements OnInit {
       if (element.id == id) {
         this.selectedName = element.name;
       }
+      this.productsModel.category=this.selectedName;   
     })
 
   }
