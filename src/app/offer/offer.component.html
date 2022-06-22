@@ -1,6 +1,6 @@
 <div class="main-content">
-    
-    
+
+
     <div class="modal fade" id="offerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-xl modal-notice">
@@ -22,7 +22,7 @@
                                             [(ngModel)]="offerModel.fname" placeholder=" Enter First Name " />
                                     </div>
                                 </div>
-                                
+
                                 <label class="col-md-2 col-form-label">Offer Price</label>
                                 <div class="col-md-4">
                                     <div class="form-group">
@@ -31,7 +31,7 @@
                                             placeholder="Enter Offer Price" />
                                     </div>
                                 </div>
-                                
+
                             </div>
 
                         </form>
@@ -72,12 +72,12 @@
                     <label class="col-form-label">Offer Name</label>
                     <div class="form-group">
                         <input type="text" class="form-control" id="fname" [(ngModel)]="offerModel.offername"
-                            name="fname"  />
+                            name="fname" />
                     </div>
                 </div>
-                
-                
-            </div> 
+
+
+            </div>
 
             <div class="row" *ngFor="let add of addService; let ind = index">
                 <div class="col-md-4">
@@ -97,7 +97,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="col-md-1">
                     <i class="fa fa-plus-circle" aria-hidden="true" (click)="addServiceList(add)"
                         style="font-size: 33px !important; margin-top: 47% !important"></i>
@@ -116,24 +116,24 @@
                     <thead class="text-primary">
                         <th class="text-center">#</th>
                         <th class="text-center">Services Name</th>
-                        
+
                         <th class="text-center">Price</th>
-                        
+
                         <th class="text-right">Actions</th>
                     </thead>
                     <tbody *ngIf="addService[0].serpoint !=null">
                         <tr *ngFor="let item of addService; let i = index">
                             <td class="text-center">{{ i+1 }}</td>
                             <td class="text-center">{{ item.selectedServ}} </td>
-                            
+
                             <td class="text-center">{{ item.serprice }} ₹</td>
-                            
-                                <td class="text-right">
-                                    <button type="button" rel="tooltip" class="btn btn-info btn-icon btn-sm">
-                                        <i class="fa fa-eye" (click)="onlyViewOfferDetails(item.id)"></i>
-                                    </button>
-                                    &nbsp;
-                                  
+
+                            <td class="text-right">
+                                <button type="button" rel="tooltip" class="btn btn-info btn-icon btn-sm">
+                                    <i class="fa fa-eye" (click)="onlyViewOfferDetails(item.id)"></i>
+                                </button>
+                                &nbsp;
+
 
                                 <button type="button" rel="tooltip" class="btn btn-danger btn-icon btn-sm"
                                     (click)="removeItem(i)">
@@ -147,7 +147,7 @@
         </div>
         <div class="card-footer">
             <div class="row">
-                
+
                 <div class="col-md-2">
                     <label class="col-form-label" style="font-size: 20px;color: black;">Total
                         Price</label>
@@ -160,24 +160,23 @@
                     <label class="col-form-label" style="font-size: 20px;color: black;">Enter Percentage </label>
                     <div class="form-group">
                         <input type="text" class="form-control" id="percentage" name="percentage"
-                             [(ngModel)]="offerModel.percentage"
-                            placeholder="Enter Percentage" />
+                            [(ngModel)]="offerModel.percentage" placeholder="Enter Percentage" />
                     </div>
                 </div>
-               
-                  
+
+
                 <div class="col-md-2">
                     <label class="col-form-label" style="font-size: 20px;color: black;">Offer Price
-               </label>
-               
-               
+                    </label>
+
+
                     <div class="form-group">
                         <input type="text" class="form-control" id="fname" name="fname" disabled
-                            value= "{{offerprice}} ₹" [(ngModel)]="offerModel.offerprice"/>
-                            
+                            value="{{offerprice}} ₹" [(ngModel)]="offerModel.offerprice" />
+
                     </div>
                 </div>
-            
+
             </div>
             <br>
             <div class="row">
@@ -216,9 +215,9 @@
                         </div>
                         <div class="col-md-3 ml-md-auto">
                             <div class="form-group" style="margin-top: 8px !important;">
-                                <input type="search" id="form1" class="form-control"
-                                    placeholder="Offer Name" [(ngModel)]="search"
-                                    (keyup)="searchOfferList($event.target.value)" aria-label="Search" />
+                                <input type="search" id="form1" class="form-control" placeholder="Offer Name"
+                                    [(ngModel)]="search" (keyup)="searchOfferList($event.target.value)"
+                                    aria-label="Search" />
                             </div>
                         </div>
 
@@ -248,10 +247,10 @@
                                             </label>
                                         </div>
                                     </td>
-                                    
-                                 
+
+
                                     <td class="text-center">{{ item.index }}</td>
-                                    
+
                                     <td class="text-center">{{ item.offername }}</td>
                                     <td class="text-center">{{ item.offerprice }}</td>
                                     <td class="text-center">{{ item.totalprice }}</td>
@@ -289,7 +288,7 @@
         </div>
 
     </div>
- 
+
     <div class="card" *ngIf="viewOfferAllData">
         <div class="card-header">
             <div class="row">
@@ -371,7 +370,7 @@
                                     <td class="text-center">{{ item.price }}</td>
                                     <td class="text-center">{{ item.point }}</td>
                                 </tr>
-                                
+
                             </tbody>
                         </table>
                     </div>
@@ -441,7 +440,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+
                                 <label class="col-md-2 col-form-label">Offer Price</label>
                                 <div class="col-md-4">
                                     <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
@@ -460,7 +459,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+
                             </div>
 
                         </form>
@@ -468,7 +467,7 @@
                 </div>
                 <div class="modal-footer justify-content-center">
                     <button type="submit" class="btn btn-info btn-round" (click)="saveOfferDetail(offerModel)"
-                        [disabled]="!CustForm.form.valid" data-dismiss="modal"> 
+                        [disabled]="!CustForm.form.valid" data-dismiss="modal">
                         <i class="fa fa-paper-plane" aria-hidden="true"></i> Submit
                     </button>
                     <button type="submit" class="btn btn-danger btn-round" data-dismiss="modal">
@@ -476,6 +475,169 @@
                     </button>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="hostingService">
+        <h2 class="tagLine">Select the Best Plan for Your Site</h2>
+        <div class="row d-flex">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-3">
+                <div class="card">
+                    <div class="card-header text-center">
+                        <h5>Single Web Hosting</h5>
+                        <h6>Ideal solution for beginners</h6>
+                    </div>
+                    <div class="card-body text-center">
+                        <div class="card-body">
+                            <s class="text-secondary">&#8377; 299.00</s><span class="badge bg-info">Save 77%</span>
+
+                            <div class="price">
+                                <h1 class="display-4"><span class="rupees">&#8377;</span> <span
+                                        class="trontext">69.00</span><span class="pertext">/mo</span>
+                                </h1>
+                            </div>
+                            <button type="button" class="buttons btn btn-outline-primary">Add to Cart</button>
+                            <p class="text-secondary" style="margin-top: 15px; margin-bottom: 35px">₹159.00/mo when you
+                                renew
+                            </p>
+
+                            <div class="separated-features-ab-test-original">
+                                <ul class="listing">
+                                    <li class="servicesList">
+                                        <b>1</b> Website
+                                    </li>
+                                    <li class="servicesList">
+                                        <b>30 GB</b> SSD Storage
+                                    </li>
+                                    <li class="servicesList">
+                                        <b>~10000</b> Visits Monthly &nbsp;
+                                    </li>
+                                    <li class="servicesList">
+                                        <b>1</b> Email Account
+                                    </li>
+                                    <li class="servicesList">
+                                        <b>Free</b> SSL (₹855.00 value) &nbsp;
+                                    </li>
+                                    <li class="servicesList">
+                                        <b>Free</b> Domain
+                                    </li>
+                                    <li class="servicesList">
+                                        <b>100 GB</b> Bandwidth
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+                        <hr id="footers">
+                        <button type="button" class="buttons btn btn-outline-primary">Show More</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="card">
+                    <div class="card-header text-center">
+                        <h5>Premium Web Hosting</h5>
+                        <h6>Perfect package for personal websites</h6>
+                    </div>
+                    <div class="card-body text-center">
+                        <div class="card-body">
+                            <s class="text-secondary">&#8377; 459.00</s><span class="badge bg-info">Save 68%</span>
+
+                            <div class="price">
+                                <h1 class="display-4"><span class="rupees">&#8377;</span> <span
+                                        class="trontext">149.00</span><span class="pertext">/mo</span>
+                                </h1>
+                            </div>
+                            <button type="button" class="buttons btn btn-outline-primary">Add to Cart</button>
+                            <p class="text-secondary" style="margin-top: 15px; margin-bottom: 35px">₹249.00/mo when you
+                                renew
+                            </p>
+
+                            <div class="separated-features-ab-test-original">
+                                <ul class="listing">
+                                    <li class="servicesList">
+                                        <b>1</b> Website
+                                    </li>
+                                    <li class="servicesList">
+                                        <b>30 GB</b> SSD Storage
+                                    </li>
+                                    <li class="servicesList">
+                                        <b>~10000</b> Visits Monthly &nbsp;
+                                    </li>
+                                    <li class="servicesList">
+                                        <b>1</b> Email Account
+                                    </li>
+                                    <li class="servicesList">
+                                        <b>Free</b> SSL (₹855.00 value) &nbsp;
+                                    </li>
+                                    <li class="servicesList">
+                                        <b>Free</b> Domain
+                                    </li>
+                                    <li class="servicesList">
+                                        <b>100 GB</b> Bandwidth
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+                        <hr id="footers">
+                        <button type="button" class="buttons btn btn-outline-primary">Show More</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="card">
+                    <div class="card-header text-center">
+                        <h5>Business Web Hosting</h5>
+                        <h6>Optimized for small Business</h6>
+                    </div>
+                    <div class="card-body text-center">
+                        <div class="card-body">
+                            <s class="text-secondary">&#8377; 649.00</s><span class="badge bg-info">Save 57%</span>
+
+                            <div class="price">
+                                <h1 class="display-4"><span class="rupees">&#8377;</span> <span
+                                        class="trontext">279.00</span><span class="pertext">/mo</span>
+                                </h1>
+                            </div>
+                            <button type="button" class="buttons btn btn-outline-primary">Add to Cart</button>
+                            <p class="text-secondary" style="margin-top: 15px; margin-bottom: 35px">₹499.00/mo when you
+                                renew
+                            </p>
+
+                            <div class="separated-features-ab-test-original">
+                                <ul class="listing">
+                                    <li class="servicesList">
+                                        <b>1</b> Website
+                                    </li>
+                                    <li class="servicesList">
+                                        <b>30 GB</b> SSD Storage
+                                    </li>
+                                    <li class="servicesList">
+                                        <b>~10000</b> Visits Monthly &nbsp;
+                                    </li>
+                                    <li class="servicesList">
+                                        <b>1</b> Email Account
+                                    </li>
+                                    <li class="servicesList">
+                                        <b>Free</b> SSL (₹855.00 value) &nbsp;
+                                    </li>
+                                    <li class="servicesList">
+                                        <b>Free</b> Domain
+                                    </li>
+                                    <li class="servicesList">
+                                        <b>100 GB</b> Bandwidth
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+                        <hr id="footers">
+                        <button type="button" class="buttons btn btn-outline-primary">Show More</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2"></div>
         </div>
     </div>
 </div>

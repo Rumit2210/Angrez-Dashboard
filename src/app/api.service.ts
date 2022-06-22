@@ -41,12 +41,13 @@ export class ApiService {
   public static removeServicesListURL: string = ApiService.HOST_URL + '/admin/RemoveServicesList/';
   public static forgotPasswordURL: string = ApiService.HOST_URL + '/admin/ForgotPassword';
   public static getOneTimePasswordURL: string = ApiService.HOST_URL + '/admin/GetOneTimePassword';
-  public static updatePasswordURL: string = ApiService.HOST_URL + '/admin/updatePasswordAccordingRole';
+  public static updatePasswordURL: string = ApiService.HOST_URL + '/admin/UpdatePassword';
   public static updateActiveStatusURL: string = ApiService.HOST_URL + '/admin/UpdateActiveStatus';
   public static updateEnquiryStatusURL: string = ApiService.HOST_URL + '/admin/UpdateEnquiryStatus';
   public static getCustomerTotalPointsURL: string = ApiService.HOST_URL + '/admin/GetCustomerTotalPoints';
   public static updateEmployeeListURL: string = ApiService.HOST_URL + '/admin/UpdateEmployeeList';
   public static getAllCustomerDataListURL: string = ApiService.HOST_URL + '/admin/GetAllCustomerDataList';
+  public static getCustomerByIdURL: string = ApiService.HOST_URL + '/admin/GetCustomerById';
   public static getUsedServicesByCustomerURL: string = ApiService.HOST_URL + '/admin/GetUsedServicesByCustomer';
   public static getAllCompletedServicesURL: string = ApiService.HOST_URL + '/admin/GetAllCompletedServices';
   public static saveAdminLoginURL: string = ApiService.HOST_URL + '/admin/login';
@@ -66,9 +67,9 @@ export class ApiService {
   public static removeexpensesDetailsURL: string = ApiService.HOST_URL + '/admin/RemoveExpensesDetails/';
   public static updateExpensesDetailsURL: string = ApiService.HOST_URL + '/admin/UpdateExpensesDetails';
   public static getMonthlyExpensesURL: string = ApiService.HOST_URL + '/admin/getMonthlyExpensesList';
-  public static saveProductsListURL: string = ApiService.HOST_URL + '/admin/SaveProductsListURL';
-  public static getAllProductsListURL: string = ApiService.HOST_URL + '/admin/GetAllProductsListURL';
-  public static removeProductDetailsURL: string = ApiService.HOST_URL + '/admin/RemoveProductDetailsURL/';
+  public static saveProductsListURL: string = ApiService.HOST_URL + '/admin/SaveProductsList';
+  public static getAllProductsListURL: string = ApiService.HOST_URL + '/admin/GetAllProductsList';
+  public static removeProductDetailsURL: string = ApiService.HOST_URL + '/admin/RemoveProductDetails/';
   public static getAllSalaryListURL: string = ApiService.HOST_URL + '/admin/GetAllSalaryList';
   public static updateSalaryStatusURL: string = ApiService.HOST_URL + '/admin/UpdateSalaryStatus';
   public static updateSalaryListURL: string = ApiService.HOST_URL + '/admin/UpdateSalaryList';
@@ -101,7 +102,14 @@ export class ApiService {
   public static updateMembershipListURL: string = ApiService.HOST_URL + '/admin/UpdateMembershipList';
   public static removeMembershipDetailsURL: string = ApiService.HOST_URL + '/admin/removeMembershipDetails/';
   public static getAllMembershipURL: string = ApiService.HOST_URL + '/admin/getAllMembership/';
-  
+  public static getWebBannersURL: string = ApiService.HOST_URL + '/admin/GetWebBanners';
+  public static uploadBannersImageURL: string = ApiService.HOST_URL + '/admin/UploadBannersImage';
+  public static saveWebBannersURL: string = ApiService.HOST_URL + '/admin/SaveWebBanners';
+  public static getWebBannerURL: string = ApiService.HOST_URL + '/admin/GetWebBanner';
+  public static removeWebBannersURL: string = ApiService.HOST_URL + '/admin/RemoveWebBanners';
+  public static updateActiveWebStatusURL: string = ApiService.HOST_URL + '/admin/UpdateActiveWebBanners';
+
+
   showNotification(from, align, msg, color) {
     var color = color;
     $.notify({
