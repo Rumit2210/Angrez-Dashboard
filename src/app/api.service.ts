@@ -82,6 +82,9 @@ export class ApiService {
   public static uploadMainImageURL: string = ApiService.HOST_URL + '/admin/UploadProductImage/';
   public static uploadMultiImageURL: string = ApiService.HOST_URL + '/admin/UploadMultiProductImage/';
   public static removeImageURL: string = ApiService.HOST_URL + '/admin/RemoveRecentUoloadImage/';
+  
+  public static courosalImageURL: string = ApiService.HOST_URL + '/admin/CourosalImage/';
+
   public static verificationURL: string = ApiService.HOST_URL + '/admin/Verification';
   public static getRegisterOtpURL: string = ApiService.HOST_URL + '/admin/GetRegisterOtp';
   public static saveUserCustomerListURL: string = ApiService.HOST_URL + '/admin/SaveUserCustomerList';
