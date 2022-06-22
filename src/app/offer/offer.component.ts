@@ -26,6 +26,7 @@ export class OfferComponent implements OnInit {
   public offer: Offer[] = [];
   disc: number;
   public offerList: Offer[];
+  public activeOffers: Offer[];
   selectedEmp: any;
   empId: any;
   selectedServ: any;
@@ -57,7 +58,8 @@ export class OfferComponent implements OnInit {
   addService: any = [];
   valu: 0;
   isDashboard: boolean = false;
-   percentage: number = 0;
+  adminRole: any;
+  percentage: number = 0;
   constructor(
     private servicesService: ServicesService,
     private employeeService: EmployeeService,
@@ -65,10 +67,11 @@ export class OfferComponent implements OnInit {
     private apiService: ApiService,
     private router: Router
   ) {
-
+    this.adminRole = localStorage.getItem('role');
     this.getAllEmployee();
     this.getAllServices();
     this.getOfferDetails();
+    this.getActiveOffers();
     if (this.router.routerState.snapshot.url === '/dashboard') {
       this.isDashboard = true;
     }
@@ -119,7 +122,6 @@ export class OfferComponent implements OnInit {
     this.totalPoint = 0;
     this.totalprice = 0;
     this.totalTime = 0;
-    debugger
     this.addService.forEach(element => {
       if (element.serprice != undefined) {
         this.totalprice = this.totalprice + element.serprice;
@@ -141,19 +143,18 @@ export class OfferComponent implements OnInit {
   }
 
   saveOfferDetail(data) {
-    
+
     this.offerModel.totalprice = this.totalprice;
     this.offerModel.offerprice = this.offerprice;
     var discount: number = +this.disc;
     this.offerModel.percentage = discount;
-    this.offerModel.services=this.addService;
-    debugger
+    this.offerModel.services = this.addService;
     this.offerService.saveOfferList(this.offerModel).subscribe((data: any) => {
       this.offerList = data;
-      debugger
+
       this.apiService.showNotification('top', 'right', 'Offer Added Successfully.', 'success');
       this.getOfferDetails();
-      location.reload();
+      // location.reload();
     })
   }
 
@@ -167,9 +168,35 @@ export class OfferComponent implements OnInit {
       }
     });
   }
+  activeBanners(ind) {
+    this.offer[ind].status = true;
+    this.offerService.activeDeavctiveOffers(this.offer[ind]).subscribe((req) => {
+    })
+  }
+  deactiveBanners(ind) {
+    this.offer[ind].status = false;
+    this.offerService.activeDeavctiveOffers(this.offer[ind]).subscribe((req) => {
+
+    })
+  }
+  getActiveOffers() {
+
+    this.offerService.getActiveOfferList().subscribe((data: any) => {
+      this.activeOffers = data;
+      this.activeOffers.forEach(element => {
+        this.offerService.getAllOfferDataList(element.id).subscribe((data: any) => {
+          element.offeredServices = data;
+        });
+      });
+      
+     
+      for (let i = 0; i < this.activeOffers.length; i++) {
+        this.activeOffers[i].index = i + 1;
+      }
+    });
+  }
 
   getOfferVal() {
-    debugger
     this.offerprice = this.totalprice - (this.totalprice * (this.disc / 100));
   }
   searchOfferList(val) {
@@ -195,9 +222,9 @@ export class OfferComponent implements OnInit {
     })
   }
   backToOffer() {
-    this.custAppointment=true;
+    this.custAppointment = true;
     this.selectOffer = false;
-    this.viewOfferAllData=false;
+    this.viewOfferAllData = false;
   }
   getOfferPoints() {
     this.offerService.getCustAllPoint(this.selectedCustId).subscribe((data: any) => {
@@ -209,115 +236,6 @@ export class OfferComponent implements OnInit {
         }
       });
     });
-  }
-  seletedOfferDetails(data) {
-    this.offerModel = data;
-    this.selectOffer = true;
-    this.getOfferPoints();
-  }
-  saveAppointmentDetails() {
-
-    this.appointmentModel.lessPoints = 0;
-    this.appointmentModel.totalpoint = this.totalPoint;
-    this.appointmentModel.lessPoints = this.tCustPoint - this.appointmentModel.percentage;
-    this.appointmentModel.lessPoints = this.appointmentModel.lessPoints + this.appointmentModel.totalpoint;
-    this.appointmentModel.selectedService = this.addService;
-    this.appointmentModel.offerprice = this.offerprice;
-    this.appointmentModel.offername = this.offername;
-    this.appointmentModel.totalpoint = this.totalPoint;
-    this.appointmentModel.isactive = true;
-    if (this.appointmentModel.percentage > this.appointmentModel.tCustPoint) {
-      this.apiService.showNotification('top', 'right', 'You can not redeem point more than total point.', 'danger');
-    }
-    else {
-      this.offerService.saveAppointmentList(this.appointmentModel).subscribe((data: any) => {
-        this.appointment = data;
-        this.router.navigate(['dashboard']);
-        location.reload();
-        this.apiService.showNotification('top', 'right', 'Appointment Successfully Booked.', 'success');
-      })
-    }
-
-  }
-  generateInvoicePDF(action = 'open') {
-
-    let docDefinition = {
-      content: [
-        {
-          image: 'testImage'
-        },
-
-        {
-          text: 'Angrez The Salon',
-          fontSize: 16,
-          alignment: 'center',
-          color: '#047886'
-        },
-        {
-          text: 'INVOICE',
-          fontSize: 20,
-          bold: true,
-          alignment: 'center',
-          decoration: 'underline',
-          color: '#ef8157'
-        }, {}, {}, {},
-        {
-          text: 'Offer Details',
-          style: 'sectionHeader'
-        },
-        {
-          columns: [
-            [
-              {
-                text: this.offerModel.fname + '' + this.offerModel.lname,
-                bold: true
-              },           
-            ],
-            [    
-              {
-                text: `Bill No : ${((Math.random() * 1000).toFixed(0))}`,
-                alignment: 'right'
-              }
-            ]
-          ]
-        }, {}, {},
-        {
-          text: 'Service Details',
-          style: 'sectionHeader'
-        },
-        {
-          table: {
-            headerRows: 1,
-            widths: ['*', 'auto', 'auto'],
-            body: [
-              ['Service', 'Price', 'Amount'],
-
-              
-            ]
-          }
-        },
-        {
-          columns: [
-         
-            [{ text: 'Signature', alignment: 'right', italics: true }],
-          ]
-        },
-        {
-          ul: [
-            'Order can be return in max 10 days.',
-            'Warrenty of the product will be subject to the manufacturer terms and conditions.',
-            'This is system generated invoice.',
-          ],
-        },
-      ]
-    };
-    if (action === 'download') {
-      pdfMake.createPdf(docDefinition).download();
-    } else if (action === 'print') {
-      pdfMake.createPdf(docDefinition).print();
-    } else {
-      pdfMake.createPdf(docDefinition).open();
-    }
   }
   viewOfferDetails(data) {
     this.totalOfferPoint = 0;
@@ -387,18 +305,6 @@ export class OfferComponent implements OnInit {
     this.selectOffer = false;
     this.custAppointment = false;
     this.viewOfferAllData = false;
-  }
-  openUsedServiceList(obj) {
-
-    this.totalPriceForDetails = obj.totalprice
-    this.totalPointForDetails = obj.totalpoint
-    this.offerService.getServicesListUsingId(obj.id).subscribe((data: any) => {
-      this.usedServices = data;
-
-      for (let i = 0; i < this.usedServices.length; i++) {
-        this.usedServices[i].index = i + 1;
-      }
-    });
   }
 
 }

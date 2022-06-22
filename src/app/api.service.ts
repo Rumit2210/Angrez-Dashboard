@@ -59,6 +59,7 @@ export class ApiService {
   public static getAllOfferDataListURL: string = ApiService.HOST_URL + '/admin/GetAllOfferDataList';
   public static getUsedServicesByOfferURL: string = ApiService.HOST_URL + '/admin/GetUsedServicesByOffer';
   public static getAllOfferURL: string = ApiService.HOST_URL + '/admin/GetAllOffer';
+  public static getActiveOfferURL: string = ApiService.HOST_URL + '/admin/GetActiveOffer';
   public static getOfferTotalPointsURL: string = ApiService.HOST_URL + '/admin/GetOfferTotalPoints';
   public static updateOfferListURL: string = ApiService.HOST_URL + '/admin/UpdateOfferList';
   public static removeOfferDetailsURL: string = ApiService.HOST_URL + '/admin/removeOfferDetails/';
@@ -105,6 +106,7 @@ export class ApiService {
   public static getWebBannerURL: string = ApiService.HOST_URL + '/admin/GetWebBanner';
   public static removeWebBannersURL: string = ApiService.HOST_URL + '/admin/RemoveWebBanners';
   public static updateActiveWebStatusURL: string = ApiService.HOST_URL + '/admin/UpdateActiveWebBanners';
+  public static updateActiveOffersURL: string = ApiService.HOST_URL + '/admin/UpdateActiveOffers';
 
 
   showNotification(from, align, msg, color) {

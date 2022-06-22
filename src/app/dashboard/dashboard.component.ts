@@ -940,6 +940,7 @@ export class DashboardComponent implements OnInit {
     private router: Router
   ) {
     this.adminRole = localStorage.getItem('role');
+    debugger
 
     this.getAllServices();
     this.getAllEmployee();

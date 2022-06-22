@@ -12,6 +12,8 @@ export class Offer {
         public services?: any,
         public totalprice?: number,
         public price?: number,
+        public status?:Boolean,
+        public offeredServices:any=[]
 
     ) {
     }
