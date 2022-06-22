@@ -66,9 +66,9 @@ export class ApiService {
   public static removeexpensesDetailsURL: string = ApiService.HOST_URL + '/admin/RemoveExpensesDetails/';
   public static updateExpensesDetailsURL: string = ApiService.HOST_URL + '/admin/UpdateExpensesDetails';
   public static getMonthlyExpensesURL: string = ApiService.HOST_URL + '/admin/getMonthlyExpensesList';
-  public static saveProductsListURL: string = ApiService.HOST_URL + '/admin/SaveProductsListURL';
-  public static getAllProductsListURL: string = ApiService.HOST_URL + '/admin/GetAllProductsListURL';
-  public static removeProductDetailsURL: string = ApiService.HOST_URL + '/admin/RemoveProductDetailsURL/';
+  public static saveProductsListURL: string = ApiService.HOST_URL + '/admin/SaveProductsList';
+  public static getAllProductsListURL: string = ApiService.HOST_URL + '/admin/GetAllProductsList';
+  public static removeProductDetailsURL: string = ApiService.HOST_URL + '/admin/RemoveProductDetails/';
   public static getAllSalaryListURL: string = ApiService.HOST_URL + '/admin/GetAllSalaryList';
   public static updateSalaryStatusURL: string = ApiService.HOST_URL + '/admin/UpdateSalaryStatus';
   public static updateSalaryListURL: string = ApiService.HOST_URL + '/admin/UpdateSalaryList';

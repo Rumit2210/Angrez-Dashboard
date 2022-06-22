@@ -154,27 +154,7 @@ export const Customer: RouteInfo[] = [
         icontype: 'nc-icon nc-bank',
         roles: "Admin",
     },
-    {
-        path: '/customer',
-        title: 'Customer',
-        type: 'link',
-        icontype: 'fa fa-user',
-        roles: "Admin",
-    },
-    {
-        path: '/enquiry',
-        title: 'Enquiry',
-        type: 'link',
-        icontype: 'fa fa-question',
-        roles: "Admin",
-    },
-    {
-        path: '/products',
-        title: 'Products',
-        type: 'link',
-        icontype: 'fa fa-cubes',
-        roles: "Admin",
-    },
+     
     {
         path: '/servicescustm',
         title: 'Ratecard',
@@ -182,13 +162,7 @@ export const Customer: RouteInfo[] = [
         icontype: 'fa fa-rupee',
         roles: "Admin",
     },
-    {
-        path: '/banners',
-        title: 'Banners',
-        type: 'link',
-        icontype: 'fa fa-rupee',
-        roles: "Admin",
-    }
+  
 
 ];
 @Component({

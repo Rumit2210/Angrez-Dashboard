@@ -21,7 +21,8 @@ export class Customer {
         public vip?: boolean,
         public otp?: number,
         public password?: any,
-        public role?:any
+        public role?:any,
+        public vipbonus?:any
 
     ) {
     }
