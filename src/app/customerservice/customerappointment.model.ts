@@ -11,6 +11,7 @@ export class CustomerAppointment {
         public isactive?: boolean,
         public createddate?: Date,
         public updateddate?: Date,
+        public selectdate?: Date,
         public redeempoints: number = 0,
         public lessPoints?: number,
         public tCustPoint?: number,
