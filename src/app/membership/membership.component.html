@@ -125,15 +125,15 @@
                             <div class="col-md-11">
                                 <label class="col-form-label" style="font-size: 20px;color: black;"></label>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" id="quantity" name="quantity"
-                                         [(ngModel)]="membershipModel.quantity"
+                                    <input type="text" class="form-control" id="quantity" name="quantity"  (focusout)="UpdatePricesTotal(item,i)"
+                                         [(ngModel)]="item.quantity"
                                         placeholder="Enter Quantity" />
                                 </div>
                             </div>
                             <td class="text-center">
                                 <div class="form-group">
                                     <input type="text" class="form-control" id="fname" name="fname" disabled
-                                        value= "{{finalprice}} ₹" [(ngModel)]="membershipModel.finalprice"/>  
+                                        value= "{{item.finalprice}} ₹" [(ngModel)]="item.finalprice"/>  
                                 </div>
                             </td> 
                                 <td class="text-right">
@@ -167,7 +167,7 @@
                 <div class="col-md-3">
                     <label class="col-form-label" style="font-size: 20px;color: black;">Enter Percentage </label>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="percentage" name="percentage"
+                        <input type="text" class="form-control" id="percentage" name="percentage"   (focusout)="UpdatePricesTotalbyPercentage()"
                              [(ngModel)]="membershipModel.percentage"
                             placeholder="Enter Percentage" />
                     </div>
