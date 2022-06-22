@@ -953,6 +953,7 @@ export class DashboardComponent implements OnInit {
     this.getAllCompletedAppointment();
     this.getExpensesDetails();
     this.GetMonthlyExpensesTotal();
+    this.onlyViewCustomerDetails();
   }
   getAllEmployee() {
     this.employeeService.getAllEmployeeList().subscribe((data: any) => {
@@ -1185,8 +1186,8 @@ export class DashboardComponent implements OnInit {
       }
     });
   }
-  onlyViewCustomerDetails(id) {
-    this.customerService.getAllCustomerDataList(id).subscribe((data: any) => {
+  onlyViewCustomerDetails() {
+    this.customerService.getCustomerById(localStorage.getItem('UserId')).subscribe((data: any) => {
       this.customerData = data;
       for (let i = 0; i < this.customerData.length; i++) {
         this.customerData[i].index = i + 1;

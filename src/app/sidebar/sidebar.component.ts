@@ -162,6 +162,13 @@ export const Customer: RouteInfo[] = [
         icontype: 'fa fa-rupee',
         roles: "Admin",
     },
+    {
+        path: '/customerservice',
+        title: 'Book Appointment',
+        type: 'link',
+        icontype: 'fa fa-calendar',
+        roles: "Admin",
+    },
   
 
 ];

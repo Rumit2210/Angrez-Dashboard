@@ -220,7 +220,7 @@
                         <div class="col-7 col-md-8">
                             <div class="numbers">
                                 <p class="card-category">Book Your Appointment</p>
-                                <p class="card-title">Total: {{customerList.length}}
+                                <p class="card-title">Total: {{customerData.length}}
                                 </p>
                             </div>
                         </div>
@@ -634,11 +634,12 @@
         <div class="card-header">
             <div class="row">
                 <div class="col-md-8">
-                    <h4 class="card-title">Customer Appointment List</h4>
+                    <h4 class="card-title">Appointment History</h4>
                 </div>
                 <div class="ml-md-auto">
-                    <button type="cancel" class="btn btn-danger btn-round" >
-                        <i class="fa fa-arrow-left"></i> Back
+                    <button type="button" class="btn btn-info btn-round" data-dismiss="modal"
+                        (click)="openCustomerService()">
+                        <i class="fa fa-calendar" aria-hidden="true"></i> New Appointment
                     </button>
                 </div>
             </div>
@@ -751,6 +752,7 @@
         </div>
     </div>
 </div>
+
 <div style="margin-top: -93px;" *ngIf="adminRole == 'Admin'">
     <app-customer></app-customer>
 </div>
