@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 import { DisplayProductRoutes } from './display-products.routing';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -14,7 +14,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     CommonModule,
     NgxPaginationModule,
     RouterModule.forChild(DisplayProductRoutes),
-    NgbModule
+    NgbModule,
+    FormsModule
   ]
 })
 export class DisplayProductsModule { }
