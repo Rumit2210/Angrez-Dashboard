@@ -12,6 +12,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { MaterialModule } from 'app/material/material.module';
 import { CustomerModule } from 'app/customer/customer.module';
 import { CustomerComponent } from 'app/customer/customer.component';
+import { OfferComponent } from 'app/offer/offer.component';
+import { OfferModule } from 'app/offer/offer.module';
 
 @NgModule({
   imports: [
@@ -20,6 +22,7 @@ import { CustomerComponent } from 'app/customer/customer.component';
     FormsModule,
     MaterialModule,
     NgxPaginationModule,
+    OfferModule,
     CustomerModule,
     AgmCoreModule.forRoot({
       apiKey: 'YOUR_GOOGLE_MAPS_API_KEY'
@@ -28,7 +31,8 @@ import { CustomerComponent } from 'app/customer/customer.component';
   declarations: [DashboardComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers:[
-    CustomerComponent
+    CustomerComponent,
+    OfferComponent
   ]
 })
 

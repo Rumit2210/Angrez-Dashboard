@@ -96,6 +96,11 @@ export const AppRoutes: Routes = [{
         loadChildren: './membership/membership.module#MembershipModule',
         canActivate: [AuthGuard]
     },
+    {
+        path: 'banners',
+        loadChildren: './banners/banners.module#BannersModule',
+        canActivate: [AuthGuard]
+    },
     ]
 }, {
     path: '',

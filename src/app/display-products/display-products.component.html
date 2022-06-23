@@ -1,5 +1,5 @@
 <div class="main-content">
-    <div class="modal fade" id="noticeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel3" aria-hidden="true">
+    <div class="modal fade" id="noticeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel3" aria-hidden="true" *ngIf="selctpr !== undefined">
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
                 <div class="align-items-right closebutton">
@@ -9,18 +9,26 @@
                 </div>
                 <div class="modal-body ">
                     <div class="row">
-                        <div class="col-sm-6 col-md-6 col-xl-6">
+                        <div class="col-sm-6 col-md-6 col-xl-6" >
                             <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
                                 <div class="carousel-inner">
+                                    
                                     <div class="carousel-item active">
-                                        <img src="https://source.unsplash.com/1600x900?haircut,hair" class="d-block w-100" alt="...">
+                                        <h6 >
+                                        <img src="http://localhost:8090{{frontimage.listimages}}" class="card-img-top" alt="Laptop " />   </h6>                        
                                     </div>
-                                    <div class="carousel-item">
-                                        <img src="https://source.unsplash.com/1600x900?haircut" class="d-block w-100" alt="...">
+                                    <div class="carousel-item" *ngFor="let b of images">
+                                        <h6 >
+                                        <img src="http://localhost:8090{{b.listimages}}" class="card-img-top" alt="Laptop " />   </h6>                        
                                     </div>
-                                    <div class="carousel-item">
+                                    <!-- <div class="carousel-item ">
+                                        <h6 >
+                                        <img src="http://localhost:8090{{selctpr.listimages}}" class="card-img-top " alt="Laptop " />   </h6>                        
+            
+                                    </div> -->
+                                    <!-- <div class="carousel-item">
                                         <img src="https://source.unsplash.com/1600x900?salon,barber" class="d-block w-100" alt="...">
-                                    </div>
+                                    </div> -->
                                 </div>
                                 <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">
                                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -33,8 +41,9 @@
                             </div>
                         </div>
                         <div class="col-sm-6 col-md-6 col-xl-6">
-                            <h5>Quant trident shirts</h5>
-                            <h4 class="me-1">$13.99</h4>
+                            <!-- <div [{ngModel}]="productsModel.name"></div> -->
+                           <h5> {{selctpr.name}}</h5>
+                            <h4 class="me-1">${{selctpr.price}}</h4>
                             <div class="d-flex flex-row">
                                 <div class="text-danger mb-1 me-2">
                                     <i class="fa fa-star"></i>
@@ -48,14 +57,15 @@
                             </div>
                             <div>
                                 <p class=" mb-4 mb-md-0">
-                                    There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.
+                                    {{selctpr.descripition}}
+                                    
                                 </p>
                             </div>
                             <h6 class="text-success">Free shipping!</h6>
                             <br>
                             <div class="row">
                                 <div class="col-12 d-grid">
-                                    <button class="col-5 btn btn-primary " type="button" data-dismiss="modal" aria-label="cartclose" (click)="cartadd('top','right')"><span><i
+                                    <button class="col-5 btn btn-primary " type="button" data-dismiss="modal" aria-label="cartclose"><span><i
                                                 class="fas fa-shopping-cart"></i></span> Add to Cart</button>
                                     <div class="btn-group btn-group-sm col-3">
                                         <button class="btn btn-outline-default btn-round" (click)="decre()"> <i
@@ -230,141 +240,52 @@
             </div>
         </div>
     </div>
-    <div class="container py-2 ">
-        <div class="row ">
-            <div class=" col-sm-2 col-md-3 col-xl-3 ">
-                <div class="card ">
-                    <div data-toggle="modal" data-target="#noticeModal ">
-                        <img src="https://source.unsplash.com/1600x900?haircut,barber " class="card-img-top " alt="Laptop " />
-                        <div class="card-body ">
-                            <div class="row justify-content-between d-flex ">
-                                <div class="col-sm-8 col-9">
-                                    <h6>Product Title</h6>
-                                </div>
-                                <div class="col-sm-4 col-3 ">
-                                    <b>
-                                        <h6>$2.99</h6>
-                                    </b>
-                                </div>
-                            </div>
-                        </div>
+    <div class="row " >
+        <div class=" col-sm-3 col-md-3 col-lg-3 col-xl-3 " *ngFor="let a of products">
+            <div class="card " (click)="selectedProd(a)">
+                <div data-toggle="modal" data-target="#noticeModal ">
+                    <div >
+                        <h6 >
+                        <img src="http://localhost:8090{{a.image}}" class="card-img-top " alt="Laptop " />   </h6>                        
                     </div>
-                    <div class="d-flex justify-content-between ">
-                        <div class="btn btn-primary buy ">
-                            Buy Now
-                        </div>
-                        <div class="btn-group btn-group-sm ">
-                            <button class="btn btn-outline-default btn-round " (click)="decre() "> <i
-                                    class="nc-icon nc-simple-delete "></i> </button>
-                            <div class="Quantity ">
-                                {{quantity}}
+                    <div class="card-body ">
+                        <div class="row justify-content-between d-flex ">
+                            <div class="col-sm-8 col-9">
+                                <div>
+                                    <h6 >{{a.name}}</h6>
+                                   
+
+                                </div>
                             </div>
-                            <button class="btn btn-outline-default btn-round " (click)="incre() "> <i
-                                    class="nc-icon nc-simple-add "></i> </button>
+                             <div class="col-sm-4 col-3 ">
+                                <b>
+                                    <div >
+                                        <h6 > ${{a.price}}</h6>
+                                       
+    
+                                    </div>
+                                </b>
+                            </div> 
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class=" col-sm-2 col-md-3 col-xl-3 ">
-                <div class="card ">
-                    <div data-toggle="modal" data-target="#noticeModal ">
-                        <img src="https://source.unsplash.com/1600x900?haircut,barber " class="card-img-top " alt="Laptop " />
-                        <div class="card-body ">
-                            <div class="row justify-content-between d-flex ">
-                                <div class="col-sm-8 col-9">
-                                    <h6>Product Title</h6>
-                                </div>
-                                <div class="col-sm-4 col-3 ">
-                                    <b>
-                                        <h6>$2.99</h6>
-                                    </b>
-                                </div>
-                            </div>
-                        </div>
+                <div class="d-flex justify-content-between ">
+                    <div class="btn btn-primary buy ">
+                        Buy Now
                     </div>
-                    <div class="d-flex justify-content-between ">
-                        <div class="btn btn-primary buy ">
-                            Buy Now
+                    <div class="btn-group btn-group-sm ">
+                        <button class="btn btn-outline-default btn-round " (click)="decre() "> <i
+                                class="nc-icon nc-simple-delete "></i> </button>
+                        <div class="Quantity ">
+                            {{quantity}}
                         </div>
-                        <div class="btn-group btn-group-sm ">
-                            <button class="btn btn-outline-default btn-round " (click)="decre() "> <i
-                                    class="nc-icon nc-simple-delete "></i> </button>
-                            <div class="Quantity ">
-                                {{quantity}}
-                            </div>
-                            <button class="btn btn-outline-default btn-round " (click)="incre() "> <i
-                                    class="nc-icon nc-simple-add "></i> </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class=" col-sm-2 col-md-3 col-xl-3 ">
-                <div class="card ">
-                    <div data-toggle="modal" data-target="#noticeModal ">
-                        <img src="https://source.unsplash.com/1600x900?haircut,barber " class="card-img-top " alt="Laptop " />
-                        <div class="card-body ">
-                            <div class="row justify-content-between d-flex ">
-                                <div class="col-sm-8 col-9">
-                                    <h6>Product Title</h6>
-                                </div>
-                                <div class="col-sm-4 col-3 ">
-                                    <b>
-                                        <h6>$2.99</h6>
-                                    </b>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="d-flex justify-content-between ">
-                        <div class="btn btn-primary buy ">
-                            Buy Now
-                        </div>
-                        <div class="btn-group btn-group-sm ">
-                            <button class="btn btn-outline-default btn-round " (click)="decre() "> <i
-                                    class="nc-icon nc-simple-delete "></i> </button>
-                            <div class="Quantity ">
-                                {{quantity}}
-                            </div>
-                            <button class="btn btn-outline-default btn-round " (click)="incre() "> <i
-                                    class="nc-icon nc-simple-add "></i> </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class=" col-sm-2 col-md-3 col-xl-3 ">
-                <div class="card ">
-                    <div data-toggle="modal" data-target="#noticeModal ">
-                        <img src="https://source.unsplash.com/1600x900?haircut,barber " class="card-img-top " alt="Laptop " />
-                        <div class="card-body ">
-                            <div class="row justify-content-between d-flex ">
-                                <div class="col-sm-8 col-9">
-                                    <h6>Product Title</h6>
-                                </div>
-                                <div class="col-sm-4 col-3 ">
-                                    <b>
-                                        <h6>$2.99</h6>
-                                    </b>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="d-flex justify-content-between ">
-                        <div class="btn btn-primary buy ">
-                            Buy Now
-                        </div>
-                        <div class="btn-group btn-group-sm ">
-                            <button class="btn btn-outline-default btn-round " (click)="decre() "> <i
-                                    class="nc-icon nc-simple-delete "></i> </button>
-                            <div class="Quantity ">
-                                {{quantity}}
-                            </div>
-                            <button class="btn btn-outline-default btn-round " (click)="incre() "> <i
-                                    class="nc-icon nc-simple-add "></i> </button>
-                        </div>
+                        <button class="btn btn-outline-default btn-round " (click)="incre() "> <i
+                                class="nc-icon nc-simple-add "></i> </button>
                     </div>
                 </div>
             </div>
         </div>
+       
     </div>
 
 </div>`

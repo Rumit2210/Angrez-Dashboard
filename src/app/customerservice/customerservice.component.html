@@ -50,6 +50,13 @@
                             value={{cd.gender}} name="fname" disabled />
                     </div>
                 </div>
+                <div class="col-md-4">
+                    <label class="col-form-label">Select Date</label>
+                    <div class="form-group">
+                        <input type="date" [(ngModel)]="appointmentModel.selectdate" class="form-control" id="selectdate" 
+                            value="{{formdate}}" name="selectdate"/>
+                    </div>
+                </div>
                 <!-- <div class="col-md-3">
                     <label class="col-form-label">Select Service</label>
                     <div class="btn-group bootstrap-select w-100">

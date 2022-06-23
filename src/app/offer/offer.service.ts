@@ -23,6 +23,9 @@ export class OfferService {
     getAllOfferList(): Observable<Offer[]> {
         return this.httpClient.get<any>(ApiService.getAllOfferURL);
     }
+    getActiveOfferList(): Observable<Offer[]> {
+        return this.httpClient.get<any>(ApiService.getActiveOfferURL);
+    }
     saveAppointmentList(admin: Appointment): Observable<any> {
         debugger
         return this.httpClient.post<any>(ApiService.saveAppointmentListURL, admin);
@@ -63,4 +66,8 @@ export class OfferService {
         }
         return this.httpClient.post<any>(ApiService.getUsedServicesByOfferURL, data);
     }
+    activeDeavctiveOffers(admin: Offer): Observable<any> {
+     
+        return this.httpClient.post<any>(ApiService.updateActiveOffersURL, admin);
+      }
 }

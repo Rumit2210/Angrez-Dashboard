@@ -55,6 +55,7 @@ export class CustomerComponent implements OnInit {
   addService: any = [];
   valu: 0;
   isDashboard: boolean = false;
+  vipbonus:any=0;
   constructor(
     private servicesService: ServicesService,
     private employeeService: EmployeeService,
@@ -75,6 +76,7 @@ export class CustomerComponent implements OnInit {
     this.addService = [{ time: null, serpoint: null, price: null, name1: this.valu, servicesname: '', employeename: '', selectedServid: null, selectedEmpid: null }]
     this.valu++;
     this.vip;
+
   }
   addServiceList() {
 
@@ -108,7 +110,6 @@ export class CustomerComponent implements OnInit {
   }
   selectServiceList(id, ind) {
     this.servId = id;
-
     this.servicesList.forEach(element => {
       if (element.id == id) {
         this.addService[ind].servicesname = element.name;
@@ -128,12 +129,14 @@ export class CustomerComponent implements OnInit {
     this.totalPoint = 0;
     this.totalPrice = 0;
     this.totalTime = 0;
+    this.vipbonus=0;
     this.addService.forEach(element => {
       if (element.price != undefined) {
         this.totalPrice = this.totalPrice + element.price;
       }
       if (element.serpoint != undefined) {
         this.totalPoint = this.totalPoint + element.serpoint;
+       
       }
       if (element.time != undefined) {
         this.totalTime = this.totalTime + element.time;

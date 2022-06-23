@@ -13,7 +13,7 @@ import { VendorService } from 'app/vendor/vendor.service';
 })
 export class ProductsComponent implements OnInit {
   public productsModel: Products = new Products;
-  public products: Products[];
+  public productsReg: Products[];
   public vendorModel: Vendor = new Vendor;
   public vendorReg: Vendor[];
   public updateProductModel: Products = new Products;
@@ -63,6 +63,7 @@ export class ProductsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    
     this.getAllCategory();
     this.getAllVendor();
   }
@@ -90,6 +91,7 @@ export class ProductsComponent implements OnInit {
       if (element.id == id) {
         this.selectedName = element.name;
       }
+      this.productsModel.category=this.selectedName;   
     })
 
   }
@@ -237,11 +239,11 @@ export class ProductsComponent implements OnInit {
 
   getAllProducts() {
     this.productService.getAllProductsList().subscribe((data: any) => {
-      this.products = data;
+      this.productsReg = data;
 
 
-      for (let i = 0; i < this.products.length; i++) {
-        this.products[i].index = i + 1;
+      for (let i = 0; i < this.productsReg .length; i++) {
+        this.productsReg [i].index = i + 1;
       }
     });
   }
@@ -258,11 +260,10 @@ export class ProductsComponent implements OnInit {
     this.getAllProducts();
     this.productsModel.image = this.image;
     this.productsModel.multi = this.multi;
-
     this.productService.saveProductsList(this.productsModel).subscribe((data: any) => {
-      this.products = data;
+      this.productsReg  = data;
       this.getAllProducts();
-      // location.reload();
+      //  location.reload();
       this.apiService.showNotification('top', 'right', 'Product Added Successfully.', 'success');
     })
   }
@@ -343,6 +344,7 @@ export class ProductsComponent implements OnInit {
   }
 
   UpdateProductDetails() {
+    this.updateProductModel
     this.productService.updateProductList(this.updateProductModel).subscribe((req) => {
       this.getAllProducts();
       this.apiService.showNotification('top', 'right', 'Product Details Successfully Updated.', 'success');
@@ -396,7 +398,7 @@ export class ProductsComponent implements OnInit {
     if (this.search == "") {
       this.getAllProducts();
     } else {
-      this.products = this.products.filter(res => {
+      this.productsReg  = this.productsReg .filter(res => {
         if (res.name.toLocaleLowerCase().match(this.search.toLocaleLowerCase())) {
           return res.name.toLocaleLowerCase().match(this.search.toLocaleLowerCase());
         }

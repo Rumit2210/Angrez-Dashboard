@@ -22,6 +22,7 @@ import Chart from 'chart.js';
 import { Router } from '@angular/router';
 import { ExpensesService } from 'app/expenses/expenses.service';
 import { Membership } from 'app/membership/membership.model';
+import { MembershipService, MemberShipService } from 'app/membership/membership.service';
 
 declare const $: any;
 
@@ -901,6 +902,7 @@ export class DashboardComponent implements OnInit {
   public employeeReg: Employee[];
   public servicesList: Services[];
   public customerList: Customer[];
+  public membershipList: Membership[];
   public offerList: Customer[];
   public dailyTotal: Customer[];
   public monthlyTotal: Customer[];
@@ -922,17 +924,19 @@ export class DashboardComponent implements OnInit {
   cPoint: any;
   cPrice: any;
   cId: any;
-  appId: any;;
+  appId: any;
   monthlyexpensestotal: number = 0;
   expenseTotal: number = 0;
   membershipService: any;
   compateserviceslist: any;
-  public membershipList: Membership[];
+  customerData: any[];
+
   constructor(
     private customercomponent: CustomerComponent,
     private servicesService: ServicesService,
     private employeeService: EmployeeService,
     private customerService: CustomerService,
+    public memberShipService: MembershipService,
     private offerService: OfferService,
     private enquiryService: EnquiryService,
     private expensesService: ExpensesService,
@@ -940,10 +944,12 @@ export class DashboardComponent implements OnInit {
     private router: Router
   ) {
     this.adminRole = localStorage.getItem('role');
+    debugger
 
     this.getAllServices();
     this.getAllEmployee();
     this.getCustomerDetails();
+    this.getMembershipDetails();
     this.getOfferDetails();
     this.getAllEnquiry();
     this.GetDailyTotal();
@@ -952,6 +958,7 @@ export class DashboardComponent implements OnInit {
     this.getAllCompletedAppointment();
     this.getExpensesDetails();
     this.GetMonthlyExpensesTotal();
+    this.onlyViewCustomerDetails();
   }
   getAllEmployee() {
     this.employeeService.getAllEmployeeList().subscribe((data: any) => {
@@ -983,13 +990,13 @@ export class DashboardComponent implements OnInit {
   openCustomer() {
     this.router.navigate(['customer']);
   }
-  openMembership() {
-    this.router.navigate(['membership']);
-  }
   getMembershipDetails() {
-    this.membershipService.getAllMembershipList().subscribe((data: any) => {
+    this.memberShipService.getAllMembershipList().subscribe((data: any) => {
       this.membershipList = data;
     });
+  }
+  openMembership() {
+    this.router.navigate(['membership']);
   }
   getAllEnquiry() {
     this.enquiryService.getAllEnquiryList().subscribe((data: any) => {
@@ -1184,6 +1191,14 @@ export class DashboardComponent implements OnInit {
       this.usedServices = data;
       for (let i = 0; i < this.usedServices.length; i++) {
         this.usedServices[i].index = i + 1;
+      }
+    });
+  }
+  onlyViewCustomerDetails() {
+    this.customerService.getCustomerById(localStorage.getItem('UserId')).subscribe((data: any) => {
+      this.customerData = data;
+      for (let i = 0; i < this.customerData.length; i++) {
+        this.customerData[i].index = i + 1;
       }
     });
   }

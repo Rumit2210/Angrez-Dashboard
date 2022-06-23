@@ -85,7 +85,7 @@ export class ForgotPwdComponent implements OnInit {
 
       this.apiService.showNotification('top', 'right', 'Email Sent Successfully on your Email Address.', 'success');
       this.emailResp = data[0].userid;
-
+      debugger
       this.forgotBox = true;
       this.changePwd = false;
       this.otpBox = true;
@@ -93,7 +93,7 @@ export class ForgotPwdComponent implements OnInit {
   }
   saveOTP() {
     this.forgotPwdModel.id = this.emailResp;
-
+    debugger
     this.loginService.getOneTimePwd(this.forgotPwdModel).subscribe((data) => {
 
       this.otpResp = data[0].userid;
@@ -104,11 +104,12 @@ export class ForgotPwdComponent implements OnInit {
   }
   changeForgotPwd() {
     this.forgotPwdModel.id = this.otpResp;
-
+    debugger
     this.loginService.updatePassword(this.forgotPwdModel).subscribe((req) => {
+      debugger
       this.apiService.showNotification('top', 'right', 'Password changed Successfully.', 'success');
+      debugger
       this.router.navigate(['/pages/login']);
-    })
-
+    });
   }
 }

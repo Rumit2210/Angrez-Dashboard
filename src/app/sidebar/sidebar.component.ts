@@ -85,13 +85,7 @@ export const ROUTES: RouteInfo[] = [{
     icontype: 'fa fa-clock-o',
     roles: "Admin",
 },
-{
-    path: '/display-products',
-    title: 'Products',
-    type: 'link',
-    icontype: 'fa fa-shopping-cart',
-    roles: "Admin",
-},
+
 {
     path: '/vendor',
     title: 'Vendor',
@@ -106,7 +100,13 @@ export const ROUTES: RouteInfo[] = [{
     icontype: 'fa fa-handshake-o',
     roles: "Admin",
 },
-
+{
+    path: '/banners',
+    title: 'Banners',
+    type: 'link',
+    icontype: 'fa fa-rupee',
+    roles: "Admin",
+}
 ];
 export const Employee: RouteInfo[] = [
     {
@@ -148,32 +148,26 @@ export const Customer: RouteInfo[] = [
         icontype: 'nc-icon nc-bank',
         roles: "Admin",
     },
-    {
-        path: '/customer',
-        title: 'Customer',
-        type: 'link',
-        icontype: 'fa fa-user',
-        roles: "Admin",
-    },
-    {
-        path: '/enquiry',
-        title: 'Enquiry',
-        type: 'link',
-        icontype: 'fa fa-question',
-        roles: "Admin",
-    },
-    {
-        path: '/products',
-        title: 'Products',
-        type: 'link',
-        icontype: 'fa fa-cubes',
-        roles: "Admin",
-    },
+     
     {
         path: '/servicescustm',
         title: 'Ratecard',
         type: 'link',
         icontype: 'fa fa-rupee',
+        roles: "Admin",
+    },
+    {
+        path: '/customerservice',
+        title: 'Book Appointment',
+        type: 'link',
+        icontype: 'fa fa-calendar',
+        roles: "Admin",
+    },
+    {
+        path: '/display-products',
+        title: 'Products',
+        type: 'link',
+        icontype: 'fa fa-shopping-cart',
         roles: "Admin",
     },
 

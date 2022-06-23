@@ -20,6 +20,8 @@ import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { MaterialModule } from './material/material.module';
 import { ServicescustmComponent } from './servicescustm/servicescustm.component';
+import { OfferModule } from './offer/offer.module';
+
 @NgModule({
     imports: [
         BrowserAnimationsModule,
@@ -36,7 +38,8 @@ import { ServicescustmComponent } from './servicescustm/servicescustm.component'
         FixedPluginModule,
         NgxPaginationModule,
         MaterialModule,
-        AngularMultiSelectModule
+        AngularMultiSelectModule,
+    
     ],
     declarations: [
         AppComponent,
