@@ -4,11 +4,11 @@
             <div class="card">
                 <div class="card-header">
                     <div class="row">
-                        <div class="col-md-8">
+                        <div class="col-md-6">
                             <h4 class="card-title"> Services and Rates List</h4>
                         </div>
                         <div class="ml-md-auto">
-                            <label class="col-form-label" style="margin-top: 5px;font-size: 18px;color: black;">Search
+                            <label class="col-form-label" style="margin-top: 10px;font-size: 18px;color: black;">Search
                                 By</label>
                         </div>
                         <div class="col-md-3 ml-md-auto">
@@ -17,6 +17,11 @@
                                     placeholder="Service Name" [(ngModel)]="search"
                                     (keyup)="searchServicescustmList($event.target.value)" aria-label="Search" />
                             </div>
+                        </div>
+                        <div class="ml-md-auto">
+                            <button type="cancel" class="btn btn-danger btn-round" routerLink='/dashboard'>
+                                <i class="fa fa-arrow-left"></i> Back
+                            </button>
                         </div>
                     </div>
                 </div>
