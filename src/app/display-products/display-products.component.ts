@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ImagesModel } from 'app/products/images.model';
+import { Products } from 'app/Products/product.model';
 import { ProductService } from './display-products.service';
-import { Products } from 'app/products/product.model';
-import { ImagesModel} from 'app/Products/images.model';
 
 declare var $: any;
 @Component({
