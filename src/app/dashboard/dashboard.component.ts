@@ -4,6 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ApiService } from 'app/api.service';
 import { Appointment } from 'app/customer/appointment.model';
 import { Customer } from 'app/customer/customer.model';
+import { CustomerComponent } from 'app/customer/customer.component';
 import { CustomerService } from 'app/customer/customer.service';
 import { Offer } from 'app/offer/offer.model';
 import { OfferService } from 'app/offer/offer.service';
@@ -925,8 +926,10 @@ export class DashboardComponent implements OnInit {
   monthlyexpensestotal: number = 0;
   expenseTotal: number = 0;
   membershipService: any;
+  compateserviceslist: any;
   public membershipList: Membership[];
   constructor(
+    private customercomponent: CustomerComponent,
     private servicesService: ServicesService,
     private employeeService: EmployeeService,
     private customerService: CustomerService,
@@ -1089,11 +1092,16 @@ export class DashboardComponent implements OnInit {
   getAllAppointment() {
     this.customerService.getAllAppointmentList().subscribe((data: any) => {
       this.appointmentList = data;
-      debugger
       this.activePageDataChunkAppo = this.appointmentList.slice(0, this.pageSize);
 
       for (let i = 0; i < this.appointmentList.length; i++) {
         this.appointmentList[i].index = i + 1;
+        this.customerService.getServicesListUsingId(data[i].id).subscribe((data: any) => {
+          this.usedServices = data;
+          for (let i = 0; i < this.usedServices.length; i++) {
+            this.usedServices[i].index = i + 1;
+          }
+        });
       }
     });
   }
@@ -1105,8 +1113,6 @@ export class DashboardComponent implements OnInit {
   }
   getAllCompletedAppointment() {
     this.customerService.getCompletedServices().subscribe((data: any) => {
-
-
       this.completedAppointment = data;
       this.activePageDataChunkComApp = this.completedAppointment.slice(0, this.pageSize);
       for (let i = 0; i < this.completedAppointment.length; i++) {
@@ -1179,6 +1185,21 @@ export class DashboardComponent implements OnInit {
       for (let i = 0; i < this.usedServices.length; i++) {
         this.usedServices[i].index = i + 1;
       }
+    });
+  }
+
+  generatepdf(){
+    this.customercomponent.generateInvoicePDF(this.appointmentList[0],this.usedServices);
+  }
+
+  generatecompateappoinmentpdf(data){
+    this.customerService.getServicesListUsingId(data.id).subscribe((data1: any) => {
+      this.usedServices = data1;
+      for (let i = 0; i < this.usedServices.length; i++) {
+        this.usedServices[i].index = i + 1;
+      }
+      console.log(this.usedServices,"in generate")
+      this.customercomponent.generateInvoicePDF(data,this.usedServices);
     });
   }
 
