@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ImagesModel } from 'app/products/images.model';
+import { Products } from 'app/Products/product.model';
 import { ProductService } from './display-products.service';
-import { Products } from 'app/products/product.model';
+
 declare var $: any;
 @Component({
   selector: 'app-display-products',
@@ -10,7 +12,10 @@ declare var $: any;
 export class DisplayProductsComponent implements OnInit {
   public productsModel: Products = new Products;
   public products: Products[];
+  public images: ImagesModel[];
+  public frontimage: ImagesModel;
   selctpr:any;
+  selctIm:any;
   search: string = '';
   constructor(private productService: ProductService) { 
     this.getAllProducts();
@@ -22,6 +27,14 @@ export class DisplayProductsComponent implements OnInit {
   ngOnInit(): void {
     this.getAllProducts();
   }
+  getAllImages(id) {
+    this.productService.getAllImagesList(id).subscribe((data: any) => {
+      this.images = data;
+      this.frontimage = this.images[0]
+      
+    });
+  }
+
   getAllProducts() {
     this.productService.getAllProductsList().subscribe((data: any) => {
       this.products = data;
@@ -39,7 +52,12 @@ export class DisplayProductsComponent implements OnInit {
   }
   selectedProd(data){ 
     this.selctpr=data;
+    this.getAllImages(this.selctpr.id)
   }
+  selectedImg(data){ 
+    this.selctIm=data;
+  }
+ 
   Search() {
     if (this.search == "") {
       this.getAllProducts();

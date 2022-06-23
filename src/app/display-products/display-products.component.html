@@ -10,16 +10,22 @@
                 <div class="modal-body ">
                     <div class="row">
                         <div class="col-sm-6 col-md-6 col-xl-6" >
-                            <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel" >
+                            <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
                                 <div class="carousel-inner">
                                     
-                                    <div >
+                                    <div class="carousel-item active">
                                         <h6 >
-                                        <img src="http://localhost:8090{{selctpr.image}}" class="card-img-top " alt="Laptop " />   </h6>                        
-            
+                                        <img src="http://localhost:8090{{frontimage.listimages}}" class="card-img-top" alt="Laptop " />   </h6>                        
                                     </div>
-                                    
-                                   
+                                    <div class="carousel-item" *ngFor="let b of images">
+                                        <h6 >
+                                        <img src="http://localhost:8090{{b.listimages}}" class="card-img-top" alt="Laptop " />   </h6>                        
+                                    </div>
+                                    <!-- <div class="carousel-item ">
+                                        <h6 >
+                                        <img src="http://localhost:8090{{selctpr.listimages}}" class="card-img-top " alt="Laptop " />   </h6>                        
+            
+                                    </div> -->
                                     <!-- <div class="carousel-item">
                                         <img src="https://source.unsplash.com/1600x900?salon,barber" class="d-block w-100" alt="...">
                                     </div> -->
@@ -223,67 +229,62 @@
     </div>
     <div class="container-fluid searchbar">
         <div class="row">
-            <div class=" col-10 col-sm-10 col-md-10 col-xl-10 col-lg-10 ">
+            <div class=" col-11 col-sm-11 col-md-11 col-xl-11 col-lg-11 ">
                 <div class="form-group">
-                    <input type="search " class="form-control rounded " placeholder="Search... " aria-label="Search " />
+                    <input type="search" id="form1" class="form-control" placeholder="Search..."
+                    [(ngModel)]="search" (ngModelChange)="Search()" aria-label="Search" />
 
                 </div>
             </div>
-            <div class="col-2 col-sm-2 col-md-2 col-xl-2 col-lg-2 searchbutton">
-                <button class="btn btn-primary">Search</button>
-            </div>
+            
         </div>
     </div>
-    <div class="container py-2 ">
-        <div class="row " >
-            <div class=" col-sm-2 col-md-3 col-xl-3 " *ngFor="let a of products">
-                <div class="card " (click)="selectedProd(a)">
-                    <div data-toggle="modal" data-target="#noticeModal ">
-                        <div >
-                            <h6 >
-                            <img src="http://localhost:8090{{a.image}}" class="card-img-top " alt="Laptop " />   </h6>                        
+    <div class="row " >
+        <div class=" col-sm-3 col-md-3 col-lg-3 col-xl-3 " *ngFor="let a of products">
+            <div class="card " (click)="selectedProd(a)">
+                <div data-toggle="modal" data-target="#noticeModal ">
+                    <div >
+                        <h6 >
+                        <img src="http://localhost:8090{{a.image}}" class="card-img-top " alt="Laptop " />   </h6>                        
+                    </div>
+                    <div class="card-body ">
+                        <div class="row justify-content-between d-flex ">
+                            <div class="col-sm-8 col-9">
+                                <div>
+                                    <h6 >{{a.name}}</h6>
+                                   
 
-                        </div>
-                        
-                        <div class="card-body ">
-                            <div class="row justify-content-between d-flex ">
-                                <div class="col-sm-8 col-9">
-                                    <div>
-                                        <h6 >{{a.name}}</h6>
+                                </div>
+                            </div>
+                             <div class="col-sm-4 col-3 ">
+                                <b>
+                                    <div >
+                                        <h6 > ${{a.price}}</h6>
                                        
     
                                     </div>
-                                </div>
-                                 <div class="col-sm-4 col-3 ">
-                                    <b>
-                                        <div >
-                                            <h6 > ${{a.price}}</h6>
-                                           
-        
-                                        </div>
-                                    </b>
-                                </div> 
-                            </div>
-                        </div>
-                    </div>
-                    <div class="d-flex justify-content-between ">
-                        <div class="btn btn-primary buy ">
-                            Buy Now
-                        </div>
-                        <div class="btn-group btn-group-sm ">
-                            <button class="btn btn-outline-default btn-round " (click)="decre() "> <i
-                                    class="nc-icon nc-simple-delete "></i> </button>
-                            <div class="Quantity ">
-                                {{quantity}}
-                            </div>
-                            <button class="btn btn-outline-default btn-round " (click)="incre() "> <i
-                                    class="nc-icon nc-simple-add "></i> </button>
+                                </b>
+                            </div> 
                         </div>
                     </div>
                 </div>
+                <div class="d-flex justify-content-between ">
+                    <div class="btn btn-primary buy ">
+                        Buy Now
+                    </div>
+                    <div class="btn-group btn-group-sm ">
+                        <button class="btn btn-outline-default btn-round " (click)="decre() "> <i
+                                class="nc-icon nc-simple-delete "></i> </button>
+                        <div class="Quantity ">
+                            {{quantity}}
+                        </div>
+                        <button class="btn btn-outline-default btn-round " (click)="incre() "> <i
+                                class="nc-icon nc-simple-add "></i> </button>
+                    </div>
+                </div>
             </div>
-           
         </div>
+       
     </div>
 
 </div>`
