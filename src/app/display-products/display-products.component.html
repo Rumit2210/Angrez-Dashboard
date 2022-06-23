@@ -239,54 +239,52 @@
             
         </div>
     </div>
-    <div class="container py-2 ">
-        <div class="row " >
-            <div class=" col-sm-2 col-md-3 col-xl-3 " *ngFor="let a of products">
-                <div class="card " (click)="selectedProd(a)">
-                    <div data-toggle="modal" data-target="#noticeModal ">
-                        <div >
-                            <h6 >
-                            <img src="http://localhost:8090{{a.image}}" class="card-img-top " alt="Laptop " />   </h6>                        
-                        </div>
-                        <div class="card-body ">
-                            <div class="row justify-content-between d-flex ">
-                                <div class="col-sm-8 col-9">
-                                    <div>
-                                        <h6 >{{a.name}}</h6>
+    <div class="row " >
+        <div class=" col-sm-3 col-md-3 col-lg-3 col-xl-3 " *ngFor="let a of products">
+            <div class="card " (click)="selectedProd(a)">
+                <div data-toggle="modal" data-target="#noticeModal ">
+                    <div >
+                        <h6 >
+                        <img src="http://localhost:8090{{a.image}}" class="card-img-top " alt="Laptop " />   </h6>                        
+                    </div>
+                    <div class="card-body ">
+                        <div class="row justify-content-between d-flex ">
+                            <div class="col-sm-8 col-9">
+                                <div>
+                                    <h6 >{{a.name}}</h6>
+                                   
+
+                                </div>
+                            </div>
+                             <div class="col-sm-4 col-3 ">
+                                <b>
+                                    <div >
+                                        <h6 > ${{a.price}}</h6>
                                        
     
                                     </div>
-                                </div>
-                                 <div class="col-sm-4 col-3 ">
-                                    <b>
-                                        <div >
-                                            <h6 > ${{a.price}}</h6>
-                                           
-        
-                                        </div>
-                                    </b>
-                                </div> 
-                            </div>
-                        </div>
-                    </div>
-                    <div class="d-flex justify-content-between ">
-                        <div class="btn btn-primary buy ">
-                            Buy Now
-                        </div>
-                        <div class="btn-group btn-group-sm ">
-                            <button class="btn btn-outline-default btn-round " (click)="decre() "> <i
-                                    class="nc-icon nc-simple-delete "></i> </button>
-                            <div class="Quantity ">
-                                {{quantity}}
-                            </div>
-                            <button class="btn btn-outline-default btn-round " (click)="incre() "> <i
-                                    class="nc-icon nc-simple-add "></i> </button>
+                                </b>
+                            </div> 
                         </div>
                     </div>
                 </div>
+                <div class="d-flex justify-content-between ">
+                    <div class="btn btn-primary buy ">
+                        Buy Now
+                    </div>
+                    <div class="btn-group btn-group-sm ">
+                        <button class="btn btn-outline-default btn-round " (click)="decre() "> <i
+                                class="nc-icon nc-simple-delete "></i> </button>
+                        <div class="Quantity ">
+                            {{quantity}}
+                        </div>
+                        <button class="btn btn-outline-default btn-round " (click)="incre() "> <i
+                                class="nc-icon nc-simple-add "></i> </button>
+                    </div>
+                </div>
             </div>
-           
         </div>
+       
     </div>
 
 </div>`

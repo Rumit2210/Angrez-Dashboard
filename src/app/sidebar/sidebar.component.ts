@@ -85,13 +85,7 @@ export const ROUTES: RouteInfo[] = [{
     icontype: 'fa fa-clock-o',
     roles: "Admin",
 },
-{
-    path: '/display-products',
-    title: 'Products',
-    type: 'link',
-    icontype: 'fa fa-shopping-cart',
-    roles: "Admin",
-},
+
 {
     path: '/vendor',
     title: 'Vendor',
@@ -169,7 +163,13 @@ export const Customer: RouteInfo[] = [
         icontype: 'fa fa-calendar',
         roles: "Admin",
     },
-  
+    {
+        path: '/display-products',
+        title: 'Products',
+        type: 'link',
+        icontype: 'fa fa-shopping-cart',
+        roles: "Admin",
+    },
 
 ];
 @Component({

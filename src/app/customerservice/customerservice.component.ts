@@ -27,6 +27,7 @@ export class CustomerserviceComponent implements OnInit {
 
   totalPoint: any = 0;
   tCustPoint: any = 0;
+  selectdate: any = 0;
   addService: any = [];
   totalCustPoint: any = [];
   selectedEmp: any;
@@ -251,13 +252,13 @@ export class CustomerserviceComponent implements OnInit {
       this.customerService.saveAppointmentList(this.appointmentModel).subscribe((data: any) => {
         this.appointment = data;
         this.router.navigate(['dashboard']);
-        location.reload();
         this.apiService.showNotification('top', 'right', 'Appointment Successfully Booked.', 'success');
       })
     }
 
 
   }
+  
 
 
 
