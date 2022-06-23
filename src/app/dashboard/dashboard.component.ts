@@ -17,6 +17,8 @@ import { Router } from '@angular/router';
 import { ExpensesService } from 'app/expenses/expenses.service';
 import { Membership } from 'app/membership/membership.model';
 import { MembershipService } from 'app/membership/membership.service';
+import { BannersService } from 'app/banners/banners.service';
+import { Webbanners } from 'app/banners/banners.model';
 
 declare const $: any;
 
@@ -68,6 +70,8 @@ export class DashboardComponent implements OnInit {
   membershipService: any;
   compateserviceslist: any;
   customerData: any[];
+  public Banners: Webbanners[] = [];
+  topban: any = [];
 
   constructor(
     private customercomponent: CustomerComponent,
@@ -79,7 +83,8 @@ export class DashboardComponent implements OnInit {
     private enquiryService: EnquiryService,
     private expensesService: ExpensesService,
     private apiService: ApiService,
-    private router: Router
+    private router: Router,
+    private bannersService:BannersService
   ) {
     this.adminRole = localStorage.getItem('role');
 
@@ -97,6 +102,7 @@ export class DashboardComponent implements OnInit {
     this.getExpensesDetails();
     this.GetMonthlyExpensesTotal();
     this.onlyViewCustomerDetails();
+    this.getBanners(); 
   }
   public ngOnInit() {
   }
@@ -357,5 +363,16 @@ export class DashboardComponent implements OnInit {
       this.customercomponent.generateInvoicePDF(data, this.usedServices);
     });
   }
+  getBanners() {
+    this.bannersService.getWebSlider().subscribe((data: any) => {
+      this.Banners = data;
+      debugger
+      this.Banners.forEach(element => {
+        if (element.name == 'Top') {
+          this.topban.push(element);
+        }
+      })
 
+    });
+  }
 }

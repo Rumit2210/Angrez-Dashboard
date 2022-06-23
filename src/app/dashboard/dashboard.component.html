@@ -1,4 +1,26 @@
 <div class="main-content">
+    <div class="row" *ngIf="adminRole == 'Customer'">
+        <div class="col-md-12">
+          <div class="card ">
+            <div class="card-body ">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class=" page-carousel">
+                    <ngb-carousel>
+                      <ng-template ngbSlide *ngFor="let b of topban">
+                        <img src="http://localhost:8090{{b.bannersimage}}" style="height:40%;width:100%;"
+                          alt="Random first slide">
+                        <div class="carousel-caption">
+                        </div>
+                      </ng-template>
+                    </ngb-carousel>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     <div class="row">
         <div class="col-lg-4 col-md-6 col-sm-6" *ngIf="adminRole == 'Admin'">
             <div class="card card-stats" (click)="openCustomer()">
