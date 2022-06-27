@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { ImagesModel } from 'app/products/images.model';
 import { ProductService } from './display-products.service';
 import { Products } from 'app/products/product.model';
 import { ApiService } from 'app/api.service';
 import { Cart } from './cart.model';
 import Swal from 'sweetalert2';
+
 declare var $: any;
 @Component({
   selector: 'app-display-products',
@@ -18,6 +20,9 @@ export class DisplayProductsComponent implements OnInit {
   selctpr:any;
   cid:any;
   selcart:any;
+  public images: ImagesModel[];
+  public frontimage: ImagesModel;
+  selctIm:any;
   search: string = '';
   CartList: any;
   constructor(private productService: ProductService,
@@ -34,6 +39,14 @@ export class DisplayProductsComponent implements OnInit {
     this.cid = localStorage.getItem('UserId');  
     this.productsModel.quant=0;
   }
+  getAllImages(id) {
+    this.productService.getAllImagesList(id).subscribe((data: any) => {
+      this.images = data;
+      this.frontimage = this.images[0]
+      
+    });
+  }
+
   getAllProducts() {
     this.productService.getAllProductsList().subscribe((data: any) => {
       this.products = data;
@@ -56,8 +69,8 @@ export class DisplayProductsComponent implements OnInit {
   }
   selectedProd(data){ 
     this.selctpr=data;
+    this.getAllImages(this.selctpr.id)
   }
-  // saveCart(data){
   //   this.selcart=data;
   // }
   saveCart(data) {
@@ -73,9 +86,11 @@ export class DisplayProductsComponent implements OnInit {
     })
   }
 
+  selectedImg(data){ 
+  }
+ 
   Search() {
     if (this.search == "") {
-      this.getAllProducts();
     } else {
       this.products = this.products.filter(res => {
         if (res.name.toLocaleLowerCase().match(this.search.toLocaleLowerCase())) {

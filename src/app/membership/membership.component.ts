@@ -79,13 +79,14 @@ export class MembershipComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.addService = [{ sertime: null, serpoint: null, serprice: null, name1: this.valu, selectedServ: '', selectedEmp: '', selectedServid: null, selectedEmpid: null }]
+    this.addService = [{ sertime: null,quantity:0, serpoint: null, serprice: null, name1: this.valu, selectedServ: '', selectedEmp: '', selectedServid: null, selectedEmpid: null }]
     this.valu++;
+    this.membershipModel.finalprice=0;
+    this.membershipModel.membershipprice=0;
   }
   addServiceList() {
-
     this.valu++;
-    this.addService.push({ sertime: null, serpoint: null, serprice: null, name1: this.valu, selectedServ: '', selectedEmp: '', selectedServid: null, selectedEmpid: null });
+    this.addService.push({finalprice:0, sertime: null,quantity:0, serpoint: null, serprice: null, name1: this.valu, selectedServ: '', selectedEmp: '', selectedServid: null, selectedEmpid: null,serTotalPrice:0 });
   }
   removeServiceList(valu) {
     this.addService.splice(valu, 1);
@@ -113,6 +114,7 @@ export class MembershipComponent implements OnInit {
         this.addService[ind].serprice = element.price;
         this.addService[ind].serpoint = element.point;
         this.addService[ind].sertime = element.time;
+        this.addService[ind].quantity =0;
         this.addPoinInList();
 
       }
@@ -123,7 +125,6 @@ export class MembershipComponent implements OnInit {
     this.totalPoint = 0;
     this.totalprice = 0;
     this.totalTime = 0;
-    debugger
     this.addService.forEach(element => {
       if (element.serprice != undefined) {
         this.totalprice = this.totalprice + element.serprice;
@@ -137,7 +138,7 @@ export class MembershipComponent implements OnInit {
       this.disc = this.membershipModel.percentage;
       this.quantity = this.membershipModel.quantity;
       this.getMembershipVal();
-      this.finalmembershipprice();
+      // this.finalmembershipprice();
     });
   }
 
@@ -154,17 +155,14 @@ export class MembershipComponent implements OnInit {
     var discount: number = +this.disc;
     this.membershipModel.percentage = discount;
     this.membershipModel.services=this.addService;
-    debugger
     this.membershipService.saveMembershipList(this.membershipModel).subscribe((data: any) => {
       this.membershipList = data;
-      debugger
       this.apiService.showNotification('top', 'right', 'Membership Added Successfully.', 'success');
       this.getMembershipDetails();
       location.reload();
     })
   }
 finalmembershipprice() {
-  debugger
   this.finalprice = Number(this.quantity) * this.totalprice;
 }
 
@@ -346,6 +344,20 @@ finalmembershipprice() {
       this.getMembershipDetails();
       this.apiService.showNotification('top', 'right', 'Membership Details Successfully Updated.', 'success');
     })
+  }
+  UpdatePricesTotal(data,ind){
+    this.finalprice=0;
+    this.addService[ind].finalprice = Number(data.quantity) * data.serprice;
+    this.addService.forEach((element:any)=>{
+      if(element.finalprice != undefined){
+        this.finalprice = this.finalprice+element.finalprice;
+        this.membershipModel.finalprice = this.finalprice;
+        this.membershipModel.membershipprice=0;
+      }
+    })
+  }
+  UpdatePricesTotalbyPercentage(){
+    this.membershipModel.membershipprice =(this.membershipModel.finalprice*this.membershipModel.percentage)/100;
   }
   removeMembershipList(id) {
     Swal.fire({

@@ -47,6 +47,7 @@ export class ApiService {
   public static getCustomerTotalPointsURL: string = ApiService.HOST_URL + '/admin/GetCustomerTotalPoints';
   public static updateEmployeeListURL: string = ApiService.HOST_URL + '/admin/UpdateEmployeeList';
   public static getAllCustomerDataListURL: string = ApiService.HOST_URL + '/admin/GetAllCustomerDataList';
+  public static getCustomerByIdURL: string = ApiService.HOST_URL + '/admin/GetCustomerById';
   public static getUsedServicesByCustomerURL: string = ApiService.HOST_URL + '/admin/GetUsedServicesByCustomer';
   public static getAllCompletedServicesURL: string = ApiService.HOST_URL + '/admin/GetAllCompletedServices';
   public static saveAdminLoginURL: string = ApiService.HOST_URL + '/admin/login';
@@ -58,6 +59,7 @@ export class ApiService {
   public static getAllOfferDataListURL: string = ApiService.HOST_URL + '/admin/GetAllOfferDataList';
   public static getUsedServicesByOfferURL: string = ApiService.HOST_URL + '/admin/GetUsedServicesByOffer';
   public static getAllOfferURL: string = ApiService.HOST_URL + '/admin/GetAllOffer';
+  public static getActiveOfferURL: string = ApiService.HOST_URL + '/admin/GetActiveOffer';
   public static getOfferTotalPointsURL: string = ApiService.HOST_URL + '/admin/GetOfferTotalPoints';
   public static updateOfferListURL: string = ApiService.HOST_URL + '/admin/UpdateOfferList';
   public static removeOfferDetailsURL: string = ApiService.HOST_URL + '/admin/removeOfferDetails/';
@@ -82,6 +84,9 @@ export class ApiService {
   public static uploadMainImageURL: string = ApiService.HOST_URL + '/admin/UploadProductImage/';
   public static uploadMultiImageURL: string = ApiService.HOST_URL + '/admin/UploadMultiProductImage/';
   public static removeImageURL: string = ApiService.HOST_URL + '/admin/RemoveRecentUoloadImage/';
+  
+  public static courosalImageURL: string = ApiService.HOST_URL + '/admin/CourosalImage/';
+
   public static verificationURL: string = ApiService.HOST_URL + '/admin/Verification';
   public static getRegisterOtpURL: string = ApiService.HOST_URL + '/admin/GetRegisterOtp';
   public static saveUserCustomerListURL: string = ApiService.HOST_URL + '/admin/SaveUserCustomerList';
@@ -109,6 +114,9 @@ export class ApiService {
   public static removeCartDetailsURL: string = ApiService.HOST_URL + '/admin/removeCartDetails';
   public static updateCartListURL: string = ApiService.HOST_URL + '/admin/updateCartList';
   public static saveOrderListURL: string = ApiService.HOST_URL + '/admin/saveOrderList';
+  public static updateActiveOffersURL: string = ApiService.HOST_URL + '/admin/UpdateActiveOffers';
+
+
   showNotification(from, align, msg, color) {
     var color = color;
     $.notify({

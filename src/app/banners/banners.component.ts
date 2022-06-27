@@ -166,6 +166,7 @@ export class BannersComponent implements OnInit {
 
     this.bannersServie.getWebBanners().subscribe((data: any) => {
       this.webImage = data;
+      debugger
       for (let i = 0; i < this.webImage.length; i++) {
         this.webImage[i].index = i + 1;
       }
@@ -206,14 +207,14 @@ export class BannersComponent implements OnInit {
     })
   }
 
-  activeBanners(id) {
-    this.webImage[id].status = true;
-    this.bannersServie.activeDeavctiveWebBanners(this.webImage[id]).subscribe((req) => {
+  activeBanners(ind) {
+    this.webImage[ind].status = true;
+    this.bannersServie.activeDeavctiveWebBanners(this.webImage[ind]).subscribe((req) => {
     })
   }
-  deactiveBanners(id) {
-    this.webImage[id].status = false;
-    this.bannersServie.activeDeavctiveWebBanners(this.webImage[id]).subscribe((req) => {
+  deactiveBanners(ind) {
+    this.webImage[ind].status = false;
+    this.bannersServie.activeDeavctiveWebBanners(this.webImage[ind]).subscribe((req) => {
 
     })
   }
