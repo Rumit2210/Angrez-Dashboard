@@ -3,6 +3,15 @@ import { ROUTES } from '../.././sidebar/sidebar.component';
 import { NavigationEnd, Router } from '@angular/router';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { Subscription } from 'rxjs/Subscription';
+import { Products } from 'app/products/product.model';
+import { ProductService } from 'app/display-products/display-products.service';
+import { Cart } from 'app/display-products/cart.model';
+import { DisplayProductsComponent } from 'app/display-products/display-products.component';
+import Swal from 'sweetalert2';
+import { ApiService } from 'app/api.service';
+import { FormsModule } from '@angular/forms';
+import { analyzeAndValidateNgModules } from '@angular/compiler';
+
 
 var misc:any ={
     navbar_menu_visible: 0,
@@ -27,13 +36,21 @@ export class NavbarComponent implements OnInit{
     private _router: Subscription;
     public open: boolean = false;
    quantity:number=0;
+   CartList: any;
+   q:any;
+   total:any;
+   public cart: Cart[];
+   public updateCartModel: Cart = new Cart;
     @ViewChild("navbar-cmp", {static: false}) button;
+  selcorder: any;
+  cid: string;
 
-    constructor(location:Location, private renderer : Renderer2, private element : ElementRef, private router: Router) {
+    constructor(location:Location, private renderer : Renderer2, private element : ElementRef, private router: Router,private productService:ProductService,private apiService:ApiService,) {
         this.location = location;
         this.nativeElement = element.nativeElement;
         this.sidebarVisible = false;
         this.lastLogin = localStorage.getItem('lastOutTime');
+        this.getAllCart();
     }
 
     ngOnInit(){
@@ -147,13 +164,130 @@ export class NavbarComponent implements OnInit{
         // console.log(this.location);
         return this.location.prepareExternalUrl(this.location.path());
     }
-    incre(){
-        if(this.quantity!=10){
-          this.quantity++;
-        }
+ 
+      
+      getAllCart() {
+        
+        this.productService.getAllCartList().subscribe((data: any) => {
+          this.CartList = data;
+          for (let i = 0; i < this.CartList.length; i++) {
+            this.CartList[i].index = i + 1;
+          }
+        });
       }
-      decre(){
-        if(this.quantity!=0)
-        this.quantity--;
+      removeCartList(id) {
+        // debugger
+        // Swal.fire({
+        //   title: 'Are you sure?',
+        //   text: "You want to delete! If you delete Customer then all the customer data will be delete.",
+        //   icon: 'warning',
+        //   showCancelButton: true,
+        //   customClass: {
+        //     confirmButton: 'btn btn-success',
+        //     cancelButton: 'btn btn-danger',
+        //   },
+        //   confirmButtonText: 'Yes',
+        //   buttonsStyling: false
+        // }).then((result) => {
+        //   if (result.value == true) {
+        //     debugger
+        //     this.productService.removeCartDetails(id).subscribe((req) => {
+        //         debugger
+        //       this.apiService.showNotification('top', 'right', 'Product removed Successfully.', 'success');
+        //     })
+        //     Swal.fire(
+        //       {
+        //         title: 'Deleted!',
+        //         text: 'Your product has been deleted.',
+        //         icon: 'success',
+        //         customClass: {
+        //           confirmButton: "btn btn-success",
+        //         },
+        //         buttonsStyling: false
+        //       }
+        //     )
+        //     this.getAllCart();
+        //   }
+        // })
+        debugger
+        this.productService.removeCartDetails(id).subscribe((req) => {
+                
+                  this.apiService.showNotification('top', 'right', 'Product removed Successfully.', 'success');
+                })
+                this.getAllCart();
+    
       }
+      viewCartDetails(data: Cart) {
+        this.updateCartModel = data;
+      }
+      UpdateCartDetails() {
+    this.updateCartModel
+    this.productService.updateCartList(this.updateCartModel).subscribe((req) => {
+      this.getAllCart();
+      this.apiService.showNotification('top', 'right', 'Quantity Details Successfully Updated.', 'success');
+    })
+  }
+  incre(ind){
+    this.updateCartModel
+    debugger
+       this.cart[ind].quantity=this.updateCartModel.quantity;
+       debugger
+       this.q= this.cart[ind].quantity ++;
+     this.updateCartModel.quantity=this.q;
+      this.UpdateCartDetails(); 
+    }      
+  decre(ind){
+    // if(this.cart[ind].quantity>0){
+    //   this.q= this.cart[ind].quantity --;
+    //  this.updateCartModel.quantity=this.q;
+    //   this.UpdateCartDetails(); 
+    // }    
+    this.updateCartModel
+    this.cart[ind].quantity=this.updateCartModel.quantity;
+    this.q= this.cart[ind].quantity --;
+  this.updateCartModel.quantity=this.q;
+   this.UpdateCartDetails(); 
+  }
+  sum(){
+    // debugger
+    this.total = 0;
+    this.productService.getAllCartList().subscribe((data: any) => {
+      data.forEach(element => {
+      //  debugger
+       console.log(element.price);
+       console.log(element);
+       console.log(element.quantity);
+      //  console.log(element.price * element.quantity);
+          this.total = this.total + (element.price * element.quantity);
+        console.log('total',this.total);
+          for (let i = 0; i < this.CartList.length; i++) {
+            this.CartList[i].index = i + 1;
+          }
+
+      })
+    });
+}
+SaveOrder(data) {
+  debugger
+  debugger
+  data.forEach(element => {
+    //  debugger
+    
+    //  console.log(element.price * element.quantity);
+    console.log(element);
+    this.selcorder=element;
+    this.cid=localStorage.getItem('UserId');
+    this.selcorder.uid=this.cid;
+    this.selcorder.total=this.total;
+    debugger
+    // this.cid= this.productsModel.uid;
+    this.productService.saveOrderList(this.selcorder).subscribe((data: any) => {
+      // this.cart = data;
+      // this.getAllCart();
+      this.apiService.showNotification('top', 'right', 'submitted  Successfully.', 'success');
+    })
+    })
+ 
+}
+
 }

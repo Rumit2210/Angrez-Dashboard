@@ -6,7 +6,6 @@ import { Employee } from 'app/employee/employee.model';
 import { Observable } from 'rxjs';
 import { Category } from './category.model';
 import { Products } from './product.model';
-
 @Injectable({
     providedIn: 'root'
 })
@@ -22,6 +21,7 @@ export class ProductService {
     saveCategoryList(admin: Category): Observable<any> {
         return this.httpClient.post<any>(ApiService.saveCategoryListURL, admin);
     }
+   
     getAllProductsList(): Observable<Products[]> {
         return this.httpClient.get<any>(ApiService.getAllProductsListURL);
     }
@@ -53,4 +53,5 @@ export class ProductService {
     removeOrChanged() {
         return this.httpClient.get<any>(ApiService.removeImageURL);
     }
+
 }

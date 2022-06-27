@@ -30,7 +30,7 @@
                     </a>
                 </li>
                 <li class="nav-item  dropdown">
-                    <a class="nav-link dropdown-toggle" href="pablo" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="pablo" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"(click)="sum()">
                         <i class="fas fa-shopping-cart"></i>
                         <p>
                             <span class="d-lg-none d-md-block">Some Actions</span>
@@ -38,137 +38,74 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink" style="width:800px ;">
                         <div class="col-md-12">
-                            <div class="card">
-                                <div class="card-header">
+                            <div class >
+                                <div class="">
                                     <h4 class="card-title text-center"> Your Cart</h4>
                                 </div>
-                                <div class="card-body">
+                                <div class="">
                                     <div class="table-responsive">
                                         <table class="table ">
                                             <thead class="text-primary">
-                                                <th class="cart-img-head text-center" colspan=" 2 ">
-                                                    Product Name
+                                                <th class="text-center" colspan="2">
                                                 </th>
-                                                <th class="center " style="padding-left:7.8% ; ">
-                                                    Qty
+                                                <th class="text-center" colspan="2">
+                                                    Product
                                                 </th>
-                                                <th class="text-center ">
+                                                
+                                                <th class="text-center">
+                                                    Quantity
+                                                </th>
+                                                <th  class="text-center">
                                                     Price
                                                 </th>
+                                                <th  class="text-center" >
+                                                     &nbsp;
+                                                </th>
                                             </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <div class="img-container card-img ">
-                                                        <img src="./assets/img/stylus.jpg " alt="... ">
-                                                    </div>
-                                                    <td>
-                                                        Moleskine Agenda
-                                                    </td>
-
-                                                    <td class="center ">
-                                                        <div class="btn-group btn-group-sm col-3 ">
-                                                            <button class="btn btn-outline-default btn-round " (click)="decre() "> <i class="nc-icon nc-simple-delete "></i> </button>
-                                                            <div class="Quantity ">
-                                                                {{quantity}}
-                                                            </div>
-                                                            <button class="btn btn-outline-default btn-round " (click)="incre() "> <i class="nc-icon nc-simple-add "></i> </button>
+                                           <tbody>
+                                            <tr *ngFor="let items of CartList; let i=index">
+                                                <td class="text-left" style="width: 200px;"><img src="http://localhost:8090{{items.image}}"></td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <td class="text-center">{{items.name}}</td>&nbsp;
+                                                <td class="text-right">
+                                                    <div class="btn-group btn-group-sm ">
+                                                        <button class="btn btn-outline-default btn-round " (click)="decre(i) "> <i
+                                                                class="nc-icon nc-simple-delete "></i> </button>
+                                                        <div class="Quantity text-right">
+                                                         {{items.quantity}}
                                                         </div>
-                                                    </td>
-                                                    <td class="text-center ">
-                                                        € 49
-                                                    </td>
-
-                                                </tr>
-                                                <tr>
-                                                    <div class="img-container card-img ">
-                                                        <img src="./assets/img/stylus.jpg " alt="... ">
-                                                    </div>
-                                                    <td>
-                                                        Stabilo Pen
-                                                    </td>
-
-                                                    <td class="center ">
-                                                        <div class="btn-group btn-group-sm col-3 ">
-                                                            <button class="btn btn-outline-default btn-round " (click)="decre() "> <i class="nc-icon nc-simple-delete "></i> </button>
-                                                            <div class="Quantity ">
-                                                                {{quantity}}
-                                                            </div>
-                                                            <button class="btn btn-outline-default btn-round " (click)="incre() "> <i class="nc-icon nc-simple-add "></i> </button>
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-center ">
-                                                        € 10
-                                                    </td>
-
-                                                </tr>
-                                                <tr>
-                                                    <div class="img-container card-img ">
-                                                        <img src="./assets/img/stylus.jpg " alt="... ">
-                                                    </div>
-                                                    <td>
-                                                        A4 Paper Pack
-                                                    </td>
-
-                                                    <td class="center ">
-                                                        <div class="btn-group btn-group-sm col-3 ">
-                                                            <button class="btn btn-outline-default btn-round " (click)="decre() "> <i class="nc-icon nc-simple-delete "></i> </button>
-                                                            <div class="Quantity ">
-                                                                {{quantity}}
-                                                            </div>
-                                                            <button class="btn btn-outline-default btn-round " (click)="incre() "> <i class="nc-icon nc-simple-add "></i> </button>
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-center ">
-                                                        € 10.99
-                                                    </td>
-
-                                                </tr>
-                                                <tr>
-                                                    <div class="img-container card-img ">
-                                                        <img src="./assets/img/stylus.jpg " alt="... ">
-                                                    </div>
-                                                    <td>
-                                                        Apple iPad
-                                                    </td>
-
-                                                    <td class="center ">
-                                                        <div class="btn-group btn-group-sm col-3 ">
-                                                            <button class="btn btn-outline-default btn-round " (click)="decre() "> <i class="nc-icon nc-simple-delete "></i> </button>
-                                                            <div class="Quantity ">
-                                                                {{quantity}}
-                                                            </div>
-                                                            <button class="btn btn-outline-default btn-round " (click)="incre() "> <i class="nc-icon nc-simple-add "></i> </button>
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-center ">
-                                                        € 499.00
-                                                    </td>
-
-                                                </tr>
-                                                <tr>
-                                                    <div class="img-container card-img ">
-                                                        <img src="./assets/img/stylus.jpg " alt="... ">
-                                                    </div>
-                                                    <td>
-                                                        Apple iPhone
-                                                    </td>
-
-                                                    <td class="center ">
-                                                        <div class="btn-group btn-group-sm col-3 ">
-                                                            <button class="btn btn-outline-default btn-round " (click)="decre() "> <i class="nc-icon nc-simple-delete "></i> </button>
-                                                            <div class="Quantity ">
-                                                                {{quantity}}
-                                                            </div>
-                                                            <button class="btn btn-outline-default btn-round " (click)="incre() "> <i class="nc-icon nc-simple-add "></i> </button>
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-center ">
-                                                        € 599.00
-                                                    </td>
-
-                                                </tr>
-                                            </tbody>
+                                                        <button class="btn btn-outline-default btn-round " (click)="incre(i) "> <i
+                                                                class="nc-icon nc-simple-add "></i> </button>
+                                                    </div></td>
+                                                <td class="text-center">{{items.price}}</td>
+                                                <td class="text-right">
+                                                    <!-- <button type="button" rel="tooltip" class="btn btn-success btn-icon btn-sm">
+                                                        <i class="fa fa-edit" data-toggle="modal" data-target="#CartModal"
+                                                            (click)="viewCartDetails(items)" ></i>
+                                                    </button>
+                                                    &nbsp; -->
+                                                    <button type="button" rel="tooltip" class="close" 
+                                                    (click)="removeCartList(items.id)">
+                                                    <i class='fa fa-close'></i>
+                                                </button>
+                                                </td>
+                                                
+                                            </tr>
+                                           </tbody>
+                                           
                                         </table>
+                                    </div>
+                                </div>
+                                <div class="">
+                                    <div class="row" >
+                                       <h6 style="margin-top:10px ;margin-left: 10px;">Total Amount:  {{total}}</h6> 
+                                        <div class="ml-md-auto">
+                                            <button type="submit" class="btn btn-info btn-round"(click)="SaveOrder(CartList)">
+                                                <i class="fa fa-paper-plane" aria-hidden="true"></i> Place order
+                                            </button>
+                                            <button type="submit" class="btn btn-danger btn-round" routerLink='/dashboard'>
+                                                <i class="fa fa-times" aria-hidden="true"></i> Cancel
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -199,4 +136,43 @@
       </form> -->
 
     </div>
+    <div class="modal fade" id="CartModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-md modal-notice">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    <i class="nc-icon nc-simple-remove"></i>
+                </button>
+                <h5 class="modal-title" id="myModalLabel">View/Edit Quantity</h5>
+            </div>
+            <div class="modal-body">
+                <div class="instruction">
+                    <form class="form-horizontal" name="cartRegForm"  #cartRegForm="ngForm">
+                        <div class="row">
+                            <label class="col-md-4 col-form-label">Product Quantity</label>
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <input type="number" class="form-control" id="fname" name="fname"
+                                    [(ngModel)]="updateCartModel.quantity"  placeholder=" Enter Product Quantity " />
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <button type="button" class="btn btn-info btn-round" data-dismiss="modal"
+                    (click)="UpdateCartDetails()">
+                    <i class="fa fa-paper-plane" aria-hidden="true"></i> Update
+                </button>
+                <button type="button" class="btn btn-secondary btn-round" data-dismiss="modal">
+                    <i class="fa fa-times" aria-hidden="true"></i> Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 </nav>

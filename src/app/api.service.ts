@@ -104,8 +104,11 @@ export class ApiService {
   public static getWebBannerURL: string = ApiService.HOST_URL + '/admin/GetWebBanner';
   public static removeWebBannersURL: string = ApiService.HOST_URL + '/admin/RemoveWebBanners';
   public static updateActiveWebStatusURL: string = ApiService.HOST_URL + '/admin/UpdateActiveWebBanners';
-
-
+  public static saveCartListURL: string = ApiService.HOST_URL + '/admin/saveCartList';
+  public static getAllCartListURL: string = ApiService.HOST_URL + '/admin/getAllCartList';
+  public static removeCartDetailsURL: string = ApiService.HOST_URL + '/admin/removeCartDetails';
+  public static updateCartListURL: string = ApiService.HOST_URL + '/admin/updateCartList';
+  public static saveOrderListURL: string = ApiService.HOST_URL + '/admin/saveOrderList';
   showNotification(from, align, msg, color) {
     var color = color;
     $.notify({
