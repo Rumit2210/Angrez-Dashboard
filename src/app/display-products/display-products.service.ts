@@ -25,8 +25,6 @@ export class ProductService {
     getAllImagesList(id) {
         return this.httpClient.get<any>(ApiService.courosalImageURL + id);
     }
-    
-   
     getAllCategoryList(): Observable<Category[]> {
         return this.httpClient.get<any>(ApiService.getAllCategoryListURL);
     }
@@ -34,7 +32,6 @@ export class ProductService {
         return this.httpClient.post<any>(ApiService.saveCartListURL, admin);
     }
     getAllCartList(): Observable<Cart[]> {
-        debugger
         return this.httpClient.get<any>(ApiService.getAllCartListURL);
     }
     removeCartDetails(id){
@@ -47,6 +44,9 @@ export class ProductService {
     saveOrderList(admin:Order)
     {
         return this.httpClient.post<any>(ApiService.saveOrderListURL, admin);
+    }
+    getActiveProductsList(): Observable<Products[]> {
+        return this.httpClient.get<any>(ApiService.getActiveProductsURL);
     }
   
 

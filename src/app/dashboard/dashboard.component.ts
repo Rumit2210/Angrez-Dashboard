@@ -34,8 +34,8 @@ export class DashboardComponent implements OnInit {
   activePageDataChunk: any = [];
   pageSize = 10;
   pageSizeOptions: number[] = [10, 15, 20];
-  totalModelRecords:any;
-  modelPage:any;
+  totalModelRecords: any;
+  modelPage: any;
   public appointmentModel: Appointment = new Appointment;
   public paymentModel: Payment = new Payment;
   public paymentList: Payment[];
@@ -70,6 +70,7 @@ export class DashboardComponent implements OnInit {
   membershipService: any;
   compateserviceslist: any;
   customerData: any[];
+  totalCustExpense: number = 0;
   public Banners: Webbanners[] = [];
   topban: any = [];
 
@@ -84,7 +85,7 @@ export class DashboardComponent implements OnInit {
     private expensesService: ExpensesService,
     private apiService: ApiService,
     private router: Router,
-    private bannersService:BannersService
+    private bannersService: BannersService
   ) {
     this.adminRole = localStorage.getItem('role');
 
@@ -102,7 +103,7 @@ export class DashboardComponent implements OnInit {
     this.getExpensesDetails();
     this.GetMonthlyExpensesTotal();
     this.onlyViewCustomerDetails();
-    this.getBanners(); 
+    this.getBanners();
   }
   public ngOnInit() {
   }
@@ -343,6 +344,9 @@ export class DashboardComponent implements OnInit {
   onlyViewCustomerDetails() {
     this.customerService.getCustomerById(localStorage.getItem('UserId')).subscribe((data: any) => {
       this.customerData = data;
+      this.customerData.forEach(element => {
+          this.totalCustExpense = this.totalCustExpense + element.totalprice;
+      });
       for (let i = 0; i < this.customerData.length; i++) {
         this.customerData[i].index = i + 1;
       }

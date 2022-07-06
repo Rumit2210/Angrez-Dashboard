@@ -101,6 +101,32 @@
             </div>
         </div>
         <div class="col-lg-4 col-md-6 col-sm-6" *ngIf="adminRole == 'Customer'">
+            <div class="card card-stats" (click)="openCustomerService()">
+                <div class="card-body ">
+                    <div class="row">
+                        <div class="col-5 col-md-4">
+                            <div class="icon-big text-center icon-warning">
+                                <i class="fa fa-scissors text-primary"></i>
+                            </div>
+                        </div>
+                        <div class="col-7 col-md-8">
+                            <div class="numbers">
+                                <p class="card-category">Book Your Appointment</p>
+                                <p class="card-title">Total: {{customerData.length}}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <hr>
+                    <div class="stats">
+                        <i class="fa fa-arrow-right"></i> View
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-6" *ngIf="adminRole == 'Customer'">
             <div class="card card-stats" (click)="openServCustom()">
                 <div class="card-body ">
                     <div class="row">
@@ -126,6 +152,59 @@
                 </div>
             </div>
         </div>
+        <div class="col-lg-4 col-md-6 col-sm-6" *ngIf="adminRole == 'Customer'">
+            <div class="card card-stats" >
+                <div class="card-body ">
+                    <div class="row">
+                        <div class="col-5 col-md-4">
+                            <div class="icon-big text-center icon-warning">
+                                <i class="fa fa-rupee text-warning"></i>
+                            </div>
+                        </div>
+                        <div class="col-7 col-md-8">
+                            <div class="numbers">
+                                <p class="card-category">Total Expense</p>
+                                <p class="card-title">Total: {{totalCustExpense}}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <hr>
+                    <div class="stats">
+                        <i class="fa fa-arrow-right"></i> View
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-6" *ngIf="adminRole == 'Customer'">
+            <div class="card card-stats" (click)="openServCustom()">
+                <div class="card-body ">
+                    <div class="row">
+                        <div class="col-5 col-md-4">
+                            <div class="icon-big text-center icon-success">
+                                <i class="fa fa-shopping-cart text-success"></i>
+                            </div>
+                        </div>
+                        <div class="col-7 col-md-8">
+                            <div class="numbers">
+                                <p class="card-category">Booked Products</p>
+                                <p class="card-title">Total: 0
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <hr>
+                    <div class="stats">
+                        <i class="fa fa-arrow-right"></i> View
+                    </div>
+                </div>
+            </div>
+        </div>
+        
         <div class="col-lg-4 col-md-6 col-sm-6" *ngIf="adminRole == 'Admin'">
             <div class="card card-stats" (click)="openDaily()">
                 <div class="card-body">
@@ -231,17 +310,17 @@
             </div>
         </div>
         <div class="col-lg-4 col-md-6 col-sm-6" *ngIf="adminRole == 'Customer'">
-            <div class="card card-stats" (click)="openCustomerService()">
+            <div class="card card-stats" >
                 <div class="card-body ">
                     <div class="row">
                         <div class="col-5 col-md-4">
-                            <div class="icon-big text-center icon-warning">
-                                <i class="fa fa-scissors text-primary"></i>
+                            <div class="icon-big text-center icon-success">
+                                <i class="fa fa-scissors text-success"></i>
                             </div>
                         </div>
                         <div class="col-7 col-md-8">
                             <div class="numbers">
-                                <p class="card-category">Book Your Appointment</p>
+                                <p class="card-category">Total Completed Appointments</p>
                                 <p class="card-title">Total: {{customerData.length}}
                                 </p>
                             </div>
@@ -648,6 +727,9 @@
             </div>
         </div>
     </div>
+    <div style="margin-top: -93px;" *ngIf="adminRole == 'Customer'" >
+        <app-offer></app-offer>
+    </div>
     <div class="card" *ngIf="adminRole == 'Customer'">
         <div class="card-header">
             <div class="row">
@@ -772,9 +854,7 @@
    
 </div>
 
-<div style="margin-top: -93px;" *ngIf="adminRole == 'Customer'" >
-    <app-offer></app-offer>
-</div>
+
 <div style="margin-top: -93px;" *ngIf="adminRole == 'Admin'">
     <app-customer></app-customer>
 </div>

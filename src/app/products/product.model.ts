@@ -17,7 +17,7 @@ export class Products {
         public createddate?: Date,
         public updateddate?: Date,
         public multi?:any[],
-        public display?: boolean,
+        public display: boolean = false,
         public quant?:number,
     ) {
     }

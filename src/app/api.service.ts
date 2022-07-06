@@ -70,6 +70,7 @@ export class ApiService {
   public static getMonthlyExpensesURL: string = ApiService.HOST_URL + '/admin/getMonthlyExpensesList';
   public static saveProductsListURL: string = ApiService.HOST_URL + '/admin/SaveProductsList';
   public static getAllProductsListURL: string = ApiService.HOST_URL + '/admin/GetAllProductsList';
+  public static getActiveProductsURL: string = ApiService.HOST_URL + '/admin/GetActiveProducts';
   public static removeProductDetailsURL: string = ApiService.HOST_URL + '/admin/RemoveProductDetails/';
   public static getAllSalaryListURL: string = ApiService.HOST_URL + '/admin/GetAllSalaryList';
   public static updateSalaryStatusURL: string = ApiService.HOST_URL + '/admin/UpdateSalaryStatus';

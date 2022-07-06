@@ -644,7 +644,7 @@
             </div>
         </div>
     </div>
-    <div class="card" *ngIf="addc">
+    <div class="card" *ngIf="openCategoryFlag">
         <div class="card-header">
             <div class="row">
                 <div class="col-md-10">
@@ -758,6 +758,14 @@
 
                     </form>
                 </div>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <button type="button" class="btn btn-info btn-round" data-dismiss="modal" (click)="updateCategoryDetails()">
+                    <i class="fa fa-paper-plane" aria-hidden="true"></i> Update
+                </button>
+                <button type="button" class="btn btn-secondary btn-round" data-dismiss="modal">
+                    <i class="fa fa-times" aria-hidden="true"></i> Cancel
+                </button>
             </div>
         </div>
     </div>

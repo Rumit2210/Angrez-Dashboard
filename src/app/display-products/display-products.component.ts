@@ -48,27 +48,31 @@ export class DisplayProductsComponent implements OnInit {
   }
 
   getAllProducts() {
-    this.productService.getAllProductsList().subscribe((data: any) => {
+    this.productService.getActiveProductsList().subscribe((data: any) => {
       this.products = data;
       this.products.forEach((element:any)=>{
         element.quant=0;
       })
-      debugger
     });
   }
   incre(ind){
     
     if( this.products[ind].quant>=0){
       this.products[ind].quant ++;
+     
     }
+   
   }
   decre(ind){
     if(this.products[ind].quant>0){
       this.products[ind].quant --;
-    }    
+      
+    }   
+    
   }
-  selectedProd(data){ 
+  selectedProd(data,ind){ 
     this.selctpr=data;
+    this.selctpr.index = ind;
     this.getAllImages(this.selctpr.id)
   }
   //   this.selcart=data;
