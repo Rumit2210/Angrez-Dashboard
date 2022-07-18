@@ -11,6 +11,8 @@ import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { Offer } from 'app/offer/offer.model';
+import { OfferService } from 'app/offer/offer.service';
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 @Component({
@@ -55,25 +57,43 @@ export class CustomerComponent implements OnInit {
   addService: any = [];
   valu: 0;
   isDashboard: boolean = false;
-  vipbonus:any=0;
+  vipbonus: any = 0;
+  public offerList: Offer[];
+  selectedOffer: any;
+  offerId: any;
+  selctedPer: any;
+  offerData: any[];
+  offerPrice: bigint;
   constructor(
     private servicesService: ServicesService,
     private employeeService: EmployeeService,
     private customerService: CustomerService,
     private apiService: ApiService,
-    private router: Router
+    private router: Router,
+    private offerService: OfferService
   ) {
 
     this.getAllEmployee();
     this.getAllServices();
     this.getCustomerDetails();
+    this.getOfferDetails();
     if (this.router.routerState.snapshot.url === '/dashboard') {
       this.isDashboard = true;
     }
   }
 
   ngOnInit(): void {
-    this.addService = [{ time: null, serpoint: null, price: null, name1: this.valu, servicesname: '', employeename: '', selectedServid: null, selectedEmpid: null }]
+    this.addService = [
+      {
+        time: null,
+        serpoint: null,
+        price: null,
+        name1: this.valu,
+        servicesname: '',
+        employeename: '',
+        selectedServid: null,
+        selectedEmpid: null
+      }]
     this.valu++;
     this.vip;
 
@@ -127,16 +147,16 @@ export class CustomerComponent implements OnInit {
   }
   addPoinInList() {
     this.totalPoint = 0;
-    this.totalPrice = 0;
+    // this.totalPrice = 0;
     this.totalTime = 0;
-    this.vipbonus=0;
+    this.vipbonus = 0;
     this.addService.forEach(element => {
       if (element.price != undefined) {
         this.totalPrice = this.totalPrice + element.price;
       }
       if (element.serpoint != undefined) {
         this.totalPoint = this.totalPoint + element.serpoint;
-       
+
       }
       if (element.time != undefined) {
         this.totalTime = this.totalTime + element.time;
@@ -230,7 +250,9 @@ export class CustomerComponent implements OnInit {
     this.appointmentModel.totaltime = this.totalTime;
     this.appointmentModel.isactive = true;
     this.appointmentModel.custid = this.appointmentModel.id;
-
+    this.appointmentModel.totalprice = this.offerPrice;
+    this.totalPrice = this.offerPrice;
+    debugger
     if (this.appointmentModel.redeempoints > this.appointmentModel.tCustPoint) {
       this.apiService.showNotification('top', 'right', 'You can not redeem point more than total point.', 'danger');
     }
@@ -245,8 +267,39 @@ export class CustomerComponent implements OnInit {
 
 
   }
+  getOfferDetails() {
+
+    this.offerService.getAllOfferList().subscribe((data: any) => {
+      this.offerList = data;
+    });
+  }
+  selectOfferList(id) {
+    this.offerId = id;
+    this.offerList.forEach(element => {
+      if (element.id == id) {
+        this.selectedOffer = element.offername;
+        this.selctedPer = element.percentage
+        this.onlyViewOfferDetails();
+
+      }
+    })
+  }
+  onlyViewOfferDetails() {
+    this.offerService.getAllOfferDataList(this.offerId).subscribe((data: any) => {
+      this.offerData = data;
+      this.offerData.forEach(element => {
+        this.offerPrice = element.offerprice;
+        debugger
+      });
+      this.totalPrice = this.offerPrice;
+      for (let i = 0; i < this.offerData.length; i++) {
+        this.offerData[i].index = i + 1;
+      }
+    });
+  }
+
   generateInvoicePDF(customer, service) {
-    console.log(customer,service)
+    console.log(customer, service)
     let docDefinition = {
       pageSize: 'A5',
       footer: function (currentPage, pageCount) {

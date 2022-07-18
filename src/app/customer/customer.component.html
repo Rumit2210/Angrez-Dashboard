@@ -18,7 +18,9 @@
                     <label class="col-md-2 col-form-label">First Name</label>
                     <div class="col-md-4">
                         <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
-                            <input type="text" class="form-control" id="fname" name="fname" [(ngModel)]="customerModel.fname" placeholder=" Enter First Name " required value="" pattern="^[a-zA-Z]+$" (focus)="focus = true" #fname="ngModel" />
+                            <input type="text" class="form-control" id="fname" name="fname"
+                                [(ngModel)]="customerModel.fname" placeholder=" Enter First Name " required value=""
+                                pattern="^[a-zA-Z]+$" (focus)="focus = true" #fname="ngModel" />
                         </div>
                         <div *ngIf="fname.errors && (fname.dirty || fname.touched)" class="alert alert-danger">
                             <div *ngIf="fname.errors.required">
@@ -32,7 +34,9 @@
                     <label class="col-md-2 col-form-label">Last Name</label>
                     <div class="col-md-4">
                         <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
-                            <input type="text" class="form-control" id="lname" name="lname" [(ngModel)]="customerModel.lname" placeholder=" Enter Last Name" required value="" pattern="^[a-zA-Z]+$" (focus)="focus = true" #lname="ngModel" />
+                            <input type="text" class="form-control" id="lname" name="lname"
+                                [(ngModel)]="customerModel.lname" placeholder=" Enter Last Name" required value=""
+                                pattern="^[a-zA-Z]+$" (focus)="focus = true" #lname="ngModel" />
                         </div>
                         <div *ngIf="lname.errors && (lname.dirty || lname.touched)" class="alert alert-danger">
                             <div *ngIf="lname.errors.required">
@@ -46,7 +50,10 @@
                     <label class="col-md-2 col-form-label">Email</label>
                     <div class="col-md-4">
                         <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
-                            <input type="text" class="form-control" id="email" name="email" [(ngModel)]="customerModel.email" placeholder=" Enter Email Address" value="" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" (focus)="focus = true" #email="ngModel" />
+                            <input type="text" class="form-control" id="email" name="email"
+                                [(ngModel)]="customerModel.email" placeholder=" Enter Email Address" value=""
+                                pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" (focus)="focus = true"
+                                #email="ngModel" />
                         </div>
                         <div *ngIf="email.errors && (email.dirty || email.touched)" class="alert alert-danger">
                             <div *ngIf="email.errors.required">
@@ -60,7 +67,9 @@
                     <label class="col-md-2 col-form-label">Contact Number</label>
                     <div class="col-md-4">
                         <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
-                            <input type="text" class="form-control" id="contact" [(ngModel)]="customerModel.contact" name="contact" placeholder="Enter Contact Number" required value="" pattern="^[0-9].{9,9}$" (focus)="focus = true" #contact="ngModel" />
+                            <input type="text" class="form-control" id="contact" [(ngModel)]="customerModel.contact"
+                                name="contact" placeholder="Enter Contact Number" required value=""
+                                pattern="^[0-9].{9,9}$" (focus)="focus = true" #contact="ngModel" />
                         </div>
                         <div *ngIf="contact.errors && (contact.dirty || contact.touched)" class="alert alert-danger">
                             <div *ngIf="contact.errors.required">
@@ -74,7 +83,9 @@
                     <label class="col-md-2 col-form-label">Whatsapp Number</label>
                     <div class="col-md-4">
                         <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
-                            <input type="text" class="form-control" id="whatsapp" [(ngModel)]="customerModel.whatsapp" name="whatsapp" placeholder="Enter Whatsapp Number" required value="" pattern="^[0-9].{9,9}$" (focus)="focus = true" #whatsapp="ngModel" />
+                            <input type="text" class="form-control" id="whatsapp" [(ngModel)]="customerModel.whatsapp"
+                                name="whatsapp" placeholder="Enter Whatsapp Number" required value=""
+                                pattern="^[0-9].{9,9}$" (focus)="focus = true" #whatsapp="ngModel" />
                         </div>
                         <div *ngIf="whatsapp.errors && (whatsapp.dirty || whatsapp.touched)" class="alert alert-danger">
                             <div *ngIf="whatsapp.errors.required">
@@ -88,7 +99,10 @@
                     <label class="col-md-2 col-form-label">Address</label>
                     <div class="col-md-4">
                         <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
-                            <textarea id="address" class="form-control validate" name="address" rows="4" cols="54" [(ngModel)]="customerModel.address" placeholder="Enter Address" value="" pattern="[#\d+ ([^,]+), ([A-Z]{2}) (\d{5})]" (focus)="focus = true" #address="ngModel"> </textarea>
+                            <textarea id="address" class="form-control validate" name="address" rows="4" cols="54"
+                                [(ngModel)]="customerModel.address" placeholder="Enter Address" value=""
+                                pattern="[#\d+ ([^,]+), ([A-Z]{2}) (\d{5})]" (focus)="focus = true"
+                                #address="ngModel"> </textarea>
                         </div>
                         <div *ngIf="address.errors && (address.dirty || address.touched)" class="alert alert-danger">
                             <div *ngIf="address.errors.required">
@@ -122,10 +136,10 @@
                     </div>
                     <label class="col-sm-2 col-form-label">VIP</label>
                     <label class="switch">
-                                <input type="checkbox" checked class="switch-input" [switch-on-color]="'primary'" [switch-off-color]="'primary'" id="vip"
-                                     name="vip" [(ngModel)]="customerModel.vip">
-                                <span class="slider round"></span>
-                          </label>
+                        <input type="checkbox" checked class="switch-input" [switch-on-color]="'primary'"
+                            [switch-off-color]="'primary'" id="vip" name="vip" [(ngModel)]="customerModel.vip">
+                        <span class="slider round"></span>
+                    </label>
                 </div>
 
             </form>
@@ -133,7 +147,8 @@
         <div class="card-footer">
             <div class="row">
                 <div class="ml-md-auto">
-                    <button type="submit" class="btn btn-info btn-round" (click)="saveCustomerDetail(customerModel)" [disabled]="!CustForm.form.valid">
+                    <button type="submit" class="btn btn-info btn-round" (click)="saveCustomerDetail(customerModel)"
+                        [disabled]="!CustForm.form.valid">
                         <i class="fa fa-paper-plane" aria-hidden="true"></i> Submit
                     </button>
                     <button type="submit" class="btn btn-danger btn-round" routerLink='/dashboard'>
@@ -152,7 +167,8 @@
                             <h4 class="card-title"> Customer List</h4>
                         </div>
                         <div class="ml-md-auto">
-                            <button type="submit" *ngIf="isDashboard" class="btn btn-info btn-round" data-toggle="modal" data-target="#addCustomerModal">
+                            <button type="submit" *ngIf="isDashboard" class="btn btn-info btn-round" data-toggle="modal"
+                                data-target="#addCustomerModal">
                                 <i class="fa fa-plus" aria-hidden="true"></i> Add Customer
                             </button>
                         </div>
@@ -162,7 +178,9 @@
                         </div>
                         <div class="col-md-3 ml-md-auto">
                             <div class="form-group" style="margin-top: 8px !important;">
-                                <input type="search" id="form1" class="form-control" placeholder="Contact Number & Whatsapp Number" [(ngModel)]="search" (keyup)="searchCustomerList($event.target.value)" aria-label="Search" />
+                                <input type="search" id="form1" class="form-control"
+                                    placeholder="Contact Number & Whatsapp Number" [(ngModel)]="search"
+                                    (keyup)="searchCustomerList($event.target.value)" aria-label="Search" />
                             </div>
                         </div>
 
@@ -184,7 +202,8 @@
                                 <th class="text-right">Actions</th>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let item of customer | paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
+                                <tr
+                                    *ngFor="let item of customer | paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
                                     <td>
                                         <div class="form-check">
                                             <label class="form-check-label">
@@ -196,7 +215,8 @@
                                     </td>
                                     <td class="text-center">{{ item.index }}</td>
                                     <td class="text-center">
-                                        <div class="text-center"><span class="fa fa-star checked" *ngIf="item.vip==true"></span> {{ item.fname}} {{ item.lname}}</div>
+                                        <div class="text-center"><span class="fa fa-star checked"
+                                                *ngIf="item.vip==true"></span> {{ item.fname}} {{ item.lname}}</div>
                                     </td>
                                     <!-- <td class="text-center">{{ item.contact }}</td> -->
                                     <td class="text-center">{{ item.whatsapp }}</td>
@@ -205,7 +225,7 @@
                                         <button class="btn btn-success" *ngIf="item.status==1">
                                             Active
                                         </button>
-                                        <button class="btn btn-danger"  *ngIf="item.status==0">
+                                        <button class="btn btn-danger" *ngIf="item.status==0">
                                             Deactive
                                         </button>
                                     </td>
@@ -219,7 +239,8 @@
                                             <i class="fa fa-edit" data-toggle="modal" data-target="#customerModal"
                                                 (click)="viewCustomerDetails(item)"></i>
                                         </button> &nbsp;
-                                        <button type="button" rel="tooltip" class="btn btn-danger btn-icon btn-sm" (click)="removeCustomerList(item.id)">
+                                        <button type="button" rel="tooltip" class="btn btn-danger btn-icon btn-sm"
+                                            (click)="removeCustomerList(item.id)">
                                             <i class="fa fa-times"></i>
                                         </button>
                                     </td>
@@ -231,7 +252,8 @@
                 <div class="card-footer">
                     <div class="row">
                         <div class="ml-md-auto">
-                            <pagination-controls (pageChange)="p = $event" maxSize="10" autoHide="true" responsive="true">
+                            <pagination-controls (pageChange)="p = $event" maxSize="10" autoHide="true"
+                                responsive="true">
                             </pagination-controls>
                         </div>
                     </div>
@@ -240,7 +262,8 @@
         </div>
 
     </div>
-    <div class="modal fade" id="customerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade" id="customerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-xl modal-notice">
             <div class="modal-content">
                 <div class="modal-header">
@@ -256,37 +279,46 @@
                                 <label class="col-md-2 col-form-label">First Name</label>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" id="fname" name="fname" [(ngModel)]="customerModel.fname" placeholder=" Enter First Name " />
+                                        <input type="text" class="form-control" id="fname" name="fname"
+                                            [(ngModel)]="customerModel.fname" placeholder=" Enter First Name " />
                                     </div>
                                 </div>
                                 <label class="col-md-2 col-form-label">Last Name</label>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" id="lname" name="lname" [(ngModel)]="customerModel.lname" placeholder=" Enter Last Name" />
+                                        <input type="text" class="form-control" id="lname" name="lname"
+                                            [(ngModel)]="customerModel.lname" placeholder=" Enter Last Name" />
                                     </div>
                                 </div>
                                 <label class="col-md-2 col-form-label">Email</label>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" id="email" name="email" [(ngModel)]="customerModel.email" placeholder=" Enter Email Address" />
+                                        <input type="text" class="form-control" id="email" name="email"
+                                            [(ngModel)]="customerModel.email" placeholder=" Enter Email Address" />
                                     </div>
                                 </div>
                                 <label class="col-md-2 col-form-label">Contact Number</label>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" id="contact" [(ngModel)]="customerModel.contact" name="contact" placeholder="Enter Contact Number" />
+                                        <input type="text" class="form-control" id="contact"
+                                            [(ngModel)]="customerModel.contact" name="contact"
+                                            placeholder="Enter Contact Number" />
                                     </div>
                                 </div>
                                 <label class="col-md-2 col-form-label">Whatsapp Number</label>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" id="whatsapp" [(ngModel)]="customerModel.whatsapp" name="whatsapp" placeholder="Enter Whatsapp Number" />
+                                        <input type="text" class="form-control" id="whatsapp"
+                                            [(ngModel)]="customerModel.whatsapp" name="whatsapp"
+                                            placeholder="Enter Whatsapp Number" />
                                     </div>
                                 </div>
                                 <label class="col-md-2 col-form-label">Address</label>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <textarea id="address" class="form-control validate" name="address" rows="3" cols="40" [(ngModel)]="customerModel.address" placeholder="Enter Address" value=""> </textarea>
+                                        <textarea id="address" class="form-control validate" name="address" rows="3"
+                                            cols="40" [(ngModel)]="customerModel.address" placeholder="Enter Address"
+                                            value=""> </textarea>
                                     </div>
                                 </div>
                                 <label class="col-sm-2 col-form-label">Select Gender</label>
@@ -315,10 +347,10 @@
                                 <label class="col-sm-2 col-form-label">VIP</label>
 
                                 <label class="switch">
-                                        <input type="checkbox" checked class="switch-input"  id="vip"
-                                        name="vip" [(ngModel)]="customerModel.vip">
-                                        <span class="slider round"></span>
-                                 </label>
+                                    <input type="checkbox" checked class="switch-input" id="vip" name="vip"
+                                        [(ngModel)]="customerModel.vip">
+                                    <span class="slider round"></span>
+                                </label>
 
                                 <!-- <label class="col-md-2 col-form-label">Total Points</label>
                                 <div class="col-md-4">
@@ -333,7 +365,8 @@
                     </div>
                 </div>
                 <div class="modal-footer justify-content-center">
-                    <button type="button" class="btn btn-info btn-round" data-dismiss="modal" (click)="updateCustomerDetails()">
+                    <button type="button" class="btn btn-info btn-round" data-dismiss="modal"
+                        (click)="updateCustomerDetails()">
                         <i class="fa fa-paper-plane" aria-hidden="true"></i> Update
                     </button>
                     <button type="button" class="btn btn-secondary btn-round" data-dismiss="modal">
@@ -347,7 +380,8 @@
         <div class="card-header">
             <div class="row">
                 <div class="col-md-9">
-                    <h4 class="card-title">Customer Appointment<span class="fa fa-star checked" *ngIf="customerModel.vip==true"></span></h4>
+                    <h4 class="card-title">Customer Appointment<span class="fa fa-star checked"
+                            *ngIf="customerModel.vip==true"></span></h4>
                 </div>
                 <div class="ml-md-auto">
 
@@ -360,33 +394,55 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-md-4">
-                    <label class="col-form-label">Customer Name</label> 
+                    <label class="col-form-label">Customer Name</label>
                     <div class="form-group">
-                       <input type="text" class="form-control" id="fname" [(ngModel)]="customerModel.fname " name="fname" disabled />
+                        <input type="text" class="form-control" id="fname" [(ngModel)]="customerModel.fname "
+                            name="fname" disabled />
                     </div>
                 </div>
                 <div class="col-md-4">
                     <label class="col-form-label">Contact Number</label>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="fname" [(ngModel)]="customerModel.contact" name="fname" disabled />
+                        <input type="text" class="form-control" id="fname" [(ngModel)]="customerModel.contact"
+                            name="fname" disabled />
                     </div>
                 </div>
                 <div class="col-md-4">
                     <label class="col-form-label">Whatsapp Number</label>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="fname" [(ngModel)]="customerModel.whatsapp" name="fname" disabled />
+                        <input type="text" class="form-control" id="fname" [(ngModel)]="customerModel.whatsapp"
+                            name="fname" disabled />
                     </div>
                 </div>
                 <div class="col-md-4">
                     <label class="col-form-label">Email Address</label>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="fname" [(ngModel)]="customerModel.email" name="fname" disabled />
+                        <input type="text" class="form-control" id="fname" [(ngModel)]="customerModel.email"
+                            name="fname" disabled />
                     </div>
                 </div>
                 <div class="col-md-4">
                     <label class="col-form-label">Gender</label>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="fname" [(ngModel)]="customerModel.gender" name="fname" disabled />
+                        <input type="text" class="form-control" id="fname" [(ngModel)]="customerModel.gender"
+                            name="fname" disabled />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label class="col-form-label">Select Combo Offer</label>
+                    <div class="dropdown form-group">
+                        <button class="dropdown-toggle btn btn btn btn-block" type="button" name="dropdownMenuButton"
+                            id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                            style="margin: 0px 0px !important;">
+                            {{ selectedOffer }}
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                            <div class="dropdown-header">Select Combo Offer</div>
+                            <div *ngFor="let o of offerList">
+                                <a class="dropdown-item" (click)="selectOfferList(o.id)"
+                                    style="color:#252422 !important">{{o.offername}}</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <!-- <div class="col-md-3">
@@ -421,18 +477,20 @@
                     </div>
                 </div> -->
             </div>
-
             <div class="row" *ngFor="let add of addService; let ind = index">
                 <div class="col-md-4">
                     <label class="col-form-label">Select Service</label>
                     <div class="dropdown form-group">
-                        <button class="dropdown-toggle btn btn btn btn-block" type="button" name="dropdownMenuButton" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin: 0px 0px !important;">
+                        <button class="dropdown-toggle btn btn btn btn-block" type="button" name="dropdownMenuButton"
+                            id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                            style="margin: 0px 0px !important;">
                             {{ add.servicesname }}
                         </button>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
                             <div class="dropdown-header">Select Service</div>
                             <div *ngFor="let sl of servicesList">
-                                <a class="dropdown-item" (click)="selectServiceList(sl.id,ind)" style="color:#252422 !important">{{sl.name}}</a>
+                                <a class="dropdown-item" (click)="selectServiceList(sl.id,ind)"
+                                    style="color:#252422 !important">{{sl.name}}</a>
                             </div>
                         </div>
                     </div>
@@ -440,20 +498,24 @@
                 <div class="col-md-4">
                     <label class="col-form-label">Select Team Member</label>
                     <div class="dropdown form-group">
-                        <button class="dropdown-toggle btn btn btn btn-block" type="button" name="dropdownMenuButton" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin: 0px 0px !important;">
+                        <button class="dropdown-toggle btn btn btn btn-block" type="button" name="dropdownMenuButton"
+                            id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                            style="margin: 0px 0px !important;">
                             {{ add.employeename }}
                         </button>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
                             <div class="dropdown-header">Select Team Member</div>
                             <div *ngFor="let e of employeeReg">
-                                <a class="dropdown-item" (click)="selectEmpList(e.id,ind)" style="color:#252422 !important">{{e.fname}}
+                                <a class="dropdown-item" (click)="selectEmpList(e.id,ind)"
+                                    style="color:#252422 !important">{{e.fname}}
                                     {{e.lname}}</a>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-1">
-                    <i class="fa fa-plus-circle" aria-hidden="true" (click)="addServiceList(add)" style="font-size: 33px !important; margin-top: 47% !important"></i>
+                    <i class="fa fa-plus-circle" aria-hidden="true" (click)="addServiceList(add)"
+                        style="font-size: 33px !important; margin-top: 47% !important"></i>
                 </div>
                 <div class="col-md-1" *ngIf="ind > 0">
                     <i class="fa fa-times-circle" aria-hidden="true" (click)="removeServiceList(ind)" style="
@@ -463,7 +525,27 @@
                       "></i>
                 </div>
             </div>
-
+            <div class="table-responsive" *ngIf="selectedOffer">
+                <h3>Offer Services List</h3>
+                <table class="table">
+                    <thead class="text-primary">
+                        <th class="text-center">#</th>
+                        <th class="text-center">Services Name</th>
+                        <th class="text-center">Total Price</th>
+                        <th class="text-center">Percantage</th>
+                        <th class="text-center">Offer Price</th>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of offerData; let i = index">
+                            <td class="text-center">{{ i+1 }}</td>
+                            <td class="text-center">{{ item.servicesname}} </td>
+                            <td class="text-center">{{item.totalprice}} ₹</td>
+                            <td class="text-center">{{selctedPer }} %</td>
+                            <td class="text-center">{{ item.offerprice }} ₹</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
             <div class="table-responsive">
                 <table class="table">
                     <thead class="text-primary">
@@ -484,7 +566,8 @@
                             <td class="text-center">{{ item.serpoint }}</td>
                             <td class="text-center">{{ item.time }}</td>
                             <td class="text-right">
-                                <button type="button" rel="tooltip" class="btn btn-danger btn-icon btn-sm" (click)="removeItem(i)">
+                                <button type="button" rel="tooltip" class="btn btn-danger btn-icon btn-sm"
+                                    (click)="removeItem(i)">
                                     <i class="fa fa-times"></i>
                                 </button>
                             </td>
@@ -498,49 +581,56 @@
                 <div class="col-md-2">
                     <label class="col-form-label" style="font-size: 20px;color: black;">Total Points</label>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="tPoints" name="tPoints" disabled value="{{tCustPoint}}" />
+                        <input type="text" class="form-control" id="tPoints" name="tPoints" disabled
+                            value="{{tCustPoint}}" />
                     </div>
                 </div>
                 <div class="col-md-3">
                     <label class="col-form-label" style="font-size: 20px;color: black;">Enter Points to Redeem </label>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="redeemPoint" name="redeemPoint" [disabled]="tCustPoint ==0 " [(ngModel)]="appointmentModel.redeempoints" placeholder="Enter Redeem Point" />
+                        <input type="text" class="form-control" id="redeemPoint" name="redeemPoint"
+                            [disabled]="tCustPoint ==0 " [(ngModel)]="appointmentModel.redeempoints"
+                            placeholder="Enter Redeem Point" />
                     </div>
                 </div>
                 <div class="col-md-2">
                     <label class="col-form-label" style="font-size: 20px;color: black;">Total
                         Price</label>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="fname" name="fname" disabled value="{{totalPrice}} ₹" />
+                        <input type="text" class="form-control" id="fname" name="fname" disabled
+                            value="{{totalPrice}} ₹" />
                     </div>
                 </div>
                 <div class="col-md-2">
                     <label class="col-form-label" style="font-size: 20px;color: black;">Today
                         Points</label>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="fname" name="fname" disabled value="{{totalPoint}} Point" />
+                        <input type="text" class="form-control" id="fname" name="fname" disabled
+                            value="{{totalPoint}} Point" />
                     </div>
                 </div>
                 <div class="col-md-2">
                     <label class="col-form-label" style="font-size: 20px;color: black;">Approx Time</label>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="fname" name="fname" disabled value="{{totalTime}} minute" />
+                        <input type="text" class="form-control" id="fname" name="fname" disabled
+                            value="{{totalTime}} minute" />
                     </div>
                 </div>
             </div>
-            <div class="row" >
+            <div class="row">
                 <div class="col-md-2" *ngIf="customerModel.vip==true">
                     <label class="col-form-label" style="font-size: 20px;color: black;">VIP Bonus</label>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="fname" name="vipbonus" disabled  value="-{{vipbonus}} ₹"/>
+                        <input type="text" class="form-control" id="fname" name="vipbonus" disabled
+                            value="-{{vipbonus}} ₹" />
                     </div>
                 </div>
             </div>
             <br>
             <div class="row">
                 <div class="ml-md-auto">
-                    <button type="button" class="btn btn-info btn-round ml5" (click)="generateInvoicePDF(appointmentModel,addService)"><i
-                            class="fa fa-file-pdf-o"></i>
+                    <button type="button" class="btn btn-info btn-round ml5"
+                        (click)="generateInvoicePDF(appointmentModel,addService)"><i class="fa fa-file-pdf-o"></i>
                         Invoice(PDF)</button>
                     <button type="submit" class="btn btn-info btn-round ml5" (click)="saveAppointmentDetails()">
                         <i class="fa fa-paper-plane" aria-hidden="true"></i> Submit
@@ -578,7 +668,8 @@
                         <th class="text-right">Actions</th>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let item of customerData |  paginate: { id:'listing_pagination',itemsPerPage: 5, currentPage: page,totalItems:totalRecords }">
+                        <tr
+                            *ngFor="let item of customerData |  paginate: { id:'listing_pagination',itemsPerPage: 5, currentPage: page,totalItems:totalRecords }">
                             <td class="text-center">{{ item.index }}</td>
                             <!-- <td class="text-center">{{ item.empname}}</td> -->
                             <td class="text-center">{{ item.totalprice }}</td>
@@ -598,14 +689,16 @@
         <div class="card-footer">
             <div class="row">
                 <div class="ml-md-auto">
-                    <pagination-controls id="listing_pagination" maxSize="5" directionLinks="true" (pageChange)="page= $event" autoHide="true" responsive="true">
+                    <pagination-controls id="listing_pagination" maxSize="5" directionLinks="true"
+                        (pageChange)="page= $event" autoHide="true" responsive="true">
                     </pagination-controls>
 
                 </div>
             </div>
         </div>
     </div>
-    <div class="modal fade" id="customerServicesModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade" id="customerServicesModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-xl modal-notice">
             <div class="modal-content">
                 <div class="modal-header">
@@ -624,7 +717,8 @@
                                 <th class="text-center">Service Point</th>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let item of usedServices |  paginate: { id:'model_pagination',itemsPerPage: 10, currentPage: modelPage,totalItems:totalModelRecords }">
+                                <tr
+                                    *ngFor="let item of usedServices |  paginate: { id:'model_pagination',itemsPerPage: 10, currentPage: modelPage,totalItems:totalModelRecords }">
                                     <td class="text-center">{{ item.index }}</td>
                                     <td class="text-center">{{ item.servicesname}}</td>
                                     <td class="text-center">{{ item.price }}</td>
@@ -649,7 +743,8 @@
                         </div>
                         <div class="col-md-2">
                             <div class="form-group">
-                                <input type="text" class="form-control" id="fname" name="fname" disabled value="{{totalPriceForDetails}} ₹" />
+                                <input type="text" class="form-control" id="fname" name="fname" disabled
+                                    value="{{totalPriceForDetails}} ₹" />
                             </div>
                         </div>
                         <div class="col-md-2">
@@ -658,7 +753,8 @@
                         </div>
                         <div class="col-md-2">
                             <div class="form-group">
-                                <input type="text" class="form-control" id="tPoints" name="tPoints" disabled value="{{totalPointForDetails}}" />
+                                <input type="text" class="form-control" id="tPoints" name="tPoints" disabled
+                                    value="{{totalPointForDetails}}" />
                             </div>
                         </div>
 
@@ -673,7 +769,8 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="addCustomerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade" id="addCustomerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-xl modal-notice">
             <div class="modal-content">
                 <div class="modal-header">
@@ -689,9 +786,12 @@
                                 <label class="col-md-2 col-form-label">First Name</label>
                                 <div class="col-md-4">
                                     <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
-                                        <input type="text" class="form-control" id="fname" name="fname" [(ngModel)]="customerModel.fname" placeholder=" Enter First Name " required value="" pattern="^[a-zA-Z]+$" (focus)="focus = true" #fname="ngModel" />
+                                        <input type="text" class="form-control" id="fname" name="fname"
+                                            [(ngModel)]="customerModel.fname" placeholder=" Enter First Name " required
+                                            value="" pattern="^[a-zA-Z]+$" (focus)="focus = true" #fname="ngModel" />
                                     </div>
-                                    <div *ngIf="fname.errors && (fname.dirty || fname.touched)" class="alert alert-danger">
+                                    <div *ngIf="fname.errors && (fname.dirty || fname.touched)"
+                                        class="alert alert-danger">
                                         <div *ngIf="fname.errors.required">
                                             First Name is required
                                         </div>
@@ -703,9 +803,12 @@
                                 <label class="col-md-2 col-form-label">Last Name</label>
                                 <div class="col-md-4">
                                     <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
-                                        <input type="text" class="form-control" id="lname" name="lname" [(ngModel)]="customerModel.lname" placeholder=" Enter Last Name" required value="" pattern="^[a-zA-Z]+$" (focus)="focus = true" #lname="ngModel" />
+                                        <input type="text" class="form-control" id="lname" name="lname"
+                                            [(ngModel)]="customerModel.lname" placeholder=" Enter Last Name" required
+                                            value="" pattern="^[a-zA-Z]+$" (focus)="focus = true" #lname="ngModel" />
                                     </div>
-                                    <div *ngIf="lname.errors && (lname.dirty || lname.touched)" class="alert alert-danger">
+                                    <div *ngIf="lname.errors && (lname.dirty || lname.touched)"
+                                        class="alert alert-danger">
                                         <div *ngIf="lname.errors.required">
                                             Last Name is required
                                         </div>
@@ -717,9 +820,13 @@
                                 <label class="col-md-2 col-form-label">Email</label>
                                 <div class="col-md-4">
                                     <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
-                                        <input type="text" class="form-control" id="email" name="email" [(ngModel)]="customerModel.email" placeholder=" Enter Email Address" value="" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" (focus)="focus = true" #email="ngModel" />
+                                        <input type="text" class="form-control" id="email" name="email"
+                                            [(ngModel)]="customerModel.email" placeholder=" Enter Email Address"
+                                            value="" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+                                            (focus)="focus = true" #email="ngModel" />
                                     </div>
-                                    <div *ngIf="email.errors && (email.dirty || email.touched)" class="alert alert-danger">
+                                    <div *ngIf="email.errors && (email.dirty || email.touched)"
+                                        class="alert alert-danger">
                                         <div *ngIf="email.errors.required">
                                             Email Address is required.
                                         </div>
@@ -731,9 +838,13 @@
                                 <label class="col-md-2 col-form-label">Contact Number</label>
                                 <div class="col-md-4">
                                     <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
-                                        <input type="text" class="form-control" id="contact" [(ngModel)]="customerModel.contact" name="contact" placeholder="Enter Contact Number" required value="" pattern="^[0-9].{9,9}$" (focus)="focus = true" #contact="ngModel" />
+                                        <input type="text" class="form-control" id="contact"
+                                            [(ngModel)]="customerModel.contact" name="contact"
+                                            placeholder="Enter Contact Number" required value="" pattern="^[0-9].{9,9}$"
+                                            (focus)="focus = true" #contact="ngModel" />
                                     </div>
-                                    <div *ngIf="contact.errors && (contact.dirty || contact.touched)" class="alert alert-danger">
+                                    <div *ngIf="contact.errors && (contact.dirty || contact.touched)"
+                                        class="alert alert-danger">
                                         <div *ngIf="contact.errors.required">
                                             contact Address is required.
                                         </div>
@@ -745,9 +856,13 @@
                                 <label class="col-md-2 col-form-label">Whatsapp Number</label>
                                 <div class="col-md-4">
                                     <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
-                                        <input type="text" class="form-control" id="whatsapp" [(ngModel)]="customerModel.whatsapp" name="whatsapp" placeholder="Enter Whatsapp Number" required value="" pattern="^[0-9].{9,9}$" (focus)="focus = true" #whatsapp="ngModel" />
+                                        <input type="text" class="form-control" id="whatsapp"
+                                            [(ngModel)]="customerModel.whatsapp" name="whatsapp"
+                                            placeholder="Enter Whatsapp Number" required value=""
+                                            pattern="^[0-9].{9,9}$" (focus)="focus = true" #whatsapp="ngModel" />
                                     </div>
-                                    <div *ngIf="whatsapp.errors && (whatsapp.dirty || whatsapp.touched)" class="alert alert-danger">
+                                    <div *ngIf="whatsapp.errors && (whatsapp.dirty || whatsapp.touched)"
+                                        class="alert alert-danger">
                                         <div *ngIf="whatsapp.errors.required">
                                             whatsapp Address is required.
                                         </div>
@@ -759,9 +874,13 @@
                                 <label class="col-md-2 col-form-label">Address</label>
                                 <div class="col-md-4">
                                     <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
-                                        <textarea id="address" class="form-control validate" name="address" rows="4" cols="40" [(ngModel)]="customerModel.address" placeholder="Enter Address" value="" pattern="[#\d+ ([^,]+), ([A-Z]{2}) (\d{5})]" (focus)="focus = true" #address="ngModel"> </textarea>
+                                        <textarea id="address" class="form-control validate" name="address" rows="4"
+                                            cols="40" [(ngModel)]="customerModel.address" placeholder="Enter Address"
+                                            value="" pattern="[#\d+ ([^,]+), ([A-Z]{2}) (\d{5})]" (focus)="focus = true"
+                                            #address="ngModel"> </textarea>
                                     </div>
-                                    <div *ngIf="address.errors && (address.dirty || address.touched)" class="alert alert-danger">
+                                    <div *ngIf="address.errors && (address.dirty || address.touched)"
+                                        class="alert alert-danger">
                                         <div *ngIf="address.errors.required">
                                             Address is required
                                         </div>
@@ -795,17 +914,18 @@
                                 <label class="col-sm-2 col-form-label">VIP</label>
 
                                 <label class="switch">
-                                        <input type="checkbox" checked class="switch-input"  id="vip"
-                                        name="vip" [(ngModel)]="customerModel.vip">
-                                        <span class="slider round"></span>
-                                 </label>
+                                    <input type="checkbox" checked class="switch-input" id="vip" name="vip"
+                                        [(ngModel)]="customerModel.vip">
+                                    <span class="slider round"></span>
+                                </label>
                             </div>
 
                         </form>
                     </div>
                 </div>
                 <div class="modal-footer justify-content-center">
-                    <button type="submit" class="btn btn-info btn-round" (click)="saveCustomerDetail()" [disabled]="!CustForm.form.valid" data-dismiss="modal"> 
+                    <button type="submit" class="btn btn-info btn-round" (click)="saveCustomerDetail()"
+                        [disabled]="!CustForm.form.valid" data-dismiss="modal">
                         <i class="fa fa-paper-plane" aria-hidden="true"></i> Submit
                     </button>
                     <button type="submit" class="btn btn-danger btn-round" data-dismiss="modal">
