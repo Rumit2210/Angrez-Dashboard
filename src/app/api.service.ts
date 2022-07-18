@@ -70,6 +70,7 @@ export class ApiService {
   public static getMonthlyExpensesURL: string = ApiService.HOST_URL + '/admin/getMonthlyExpensesList';
   public static saveProductsListURL: string = ApiService.HOST_URL + '/admin/SaveProductsList';
   public static getAllProductsListURL: string = ApiService.HOST_URL + '/admin/GetAllProductsList';
+  public static getActiveProductsURL: string = ApiService.HOST_URL + '/admin/GetActiveProducts';
   public static removeProductDetailsURL: string = ApiService.HOST_URL + '/admin/RemoveProductDetails/';
   public static getAllSalaryListURL: string = ApiService.HOST_URL + '/admin/GetAllSalaryList';
   public static updateSalaryStatusURL: string = ApiService.HOST_URL + '/admin/UpdateSalaryStatus';
@@ -109,6 +110,11 @@ export class ApiService {
   public static getWebBannerURL: string = ApiService.HOST_URL + '/admin/GetWebBanner';
   public static removeWebBannersURL: string = ApiService.HOST_URL + '/admin/RemoveWebBanners';
   public static updateActiveWebStatusURL: string = ApiService.HOST_URL + '/admin/UpdateActiveWebBanners';
+  public static saveCartListURL: string = ApiService.HOST_URL + '/admin/saveCartList';
+  public static getAllCartListURL: string = ApiService.HOST_URL + '/admin/getAllCartList';
+  public static removeCartDetailsURL: string = ApiService.HOST_URL + '/admin/removeCartDetails';
+  public static updateCartListURL: string = ApiService.HOST_URL + '/admin/updateCartList';
+  public static saveOrderListURL: string = ApiService.HOST_URL + '/admin/saveOrderList';
   public static updateActiveOffersURL: string = ApiService.HOST_URL + '/admin/UpdateActiveOffers';
 
 

@@ -88,7 +88,7 @@
                     <label class="col-md-2 col-form-label">Address</label>
                     <div class="col-md-4">
                         <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
-                            <textarea id="address" class="form-control validate"name="address" rows="4" cols="54" [(ngModel)]="customerModel.address" placeholder="Enter Address" value="" pattern="[#\d+ ([^,]+), ([A-Z]{2}) (\d{5})]" (focus)="focus = true" #address="ngModel"> </textarea>
+                            <textarea id="address" class="form-control validate" name="address" rows="4" cols="54" [(ngModel)]="customerModel.address" placeholder="Enter Address" value="" pattern="[#\d+ ([^,]+), ([A-Z]{2}) (\d{5})]" (focus)="focus = true" #address="ngModel"> </textarea>
                         </div>
                         <div *ngIf="address.errors && (address.dirty || address.touched)" class="alert alert-danger">
                             <div *ngIf="address.errors.required">
@@ -121,7 +121,7 @@
                         </div>
                     </div>
                     <label class="col-sm-2 col-form-label">VIP</label>
-                         <label class="switch">
+                    <label class="switch">
                                 <input type="checkbox" checked class="switch-input" [switch-on-color]="'primary'" [switch-off-color]="'primary'" id="vip"
                                      name="vip" [(ngModel)]="customerModel.vip">
                                 <span class="slider round"></span>
@@ -195,7 +195,9 @@
                                         </div>
                                     </td>
                                     <td class="text-center">{{ item.index }}</td>
-                                    <td class="text-center"><div class="text-center" ><span class="fa fa-star checked" *ngIf="item.vip==true"></span> {{ item.fname}} {{ item.lname}}</div></td>
+                                    <td class="text-center">
+                                        <div class="text-center"><span class="fa fa-star checked" *ngIf="item.vip==true"></span> {{ item.fname}} {{ item.lname}}</div>
+                                    </td>
                                     <!-- <td class="text-center">{{ item.contact }}</td> -->
                                     <td class="text-center">{{ item.whatsapp }}</td>
                                     <td class="text-center">{{ item.gender }}</td>
@@ -284,7 +286,7 @@
                                 <label class="col-md-2 col-form-label">Address</label>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <textarea id="address"class="form-control validate" name="address" rows="3" cols="40" [(ngModel)]="customerModel.address" placeholder="Enter Address" value=""> </textarea>
+                                        <textarea id="address" class="form-control validate" name="address" rows="3" cols="40" [(ngModel)]="customerModel.address" placeholder="Enter Address" value=""> </textarea>
                                     </div>
                                 </div>
                                 <label class="col-sm-2 col-form-label">Select Gender</label>
@@ -309,10 +311,10 @@
                                         </label>
                                     </div>
                                 </div>
-                                
+
                                 <label class="col-sm-2 col-form-label">VIP</label>
-                
-                                    <label class="switch">
+
+                                <label class="switch">
                                         <input type="checkbox" checked class="switch-input"  id="vip"
                                         name="vip" [(ngModel)]="customerModel.vip">
                                         <span class="slider round"></span>
@@ -425,7 +427,7 @@
                     <label class="col-form-label">Select Service</label>
                     <div class="dropdown form-group">
                         <button class="dropdown-toggle btn btn btn btn-block" type="button" name="dropdownMenuButton" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin: 0px 0px !important;">
-                            {{ add.selectedServ }}
+                            {{ add.servicesname }}
                         </button>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
                             <div class="dropdown-header">Select Service</div>
@@ -439,7 +441,7 @@
                     <label class="col-form-label">Select Team Member</label>
                     <div class="dropdown form-group">
                         <button class="dropdown-toggle btn btn btn btn-block" type="button" name="dropdownMenuButton" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin: 0px 0px !important;">
-                            {{ add.selectedEmp }}
+                            {{ add.employeename }}
                         </button>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
                             <div class="dropdown-header">Select Team Member</div>
@@ -476,11 +478,11 @@
                     <tbody *ngIf="addService[0].serpoint !=null">
                         <tr *ngFor="let item of addService; let i = index">
                             <td class="text-center">{{ i+1 }}</td>
-                            <td class="text-center">{{ item.selectedServ}} </td>
-                            <td class="text-center">{{item.selectedEmp}}</td>
-                            <td class="text-center">{{ item.serprice }} ₹</td>
+                            <td class="text-center">{{ item.servicesname}} </td>
+                            <td class="text-center">{{item.employeename}}</td>
+                            <td class="text-center">{{ item.price }} ₹</td>
                             <td class="text-center">{{ item.serpoint }}</td>
-                            <td class="text-center">{{ item.sertime }}</td>
+                            <td class="text-center">{{ item.time }}</td>
                             <td class="text-right">
                                 <button type="button" rel="tooltip" class="btn btn-danger btn-icon btn-sm" (click)="removeItem(i)">
                                     <i class="fa fa-times"></i>
@@ -757,7 +759,7 @@
                                 <label class="col-md-2 col-form-label">Address</label>
                                 <div class="col-md-4">
                                     <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
-                                        <textarea id="address"class="form-control validate" name="address" rows="4" cols="40" [(ngModel)]="customerModel.address" placeholder="Enter Address" value="" pattern="[#\d+ ([^,]+), ([A-Z]{2}) (\d{5})]" (focus)="focus = true" #address="ngModel"> </textarea>
+                                        <textarea id="address" class="form-control validate" name="address" rows="4" cols="40" [(ngModel)]="customerModel.address" placeholder="Enter Address" value="" pattern="[#\d+ ([^,]+), ([A-Z]{2}) (\d{5})]" (focus)="focus = true" #address="ngModel"> </textarea>
                                     </div>
                                     <div *ngIf="address.errors && (address.dirty || address.touched)" class="alert alert-danger">
                                         <div *ngIf="address.errors.required">
@@ -791,8 +793,8 @@
                                     </div>
                                 </div>
                                 <label class="col-sm-2 col-form-label">VIP</label>
-                
-                                    <label class="switch">
+
+                                <label class="switch">
                                         <input type="checkbox" checked class="switch-input"  id="vip"
                                         name="vip" [(ngModel)]="customerModel.vip">
                                         <span class="slider round"></span>

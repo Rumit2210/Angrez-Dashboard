@@ -25,9 +25,9 @@ export class CustomerComponent implements OnInit {
   public appointmentList: Appointment[];
   public customer: Customer[] = [];
   public customerList: Customer[];
-  selectedEmp: any;
+  employeename: any;
   empId: any;
-  selectedServ: any;
+  servicesname: any;
   servId: any;
   public employeeReg: Employee[];
   public servicesList: Services[];
@@ -73,7 +73,7 @@ export class CustomerComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.addService = [{ sertime: null, serpoint: null, serprice: null, name1: this.valu, selectedServ: '', selectedEmp: '', selectedServid: null, selectedEmpid: null }]
+    this.addService = [{ time: null, serpoint: null, price: null, name1: this.valu, servicesname: '', employeename: '', selectedServid: null, selectedEmpid: null }]
     this.valu++;
     this.vip;
 
@@ -81,7 +81,7 @@ export class CustomerComponent implements OnInit {
   addServiceList() {
 
     this.valu++;
-    this.addService.push({ sertime: null, serpoint: null, serprice: null, name1: this.valu, selectedServ: '', selectedEmp: '', selectedServid: null, selectedEmpid: null });
+    this.addService.push({ time: null, serpoint: null, price: null, name1: this.valu, servicesname: '', employeename: '', selectedServid: null, selectedEmpid: null });
   }
   removeServiceList(valu) {
     this.addService.splice(valu, 1);
@@ -97,7 +97,7 @@ export class CustomerComponent implements OnInit {
     this.empId = id;
     this.employeeReg.forEach(element => {
       if (element.id == id) {
-        this.addService[ind].selectedEmp = element.fname + ' ' + element.lname;
+        this.addService[ind].employeename = element.fname + ' ' + element.lname;
         this.addService[ind].selectedEmpid = id;
       }
     })
@@ -112,11 +112,11 @@ export class CustomerComponent implements OnInit {
     this.servId = id;
     this.servicesList.forEach(element => {
       if (element.id == id) {
-        this.addService[ind].selectedServ = element.name;
+        this.addService[ind].servicesname = element.name;
         this.addService[ind].selectedServid = id;
-        this.addService[ind].serprice = element.price;
+        this.addService[ind].price = element.price;
         this.addService[ind].serpoint = element.point;
-        this.addService[ind].sertime = element.time;
+        this.addService[ind].time = element.time;
         for (let i = 0; i < this.addService.length; i++) {
           this.addService[i].index = i + 1;
         }
@@ -131,19 +131,15 @@ export class CustomerComponent implements OnInit {
     this.totalTime = 0;
     this.vipbonus=0;
     this.addService.forEach(element => {
-      if (element.serprice != undefined) {
-        this.totalPrice = this.totalPrice + element.serprice;
-        if(this.customerModel.vip ){
-          this.vipbonus = this.totalPrice/10;
-          debugger
-        }
+      if (element.price != undefined) {
+        this.totalPrice = this.totalPrice + element.price;
       }
       if (element.serpoint != undefined) {
         this.totalPoint = this.totalPoint + element.serpoint;
        
       }
-      if (element.sertime != undefined) {
-        this.totalTime = this.totalTime + element.sertime;
+      if (element.time != undefined) {
+        this.totalTime = this.totalTime + element.time;
       }
     });
   }
@@ -228,7 +224,7 @@ export class CustomerComponent implements OnInit {
     this.appointmentModel.lessPoints = this.tCustPoint - this.appointmentModel.redeempoints;
     this.appointmentModel.lessPoints = this.appointmentModel.lessPoints + this.appointmentModel.totalpoint;
     this.appointmentModel.selectedService = this.addService;
-    this.appointmentModel.emp = this.selectedEmp;
+    this.appointmentModel.emp = this.employeename;
     this.appointmentModel.totalprice = this.totalPrice;
     this.appointmentModel.totalpoint = this.totalPoint;
     this.appointmentModel.totaltime = this.totalTime;
@@ -250,6 +246,7 @@ export class CustomerComponent implements OnInit {
 
   }
   generateInvoicePDF(customer, service) {
+    console.log(customer,service)
     let docDefinition = {
       pageSize: 'A5',
       footer: function (currentPage, pageCount) {
@@ -335,7 +332,7 @@ export class CustomerComponent implements OnInit {
             widths: ['auto', '*', '*', 'auto', 'auto'],
             body: [
               [{ text: 'ITEMS', style: 'tablehead' }, { text: 'SERVICE', style: 'tablehead' }, { text: 'EMPLOYEE', style: 'tablehead' }, { text: 'TIME', style: 'tablehead' }, { text: 'PRICE', style: 'tablehead' }],
-              ...service.map(p => ([{ text: p.index, style: 'tablecell' }, { text: p.selectedServ, style: 'tablecell' }, { text: p.selectedEmp, style: 'tablecell' }, { text: p.sertime + " min", style: 'tablecell' }, { text: "₹" + p.serprice, style: 'tablecell' }])),
+              ...service.map(p => ([{ text: p.index, style: 'tablecell' }, { text: p.servicesname, style: 'tablecell' }, { text: p.employeename, style: 'tablecell' }, { text: p.time + " min", style: 'tablecell' }, { text: "₹" + p.price, style: 'tablecell' }])),
             ]
           }
         },
@@ -350,7 +347,7 @@ export class CustomerComponent implements OnInit {
             ],
             [
               { text: 'TOTAL', alignment: 'right', fontSize: 10, margin: [0, 50, 0, 0] },
-              { text: "₹" + service.reduce((sum, p) => sum + p.serprice, 0), alignment: 'right', fontSize: 28 }
+              { text: "₹" + service.reduce((sum, p) => sum + p.price, 0), alignment: 'right', fontSize: 28 }
             ]
           ]
         },

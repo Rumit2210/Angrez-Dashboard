@@ -22,7 +22,7 @@ export class ProductsComponent implements OnInit {
   p: any;
   showList: boolean = true;
   addProduct: boolean = true;
-  addc: boolean = false;
+  openCategoryFlag: boolean = false;
   showCategoryList: boolean = false;
   public updateCategoryModel: Category = new Category;
   public categoryModel: Category = new Category;
@@ -63,9 +63,7 @@ export class ProductsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
-    this.getAllCategory();
-    this.getAllVendor();
+  
   }
   saveVendorDetail() {
     this.vendorModel.isactive = true;
@@ -257,13 +255,12 @@ export class ProductsComponent implements OnInit {
     });
   }
   saveProductsDetail() {
-    this.getAllProducts();
     this.productsModel.image = this.image;
     this.productsModel.multi = this.multi;
     this.productService.saveProductsList(this.productsModel).subscribe((data: any) => {
       this.productsReg  = data;
       this.getAllProducts();
-      //  location.reload();
+       location.reload();
       this.apiService.showNotification('top', 'right', 'Product Added Successfully.', 'success');
     })
   }
@@ -352,7 +349,6 @@ export class ProductsComponent implements OnInit {
     })
   }
   updateCategoryDetails() {
-    this.updateCategoryModel
     this.productService.updateCategoryList(this.updateCategoryModel).subscribe((req) => {
       this.getAllCategory();
       this.apiService.showNotification('top', 'right', 'Category Details Successfully Updated.', 'success');
@@ -361,14 +357,14 @@ export class ProductsComponent implements OnInit {
   addcategory() {
     this.showList = false;
     this.addProduct = false;
-    this.addc = true;
+    this.openCategoryFlag = true;
     this.showCategoryList = true;
     this.getAllCategory();
   }
   backToProduct() {
     this.showList = true;
     this.addProduct = true;
-    this.addc = false;
+    this.openCategoryFlag = false;
     this.showCategoryList = false;
   }
 

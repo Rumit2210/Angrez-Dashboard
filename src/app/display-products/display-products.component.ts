@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { ImagesModel } from 'app/products/images.model';
 import { ProductService } from './display-products.service';
 import { Products } from 'app/products/product.model';
-import { ImagesModel} from 'app/Products/images.model';
+import { ApiService } from 'app/api.service';
+import { Cart } from './cart.model';
+import Swal from 'sweetalert2';
 
 declare var $: any;
 @Component({
@@ -12,20 +15,29 @@ declare var $: any;
 export class DisplayProductsComponent implements OnInit {
   public productsModel: Products = new Products;
   public products: Products[];
+  //  public cartModel: Cart = new Cart;
+  public cart: Cart[];
+  selctpr:any;
+  cid:any;
+  selcart:any;
   public images: ImagesModel[];
   public frontimage: ImagesModel;
-  selctpr:any;
   selctIm:any;
   search: string = '';
-  constructor(private productService: ProductService) { 
+  CartList: any;
+  constructor(private productService: ProductService,
+    private apiService: ApiService,) { 
     this.getAllProducts();
     // this.formdate;
+    this.productsModel.quant=0;
   }
 
   quantity:number=0;
   
   ngOnInit(): void {
     this.getAllProducts();
+    this.cid = localStorage.getItem('UserId');  
+    this.productsModel.quant=0;
   }
   getAllImages(id) {
     this.productService.getAllImagesList(id).subscribe((data: any) => {
@@ -36,31 +48,53 @@ export class DisplayProductsComponent implements OnInit {
   }
 
   getAllProducts() {
-    this.productService.getAllProductsList().subscribe((data: any) => {
+    this.productService.getActiveProductsList().subscribe((data: any) => {
       this.products = data;
-      debugger
+      this.products.forEach((element:any)=>{
+        element.quant=0;
+      })
     });
   }
-  incre(){
-    if(this.quantity!=10){
-      this.quantity++;
+  incre(ind){
+    
+    if( this.products[ind].quant>=0){
+      this.products[ind].quant ++;
+     
     }
+   
   }
-  decre(){
-    if(this.quantity!=0)
-    this.quantity--;
+  decre(ind){
+    if(this.products[ind].quant>0){
+      this.products[ind].quant --;
+      
+    }   
+    
   }
-  selectedProd(data){ 
+  selectedProd(data,ind){ 
     this.selctpr=data;
+    this.selctpr.index = ind;
     this.getAllImages(this.selctpr.id)
   }
+  //   this.selcart=data;
+  // }
+  saveCart(data) {
+    this.selcart=data;
+    this.cid=localStorage.getItem('UserId');
+    this.selcart.uid=this.cid;
+    debugger
+    // this.cid= this.productsModel.uid;
+    this.productService.saveCartList(this.selcart).subscribe((data: any) => {
+      this.cart = data;
+      // this.getAllCart();
+      this.apiService.showNotification('top', 'right', 'Cart Added Successfully.', 'success');
+    })
+  }
+
   selectedImg(data){ 
-    this.selctIm=data;
   }
  
   Search() {
     if (this.search == "") {
-      this.getAllProducts();
     } else {
       this.products = this.products.filter(res => {
         if (res.name.toLocaleLowerCase().match(this.search.toLocaleLowerCase())) {
@@ -72,7 +106,48 @@ export class DisplayProductsComponent implements OnInit {
       });
     }
   }
+  getAllCart() {
+    this.productService.getAllCartList().subscribe((data: any) => {
+      this.CartList = data;
 
+      for (let i = 0; i < this.CartList.length; i++) {
+        this.CartList[i].index = i + 1;
+      }
+    });
+  }
+  removeCartList(id) {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You want to delete! If you delete Customer then all the customer data will be delete.",
+      icon: 'warning',
+      showCancelButton: true,
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger',
+      },
+      confirmButtonText: 'Yes',
+      buttonsStyling: false
+    }).then((result) => {
+      if (result.value == true) {
+        this.productService.removeCartDetails(id).subscribe((req) => {
+          this.apiService.showNotification('top', 'right', 'Customer removed Successfully.', 'success');
+        })
+        Swal.fire(
+          {
+            title: 'Deleted!',
+            text: 'Your product has been deleted.',
+            icon: 'success',
+            customClass: {
+              confirmButton: "btn btn-success",
+            },
+            buttonsStyling: false
+          }
+        )
+        this.getAllCart();
+      }
+    })
+
+  }
 
   // cartadd(from,align){
   //    if(this.quantity!=0){

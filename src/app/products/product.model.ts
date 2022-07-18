@@ -2,6 +2,7 @@ export class Products {
     index: number;
     constructor(
         public id?: number,
+        public uid?:number,
         public name?: string,
         public image?:string,
         public listimages?: string,
@@ -16,7 +17,8 @@ export class Products {
         public createddate?: Date,
         public updateddate?: Date,
         public multi?:any[],
-        public display?: boolean
+        public display: boolean = false,
+        public quant?:number,
     ) {
     }
 }

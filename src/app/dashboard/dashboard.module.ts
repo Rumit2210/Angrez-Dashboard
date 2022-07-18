@@ -14,6 +14,7 @@ import { CustomerModule } from 'app/customer/customer.module';
 import { CustomerComponent } from 'app/customer/customer.component';
 import { OfferComponent } from 'app/offer/offer.component';
 import { OfferModule } from 'app/offer/offer.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   imports: [
@@ -24,6 +25,7 @@ import { OfferModule } from 'app/offer/offer.module';
     NgxPaginationModule,
     OfferModule,
     CustomerModule,
+    NgbModule,
     AgmCoreModule.forRoot({
       apiKey: 'YOUR_GOOGLE_MAPS_API_KEY'
     })
