@@ -7,6 +7,7 @@ export class Membership {
         public contact?: string,
         public membershipname?: string,
         public membershipprice?: number,
+        public membershipdiscount?: number,
         public servicesname?: string,
         public percentage?: number,
         public services?: any,
