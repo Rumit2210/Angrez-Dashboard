@@ -216,6 +216,13 @@ export class SidebarComponent {
         this.menuItems = ROUTES.filter(menuItem => menuItem);
         this.customerMenuItems = Customer.filter((menuItem) => menuItem);
         this.subAdminMenuItems = Employee.filter((menuItem) => menuItem);
+        if(localStorage.getItem('role') == undefined){
+            this.userName='Haribhakt'
+            
+        }else{
+            this.userName='Admin';
+            
+        }
     }
     ngAfterViewInit() {
     }

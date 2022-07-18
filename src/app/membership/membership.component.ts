@@ -149,17 +149,18 @@ export class MembershipComponent implements OnInit {
 
   saveMembershipDetail(data) {
     
-    this.membershipModel.totalprice = this.totalprice;
-    this.membershipModel.finalprice = this.finalprice;
-    this.membershipModel.membershipprice = this.membershipprice;
+    // this.membershipModel.totalprice = this.totalprice;
+    // this.membershipModel.finalprice = this.finalprice;
+    // this.membershipModel.membershipprice = this.membershipprice;
     var discount: number = +this.disc;
     this.membershipModel.percentage = discount;
     this.membershipModel.services=this.addService;
     this.membershipService.saveMembershipList(this.membershipModel).subscribe((data: any) => {
       this.membershipList = data;
       this.apiService.showNotification('top', 'right', 'Membership Added Successfully.', 'success');
+      this.membershipModel.services=[];
+      this.membershipModel={};
       this.getMembershipDetails();
-      location.reload();
     })
   }
 finalmembershipprice() {
@@ -351,13 +352,13 @@ finalmembershipprice() {
     this.addService.forEach((element:any)=>{
       if(element.finalprice != undefined){
         this.finalprice = this.finalprice+element.finalprice;
-        this.membershipModel.finalprice = this.finalprice;
+        this.membershipModel.totalprice = this.finalprice;
         this.membershipModel.membershipprice=0;
       }
     })
   }
   UpdatePricesTotalbyPercentage(){
-    this.membershipModel.membershipprice =(this.membershipModel.finalprice*this.membershipModel.percentage)/100;
+    this.membershipModel.membershipprice =this.membershipModel.totalprice-(this.membershipModel.totalprice*this.membershipModel.membershipdiscount)/100;
   }
   removeMembershipList(id) {
     Swal.fire({

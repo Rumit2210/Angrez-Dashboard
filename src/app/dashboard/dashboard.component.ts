@@ -940,11 +940,9 @@ export class DashboardComponent implements OnInit {
     private router: Router
   ) {
     this.adminRole = localStorage.getItem('role');
-    debugger
-
     this.getAllServices();
     this.getAllEmployee();
-    this.getCustomerDetails();
+    this.getCustomerDetails();                                                                                 
     this.getMembershipDetails();
     this.getOfferDetails();
     this.getAllEnquiry();
@@ -1095,24 +1093,19 @@ export class DashboardComponent implements OnInit {
   getAllAppointment() {
     this.customerService.getAllAppointmentList().subscribe((data: any) => {
       this.appointmentList = data;
-      debugger
       this.activePageDataChunkAppo = this.appointmentList.slice(0, this.pageSize);
-
       for (let i = 0; i < this.appointmentList.length; i++) {
         this.appointmentList[i].index = i + 1;
       }
     });
   }
   onPageChangedAppoi(e) {
-    debugger
     let firstCut = e.pageIndex * e.pageSize;
     let secondCut = firstCut + e.pageSize;
     this.activePageDataChunkAppo = this.enquiryList.slice(firstCut, secondCut);
   }
   getAllCompletedAppointment() {
     this.customerService.getCompletedServices().subscribe((data: any) => {
-
-
       this.completedAppointment = data;
       this.activePageDataChunkComApp = this.completedAppointment.slice(0, this.pageSize);
       for (let i = 0; i < this.completedAppointment.length; i++) {
@@ -1126,7 +1119,6 @@ export class DashboardComponent implements OnInit {
     this.activePageDataChunkComApp = this.enquiryList.slice(firstCut, secondCut);
   }
   modeOfPayment(obj) {
-
     this.cContact = obj.contact;
     this.cEmail = obj.email;
     this.cName = obj.fname + ' ' + obj.lname;
@@ -1152,7 +1144,6 @@ export class DashboardComponent implements OnInit {
     this.paymentModel.cid = this.cId;
     this.paymentModel.appointmentid = this.appId;
     this.customerService.savePaymentDetails(this.paymentModel).subscribe((data: any) => {
-
       this.paymentList = data;
       if (data == 'success') {
         this.paymentCompleted(this.appId);
@@ -1161,7 +1152,6 @@ export class DashboardComponent implements OnInit {
       else {
         this.apiService.showNotification('top', 'right', 'Payment Failed Please Resubmit.', 'danger');
       }
-
     });
   }
 
@@ -1173,11 +1163,9 @@ export class DashboardComponent implements OnInit {
       this.getAllCompletedAppointment();
       this.GetDailyTotal();
       this.GetMonthlyTotal();
-
     })
   }
   openUsedServiceList(obj) {
-
     this.totalPriceForDetails = obj.totalprice
     this.totalPointForDetails = obj.totalpoint
     this.customerService.getServicesListUsingId(obj.id).subscribe((data: any) => {
@@ -1195,5 +1183,4 @@ export class DashboardComponent implements OnInit {
       }
     });
   }
-
 }

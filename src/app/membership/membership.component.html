@@ -161,14 +161,14 @@
                         Price</label>
                     <div class="form-group">
                         <input type="text" class="form-control" id="fname" name="fname" 
-                            value="{{finalprice}} ₹" [(ngModel)]="membershipModel.finalprice" />
+                            value="{{membershipModel.totalprice}} ₹" [(ngModel)]="membershipModel.totalprice" />
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <label class="col-form-label" style="font-size: 20px;color: black;">Enter Percentage </label>
+                    <label class="col-form-label" style="font-size: 20px;color: black;">Membership Percentage </label>
                     <div class="form-group">
                         <input type="text" class="form-control" id="percentage" name="percentage"   (focusout)="UpdatePricesTotalbyPercentage()"
-                             [(ngModel)]="membershipModel.percentage"
+                             [(ngModel)]="membershipModel.membershipdiscount"
                             placeholder="Enter Percentage" />
                     </div>
                 </div>  
@@ -177,9 +177,10 @@
                </label>
                     <div class="form-group">
                         <input type="text" class="form-control" id="fname" name="fname" disabled
-                            value= "{{membershipprice}} ₹" [(ngModel)]="membershipModel.membershipprice"/>  
+                            value= "{{membershipModel.membershipprice}} ₹" [(ngModel)]="membershipModel.membershipprice"/>  
                     </div>
                 </div>
+              
             </div>
             <br>
             <div class="row">
@@ -235,8 +236,7 @@
                                 <th class="text-center">Membership Package Name</th>
                                 <th class="text-center">Membership Price</th>
                                 <th class="text-center">Total Price</th>
-                                <th class="text-center"> Quantity</th>
-                                <th class="text-right">Final Price</th>
+                                <th class="text-center"> Membership Discount</th>
                                 <th class="text-right">Actions</th>
                             </thead>
                             <tbody>
@@ -259,8 +259,7 @@
                                     <td class="text-center">{{ item.membershipname }}</td>
                                     <td class="text-center">{{ item.membershipprice }}</td>
                                     <td class="text-center">{{ item.totalprice }}</td>
-                                    <td class="text-center">{{ item.quantity}}</td>
-                                    <td class="text-center">{{ item.finalprice}}</td>
+                                    <td class="text-center">{{ item.membershipdiscount}}</td>
                                     <td class="text-right">
                                         <button type="button" rel="tooltip" class="btn btn-info btn-icon btn-sm">
                                             <i class="fa fa-eye" (click)="onlyViewMembershipDetails(item.id)"></i>

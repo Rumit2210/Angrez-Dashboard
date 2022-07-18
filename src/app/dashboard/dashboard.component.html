@@ -1,5 +1,6 @@
 <div class="main-content">
     <div class="row">
+        
         <div class="col-lg-4 col-md-6 col-sm-6" *ngIf="adminRole == 'Admin'">
             <div class="card card-stats" (click)="openCustomer()">
                 <div class="card-body ">
@@ -52,32 +53,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-4 col-md-6 col-sm-6" *ngIf="adminRole == 'Admin'">
-            <div class="card card-stats" (click)="openEmployee()">
-                <div class="card-body ">
-                    <div class="row">
-                        <div class="col-5 col-md-4">
-                            <div class="icon-big text-center icon-warning">
-                                <i class="fa fa-users text-warning"></i>
-                            </div>
-                        </div>
-                        <div class="col-7 col-md-8">
-                            <div class="numbers">
-                                <p class="card-category">Employee</p>
-                                <p class="card-title">Total: {{employeeReg.length}}
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-footer">
-                    <hr>
-                    <div class="stats">
-                        <i class="fa fa-arrow-right"></i> View
-                    </div>
-                </div>
-            </div>
-        </div>
+      
         <div class="col-lg-4 col-md-6 col-sm-6" *ngIf="adminRole == 'Customer'">
             <div class="card card-stats" (click)="openServCustom()">
                 <div class="card-body ">
