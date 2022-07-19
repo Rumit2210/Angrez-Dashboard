@@ -24,7 +24,7 @@ export class CustomerService {
         return this.httpClient.get<any>(ApiService.getAllCustomerURL);
     }
     saveAppointmentList(admin: Appointment): Observable<any> {
-        debugger
+         
         return this.httpClient.post<any>(ApiService.saveAppointmentListURL, admin);
     }
     getAllAppointmentList(): Observable<Appointment[]> {

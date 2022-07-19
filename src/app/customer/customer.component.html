@@ -445,6 +445,24 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-md-4" *ngIf="selectedOffer">
+                    <label class="col-form-label">Select Team Member</label>
+                    <div class="dropdown form-group">
+                        <button class="dropdown-toggle btn btn btn btn-block" type="button" name="dropdownMenuButton"
+                            id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                            style="margin: 0px 0px !important;">
+                            {{ selectedOfferEmpName }}
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                            <div class="dropdown-header">Select Team Member</div>
+                            <div *ngFor="let e of employeeReg">
+                                <a class="dropdown-item" (click)="selectEmpForOffer(e.id)"
+                                    style="color:#252422 !important">{{e.fname}}
+                                    {{e.lname}}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <!-- <div class="col-md-3">
                     <label class="col-form-label">Select Service</label>
                     <div class="btn-group bootstrap-select w-100">

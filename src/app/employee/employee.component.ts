@@ -88,7 +88,7 @@ export class EmployeeComponent implements OnInit {
   getAllSalary() {
 
     this.currempid = this.selectedCustId;
-    debugger
+     
     this.salaryService.getAllSalaryList(this.currempid).subscribe((data: any) => {
       this.salaryList = data;
 
@@ -192,7 +192,7 @@ export class EmployeeComponent implements OnInit {
   generaterecipt(salarylistIndex) {
     this.currempid = this.employeeModel.id;
     salarylistIndex = salarylistIndex - 1;
-    debugger
+     
 
     for (let i = 0; i < this.employeeReg.length; i++) {
       if(this.employeeReg[i].id == this.currempid)
@@ -313,7 +313,7 @@ export class EmployeeComponent implements OnInit {
     this.selectCustomer = true;
   }
   openSalary(data) {
-    debugger
+     
     this.showEmp = false;
     this.showSalary = true;
     this.addEmp = false;

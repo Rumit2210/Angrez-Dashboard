@@ -13,14 +13,13 @@
                         <div class="col-sm-6 col-md-6 col-xl-6">
                             <div class=" page-carousel">
                                 <ngb-carousel>
-                                  <ng-template ngbSlide *ngFor="let b of images">
-                                    <img src="http://localhost:8090{{b.listimages}}" 
-                                      alt="Random first slide">
-                                    <div class="carousel-caption">
-                                    </div>
-                                  </ng-template>
+                                    <ng-template ngbSlide *ngFor="let b of images">
+                                        <img src="http://localhost:8090{{b.listimages}}" alt="Random first slide">
+                                        <div class="carousel-caption">
+                                        </div>
+                                    </ng-template>
                                 </ngb-carousel>
-                              </div>
+                            </div>
                             <!-- <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
                                 <div class="carousel-inner">
 
@@ -79,13 +78,15 @@
                                         aria-label="cartclose"><span><i class="fas fa-shopping-cart"></i></span> Add to
                                         Cart</button>
                                     <div class="btn-group btn-group-sm col-3">
-                                        <button class="btn btn-outline-default btn-round" (click)="decre(selctpr.index)"> <i
-                                                class="nc-icon nc-simple-delete "></i> </button>
-                                        <div class="Quantity" value="" [(ngModel)]="selctpr.quant" >{{selctpr.quant}}
-                                        
+                                        <button class="btn btn-outline-default btn-round"
+                                            (click)="decre(selctpr.index)"> <i class="nc-icon nc-simple-delete "></i>
+                                        </button>
+                                        <div class="Quantity" value="" [(ngModel)]="selctpr.quant">{{selctpr.quant}}
+
                                         </div>
-                                        <button class="btn btn-outline-default btn-round" (click)="incre(selctpr.index)"> <i
-                                                class="nc-icon nc-simple-add "></i> </button>
+                                        <button class="btn btn-outline-default btn-round"
+                                            (click)="incre(selctpr.index)"> <i class="nc-icon nc-simple-add "></i>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -258,15 +259,30 @@
     </div>
     <div class="container-fluid searchbar">
         <div class="row">
-            <div class=" col-11 col-sm-11 col-md-11 col-xl-11 col-lg-11 ">
+            <div class=" col-9 col-sm-9 col-md-9 col-xl-9 col-lg-9 ">
                 <div class="form-group">
                     <input type="search" id="form1" class="form-control" placeholder="Search..." [(ngModel)]="search"
                         (ngModelChange)="Search()" aria-label="Search" />
 
                 </div>
             </div>
-
+            <div class="col-xs-2 col-sm-2 col-md-2 col-xl-2 col-lg-2" style="margin-top:-10px;">
+                <div class="dropdown">
+                    <button class="dropdown-toggle btn btn-primary btn-block" type="button"
+                        name="dropdownMenuButton" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false">
+                        {{ selectedName }}
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenuButton">
+                        <div class="dropdown-header">Select Category</div>
+                        <div *ngFor="let pos of CategoryList">
+                            <a class="dropdown-item" (click)="selectedCategory(pos.id)">{{pos.name}}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+        
     </div>
     <div class="container py-2 ">
         <div class="row ">
@@ -277,15 +293,15 @@
                             <img src="http://localhost:8090{{a.image}}" class="card-img-top " alt="Laptop " />
 
                             <div class="col-sm-8">
-                                    <h6>{{a.name}}</h6>
+                                <h6>{{a.name}}</h6>
                             </div>
                             <div class="col-sm-4">
-                                    <h6> ₹ {{a.price}}</h6>
+                                <h6> ₹ {{a.price}}</h6>
                             </div>
                             <div class="col-sm-12">
-                                        <h6>
-                                            <span>{{a.category}}</span>
-                                        </h6>
+                                <h6>
+                                    <span>{{a.category}}</span>
+                                </h6>
                             </div>
                         </div>
                     </div>

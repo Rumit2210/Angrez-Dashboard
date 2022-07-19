@@ -57,7 +57,7 @@ export class ExpensesComponent implements OnInit {
   }
 
   getExpensesDetails() {
-    debugger
+     
     this.expensesService.getAllExpensesList().subscribe((data: any) => {
       this.Allexpenses = data;
       this.expenses = [];

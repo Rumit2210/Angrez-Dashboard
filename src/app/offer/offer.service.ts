@@ -27,7 +27,7 @@ export class OfferService {
         return this.httpClient.get<any>(ApiService.getActiveOfferURL);
     }
     saveAppointmentList(admin: Appointment): Observable<any> {
-        debugger
+         
         return this.httpClient.post<any>(ApiService.saveAppointmentListURL, admin);
     }
     getAllAppointmentList(): Observable<Appointment[]> {

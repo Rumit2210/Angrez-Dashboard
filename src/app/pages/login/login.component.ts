@@ -115,7 +115,7 @@ export class LoginComponent implements OnInit {
         console.log("......data...." + credentials.email);
 
         this.loginService.userLogin(credentials).subscribe(data => {
-             debugger
+              
             if (data == 1) {
                 this.apiService.showNotification('top', 'right', 'Wrong Email!', 'danger');
             }
@@ -126,7 +126,7 @@ export class LoginComponent implements OnInit {
             }
             else {
                 if (data[0].role == 'Admin') {
-                     debugger
+                      
                     this.apiService.showNotification('top', 'right', 'Admin successfully Login.', 'success');
                     localStorage.setItem('authenticationToken', data[0].token);
                     localStorage.setItem('UserId', data[0].id);
@@ -138,7 +138,7 @@ export class LoginComponent implements OnInit {
                     this.router.navigate(['dashboard']);
                 }
                 else if (data[0].role == 'Customer') {
-                     debugger
+                      
                     this.apiService.showNotification('top', 'right', 'Customer successfully Login.', 'success');
                     localStorage.setItem('authenticationToken', data[0].token);
                     localStorage.setItem('UserId', data[0].id);

@@ -43,7 +43,7 @@ export class ProductService {
         return this.httpClient.get<any>(ApiService.removeCategoryDetailsURL + id);
     }
     selectUploadImage(img): Observable<any> {
-        debugger
+         
         return this.httpClient.post<any>(ApiService.uploadMainImageURL, img);
 
     }

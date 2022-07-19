@@ -216,13 +216,6 @@ export class SidebarComponent {
         this.menuItems = ROUTES.filter(menuItem => menuItem);
         this.customerMenuItems = Customer.filter((menuItem) => menuItem);
         this.subAdminMenuItems = Employee.filter((menuItem) => menuItem);
-        if(localStorage.getItem('role') == undefined){
-            this.userName='Haribhakt'
-            
-        }else{
-            this.userName='Admin';
-            
-        }
     }
     ngAfterViewInit() {
     }
@@ -232,7 +225,7 @@ export class SidebarComponent {
           userid: this.uid ,
           loginMinute: this.loginTotalTime
         };
-        debugger
+         
         this.loginService.UpdateLogout(data).subscribe((res) => {
           this.apiService.showNotification('top', 'right', 'Logout Successfully.', 'success');
           localStorage.clear();

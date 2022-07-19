@@ -64,6 +64,8 @@ export class CustomerComponent implements OnInit {
   selctedPer: any;
   offerData: any[];
   offerPrice: bigint;
+  offerEmpId:any;
+  selectedOfferEmpName:any;
   constructor(
     private servicesService: ServicesService,
     private employeeService: EmployeeService,
@@ -112,6 +114,14 @@ export class CustomerComponent implements OnInit {
     this.employeeService.getAllEmployeeList().subscribe((data: any) => {
       this.employeeReg = data;
     });
+  }
+  selectEmpForOffer(id){
+    this.offerEmpId = id;
+    this.employeeReg.forEach(element => {
+      if (element.id == id) {
+        this.selectedOfferEmpName = element.fname + ' ' + element.lname;
+      }
+    })
   }
   selectEmpList(id, ind) {
     this.empId = id;
@@ -252,7 +262,7 @@ export class CustomerComponent implements OnInit {
     this.appointmentModel.custid = this.appointmentModel.id;
     this.appointmentModel.totalprice = this.offerPrice;
     this.totalPrice = this.offerPrice;
-    debugger
+     
     if (this.appointmentModel.redeempoints > this.appointmentModel.tCustPoint) {
       this.apiService.showNotification('top', 'right', 'You can not redeem point more than total point.', 'danger');
     }
@@ -289,7 +299,7 @@ export class CustomerComponent implements OnInit {
       this.offerData = data;
       this.offerData.forEach(element => {
         this.offerPrice = element.offerprice;
-        debugger
+         
       });
       this.totalPrice = this.offerPrice;
       for (let i = 0; i < this.offerData.length; i++) {

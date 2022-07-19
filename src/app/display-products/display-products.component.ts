@@ -25,9 +25,13 @@ export class DisplayProductsComponent implements OnInit {
   selctIm:any;
   search: string = '';
   CartList: any;
+  selectedName: any;
+  CategoryList;
+
   constructor(private productService: ProductService,
     private apiService: ApiService,) { 
     this.getAllProducts();
+    this.getAllCategory();
     // this.formdate;
     this.productsModel.quant=0;
   }
@@ -38,6 +42,7 @@ export class DisplayProductsComponent implements OnInit {
     this.getAllProducts();
     this.cid = localStorage.getItem('UserId');  
     this.productsModel.quant=0;
+    this.selectedName='Category Filters'
   }
   getAllImages(id) {
     this.productService.getAllImagesList(id).subscribe((data: any) => {
@@ -45,6 +50,20 @@ export class DisplayProductsComponent implements OnInit {
       this.frontimage = this.images[0]
       
     });
+  }
+  getAllCategory() {
+    this.productService.getAllCategoryList().subscribe((data: any) => {
+      this.CategoryList = data;
+    });
+  }
+  selectedCategory(id) {
+    this.CategoryList.forEach(element => {
+      if (element.id == id) {
+        this.selectedName = element.name;
+      }
+      this.productsModel.category = this.selectedName;
+    })
+
   }
 
   getAllProducts() {
@@ -81,7 +100,7 @@ export class DisplayProductsComponent implements OnInit {
     this.selcart=data;
     this.cid=localStorage.getItem('UserId');
     this.selcart.uid=this.cid;
-    debugger
+     
     // this.cid= this.productsModel.uid;
     this.productService.saveCartList(this.selcart).subscribe((data: any) => {
       this.cart = data;

@@ -18,7 +18,7 @@ export class SalaryService {
         let data = {
             id: id
         }
-        debugger
+         
         return this.httpClient.post<any>(ApiService.getAllSalaryListURL, data);
     }
     removeSalaryList(id) {
