@@ -43,6 +43,7 @@ export class NavbarComponent implements OnInit {
   totalCustPoint: any = [];
   tCustPoint: number = 0;
   role: any;
+
   constructor(
     location: Location,
     private renderer: Renderer2,
@@ -57,8 +58,9 @@ export class NavbarComponent implements OnInit {
     this.sidebarVisible = false;
     this.lastLogin = localStorage.getItem('lastOutTime');
     this.role = localStorage.getItem('role');
+    this.cid = localStorage.getItem('UserId');
     if (this.role == 'Customer') {
-      this.getAllCart();
+      this.getCartList();
       this.getCustomerPoints();
     }
 
@@ -176,56 +178,28 @@ export class NavbarComponent implements OnInit {
     return this.location.prepareExternalUrl(this.location.path());
   }
 
-
-  getAllCart() {
-
-    this.productService.getAllCartList().subscribe((data: any) => {
+  getCartList(){
+    this.productService.getCartListById(this.cid).subscribe((data:any)=>{
       this.CartList = data;
+      debugger
       for (let i = 0; i < this.CartList.length; i++) {
         this.CartList[i].index = i + 1;
       }
-    });
-  }
-  removeCartList(id) {
-    //  
-    // Swal.fire({
-    //   title: 'Are you sure?',
-    //   text: "You want to delete! If you delete Customer then all the customer data will be delete.",
-    //   icon: 'warning',
-    //   showCancelButton: true,
-    //   customClass: {
-    //     confirmButton: 'btn btn-success',
-    //     cancelButton: 'btn btn-danger',
-    //   },
-    //   confirmButtonText: 'Yes',
-    //   buttonsStyling: false
-    // }).then((result) => {
-    //   if (result.value == true) {
-    //      
-    //     this.productService.removeCartDetails(id).subscribe((req) => {
-    //          
-    //       this.apiService.showNotification('top', 'right', 'Product removed Successfully.', 'success');
-    //     })
-    //     Swal.fire(
-    //       {
-    //         title: 'Deleted!',
-    //         text: 'Your product has been deleted.',
-    //         icon: 'success',
-    //         customClass: {
-    //           confirmButton: "btn btn-success",
-    //         },
-    //         buttonsStyling: false
-    //       }
-    //     )
-    //     this.getAllCart();
-    //   }
-    // })
-
-    this.productService.removeCartDetails(id).subscribe((req) => {
-
-      this.apiService.showNotification('top', 'right', 'Product removed Successfully.', 'success');
     })
-    this.getAllCart();
+  }
+
+  removeCartList(id) {
+    debugger
+    let data={
+      userid:this.cid,
+      productid:id
+    }
+    this.productService.removeCartDetails(data).subscribe((req) => {
+
+      this.apiService.showNotification('top', 'right', 'Cart Item removed Successfully.', 'success');
+    })
+    this.getCartList();
+    location.reload();
 
   }
   viewCartDetails(data: Cart) {
@@ -234,7 +208,8 @@ export class NavbarComponent implements OnInit {
   UpdateCartDetails() {
     this.updateCartModel
     this.productService.updateCartList(this.updateCartModel).subscribe((req) => {
-      this.getAllCart();
+      this.getCartList();
+      location.reload();
       this.apiService.showNotification('top', 'right', 'Quantity Details Successfully Updated.', 'success');
     })
   }
@@ -287,7 +262,6 @@ export class NavbarComponent implements OnInit {
       //  console.log(element.price * element.quantity);
       console.log(element);
       this.selcorder = element;
-      this.cid = localStorage.getItem('UserId');
       this.selcorder.uid = this.cid;
       this.selcorder.total = this.total;
 

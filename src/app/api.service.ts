@@ -87,7 +87,7 @@ export class ApiService {
   public static removeImageURL: string = ApiService.HOST_URL + '/admin/RemoveRecentUoloadImage/';
   
   public static courosalImageURL: string = ApiService.HOST_URL + '/admin/CourosalImage/';
-
+  public static getCartDataByID: string = ApiService.HOST_URL + '/admin/GetCartDataByID/';
   public static verificationURL: string = ApiService.HOST_URL + '/admin/Verification';
   public static getRegisterOtpURL: string = ApiService.HOST_URL + '/admin/GetRegisterOtp';
   public static saveUserCustomerListURL: string = ApiService.HOST_URL + '/admin/SaveUserCustomerList';

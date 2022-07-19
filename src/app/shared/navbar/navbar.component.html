@@ -40,6 +40,9 @@
                     <a class="nav-link dropdown-toggle" href="pablo" id="navbarDropdownMenuLink" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false" (click)="sum()">
                         <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-badge">{{CartList.length}}</span>
+
+                        
                         <p>
                             <span class="d-lg-none d-md-block">Some Actions</span>
                         </p>
@@ -55,9 +58,9 @@
                                     <div class="table-responsive">
                                         <table class="table ">
                                             <thead class="text-primary">
-                                                <th class="text-center" colspan="2">
+                                                <th class="text-center" >
                                                 </th>
-                                                <th class="text-center" colspan="2">
+                                                <th class="text-center">
                                                     Product
                                                 </th>
 
@@ -68,16 +71,15 @@
                                                     Price
                                                 </th>
                                                 <th class="text-center">
-                                                    &nbsp;
                                                 </th>
                                             </thead>
                                             <tbody>
-                                                <tr *ngFor="let items of CartList; let i=index">
-                                                    <td class="text-left" style="width: 200px;"><img
+                                                <tr class="text-center" *ngFor="let items of CartList; let i=index">
+                                                    <td class="text-left" style="width: 100px;"><img
                                                             src="http://localhost:8090{{items.image}}"></td>
-                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                    <td class="text-center">{{items.name}}</td>&nbsp;
-                                                    <td class="text-right">
+                                                
+                                                    <td class="text-center">{{items.name}}</td>
+                                                    <td class="text-center">
                                                         <div class="btn-group btn-group-sm ">
                                                             <button class="btn btn-outline-default btn-round "
                                                                 (click)="decre(i) "> <i

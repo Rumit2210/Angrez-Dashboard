@@ -29,13 +29,17 @@ export class ProductService {
         return this.httpClient.get<any>(ApiService.getAllCategoryListURL);
     }
     saveCartList(admin:Cart): Observable<any> {
+        debugger
         return this.httpClient.post<any>(ApiService.saveCartListURL, admin);
     }
     getAllCartList(): Observable<Cart[]> {
         return this.httpClient.get<any>(ApiService.getAllCartListURL);
     }
-    removeCartDetails(id){
-        let data={id:id}
+    getCartListById(id) {
+        return this.httpClient.get<any>(ApiService.getCartDataByID + id);
+    }
+    removeCartDetails(data){
+        
         return this.httpClient.post<any>(ApiService.removeCartDetailsURL , data);
     }
     updateCartList(admin: Cart): Observable<any[]> {

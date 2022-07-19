@@ -6,7 +6,6 @@ import {
   AgmCoreModule
 } from '@agm/core';
 import { DashboardComponent } from './dashboard.component';
-
 import { DashboardRoutes } from './dashboard.routing';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { MaterialModule } from 'app/material/material.module';

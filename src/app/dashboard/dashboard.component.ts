@@ -363,7 +363,7 @@ export class DashboardComponent implements OnInit {
   getBanners() {
     this.bannersService.getWebSlider().subscribe((data: any) => {
       this.Banners = data;
-       
+      debugger
       this.Banners.forEach(element => {
         if (element.name == 'Top') {
           this.topban.push(element);

@@ -78,7 +78,6 @@ export class DisplayProductsComponent implements OnInit {
     
     if( this.products[ind].quant>=0){
       this.products[ind].quant ++;
-     
     }
    
   }
@@ -97,6 +96,10 @@ export class DisplayProductsComponent implements OnInit {
   //   this.selcart=data;
   // }
   saveCart(data) {
+    debugger
+    if(data.quant==0){
+      data.quant=1;
+    }
     this.selcart=data;
     this.cid=localStorage.getItem('UserId');
     this.selcart.uid=this.cid;
