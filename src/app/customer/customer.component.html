@@ -564,7 +564,7 @@
                     </tbody>
                 </table>
             </div>
-            <div class="table-responsive">
+            <div class="table-responsive" *ngIf="addService.length>0">
                 <table class="table">
                     <thead class="text-primary">
                         <th class="text-center">#</th>
@@ -575,7 +575,8 @@
                         <th class="text-center">Approx Time</th>
                         <th class="text-right">Actions</th>
                     </thead>
-                    <tbody *ngIf="addService[0].serpoint !=null">
+                    <tbody *ngIf="addService[0].serpoint !=null ">
+                       
                         <tr *ngFor="let item of addService; let i = index">
                             <td class="text-center">{{ i+1 }}</td>
                             <td class="text-center">{{ item.servicesname}} </td>
