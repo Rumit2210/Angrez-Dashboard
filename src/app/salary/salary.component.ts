@@ -56,7 +56,7 @@ export class SalaryComponent implements OnInit {
     
     this.employeeService.getAllEmployeeList().subscribe((data: any) => {
       this.employeeReg = data;
-      debugger
+       
 
       for (let i = 0; i < this.employeeReg.length; i++) {
         if(idd == this.employeeReg[i].index)
@@ -70,7 +70,7 @@ export class SalaryComponent implements OnInit {
   generaterecipt(arrIndex)
   {
     arrIndex = arrIndex-1;
-    debugger
+     
     let iidd = this.salaryList[arrIndex].empid;
     this.emid = this.salaryList[arrIndex].empid;
     this.getAllEmployee(this.emid);

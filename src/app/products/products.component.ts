@@ -17,7 +17,7 @@ export class ProductsComponent implements OnInit {
   public vendorModel: Vendor = new Vendor;
   public vendorReg: Vendor[];
   public updateProductModel: Products = new Products;
-  public  updateVendorModel: Vendor = new Vendor;
+  public updateVendorModel: Vendor = new Vendor;
   formdate: Date = new Date();
   p: any;
   showList: boolean = true;
@@ -49,8 +49,8 @@ export class ProductsComponent implements OnInit {
   modelValue: any;
   selectedName: any;
   selectvendor: any;
-  selectedContact:any;
- 
+  selectedContact: any;
+
   constructor(
     private vendorService: VendorService,
     private productService: ProductService,
@@ -63,7 +63,7 @@ export class ProductsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-  
+
   }
   saveVendorDetail() {
     this.vendorModel.isactive = true;
@@ -89,17 +89,17 @@ export class ProductsComponent implements OnInit {
       if (element.id == id) {
         this.selectedName = element.name;
       }
-      this.productsModel.category=this.selectedName;   
+      this.productsModel.category = this.selectedName;
     })
 
   }
   selectedVendor(id) {
     this.VendorList.forEach(element => {
       if (element.id == id) {
-        this.selectedContact=element.contact;
+        this.selectedContact = element.contact;
         this.selectvendor = element.fname;
       }
-      this.productsModel.vendorcontact=this.selectedContact;
+      this.productsModel.vendorcontact = this.selectedContact;
     })
 
   }
@@ -119,7 +119,7 @@ export class ProductsComponent implements OnInit {
     this.addingprdtimg.splice(val, 1);
   }
   select(event) {
-     
+
     let max_height;
     let max_width;
     if (event.target.files && event.target.files[0]) {
@@ -178,7 +178,7 @@ export class ProductsComponent implements OnInit {
   onSelect(event) {
     let max_height;
     let max_width;
-     
+
     if (event.target.files && event.target.files[0]) {
       const file = event.target.files[0];
       const max_size = 20971520;
@@ -240,8 +240,8 @@ export class ProductsComponent implements OnInit {
       this.productsReg = data;
 
 
-      for (let i = 0; i < this.productsReg .length; i++) {
-        this.productsReg [i].index = i + 1;
+      for (let i = 0; i < this.productsReg.length; i++) {
+        this.productsReg[i].index = i + 1;
       }
     });
   }
@@ -258,9 +258,9 @@ export class ProductsComponent implements OnInit {
     this.productsModel.image = this.image;
     this.productsModel.multi = this.multi;
     this.productService.saveProductsList(this.productsModel).subscribe((data: any) => {
-      this.productsReg  = data;
+      this.productsReg = data;
       this.getAllProducts();
-       location.reload();
+      location.reload();
       this.apiService.showNotification('top', 'right', 'Product Added Successfully.', 'success');
     })
   }
@@ -335,13 +335,16 @@ export class ProductsComponent implements OnInit {
   }
   viewProDetails(data: Products) {
     this.updateProductModel = data;
+    this.selectedName = data.category;
+    this.selectvendor = data.vendorname;
   }
   viewCategoryDetails(data: Category) {
     this.updateCategoryModel = data;
   }
 
   UpdateProductDetails() {
-    this.updateProductModel
+    this.updateProductModel.category = this.selectedName;
+    this.updateProductModel.vendorname = this.selectvendor;
     this.productService.updateProductList(this.updateProductModel).subscribe((req) => {
       this.getAllProducts();
       this.apiService.showNotification('top', 'right', 'Product Details Successfully Updated.', 'success');
@@ -394,7 +397,7 @@ export class ProductsComponent implements OnInit {
     if (this.search == "") {
       this.getAllProducts();
     } else {
-      this.productsReg  = this.productsReg .filter(res => {
+      this.productsReg = this.productsReg.filter(res => {
         if (res.name.toLocaleLowerCase().match(this.search.toLocaleLowerCase())) {
           return res.name.toLocaleLowerCase().match(this.search.toLocaleLowerCase());
         }

@@ -166,7 +166,7 @@ export class BannersComponent implements OnInit {
 
     this.bannersServie.getWebBanners().subscribe((data: any) => {
       this.webImage = data;
-      debugger
+       
       for (let i = 0; i < this.webImage.length; i++) {
         this.webImage[i].index = i + 1;
       }

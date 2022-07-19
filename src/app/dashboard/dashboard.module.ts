@@ -15,6 +15,7 @@ import { CustomerComponent } from 'app/customer/customer.component';
 import { OfferComponent } from 'app/offer/offer.component';
 import { OfferModule } from 'app/offer/offer.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxStarRatingModule } from 'ngx-star-rating';
 
 @NgModule({
   imports: [
@@ -26,6 +27,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     OfferModule,
     CustomerModule,
     NgbModule,
+    NgxStarRatingModule,
     AgmCoreModule.forRoot({
       apiKey: 'YOUR_GOOGLE_MAPS_API_KEY'
     })

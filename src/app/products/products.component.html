@@ -79,11 +79,6 @@
                     </div>
                     <label class="col-md-2 col-form-label">Vendor's Name</label>
                     <div class="col-md-4">
-                        <!-- <div class="form-group">
-                            <input placeholder="Enter Vendor's name" [(ngModel)]="productsModel.vendorname" id="name"
-                                name="name" type="text" class="form-control validate"
-                                [ngModelOptions]="{standalone: true}" required="" #vendorname="ngModel">
-                        </div> -->
                         <div class="dropdown form-group">
                             <button class="dropdown-toggle btn btn-primary btn-round btn-block" type="button"
                                 name="dropdownMenuButton" id="dropdownMenuButton" data-toggle="dropdown"
@@ -488,10 +483,10 @@
                             </td>
                             <td class="text-center">{{ item.price * item.quantity }}</td>
                             <td class="text-right">
-                                <button type="button" rel="tooltip" class="btn btn-info btn-icon btn-sm">
+                                <!-- <button type="button" rel="tooltip" class="btn btn-info btn-icon btn-sm">
                                     <i class="fa fa-eye" (click)="onlyViewCustomerDetails(item.id)"></i>
                                 </button>
-                                &nbsp;
+                                &nbsp; -->
                                 <button type="button" rel="tooltip" class="btn btn-success btn-icon btn-sm">
                                     <i class="fa fa-edit" data-toggle="modal" data-target="#employeeModal"
                                         (click)="viewProDetails(item)"></i>
@@ -534,39 +529,72 @@
                                             [(ngModel)]="updateProductModel.name" placeholder=" Enter Product Name " />
                                     </div>
                                 </div>
-                                <label class="col-md-2 col-form-label">Description</label>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" id="lname" name="lname"
-                                            [(ngModel)]="updateProductModel.descripition"
-                                            placeholder=" Enter Description" />
-                                    </div>
-                                </div>
-
                                 <label class="col-md-2 col-form-label">Category</label>
                                 <div class="col-md-4">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" id="contact"
-                                            [(ngModel)]="updateProductModel.category" name="contact"
-                                            placeholder="Enter Category" />
+                                    <div class="dropdown form-group">
+                                        <button class="dropdown-toggle btn btn-primary btn-round btn-block"
+                                            type="button" name="dropdownMenuButton" id="dropdownMenuButton"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            {{ selectedName }}
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-right"
+                                            aria-labelledby="dropdownMenuButton">
+                                            <div class="dropdown-header">Select Category</div>
+                                            <div *ngFor="let pos of CategoryList">
+                                                <a class="dropdown-item"
+                                                    (click)="selectedCategory(pos.id)">{{pos.name}}</a>
+                                            </div>
+                                            <a data-target="#exampleModal" data-toggle="modal" class="dropdown-item"><i
+                                                    class="fa fa-plus" aria-hidden="true" data-dismiss="modal"> Add
+                                                    Category</i></a>
+                                        </div>
                                     </div>
                                 </div>
-                                <label class="col-md-2 col-form-label">Purchase Date</label>
+                                <label class="col-md-2 col-form-label">Vendor's Name</label>
                                 <div class="col-md-4">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" id="whatsapp"
-                                            [(ngModel)]="updateProductModel.purchasedate" name="whatsapp"
-                                            placeholder="Enter Purchase Date" />
+                                    <div class="dropdown form-group">
+                                        <button class="dropdown-toggle btn btn-primary btn-round btn-block"
+                                            type="button" name="dropdownMenuButton" id="dropdownMenuButton"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            {{ selectvendor }}
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-right"
+                                            aria-labelledby="dropdownMenuButton">
+                                            <div class="dropdown-header">Select vendor</div>
+                                            <div *ngFor="let pos of VendorList">
+                                                <a class="dropdown-item"
+                                                    (click)="selectedVendor(pos.id)">{{pos.fname}}</a>
+                                            </div>
+                                            <a data-target="#exampleModal1" data-toggle="modal" class="dropdown-item"><i
+                                                    class="fa fa-plus" aria-hidden="true" data-dismiss="modal" > Add Vendor</i></a>
+                                        </div>
                                     </div>
                                 </div>
                                 <label class="col-md-2 col-form-label">Quantity</label>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <textarea id="address" name="address" rows="3" cols="40"
+                                        <input type="text" class="form-control" id="quantity" name="quantity"
                                             [(ngModel)]="updateProductModel.quantity"
-                                            placeholder="Enter Quantity"> </textarea>
+                                            placeholder=" Enter Quantity " />
                                     </div>
                                 </div>
+                                <label class="col-md-2 col-form-label">Description</label>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <textarea id="descripition" name="descripition" rows="3" cols="40"
+                                        [(ngModel)]="updateProductModel.descripition"
+                                            placeholder="Enter Description"> </textarea>
+                                    </div>
+                                </div>
+                                <label class="col-md-2 col-form-label">Date of Purchase</label>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <input type="date" [(ngModel)]="updateProductModel.purchasedate"
+                                            class="form-control" value="{{ formdate }}" name="purchasedate"
+                                            id="purchasedate">
+                                    </div>
+                                </div>
+                                
                                 <label class="col-md-2 col-form-label">Price</label>
                                 <div class="col-md-4">
                                     <div class="form-group">
@@ -582,51 +610,6 @@
                                         [(ngModel)]="updateProductModel.display">
                                     <span class="slider round"></span>
                                 </label>
-                                <!-- <label class="col-md-2 col-form-label">Pincode</label>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" id="pincode"
-                                            [(ngModel)]="updateProductModel.pincode" name="pincode"
-                                            placeholder="Enter Pincode" />
-                                    </div>
-                                </div> -->
-                                <!-- <label class="col-sm-2 col-form-label">Select Gender</label>
-                                <div class="col-md-2">
-                                    <div class="form-check-radio">
-                                        <label class="form-check-label" style="color: black !important">
-                                            <input #genm class="form-check-input" name="gender"
-                                                [(ngModel)]="updateProductModel.gender" type="radio" value="male"
-                                                ngModel />
-                                            Male
-                                            <span class="form-check-sign"></span>
-                                        </label>
-                                    </div>
-                                </div> -->
-                                <!-- <div class="col-md-2">
-                                    <div class="form-check-radio">
-                                        <label class="form-check-label" style="color: black !important">
-                                            <input #genf class="form-check-input" name="gender"
-                                                [(ngModel)]="updateProductModel.gender" type="radio" value="female"
-                                                ngModel />
-                                            Female
-                                            <span class="form-check-sign"></span>
-                                        </label>
-                                    </div>
-                                </div> -->
-                                <!-- <label class="col-md-2 col-form-label">Select Services</label>
-                                <div class="col-md-4">
-                                    <div class="btn-group bootstrap-select w-100">
-                                        <div style="border: 1px #DDDDDD solid !important">
-                                            <angular2-multiselect [ngModelOptions]="{standalone: true}""
-                                                [data]="serviceData" [(ngModel)]="selectedServices"
-                                                [settings]="dropdownSettings" (onSelect)="onItemSelect($event)"
-                                                (onDeSelect)="OnItemDeSelect($event)"
-                                                (onSelectAll)="onSelectAll($event)" name="items"
-                                                (onDeSelectAll)="onDeSelectAll($event)">
-                                            </angular2-multiselect>
-                                        </div>
-                                    </div>
-                                </div> -->
                             </div>
 
                         </form>
@@ -760,7 +743,8 @@
                 </div>
             </div>
             <div class="modal-footer justify-content-center">
-                <button type="button" class="btn btn-info btn-round" data-dismiss="modal" (click)="updateCategoryDetails()">
+                <button type="button" class="btn btn-info btn-round" data-dismiss="modal"
+                    (click)="updateCategoryDetails()">
                     <i class="fa fa-paper-plane" aria-hidden="true"></i> Update
                 </button>
                 <button type="button" class="btn btn-secondary btn-round" data-dismiss="modal">

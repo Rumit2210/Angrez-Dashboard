@@ -95,7 +95,7 @@ export class CustomerserviceComponent implements OnInit {
   
     this.customerService.getCustomerDataById(localStorage.getItem('UserId')).subscribe((data: any) => {
       this.customerData = data;
-      debugger
+       
       for (let i = 0; i < this.customerData.length; i++) {
         this.customerData[i].index = i + 1;
       }

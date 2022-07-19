@@ -66,6 +66,8 @@ export class CustomerComponent implements OnInit {
   selctedPer: any;
   offerData: any[];
   offerPrice: bigint;
+  offerEmpId:any;
+  selectedOfferEmpName:any;
   constructor(
     private servicesService: ServicesService,
     private employeeService: EmployeeService,
@@ -114,6 +116,14 @@ export class CustomerComponent implements OnInit {
     this.employeeService.getAllEmployeeList().subscribe((data: any) => {
       this.employeeReg = data;
     });
+  }
+  selectEmpForOffer(id){
+    this.offerEmpId = id;
+    this.employeeReg.forEach(element => {
+      if (element.id == id) {
+        this.selectedOfferEmpName = element.fname + ' ' + element.lname;
+      }
+    })
   }
   selectEmpList(id, ind) {
     this.empId = id;

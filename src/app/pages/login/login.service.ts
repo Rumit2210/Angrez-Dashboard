@@ -64,7 +64,7 @@ export class LoginService {
         return this.httpClient.post(ApiService.ChackForPasswordURL, data);
     }
     UpdateLogout(data) {
-        debugger
+         
         return this.httpClient.post(ApiService.updateLogoutDetailsURL, data);
     }
 

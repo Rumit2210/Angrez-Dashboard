@@ -178,7 +178,7 @@ finalmembershipprice() {
     });
   }
   getMembershipVal() {
-    debugger
+     
     this.membershipprice = this.totalprice - (this.totalprice * (this.disc / 100));
   }
   searchMembershipList(val) {
