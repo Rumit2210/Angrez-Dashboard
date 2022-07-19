@@ -759,7 +759,8 @@
                             <td class="text-center">{{ item.createddate | date }}</td>
                             <td class="text-center">
                                 <div class="stars">
-                                
+                                    <ngx-star-rating [(ngModel)]="rating" [id]="'rating'">
+                                    </ngx-star-rating>
                                 </div>
                             </td>
 

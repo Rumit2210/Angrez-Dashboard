@@ -15,6 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { MaterialModule } from './material/material.module';
+import { NgxStarRatingModule } from 'ngx-star-rating';
 
 @NgModule({
     imports: [
@@ -32,7 +33,7 @@ import { MaterialModule } from './material/material.module';
         NgxPaginationModule,
         MaterialModule,
         AngularMultiSelectModule,
-    
+        NgxStarRatingModule
     ],
     declarations: [
         AppComponent,

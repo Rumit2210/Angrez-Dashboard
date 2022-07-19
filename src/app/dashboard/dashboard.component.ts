@@ -73,7 +73,7 @@ export class DashboardComponent implements OnInit {
   totalCustExpense: number = 0;
   public Banners: Webbanners[] = [];
   topban: any = [];
-
+  rating: number;
   constructor(
     private customercomponent: CustomerComponent,
     private servicesService: ServicesService,
