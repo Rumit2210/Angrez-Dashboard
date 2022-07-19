@@ -26,6 +26,7 @@ import { NgxStarRatingModule } from 'ngx-star-rating';
     NgxPaginationModule,
     OfferModule,
     CustomerModule,
+    MaterialModule,
     NgbModule,
     NgxStarRatingModule,
     AgmCoreModule.forRoot({

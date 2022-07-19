@@ -731,7 +731,7 @@
                 </div>
                 <div class="ml-md-auto">
                     <button type="button" class="btn btn-info btn-round" data-dismiss="modal"
-                        (click)="openCustomerService()">
+                        (click)="openCustomerService()" matTooltip="Info about the action">
                         <i class="fa fa-calendar" aria-hidden="true"></i> New Appointment
                     </button>
                 </div>
@@ -762,6 +762,7 @@
                                     <ngx-star-rating [(ngModel)]="rating" [id]="'rating'">
                                     </ngx-star-rating>
                                 </div>
+                                
                             </td>
 
                             <td class="text-right">
