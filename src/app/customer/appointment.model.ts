@@ -13,7 +13,8 @@ export class Appointment {
         public updateddate?: Date,
         public redeempoints: number = 0,
         public lessPoints?: number,
-        public tCustPoint?: number
+        public tCustPoint?: number,
+        public offerId?:number
     ) {
 
     }

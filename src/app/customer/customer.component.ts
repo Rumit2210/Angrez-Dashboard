@@ -13,6 +13,7 @@ import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { Offer } from 'app/offer/offer.model';
 import { OfferService } from 'app/offer/offer.service';
+import { purchaseOffer } from './purchaseOffer.model';
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 @Component({
@@ -25,6 +26,7 @@ export class CustomerComponent implements OnInit {
   public appointmentModel: Appointment = new Appointment
   public appointment: Appointment[];
   public appointmentList: Appointment[];
+  public pur_off: purchaseOffer=new purchaseOffer;
   public customer: Customer[] = [];
   public customerList: Customer[];
   employeename: any;
@@ -146,6 +148,7 @@ export class CustomerComponent implements OnInit {
     })
   }
   addPoinInList() {
+    debugger
     this.totalPoint = 0;
     // this.totalPrice = 0;
     this.totalTime = 0;
@@ -162,6 +165,10 @@ export class CustomerComponent implements OnInit {
         this.totalTime = this.totalTime + element.time;
       }
     });
+    if(this.selectedOffer && this.addService.length==0){
+      this.totalPrice=0;
+      this.totalPrice = this.offerPrice;
+    }
   }
 
   removeItem(i) {
@@ -250,11 +257,31 @@ export class CustomerComponent implements OnInit {
     this.appointmentModel.totaltime = this.totalTime;
     this.appointmentModel.isactive = true;
     this.appointmentModel.custid = this.appointmentModel.id;
-    this.appointmentModel.totalprice = this.offerPrice;
-    this.totalPrice = this.offerPrice;
-    debugger
+
+
+   
     if (this.appointmentModel.redeempoints > this.appointmentModel.tCustPoint) {
       this.apiService.showNotification('top', 'right', 'You can not redeem point more than total point.', 'danger');
+    }
+    else if(this.selectedOffer){
+      this.pur_off.totalprice=this.totalPrice;
+      this.pur_off.empId = this.empId;
+      this.appointmentModel.offerId = this.offerId;
+      this.customerService.saveAppointmentList(this.appointmentModel).subscribe((data: any) => {
+        this.pur_off.appointmentId = data.insertId;
+        debugger
+        this.customerService.savePurchasedOrder(this.pur_off).subscribe((res:any)=>{
+          if(res =='success'){
+            this.router.navigate(['dashboard']);
+            location.reload();
+            this.apiService.showNotification('top', 'right', 'Appointment Successfully Booked.', 'success');
+          }else{
+            this.apiService.showNotification('top', 'right', 'Error in booking appointment.', 'danger');
+          }
+         
+        });
+        
+      })
     }
     else {
       this.customerService.saveAppointmentList(this.appointmentModel).subscribe((data: any) => {
@@ -279,6 +306,10 @@ export class CustomerComponent implements OnInit {
       if (element.id == id) {
         this.selectedOffer = element.offername;
         this.selctedPer = element.percentage
+        this.pur_off.offerId = id;
+        this.pur_off.empId = this.empId;
+        this.pur_off.custid = this.appointmentModel.id;
+        this.pur_off.offerprice = element.offerprice;
         this.onlyViewOfferDetails();
 
       }
@@ -289,9 +320,8 @@ export class CustomerComponent implements OnInit {
       this.offerData = data;
       this.offerData.forEach(element => {
         this.offerPrice = element.offerprice;
-        debugger
       });
-      this.totalPrice = this.offerPrice;
+      this.totalPrice = this.totalPrice+this.offerPrice;
       for (let i = 0; i < this.offerData.length; i++) {
         this.offerData[i].index = i + 1;
       }

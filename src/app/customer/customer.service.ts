@@ -23,8 +23,7 @@ export class CustomerService {
     getAllCustomerList(): Observable<Customer[]> {
         return this.httpClient.get<any>(ApiService.getAllCustomerURL);
     }
-    saveAppointmentList(admin: Appointment): Observable<any> {
-        debugger
+    saveAppointmentList(admin: any): Observable<any> {
         return this.httpClient.post<any>(ApiService.saveAppointmentListURL, admin);
     }
     getAllAppointmentList(): Observable<Appointment[]> {
@@ -79,7 +78,6 @@ export class CustomerService {
         return this.httpClient.post<any>(ApiService.getUsedServicesByCustomerURL, data);
     }
     savePaymentDetails(admin: Payment) {
-
         return this.httpClient.post<any>(ApiService.saveModeOfPayment, admin);
     }
     getPaymentDetails(): Observable<Payment[]> {
@@ -102,5 +100,8 @@ export class CustomerService {
     }
     saveUserCustomerList(admin: Customer): Observable<any> {
         return this.httpClient.post<any>(ApiService.saveUserCustomerListURL, admin);
+    }
+    savePurchasedOrder(data:any): Observable<any> {
+        return this.httpClient.post<any>(ApiService.saveOfferPurchaseURL, data);
     }
 }

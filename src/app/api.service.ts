@@ -91,6 +91,7 @@ export class ApiService {
   public static verificationURL: string = ApiService.HOST_URL + '/admin/Verification';
   public static getRegisterOtpURL: string = ApiService.HOST_URL + '/admin/GetRegisterOtp';
   public static saveUserCustomerListURL: string = ApiService.HOST_URL + '/admin/SaveUserCustomerList';
+  public static saveOfferPurchaseURL: string = ApiService.HOST_URL + '/admin/saveOfferPurchase';
   public static saveVendorListURL: string = ApiService.HOST_URL + '/admin/SaveVendorList';
   public static getAllVendorURL: string = ApiService.HOST_URL + '/admin/GetAllVendor';
   public static removeVendorListURL: string = ApiService.HOST_URL + '/admin/RemoveVendorList/';
