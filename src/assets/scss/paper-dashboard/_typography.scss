@@ -3,63 +3,63 @@ input,
 optgroup,
 select,
 textarea{
-    font-family: $sans-serif-family;
+    font-family: $sans-serif-family !important ;
 }
 h1,h2,h3,h4,h5,h6{
-    font-weight: $font-weight-normal;
+    font-weight: $font-weight-normal ;
 }
 
 a{
-    color: $primary-color;
+    color: $primary-color ;
     &:hover,
     &:focus{
-        color: $primary-color;
+        color: $primary-color ;
     }
 }
 h1, .h1 {
-    font-size: $font-size-h1;
-    line-height: 1.15;
+    font-size: $font-size-h1 !important;
+    line-height: 1.15 !important;
     margin-bottom: $margin-base-vertical * 2;
 
     small{
-        font-weight: $font-weight-bold;
-        text-transform: uppercase;
-        opacity: .8;
+        font-weight: $font-weight-bold !important;
+        text-transform: uppercase !important;
+        opacity: .8 !important;
     }
 }
 h2, .h2{
-    font-size: $font-size-h2;
-    margin-bottom: $margin-base-vertical * 2;
+    font-size: $font-size-h2 !important;
+    margin-bottom: $margin-base-vertical * 2 !important;
 }
 h3, .h3{
-    font-size: $font-size-h3;
-    margin-bottom: $margin-base-vertical * 2;
-    line-height: 1.4em;
+    font-size: $font-size-h3 !important;
+    margin-bottom: $margin-base-vertical * 2 !important;
+    line-height: 1.4em !important;
 }
 h4, .h4{
-    font-size: $font-size-h4;
-    line-height: 1.45em;
-    margin-top: $margin-base-vertical * 2;
-    margin-bottom: $margin-base-vertical;
+    font-size: $font-size-h4 !important;
+    line-height: 1.45em !important;
+    margin-top: $margin-base-vertical * 2 ;
+    margin-bottom: $margin-base-vertical ;
 
     & + .category,
     &.title + .category{
-        margin-top: -10px;
+        margin-top: -10px ;
     }
 }
 h5, .h5 {
-    font-size: $font-size-h5;
-    line-height: 1.4em;
+    font-size: $font-size-h5 !important;
+    line-height: 1.4em !important;
     margin-bottom: 15px;
 }
 h6, .h6{
-    font-size: $font-size-h6;
-    font-weight: $font-weight-bold;
-    text-transform: uppercase;
+    font-size: $font-size-h6 !important;
+    font-weight: $font-weight-bold ;
+    text-transform: uppercase ;
 }
 p{
     &.description{
-        font-size: 1.14em;
+        font-size: 1.14em !important;
     }
 }
 
