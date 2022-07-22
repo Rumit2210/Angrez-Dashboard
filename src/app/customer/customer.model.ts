@@ -22,7 +22,8 @@ export class Customer {
         public otp?: number,
         public password?: any,
         public role?:any,
-        public vipbonus?:any
+        public vipbonus?:any,
+        public isMembership?:any
 
     ) {
     }
