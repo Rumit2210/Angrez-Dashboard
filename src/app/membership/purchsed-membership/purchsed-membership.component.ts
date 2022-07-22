@@ -16,10 +16,11 @@ export class PurchsedMembershipComponent implements OnInit {
   public purchasedModel: Purchased = new Purchased;
   public purchsedMembership: Purchased[];
   public customerList: Customer[];
+  
   public customer: Customer[];
   public membershipList: Membership[];
   public membership: Membership[];
-  searchCustomer: any = [];
+  searchCustomer: any = {};
   selectedMembership: any;
   membershipId: any;
   mdiscount: any;
@@ -50,9 +51,9 @@ export class PurchsedMembershipComponent implements OnInit {
   getCustomer(data) {
     this.customer.forEach(element => {
       if (data == element.contact)
-        this.searchCustomer.push(element);
+        this.searchCustomer= element;
     });
-    this.customerList = this.searchCustomer;
+    // this.customerList = this.searchCustomer;
 
   }
   getMembershipDetails() {
@@ -85,7 +86,7 @@ export class PurchsedMembershipComponent implements OnInit {
     })
   }
   savePurchaseMembershipDetail() {
-    this.purchasedModel.cid = this.customerList[0].id;
+    this.purchasedModel.cid = this.searchCustomer.id;
     this.purchasedModel.memid = this.membershipId;
     this.purchasedModel.tprice = this.mtprice;
     this.purchasedModel.discount = this.mdiscount;
@@ -99,8 +100,10 @@ export class PurchsedMembershipComponent implements OnInit {
     })
   }
   getPurchasedMemberList() {
+    this.purchsedMembership=[];
     this.membershipService.getAllMemberPurchased().subscribe((data: any) => {
       this.purchsedMembership = data;
+      debugger
       for (let i = 0; i < this.purchsedMembership.length; i++) {
         this.purchsedMembership[i].index = i + 1;
       }

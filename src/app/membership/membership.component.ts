@@ -378,6 +378,7 @@ finalmembershipprice() {
 
     this.membershipService.getMemberServicesUsingId(id).subscribe((data: any) => {
       this.usedServices = data;
+      debugger
       for (let i = 0; i < this.usedServices.length; i++) {
         this.usedServices[i].index = i + 1;
       }

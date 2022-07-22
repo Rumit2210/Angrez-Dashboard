@@ -30,39 +30,39 @@
                     </button>
                 </div>
             </div>
-            <div class="row" *ngIf="customerList.length>0">
+            <div class="row" *ngIf="searchCustomer.contact != undefined">
                 <div class="col-md-4">
                     <label class="col-form-label">Customer Name</label>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="fname" value={{customerList[0].fname}} name="fname"
+                        <input type="text" class="form-control" id="fname" value={{searchCustomer.fname}} name="fname"
                             disabled />
                     </div>
                 </div>
                 <div class="col-md-4">
                     <label class="col-form-label">Contact Number</label>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="fname" value={{customerList[0].contact}}
+                        <input type="text" class="form-control" id="fname" value={{searchCustomer.contact}}
                             name="fname" disabled />
                     </div>
                 </div>
                 <div class="col-md-4">
                     <label class="col-form-label">Whatsapp Number</label>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="fname" value={{customerList[0].whatsapp}}
+                        <input type="text" class="form-control" id="fname" value={{searchCustomer.whatsapp}}
                             name="fname" disabled />
                     </div>
                 </div>
                 <div class="col-md-4">
                     <label class="col-form-label">Email Address</label>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="fname" value={{customerList[0].email}} name="fname"
+                        <input type="text" class="form-control" id="fname" value={{searchCustomer.email}} name="fname"
                             disabled />
                     </div>
                 </div>
                 <div class="col-md-4">
                     <label class="col-form-label">Gender</label>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="fname" value={{customerList[0].gender}} name="fname"
+                        <input type="text" class="form-control" id="fname" value={{searchCustomer.gender}} name="fname"
                             disabled />
                     </div>
                 </div>
@@ -109,7 +109,6 @@
         </div>
         <div class="card-footer">
             <div class="row">
-
                 <div class="col-md-2">
                     <label class="col-form-label" style="font-size: 20px;color: black;">Total
                         Price</label>
@@ -169,7 +168,7 @@
 
                     </div>
                 </div>
-                <div class="card-body">
+                <div class="card-body" *ngIf="purchsedMembership.length >0">
                     <div class="table-responsive">
                         <table class="table">
                             <thead class="text-primary">
