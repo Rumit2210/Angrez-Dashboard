@@ -103,4 +103,8 @@ export class CustomerService {
     savePurchasedOrder(data:any): Observable<any> {
         return this.httpClient.post<any>(ApiService.saveOfferPurchaseURL, data);
     }
+    removeLastInsertedOTP(data) {
+         
+        return this.httpClient.post<any>(ApiService.removeLastInsertedOTPURL ,data);
+    }
 }

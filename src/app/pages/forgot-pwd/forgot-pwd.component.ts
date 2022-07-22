@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiService } from 'app/api.service';
+import { CustomerService } from 'app/customer/customer.service';
 import { LoginService } from '../login/login.service';
 import { ForgotPwd } from './forgotpwd.model';
 declare const $: any;
@@ -19,16 +20,19 @@ export class ForgotPwdComponent implements OnInit {
   forgotBox: boolean = false;
   changePwd: boolean = false;
   otpBox: boolean = false;
-
+  interval;
   emailResp: any;
   otpResp: any;
   role: any = [];
-  selectedRole: string = 'Admin';
+  public timeLeft: number = 12;
+
+
   constructor(
     private element: ElementRef,
     private loginService: LoginService,
     private apiService: ApiService,
-    private router: Router
+    private router: Router,
+    private customerService:CustomerService
   ) {
     this.nativeElement = element.nativeElement;
     this.sidebarVisible = false;
@@ -78,9 +82,18 @@ export class ForgotPwdComponent implements OnInit {
       body.classList.remove('nav-open');
     }
   }
-  forgotPassword() {
-    // this.forgotPwdModel.role = this.selectedRole;
+  startTimer() {
+    this.interval = setInterval(() => {
+      if (this.timeLeft == 0) {
+        clearInterval(this.interval);
+      } else {
+        this.timeLeft--;
 
+      }
+    }, 1000)
+  } 
+  forgotPassword() {
+    this.startTimer();
     this.loginService.forgotPwd(this.forgotPwdModel).subscribe((data) => {
 
       this.apiService.showNotification('top', 'right', 'Email Sent Successfully on your Email Address.', 'success');
@@ -102,6 +115,17 @@ export class ForgotPwdComponent implements OnInit {
       this.forgotBox = true
     });
   }
+
+
+  resendOTP() {
+    this.customerService.removeLastInsertedOTP(this.forgotPwdModel).subscribe((data: any) => {
+        this.apiService.showNotification('top', 'right', 'OTP Resent Successfully.', 'success');
+        this.timeLeft=120;
+        this.startTimer();
+        this.forgotPassword();
+
+    })
+}
   changeForgotPwd() {
     this.forgotPwdModel.id = this.otpResp;
      

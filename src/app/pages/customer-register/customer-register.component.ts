@@ -15,7 +15,7 @@ import { ApiService } from "app/api.service";
 declare var $: any;
 // moduleId: module.id,
 @Component({
- 
+
   selector: "customer-register-cmp",
   templateUrl: "./customer-register.component.html",
 })
@@ -34,7 +34,7 @@ export class CustomerRegisterComponent implements OnInit {
   registerForm: boolean = false;
   otpBox: boolean = false;
   role: any = [];
-  selectedRole: string = "Admin";
+  selectedRole: string = 'Customer';
   emailResp: any;
   otpResp: any;
   customerList: any;
@@ -97,19 +97,19 @@ export class CustomerRegisterComponent implements OnInit {
     }
   }
   verification() {
-    this.customerModel;
     this.registerForm = true;
     this.otpBox = true;
     this.customerModel.role = this.selectedRole;
+    this.customerModel.isMembership = false;
+    this.startTimer();
     this.customerService.emailVerify(this.customerModel).subscribe((data) => {
       if (data === "Error") {
-        this.apiService.showNotification("top", "right", "Email not Sent on your Email Address.", "danger");
+        this.apiService.showNotification("top", "right", "Email not Sent Please Check Your Email and Resend.", "danger");
       } else {
         this.emailResp = data.insertId;
         this.apiService.showNotification("top", "right", "Email Sent Successfully on your Email Address.", "success");
       }
     });
-    this.startTimer();
   }
   cancelIt() {
     this.registerForm = false;
@@ -131,14 +131,21 @@ export class CustomerRegisterComponent implements OnInit {
       this.otpBox = true;
     });
   }
+  resendOTP() {
+    this.customerService.removeLastInsertedOTP(this.customerModel).subscribe((data: any) => {
+        this.apiService.showNotification('top', 'right', 'OTP Resent Successfully.', 'success');
+        this.timeLeft=120;
+        this.startTimer();
+        this.verification();
+
+    })
+}
 
   startTimer() {
     this.interval = setInterval(() => {
       if (this.timeLeft == 0) {
         alert("OTP EXPIRED!");
         clearInterval(this.interval);
-
-
       } else {
         this.timeLeft--;
 

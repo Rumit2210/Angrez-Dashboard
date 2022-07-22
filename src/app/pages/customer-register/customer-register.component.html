@@ -47,8 +47,7 @@
   </div>
 </nav>
 <div class="wrapper wrapper-full-page">
-  <div class="full-page register-page section-image" filter-color="black"
-    data-image="./assets/img/bg/map-banner.jpg">
+  <div class="full-page register-page section-image" filter-color="black" data-image="./assets/img/bg/map-banner.jpg">
     <div class="content">
       <div class="container">
         <div class="row">
@@ -58,9 +57,10 @@
                 <i class="nc-icon nc-tv-2"></i>
               </div>
               <div class="description">
-                <h5 class="info-title">Marketing</h5>
+                <h5 class="info-title">Grooming</h5>
                 <p class="description">
-                  We've created the marketing campaign of the website. It was a very interesting collaboration.
+                  Grooming is the secret of real elegance. The best clothes, the most wonderful jewels, the most
+                  glamorous beauty don’t count without good grooming.
                 </p>
               </div>
             </div>
@@ -69,9 +69,9 @@
                 <i class="nc-icon nc-html5"></i>
               </div>
               <div class="description">
-                <h5 class="info-title">Fully Coded in HTML5</h5>
+                <h5 class="info-title">Hair cut</h5>
                 <p class="description">
-                  We've developed the website with HTML5 and CSS3. The client has access to the code using GitHub.
+                  Good hair reflects your story and your spirit.
                 </p>
               </div>
             </div>
@@ -80,9 +80,9 @@
                 <i class="nc-icon nc-atom"></i>
               </div>
               <div class="description">
-                <h5 class="info-title">Built Audience</h5>
+                <h5 class="info-title">Skin Treatment</h5>
                 <p class="description">
-                  There is also a Fully Customizable CMS Admin Dashboard for this product.
+                  Beautiful skin doesn't come from good makeup, its from a good facial.
                 </p>
               </div>
             </div>
@@ -131,14 +131,9 @@
                         <i class="nc-icon nc-email-85"></i>
                       </span>
                     </div>
-                    <!-- <input type="email" class="form-control" placeholder="Email..." (focus)="focus2=true"
-                      (blur)="focus2=false" id="email" [ngModelOptions]="{standalone: true}"
-                      [(ngModel)]="customerModel.email" #email="ngModel">  -->
                     <input type="text" class="form-control" id="email" name="email" [(ngModel)]="customerModel.email"
                       placeholder="Email..." required value="" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
                       (focus)="focus2 = true" #email="ngModel" />
-
-
                   </div>
                   <div *ngIf="email.errors && (email.dirty || email.touched)" class="alert alert-danger">
                     <div *ngIf="email.errors.required">
@@ -182,21 +177,13 @@
                     <input type="text" class="form-control" placeholder="Date of Birth" onfocus="(this.type='date')"
                       id="date" [ngModelOptions]="{standalone: true}" [(ngModel)]="customerModel.date" #date="ngModel">
                   </div>
-                  <!-- <div class="form-check text-left">
-                    <label class="form-check-label">
-                      <input class="form-check-input" type="checkbox" checked>
-                      <span class="form-check-sign"></span>
-                      I agree to the
-                      <a href="#something">terms and conditions</a>.
-                    </label>
-                  </div> -->
                   <div class="card-footer ">
                     <div class="form-group">
                       <a routerLink='/pages/forgotpwd' style="font-weight: 500;">Forgot Password ?</a>
                       <a routerLink='/pages/login' style="font-weight: 500; padding-left: 80px">Login</a>
                     </div>
-                    <!-- <a href="javascript:void(0)" class="btn btn-info btn-round">Get Started</a> -->
-                    <button type="submit" (click)="verification()" class="btn btn-info btn-round" [disabled]="!forgotForm.form.valid || !selectedRole" >
+                    <button type="submit" (click)="verification()" class="btn btn-info btn-round"
+                      [disabled]="!forgotForm.form.valid || !selectedRole">
                       Get Started
                     </button>
                     <!-- [disabled]="!forgotForm.form.valid || !selectedRole" -->
@@ -219,7 +206,7 @@
                     #otp="ngModel" />
 
                   <div class="input-group-append">
-                    <span class="input-group-text" id="basic-addon1"><i class="fa fa-envelope"
+                    <span class="input-group-text" id="basic-addon1"><i class="fa fa-key"
                         aria-hidden="true"></i></span>
                   </div>
 
@@ -233,8 +220,15 @@
                   </div>
                 </div>
               </div>
-              <div><strong>Resend OTP in: </strong>{{timeLeft}}</div>
+              <div class="link d-flex justify-content-center" style="padding-top:10px ;color:blue;" >
+                <a >
+                    <strong>Resend OTP in: </strong>{{timeLeft}}
+                </a>
+            </div>
               <div class="card-footer text-center">
+                <button class="btn btn-danger btn-block btn-round" id="registration-submit" *ngIf="timeLeft==0"
+                  (click)="resendOTP()" value="Sign in"><i class="fa fa-sign-in"></i> Resend OTP</button>
+                  <br>
                 <button type="cancel" (click)="cancelIt()" class="btn btn-default btn-round">
                   <i class="fa fa-times" aria-hidden="true"></i> Cancel
                 </button>

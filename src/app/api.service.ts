@@ -120,6 +120,8 @@ export class ApiService {
   public static savePurchaseServiceListURL: string = ApiService.HOST_URL + '/admin/SavePurchaseServiceList';
   public static getAllMembershipPurchasedURL: string = ApiService.HOST_URL + '/admin/GetAllMembershipPurchased';
   public static getMembershipPurchasedByIDURL: string = ApiService.HOST_URL+'/admin/GetMembershipPurchasedByID';
+  public static removeLastInsertedOTPURL: string = ApiService.HOST_URL + '/admin/removeLastInsertedOTP';
+
 
   showNotification(from, align, msg, color) {
     var color = color;
