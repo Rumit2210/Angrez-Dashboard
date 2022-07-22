@@ -19,6 +19,8 @@ import { Membership } from 'app/membership/membership.model';
 import { MembershipService } from 'app/membership/membership.service';
 import { BannersService } from 'app/banners/banners.service';
 import { Webbanners } from 'app/banners/banners.model';
+import { ProductService } from 'app/products/products.service';
+import { Order } from 'app/display-products/order.model';
 
 declare const $: any;
 
@@ -49,6 +51,7 @@ export class DashboardComponent implements OnInit {
   public enquiryList: Enquiry[];
   public appointmentList: Appointment[];
   public completedAppointment: any = [];
+  public orderList: Order[];
   activePageDataChunkComApp: any = [];
   activePageDataChunkAppo: any = [];
 
@@ -83,6 +86,7 @@ export class DashboardComponent implements OnInit {
     private offerService: OfferService,
     private enquiryService: EnquiryService,
     private expensesService: ExpensesService,
+    private productService: ProductService,
     private apiService: ApiService,
     private router: Router,
     private bannersService: BannersService
@@ -92,7 +96,7 @@ export class DashboardComponent implements OnInit {
 
     this.getAllServices();
     this.getAllEmployee();
-    this.getCustomerDetails();                                                                                 
+    this.getCustomerDetails();
     this.getMembershipDetails();
     this.getOfferDetails();
     this.getAllEnquiry();
@@ -104,6 +108,7 @@ export class DashboardComponent implements OnInit {
     this.GetMonthlyExpensesTotal();
     this.onlyViewCustomerDetails();
     this.getBanners();
+    this.getAllOrderList();
   }
   public ngOnInit() {
   }
@@ -119,6 +124,11 @@ export class DashboardComponent implements OnInit {
     this.servicesService.getAllServicesList().subscribe((data: any) => {
       this.servicesList = data;
     });
+  }
+  getAllOrderList() {
+    this.productService.getAllOrderList().subscribe((data: any) => {
+      this.orderList = data;
+    })
   }
   openServices() {
     this.router.navigate(['services']);
@@ -338,7 +348,7 @@ export class DashboardComponent implements OnInit {
     this.customerService.getCustomerById(localStorage.getItem('UserId')).subscribe((data: any) => {
       this.customerData = data;
       this.customerData.forEach(element => {
-          this.totalCustExpense = this.totalCustExpense + element.totalprice;
+        this.totalCustExpense = this.totalCustExpense + element.totalprice;
       });
       for (let i = 0; i < this.customerData.length; i++) {
         this.customerData[i].index = i + 1;
@@ -363,7 +373,7 @@ export class DashboardComponent implements OnInit {
   getBanners() {
     this.bannersService.getWebSlider().subscribe((data: any) => {
       this.Banners = data;
-      debugger
+
       this.Banners.forEach(element => {
         if (element.name == 'Top') {
           this.topban.push(element);

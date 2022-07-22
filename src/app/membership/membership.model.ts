@@ -14,7 +14,7 @@ export class Membership {
         public totalprice?: number,
         public price?: number,
         public quantity?: number,
-public finalprice?: number,
+        public finalprice?: number,
     ) {
     }
 }

@@ -2,7 +2,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ApiService } from 'app/api.service';
-import { data } from 'jquery';
 import { Observable } from 'rxjs';
 import { Appointment } from './appointment.model';
 import { Customer } from './customer.model';

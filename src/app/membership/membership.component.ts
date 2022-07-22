@@ -42,7 +42,6 @@ export class MembershipComponent implements OnInit {
   totalTime: any = 0;
   custAppointment: boolean = true;
   selectMembership: boolean = false;
-  viewMembershipAllData: boolean = false;
   selectedCustId: any;
   totalCustPoint: any[];
   tCustPoint: any = 0;
@@ -178,7 +177,7 @@ finalmembershipprice() {
     });
   }
   getMembershipVal() {
-     
+
     this.membershipprice = this.totalprice - (this.totalprice * (this.disc / 100));
   }
   searchMembershipList(val) {
@@ -203,27 +202,7 @@ finalmembershipprice() {
       }
     })
   }
-  backToMembership() {
-    this.custAppointment = true;
-    this.selectMembership = false;
-    this.viewMembershipAllData=false;
-  }
-  getMembershipPoints() {
-    this.membershipService.getCustAllPoint(this.selectedCustId).subscribe((data: any) => {
-      this.totalCustPoint = data;
-      this.tCustPoint = 0;
-      this.totalCustPoint.forEach(element => {
-        if (element.totalcustpoint != undefined) {
-          this.tCustPoint = element.totalcustpoint;
-        }
-      });
-    });
-  }
-  seletedMembershipDetails(data) {
-    this.membershipModel = data;
-    this.selectMembership = true;
-    this.getMembershipPoints();
-  }
+
   saveAppointmentDetails() {
 
     this.appointmentModel.lessPoints = 0;
@@ -328,18 +307,18 @@ finalmembershipprice() {
       pdfMake.createPdf(docDefinition).open();
     }
   }
-  viewMembershipDetails(data) {
-    this.totalMembershipPoint = 0;
-    this.membershipModel = data;
-    this.membershipService.getViewAppointment(data).subscribe((data1: any) => {
-      this.appointment = data1;
-      this.appointment.forEach(element => {
-        if (element.totalpoint != undefined) {
-          this.totalMembershipPoint = this.totalMembershipPoint + element.totalpoint;
-        }
-      });
-    });
-  }
+  // viewMembershipDetails(data) {
+  //   this.totalMembershipPoint = 0;
+  //   this.membershipModel = data;
+  //   this.membershipService.getViewAppointment(data).subscribe((data1: any) => {
+  //     this.appointment = data1;
+  //     this.appointment.forEach(element => {
+  //       if (element.totalpoint != undefined) {
+  //         this.totalMembershipPoint = this.totalMembershipPoint + element.totalpoint;
+  //       }
+  //     });
+  //   });
+  // }
   updateMembershipDetails() {
     this.membershipService.updateMembershipList(this.membershipModel).subscribe((req) => {
       this.getMembershipDetails();
@@ -394,41 +373,13 @@ finalmembershipprice() {
     })
 
   }
+
   onlyViewMembershipDetails(id) {
-    this.selectMembership = true;
-    this.custAppointment = false;
-    this.viewMembershipAllData = true;
-    this.membershipService.getAllMembershipDataList(id).subscribe((data: any) => {
-      this.membershipData = data;
 
-      for (let i = 0; i < this.membershipData.length; i++) {
-        this.membershipData[i].index = i + 1;
-      }
-    });
-  }
-  backToList() {
-    this.selectMembership = false;
-    this.custAppointment = false;
-    this.viewMembershipAllData = false;
-  }
-  openUsedServiceList(obj) {
-
-    this.totalPriceForDetails = obj.totalprice
-    this.totalPointForDetails = obj.totalpoint
-    this.finalPriceForDetails = obj.finalprice
-
-    this.membershipService.getServicesListUsingId(obj.id).subscribe((data: any) => {
+    this.membershipService.getMemberServicesUsingId(id).subscribe((data: any) => {
       this.usedServices = data;
-      this.usedPrices = data;
-
-
       for (let i = 0; i < this.usedServices.length; i++) {
         this.usedServices[i].index = i + 1;
-
-      }
-      for (let i = 0; i < this.usedPrices.length; i++) {
-        this.usedServices[i].index = i + 1;
-
       }
     });
   }

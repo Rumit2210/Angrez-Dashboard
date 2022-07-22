@@ -260,7 +260,7 @@ export class ProductsComponent implements OnInit {
     this.productService.saveProductsList(this.productsModel).subscribe((data: any) => {
       this.productsReg = data;
       this.getAllProducts();
-      location.reload();
+      // location.reload();
       this.apiService.showNotification('top', 'right', 'Product Added Successfully.', 'success');
     })
   }

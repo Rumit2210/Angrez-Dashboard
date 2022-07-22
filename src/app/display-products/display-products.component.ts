@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ImagesModel } from 'app/products/images.model';
-import { ProductService } from './display-products.service';
 import { Products } from 'app/products/product.model';
 import { ApiService } from 'app/api.service';
 import { Cart } from './cart.model';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
+import { ProductService } from 'app/products/products.service';
 
 declare var $: any;
 @Component({
@@ -28,8 +29,11 @@ export class DisplayProductsComponent implements OnInit {
   selectedName: any;
   CategoryList;
 
-  constructor(private productService: ProductService,
-    private apiService: ApiService,) { 
+  constructor(
+    private productService: ProductService,
+    private apiService: ApiService,
+    private router:Router
+    ) { 
     this.getAllProducts();
     this.getAllCategory();
     // this.formdate;
@@ -96,7 +100,7 @@ export class DisplayProductsComponent implements OnInit {
   //   this.selcart=data;
   // }
   saveCart(data) {
-    debugger
+     
     if(data.quant==0){
       data.quant=1;
     }
@@ -108,9 +112,17 @@ export class DisplayProductsComponent implements OnInit {
     this.productService.saveCartList(this.selcart).subscribe((data: any) => {
       this.cart = data;
       // this.getAllCart();
+      this.reloadCurrentRoute();
       this.apiService.showNotification('top', 'right', 'Cart Added Successfully.', 'success');
     })
   }
+  reloadCurrentRoute() {
+    let currentUrl = this.router.url;
+    this.router.navigateByUrl('/navbar-cart', {skipLocationChange: true}).then(() => {
+        this.router.navigate([currentUrl]);
+    });
+}
+
 
   selectedImg(data){ 
   }

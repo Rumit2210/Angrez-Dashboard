@@ -97,7 +97,7 @@
                                                     </button>
                                                     &nbsp; -->
                                                         <button type="button" rel="tooltip" class="close"
-                                                            (click)="removeCartList(items.id)">
+                                                            (click)="removeCartList(items)">
                                                             <i class='fa fa-close'></i>
                                                         </button>
                                                     </td>
@@ -113,7 +113,7 @@
                                         <h6 style="margin-top:10px ;margin-left: 10px;">Total Amount: {{total}}</h6>
                                         <div class="ml-md-auto">
                                             <button type="submit" class="btn btn-info btn-round"
-                                                (click)="SaveOrder(CartList)">
+                                                (click)="placeOrderSave(CartList)">
                                                 <i class="fa fa-paper-plane" aria-hidden="true"></i> Place order
                                             </button>
                                             <button type="submit" class="btn btn-danger btn-round"

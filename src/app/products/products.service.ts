@@ -2,6 +2,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ApiService } from 'app/api.service';
+import { Cart } from 'app/display-products/cart.model';
+import { Order } from 'app/display-products/order.model';
 import { Employee } from 'app/employee/employee.model';
 import { Observable } from 'rxjs';
 import { Category } from './category.model';
@@ -53,5 +55,42 @@ export class ProductService {
     removeOrChanged() {
         return this.httpClient.get<any>(ApiService.removeImageURL);
     }
+    
+    getAllImagesList(id) {
+        return this.httpClient.get<any>(ApiService.courosalImageURL + id);
+    }
+    
+    saveCartList(admin:Cart): Observable<any> {
+         
+        return this.httpClient.post<any>(ApiService.saveCartListURL, admin);
+    }
+    getAllCartList(): Observable<Cart[]> {
+        return this.httpClient.get<any>(ApiService.getAllCartListURL);
+    }
+    getCartListById(id) {
+        return this.httpClient.get<any>(ApiService.getCartDataByID + id);
+    }
+    removeCartDetails(data){
+        
+        return this.httpClient.post<any>(ApiService.removeCartDetailsURL , data);
+    }
+    updateCartList(admin: Cart): Observable<any[]> {
+        return this.httpClient.post<any>(ApiService.updateCartListURL, admin);
+    }
+    saveOrderList(admin:Order)
+    {
+        return this.httpClient.post<any>(ApiService.saveOrderListURL, admin);
+    }
+    getActiveProductsList(): Observable<Products[]> {
+        return this.httpClient.get<any>(ApiService.getActiveProductsURL);
+    }
+    savePlaceOrder(data)
+    {
+        return this.httpClient.post<any>(ApiService.savePlaceOrderListURL, data);
+    }
+    getAllOrderList(): Observable<Cart[]> {
+        return this.httpClient.get<any>(ApiService.getAllOrderListURL);
+    }
+
 
 }

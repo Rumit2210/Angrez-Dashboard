@@ -85,7 +85,7 @@ export class ApiService {
   public static uploadMainImageURL: string = ApiService.HOST_URL + '/admin/UploadProductImage/';
   public static uploadMultiImageURL: string = ApiService.HOST_URL + '/admin/UploadMultiProductImage/';
   public static removeImageURL: string = ApiService.HOST_URL + '/admin/RemoveRecentUoloadImage/';
-  
+
   public static courosalImageURL: string = ApiService.HOST_URL + '/admin/CourosalImage/';
   public static getCartDataByID: string = ApiService.HOST_URL + '/admin/GetCartDataByID/';
   public static verificationURL: string = ApiService.HOST_URL + '/admin/Verification';
@@ -98,10 +98,8 @@ export class ApiService {
   public static updateVendorListURL: string = ApiService.HOST_URL + '/admin/UpdateVendorList/';
   public static getCustomerDataByIdURL: string = ApiService.HOST_URL + '/admin/GetCustomerDataById/';
   public static saveMembershipListURL: string = ApiService.HOST_URL + '/admin/SaveMembershipList';
-  public static getAllMembershipDataListURL: string = ApiService.HOST_URL + '/admin/GetAllMembershipDataList';
   public static getUsedServicesByMembershipURL: string = ApiService.HOST_URL + '/admin/GetUsedServicesByMembership';
   public static getAllOMembershipURL: string = ApiService.HOST_URL + '/admin/GetAllMembership';
-  public static getMembershipTotalPointsURL: string = ApiService.HOST_URL + '/admin/GetMembershipTotalPoints';
   public static updateMembershipListURL: string = ApiService.HOST_URL + '/admin/UpdateMembershipList';
   public static removeMembershipDetailsURL: string = ApiService.HOST_URL + '/admin/removeMembershipDetails/';
   public static getAllMembershipURL: string = ApiService.HOST_URL + '/admin/getAllMembership/';
@@ -117,7 +115,11 @@ export class ApiService {
   public static updateCartListURL: string = ApiService.HOST_URL + '/admin/updateCartList';
   public static saveOrderListURL: string = ApiService.HOST_URL + '/admin/saveOrderList';
   public static updateActiveOffersURL: string = ApiService.HOST_URL + '/admin/UpdateActiveOffers';
-
+  public static savePlaceOrderListURL: string = ApiService.HOST_URL + '/admin/SavePlaceOrderList';
+  public static getAllOrderListURL: string = ApiService.HOST_URL + '/admin/GetAllOrderList';
+  public static savePurchaseServiceListURL: string = ApiService.HOST_URL + '/admin/SavePurchaseServiceList';
+  public static getAllMembershipPurchasedURL: string = ApiService.HOST_URL + '/admin/GetAllMembershipPurchased';
+  public static getMembershipPurchasedByIDURL: string = ApiService.HOST_URL+'/admin/GetMembershipPurchasedByID';
 
   showNotification(from, align, msg, color) {
     var color = color;

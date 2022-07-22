@@ -75,7 +75,6 @@
                 </div>
             </div>
         </div>
-
         <div class="col-lg-4 col-md-6 col-sm-6" *ngIf="adminRole == 'Customer'">
             <div class="card card-stats" (click)="openCustomerService()">
                 <div class="card-body ">
@@ -180,7 +179,6 @@
                 </div>
             </div>
         </div>
-
         <div class="col-lg-4 col-md-6 col-sm-6" *ngIf="adminRole == 'Admin'">
             <div class="card card-stats" (click)="openDaily()">
                 <div class="card-body">
@@ -337,6 +335,33 @@
                 </div>
             </div>
         </div>
+        <div class="col-lg-4 col-md-6 col-sm-6" *ngIf="adminRole == 'Admin'">
+            <div class="card card-stats" (click)="openOffer()">
+                <div class="card-body ">
+                    <div class="row">
+                        <div class="col-5 col-md-4">
+                            <div class="icon-big text-center icon-warning">
+                                <i class="fa fa-gift text-success"></i>
+                            </div>
+                        </div>
+                        <div class="col-7 col-md-8">
+                            <div class="numbers">
+                                <p class="card-category">Order Products</p>
+                                <p class="card-title">Total: {{offerList.length}}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <hr>
+                    <div class="stats">
+                        <i class="fa fa-arrow-right"></i> View
+                    </div>
+                </div>
+            </div>
+        </div>
+        
         <!-- <div class="col-lg-4 col-md-6 col-sm-6" *ngIf="adminRole == 'Customer'">
             <div class="card card-stats" (click)="openOffer()">
                 <div class="card-body ">
@@ -389,6 +414,7 @@
                 </div>
             </div>
         </div>
+        
     </div>
     <!-- <div class="row" *ngIf="adminRole == 'Admin'">
         <div class="col-md-6">
@@ -758,7 +784,7 @@
                             <td class="text-center">{{ item.totalpoint }}</td>
                             <td class="text-center">{{ item.createddate | date }}</td>
                             <td class="text-center">
-                                <div class="stars">
+                                <div class="stars text-center">
                                     <ngx-star-rating [(ngModel)]="rating" [id]="'rating'">
                                     </ngx-star-rating>
                                 </div>

@@ -3,10 +3,10 @@ import { ROUTES } from '../.././sidebar/sidebar.component';
 import { NavigationEnd, Router } from '@angular/router';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { Subscription } from 'rxjs/Subscription';
-import { ProductService } from 'app/display-products/display-products.service';
 import { Cart } from 'app/display-products/cart.model';
 import { ApiService } from 'app/api.service';
 import { CustomerService } from 'app/customer/customer.service';
+import { ProductService } from 'app/products/products.service';
 
 
 var misc: any = {
@@ -37,12 +37,14 @@ export class NavbarComponent implements OnInit {
   total: any;
   public cart: Cart[];
   public updateCartModel: Cart = new Cart;
+  public saveCartModel: Cart = new Cart;
   @ViewChild("navbar-cmp", { static: false }) button;
   selcorder: any;
   cid: string;
   totalCustPoint: any = [];
   tCustPoint: number = 0;
   role: any;
+  cartorder: any = [];
 
   constructor(
     location: Location,
@@ -178,10 +180,10 @@ export class NavbarComponent implements OnInit {
     return this.location.prepareExternalUrl(this.location.path());
   }
 
-  getCartList(){
-    this.productService.getCartListById(this.cid).subscribe((data:any)=>{
+  getCartList() {
+    this.productService.getCartListById(this.cid).subscribe((data: any) => {
       this.CartList = data;
-      debugger
+
       for (let i = 0; i < this.CartList.length; i++) {
         this.CartList[i].index = i + 1;
       }
@@ -189,17 +191,17 @@ export class NavbarComponent implements OnInit {
   }
 
   removeCartList(id) {
-    debugger
-    let data={
-      userid:this.cid,
-      productid:id
+
+    let data = {
+      userid: this.cid,
+      id: id
     }
     this.productService.removeCartDetails(data).subscribe((req) => {
 
       this.apiService.showNotification('top', 'right', 'Cart Item removed Successfully.', 'success');
     })
     this.getCartList();
-    location.reload();
+    // location.reload();
 
   }
   viewCartDetails(data: Cart) {
@@ -209,7 +211,7 @@ export class NavbarComponent implements OnInit {
     this.updateCartModel
     this.productService.updateCartList(this.updateCartModel).subscribe((req) => {
       this.getCartList();
-      location.reload();
+      // location.reload();
       this.apiService.showNotification('top', 'right', 'Quantity Details Successfully Updated.', 'success');
     })
   }
@@ -253,27 +255,31 @@ export class NavbarComponent implements OnInit {
       })
     });
   }
-  SaveOrder(data) {
+  placeOrderSave(data) {
+    this.saveCartModel.productlist = data;
+    var x = this.cid;
+    var y: number = +x;
+    this.saveCartModel.uid = y;
+    this.saveCartModel.totalprice = this.total;
+    debugger
+    this.productService.savePlaceOrder(this.saveCartModel).subscribe((data: any) => {
+      this.apiService.showNotification('top', 'right', 'Order Successfully Placed.', 'success');
 
-
-    data.forEach(element => {
-      //   
-
-      //  console.log(element.price * element.quantity);
-      console.log(element);
-      this.selcorder = element;
-      this.selcorder.uid = this.cid;
-      this.selcorder.total = this.total;
-
-      // this.cid= this.productsModel.uid;
-      this.productService.saveOrderList(this.selcorder).subscribe((data: any) => {
-        // this.cart = data;
-        // this.getAllCart();
-        this.apiService.showNotification('top', 'right', 'submitted  Successfully.', 'success');
-      })
     })
 
   }
+  // SaveOrder(data) {
+  //   data.forEach(element => {
+  //     console.log(element);
+  //     this.selcorder = element;
+  //     this.selcorder.uid = this.cid;
+  //     this.selcorder.total = this.total;
+  //     this.productService.saveOrderList(this.selcorder).subscribe((data: any) => {
+  //       this.apiService.showNotification('top', 'right', 'submitted  Successfully.', 'success');
+  //     })
+  //   })
+
+  // }
   getCustomerPoints() {
     this.customerService.getCustAllPoint(localStorage.getItem('UserId')).subscribe((data: any) => {
       this.totalCustPoint = data;

@@ -158,7 +158,7 @@ export class CustomerComponent implements OnInit {
     })
   }
   addPoinInList() {
-    debugger
+     
     this.totalPoint = 0;
     // this.totalPrice = 0;
     this.totalTime = 0;
@@ -275,12 +275,13 @@ export class CustomerComponent implements OnInit {
     }
     else if(this.selectedOffer){
       this.pur_off.totalprice=this.totalPrice;
-      this.pur_off.empId = this.empId;
+      this.pur_off.empId = this.offerEmpId;
       this.appointmentModel.offerId = this.offerId;
       this.customerService.saveAppointmentList(this.appointmentModel).subscribe((data: any) => {
         this.pur_off.appointmentId = data.insertId;
-        debugger
+         debugger
         this.customerService.savePurchasedOrder(this.pur_off).subscribe((res:any)=>{
+          
           if(res =='success'){
             this.router.navigate(['dashboard']);
             location.reload();
