@@ -163,13 +163,18 @@
             <div class="card">
                 <div class="card-header">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-5">
                             <h4 class="card-title"> Customer List</h4>
                         </div>
                         <div class="ml-md-auto">
                             <button type="submit" *ngIf="isDashboard" class="btn btn-info btn-round" data-toggle="modal"
                                 data-target="#addCustomerModal">
                                 <i class="fa fa-plus" aria-hidden="true"></i> Add Customer
+                            </button>
+                        </div>
+                        <div class="ml-md-auto">
+                            <button type="submit" class="btn btn-info btn-round" routerLink="/purchsed-membership">
+                                <i class="fa fa-plus" aria-hidden="true"></i> Join Membership
                             </button>
                         </div>
                         <div class="ml-md-auto">
@@ -381,7 +386,22 @@
             <div class="row">
                 <div class="col-md-9">
                     <h4 class="card-title">Customer Appointment<span class="fa fa-star checked"
-                            *ngIf="customerModel.vip==true"></span></h4>
+                            *ngIf="customerModel.vip==true"></span> &nbsp;&nbsp;
+                        <span style="color:rgba(255, 217, 0, 0.712)" *ngIf="membersActive==1">(Members)</span>
+
+                    </h4>
+                </div>
+                <div class="ml-md-auto">
+                    <label class="">VIP</label>
+                    <label class="switch" >
+                        <input type="checkbox" checked class="switch-input" id="vip" name="vip"
+                            [(ngModel)]="customerModel.vip" (click)="updateCustomerDetails()">
+                        <span class="slider round"></span>
+                    </label>
+                    <!-- <mat-slide-toggle class="example-margin" [color]="color" [(ngModel)]="customerModel.vip"
+                        [checked]="checked" (click)="updateCustomerDetails()" [disabled]="disabled">
+                        Slide me!
+                    </mat-slide-toggle> -->
                 </div>
                 <div class="ml-md-auto">
 
@@ -543,8 +563,51 @@
                       "></i>
                 </div>
             </div>
+            <div class="table-responsive" *ngIf="membersActive==1">
+                <h3>Membership Services List</h3>
+                <table class="table">
+                    <thead class="text-primary">
+                        <th class="text-center">#</th>
+                        <th class="text-center">Service Name</th>
+                        <th class="text-center">Discount</th>
+                        <th class="text-center">Total Price</th>
+                        <th class="text-center">Discounted Price</th>
+                        <th class="text-center">No Of Total Services</th>
+                        <th class="text-center">Reedem Services</th>
+
+                    </thead>
+                    <tbody>
+                        <tr
+                            *ngFor="let item of activeMembership |  paginate: { id:'model_pagination',itemsPerPage: 10, currentPage: modelPage,totalItems:totalModelRecords }">
+                            <td class="text-center">{{ item.index }}</td>
+                            <td class="text-center">{{ item.sname}}</td>
+                            <td class="text-center">{{ item.discount}} %</td>
+                            <td class="text-center">{{ item.tprice}}</td>
+                            <td class="text-center">{{ item.dprice}}</td>
+                            <td class="text-center">{{item.quntity}}</td>
+                            <td class="text-center">
+                                <input type="number" class="form-control" id="quntity" name="quntity"
+                                    [(ngModel)]="item.usedMem" placeholder="Enter Used No Of Services" />
+                            </td>
+                            <!-- <td class="text-center">{{ item.serviceprice }}</td> -->
+                        </tr>
+
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="row">
+                <div class="ml-md-auto">
+                    <button type="submit" class="btn btn-info btn-round ml5" (click)="saveAppointmentDetails()">
+                        <i class="fa fa-paper-plane" aria-hidden="true"></i> Submit
+                    </button>
+                    <button type="submit" class="btn btn-danger btn-round" (click)="backToCustomer()">
+                        <i class="fa fa-times" aria-hidden="true"></i> Cancel
+                    </button>
+                </div>
+            </div>
             <div class="table-responsive" *ngIf="selectedOffer">
-                <h3>Offer Services List</h3>
+                <h3>Combo Offer Services List</h3>
                 <table class="table">
                     <thead class="text-primary">
                         <th class="text-center">#</th>
@@ -576,7 +639,7 @@
                         <th class="text-right">Actions</th>
                     </thead>
                     <tbody *ngIf="addService[0].serpoint !=null ">
-                       
+
                         <tr *ngFor="let item of addService; let i = index">
                             <td class="text-center">{{ i+1 }}</td>
                             <td class="text-center">{{ item.servicesname}} </td>

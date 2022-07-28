@@ -94,28 +94,26 @@
             <table class="table table-shopping">
               <thead class="text-primary">
                 <tr>
-                  <th></th>
-                  <th>#</th>
+                  <th class="text-left">#</th>
                   <!-- <th>Images List</th> -->
-                  <th>Position</th>
-                  <th>Image</th>
-                  <th>Status</th>
+                  <th class="text-center">Position</th>
+                  <th class="text-center">Image</th>
+                  <th class="text-center">Status</th>
                   <th class="text-right">Action</th>
                 </tr>
               </thead>
               <tbody>
                 <tr *ngFor="let item of webImage | paginate: { itemsPerPage: 5, currentPage: p };let i=index">
-                  <td></td>
-                  <td>{{ item.index }}</td>
+                  <td class="text-left">{{ item.index }}</td>
                   <!-- <td>Slider</td> -->
-                  <td>{{ item.name }}</td>
+                  <td class="text-center">{{ item.name }}</td>
   
-                  <td>
-                    <div class="img-container">
+                  <td class="text-center">
+                    <div class="img-container" style="align-items: center !important;">
                       <img src="http://localhost:8090{{ item.bannersimage }}" />
                     </div>
                   </td>
-                  <td>
+                  <td class="text-center">
                     <button class="btn btn-success" *ngIf="item.status" (click)="deactiveBanners(i)">
                       Active
                     </button>

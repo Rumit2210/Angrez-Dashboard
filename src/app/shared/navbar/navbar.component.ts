@@ -256,15 +256,15 @@ export class NavbarComponent implements OnInit {
     });
   }
   placeOrderSave(data) {
+    debugger
     this.saveCartModel.productlist = data;
     var x = this.cid;
     var y: number = +x;
     this.saveCartModel.uid = y;
     this.saveCartModel.totalprice = this.total;
-    debugger
     this.productService.savePlaceOrder(this.saveCartModel).subscribe((data: any) => {
       this.apiService.showNotification('top', 'right', 'Order Successfully Placed.', 'success');
-
+      location.reload();
     })
 
   }

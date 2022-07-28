@@ -1,13 +1,5 @@
-import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
 import { Component, OnInit, ElementRef } from "@angular/core";
-import { Router, ActivatedRoute } from "@angular/router";
-import {
-  Location,
-  LocationStrategy,
-  PathLocationStrategy,
-  Time,
-} from "@angular/common";
+import { Router } from "@angular/router";
 import { CustomerService } from "app/customer/customer.service";
 import { Customer } from "app/customer/customer.model";
 import { ApiService } from "app/api.service";
@@ -144,7 +136,6 @@ export class CustomerRegisterComponent implements OnInit {
   startTimer() {
     this.interval = setInterval(() => {
       if (this.timeLeft == 0) {
-        alert("OTP EXPIRED!");
         clearInterval(this.interval);
       } else {
         this.timeLeft--;

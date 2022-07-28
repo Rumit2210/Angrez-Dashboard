@@ -26,7 +26,7 @@ export const ROUTES: RouteInfo[] = [{
     path: '/dashboard',
     title: 'Dashboard',
     type: 'link',
-    icontype: 'nc-icon nc-bank',
+    icontype: 'fa fa-tachometer',
     roles: "Admin",
 },
 {
@@ -113,7 +113,7 @@ export const Employee: RouteInfo[] = [
         path: '/dashboard',
         title: 'Dashboard',
         type: 'link',
-        icontype: 'nc-icon nc-bank',
+        icontype: 'fa fa-tachometer',
         roles: "Admin",
     },
     {
@@ -145,7 +145,7 @@ export const Customer: RouteInfo[] = [
         path: '/dashboard',
         title: 'Dashboard',
         type: 'link',
-        icontype: 'nc-icon nc-bank',
+        icontype: 'fa fa-tachometer',
         roles: "Admin",
     },
      
@@ -184,12 +184,13 @@ export class SidebarComponent {
     public customerMenuItems: any;
     public Rolees = localStorage.getItem("role");
     public userName = localStorage.getItem("UserName");
+    member:any;
     Roles: any;
     datetime: any;
     in_time: any;
     out_time: any;
     visit: '';
-    loginTotalTime: number;
+    loginTotalTime: number=0;
     uid:any;
     vip:any;
     isNotMobileMenu() {
@@ -213,6 +214,7 @@ export class SidebarComponent {
         this.Roles = localStorage.getItem("role");
         this.uid=localStorage.getItem("UserId");
         this.vip=localStorage.getItem("VIP");
+        this.member=localStorage.getItem("member");
         this.menuItems = ROUTES.filter(menuItem => menuItem);
         this.customerMenuItems = Customer.filter((menuItem) => menuItem);
         this.subAdminMenuItems = Employee.filter((menuItem) => menuItem);
@@ -225,7 +227,6 @@ export class SidebarComponent {
           userid: this.uid ,
           loginMinute: this.loginTotalTime
         };
-         
         this.loginService.UpdateLogout(data).subscribe((res) => {
           this.apiService.showNotification('top', 'right', 'Logout Successfully.', 'success');
           localStorage.clear();

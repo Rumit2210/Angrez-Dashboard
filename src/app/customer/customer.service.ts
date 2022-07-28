@@ -85,7 +85,7 @@ export class CustomerService {
     getMonthlyDetails(): Observable<Payment[]> {
         return this.httpClient.get<any>(ApiService.getMonthlyPayment);
     }
-    getCustomerDataById(id){
+    getCustomerDataById(id) {
         let data = {
             id: id
         }
@@ -100,11 +100,17 @@ export class CustomerService {
     saveUserCustomerList(admin: Customer): Observable<any> {
         return this.httpClient.post<any>(ApiService.saveUserCustomerListURL, admin);
     }
-    savePurchasedOrder(data:any): Observable<any> {
+    savePurchasedOrder(data: any): Observable<any> {
         return this.httpClient.post<any>(ApiService.saveOfferPurchaseURL, data);
     }
     removeLastInsertedOTP(data) {
-         
-        return this.httpClient.post<any>(ApiService.removeLastInsertedOTPURL ,data);
+
+        return this.httpClient.post<any>(ApiService.removeLastInsertedOTPURL, data);
+    }
+    getActivatedMembershipDetail(data): Observable<any> {
+        return this.httpClient.post<any>(ApiService.getActivatedMembershipURL, data);
+    }
+    saveRatingsDetailsById(data): Observable<any> {
+        return this.httpClient.post<any>(ApiService.saveRatingsDetailsURL, data);
     }
 }

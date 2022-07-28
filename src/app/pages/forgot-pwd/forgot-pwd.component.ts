@@ -20,11 +20,11 @@ export class ForgotPwdComponent implements OnInit {
   forgotBox: boolean = false;
   changePwd: boolean = false;
   otpBox: boolean = false;
-  interval;
   emailResp: any;
   otpResp: any;
   role: any = [];
-  public timeLeft: number = 12;
+ timeLeft: number = 12;
+  interval:any;
 
 
   constructor(
@@ -32,7 +32,7 @@ export class ForgotPwdComponent implements OnInit {
     private loginService: LoginService,
     private apiService: ApiService,
     private router: Router,
-    private customerService:CustomerService
+    private customerService: CustomerService
   ) {
     this.nativeElement = element.nativeElement;
     this.sidebarVisible = false;
@@ -83,6 +83,7 @@ export class ForgotPwdComponent implements OnInit {
     }
   }
   startTimer() {
+    debugger
     this.interval = setInterval(() => {
       if (this.timeLeft == 0) {
         clearInterval(this.interval);
@@ -91,14 +92,15 @@ export class ForgotPwdComponent implements OnInit {
 
       }
     }, 1000)
-  } 
+  }
   forgotPassword() {
+    debugger
     this.startTimer();
     this.loginService.forgotPwd(this.forgotPwdModel).subscribe((data) => {
 
       this.apiService.showNotification('top', 'right', 'Email Sent Successfully on your Email Address.', 'success');
       this.emailResp = data[0].userid;
-       
+
       this.forgotBox = true;
       this.changePwd = false;
       this.otpBox = true;
@@ -106,7 +108,7 @@ export class ForgotPwdComponent implements OnInit {
   }
   saveOTP() {
     this.forgotPwdModel.id = this.emailResp;
-     
+
     this.loginService.getOneTimePwd(this.forgotPwdModel).subscribe((data) => {
 
       this.otpResp = data[0].userid;
@@ -119,20 +121,20 @@ export class ForgotPwdComponent implements OnInit {
 
   resendOTP() {
     this.customerService.removeLastInsertedOTP(this.forgotPwdModel).subscribe((data: any) => {
-        this.apiService.showNotification('top', 'right', 'OTP Resent Successfully.', 'success');
-        this.timeLeft=120;
-        this.startTimer();
-        this.forgotPassword();
+      this.apiService.showNotification('top', 'right', 'OTP Resent Successfully.', 'success');
+      this.timeLeft = 12;
+      this.startTimer();
+      this.forgotPassword();
 
     })
-}
+  }
   changeForgotPwd() {
     this.forgotPwdModel.id = this.otpResp;
-     
+
     this.loginService.updatePassword(this.forgotPwdModel).subscribe((req) => {
-       
+
       this.apiService.showNotification('top', 'right', 'Password changed Successfully.', 'success');
-       
+
       this.router.navigate(['/pages/login']);
     });
   }

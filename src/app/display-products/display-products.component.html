@@ -268,9 +268,8 @@
             </div>
             <div class="col-xs-2 col-sm-2 col-md-2 col-xl-2 col-lg-2" style="margin-top:-10px;">
                 <div class="dropdown">
-                    <button class="dropdown-toggle btn btn-primary btn-block" type="button"
-                        name="dropdownMenuButton" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false">
+                    <button class="dropdown-toggle btn btn-primary btn-block" type="button" name="dropdownMenuButton"
+                        id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         {{ selectedName }}
                     </button>
                     <div class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenuButton">
@@ -282,20 +281,19 @@
                 </div>
             </div>
         </div>
-        
+
     </div>
-    <div class="container py-2 ">
+    <div class="container">
         <div class="row ">
             <div class=" col-sm-2 col-md-3 col-xl-3 " *ngFor="let a of products; let i=index">
                 <div class="card">
                     <div class="card-body " data-target="#noticeModal" data-toggle="modal" (click)="selectedProd(a,i)">
                         <div class="row justify-content-between d-flex ">
                             <img src="http://localhost:8090{{a.image}}" class="card-img-top " alt="Laptop " />
-
-                            <div class="col-sm-8">
+                            <div class="col-sm-8 col-xs-8">
                                 <h6>{{a.name}}</h6>
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-4 col-xs-4">
                                 <h6> ₹ {{a.price}}</h6>
                             </div>
                             <div class="col-sm-12">
@@ -319,7 +317,7 @@
                         <div class="btn btn-primary buy " (click)="saveCart(a)">
                             Buy Now
                         </div>
-                        
+
                     </div>
                 </div>
             </div>

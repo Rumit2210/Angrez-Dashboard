@@ -10,6 +10,7 @@ import { SalaryService } from '../salary/salary.service';
 import { CustomerService } from '../customer/customer.service';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
+import { FormControl } from '@angular/forms';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
@@ -24,10 +25,9 @@ export class EmployeeComponent implements OnInit {
   public updateEmployeeModel: Employee = new Employee;
   public updateSalaryModel: Salary = new Salary;
   public salaryModel: Salary = new Salary;
-  public employee:Employee[];
+  public employee: Employee[];
   public salaryList: Salary[];
   serviceData: any = [];
-  selServiceData: any = [];
   showEmp: Boolean = true;
   showSalary: boolean = false;
   addEmp: boolean = false;
@@ -46,10 +46,10 @@ export class EmployeeComponent implements OnInit {
   cntct: string;
   search: string = '';
 
+  servicesForMulti = new FormControl('');
   constructor(
     private employeeService: EmployeeService,
     private servicesService: ServicesService,
-    private customerService: CustomerService,
     private salaryService: SalaryService,
     private apiService: ApiService
   ) {
@@ -74,21 +74,20 @@ export class EmployeeComponent implements OnInit {
   getAllServices() {
     this.servicesService.getAllServicesList().subscribe((data: any) => {
       this.servicesList = data;
-      this.servicesList.forEach(element => {
+      // this.servicesList.forEach(element => {
+      //   let data = {
+      //     itemName: element.name,
+      //     id: element.id,
+      //   }
 
-        let data = {
-          itemName: element.name,
-          id: element.id,
-        }
-
-        this.serviceData.push(data)
-      });
+      //   this.serviceData.push(data)
+      // });
     });
   }
   getAllSalary() {
 
     this.currempid = this.selectedCustId;
-     
+
     this.salaryService.getAllSalaryList(this.currempid).subscribe((data: any) => {
       this.salaryList = data;
 
@@ -112,7 +111,7 @@ export class EmployeeComponent implements OnInit {
       if (element.fname.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())) {
         this.employee.push(element);
       }
-     })
+    })
   }
   saveSalaryDetail() {
     this.salaryModel.empid = this.employeeModel.id;
@@ -124,43 +123,45 @@ export class EmployeeComponent implements OnInit {
       this.apiService.showNotification('top', 'right', 'Salary Added Successfully.', 'success');
     })
   }
-  updateSalaryDetails(){
-      this.salaryService.updateSalaryList(this.updateSalaryModel).subscribe((req) => {
+  updateSalaryDetails() {
+    this.salaryService.updateSalaryList(this.updateSalaryModel).subscribe((req) => {
       this.apiService.showNotification('top', 'right', 'Salary Details Successfully Updated.', 'success');
       this.getAllSalary();
     })
   }
-  onItemSelect($event) {
-    let data = {
-      servicesName: $event.itemName,
-      servicesId: $event.id,
-    }
-    this.selServiceData.push(data)
-  }
+  // onItemSelect($event) {
+  //   let data = {
+  //     servicesName: $event.itemName,
+  //     servicesId: $event.id,
+  //   }
+  //   this.selServiceData.push(data)
+  // }
 
-  OnItemDeSelect(item: any) {
+  // OnItemDeSelect(item: any) {
 
-    for (let i = 0; i < this.selServiceData.length; i++) {
-      if (this.selServiceData[i].servicesId == item.id) {
-        this.selServiceData.splice(i, 1);
-      }
-    }
-  }
-  onSelectAll(items: any = []) {
-    items.forEach(element => {
-      let data1 = {
-        servicesName: element.itemName,
-        servicesId: element.id,
-      };
-      this.selServiceData.push(data1)
-    });
+  //   for (let i = 0; i < this.selServiceData.length; i++) {
+  //     if (this.selServiceData[i].servicesId == item.id) {
+  //       this.selServiceData.splice(i, 1);
+  //     }
+  //   }
+  // }
+  // onSelectAll(items: any = []) {
+  //   items.forEach(element => {
+  //     let data1 = {
+  //       servicesName: element.itemName,
+  //       servicesId: element.id,
+  //     };
+  //     this.selServiceData.push(data1)
+  //   });
 
-  }
-  onDeSelectAll(items: any) {
-    this.selServiceData = [];
-  }
+  // }
+  // onDeSelectAll(items: any) {
+  //   this.selServiceData = [];
+  // }
   saveEmployeeDetail() {
-    this.employeeModel.service = this.selServiceData;
+    this.employeeModel.service 
+    debugger
+    // this.employeeModel.service = this.selServiceData;
     this.employeeModel.isactive = true;
     this.employeeService.saveEmployeeList(this.employeeModel).subscribe((data: any) => {
       this.employeeReg = data;
@@ -182,6 +183,7 @@ export class EmployeeComponent implements OnInit {
 
     // this.showEmp = true;
     this.updateEmployeeModel = data;
+    debugger
   }
   viewSalDetails(data) {
 
@@ -192,11 +194,10 @@ export class EmployeeComponent implements OnInit {
   generaterecipt(salarylistIndex) {
     this.currempid = this.employeeModel.id;
     salarylistIndex = salarylistIndex - 1;
-     
+
 
     for (let i = 0; i < this.employeeReg.length; i++) {
-      if(this.employeeReg[i].id == this.currempid)
-      {
+      if (this.employeeReg[i].id == this.currempid) {
         this.fstname = this.employeeReg[i].fname;
         this.lstname = this.employeeReg[i].lname;
         this.cntct = this.employeeReg[i].contact;
@@ -219,7 +220,7 @@ export class EmployeeComponent implements OnInit {
           {
             text: 'Name : ' + this.fstname
           },
-        ]
+          ]
         ]
       }
     };
@@ -264,7 +265,7 @@ export class EmployeeComponent implements OnInit {
 
   }
 
-  removeSalary(id){
+  removeSalary(id) {
     Swal.fire({
       title: 'Are you sure?',
       text: "You want to delete! If you delete Salary then all the salary data will be delete.",
@@ -313,7 +314,7 @@ export class EmployeeComponent implements OnInit {
     this.selectCustomer = true;
   }
   openSalary(data) {
-     
+
     this.showEmp = false;
     this.showSalary = true;
     this.addEmp = false;
@@ -322,8 +323,7 @@ export class EmployeeComponent implements OnInit {
     this.getAllSalary();
   }
 
-  openEmployee()
-  {
+  openEmployee() {
     this.showEmp = true;
     this.addEmp = false;
     this.showSalary = false;

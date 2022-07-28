@@ -138,10 +138,10 @@ export class LoginComponent implements OnInit {
                     this.router.navigate(['dashboard']);
                 }
                 else if (data[0].role == 'Customer') {
-                      
+                      debugger
                     this.apiService.showNotification('top', 'right', 'Customer successfully Login.', 'success');
                     localStorage.setItem('authenticationToken', data[0].token);
-                    localStorage.setItem('UserId', data[0].id);
+                    localStorage.setItem('UserId', data[0].uid);
                     localStorage.setItem('UserName', data[0].fname + ' ' + data[0].lname);
                     // localStorage.setItem('standardid', data[0].standard);
                     // localStorage.setItem('gender', data[0].gender);
@@ -149,6 +149,7 @@ export class LoginComponent implements OnInit {
                     localStorage.setItem('role', data[0].role);
                     localStorage.setItem('lastOutTime',data[0].last_inTime);
                     localStorage.setItem('lastInTime',data[0].last_login);
+                    localStorage.setItem('member',data[0].ismembership);
                     this.router.navigate(['dashboard']);
                 }
                 else if (data[0].role == 'Student') {

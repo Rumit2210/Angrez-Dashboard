@@ -1,5 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
+import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'app/api.service';
 import { Appointment } from 'app/customer/appointment.model';
 import { Customer } from 'app/customer/customer.model';
@@ -20,24 +19,37 @@ import { MembershipService } from 'app/membership/membership.service';
 import { BannersService } from 'app/banners/banners.service';
 import { Webbanners } from 'app/banners/banners.model';
 import { ProductService } from 'app/products/products.service';
-import { Order } from 'app/display-products/order.model';
+import { Order } from 'app/display-products/orderslist/order.model';
+import { Purchased } from 'app/membership/purchsed-membership/purchased.model';
 
 declare const $: any;
-
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html'
 })
 export class DashboardComponent implements OnInit {
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
 
-
-  activePageDataChunk: any = [];
-  pageSize = 10;
-  pageSizeOptions: number[] = [10, 15, 20];
-  totalModelRecords: any;
+  // activePageDataChunk: any = [];
+  // pageSize = 10;
+  // pageSizeOptions: number[] = [10, 15, 20];
   modelPage: any;
+
+  totalModelRecords: string;
+  totalRec: string;
+  totalcompletedService: string;
+  totalcmRecords: string;
+  totalapRecords: string;
+  totalERec: string;
+
+  page: Number = 1;
+  epage: number = 1;
+  mpage: Number = 1;
+  cspage: Number = 1;
+  cmpage: Number = 1;
+  appage: Number = 1;
+
+
   public appointmentModel: Appointment = new Appointment;
   public paymentModel: Payment = new Payment;
   public paymentList: Payment[];
@@ -52,8 +64,10 @@ export class DashboardComponent implements OnInit {
   public appointmentList: Appointment[];
   public completedAppointment: any = [];
   public orderList: Order[];
-  activePageDataChunkComApp: any = [];
-  activePageDataChunkAppo: any = [];
+  public purchsedMembership: Purchased[];
+
+  // activePageDataChunkComApp: any = [];
+  // activePageDataChunkAppo: any = [];
 
   dailytotal: number = 0;
   monthlytotal: number = 0;
@@ -70,19 +84,21 @@ export class DashboardComponent implements OnInit {
   appId: any;
   monthlyexpensestotal: number = 0;
   expenseTotal: number = 0;
-  membershipService: any;
   compateserviceslist: any;
   customerData: any[];
   totalCustExpense: number = 0;
   public Banners: Webbanners[] = [];
   topban: any = [];
-  rating: number;
+  ratings: number = 0;
+  isworking: boolean = false;
+
+
   constructor(
     private customercomponent: CustomerComponent,
     private servicesService: ServicesService,
     private employeeService: EmployeeService,
     private customerService: CustomerService,
-    public memberShipService: MembershipService,
+    private membershipService: MembershipService,
     private offerService: OfferService,
     private enquiryService: EnquiryService,
     private expensesService: ExpensesService,
@@ -93,11 +109,10 @@ export class DashboardComponent implements OnInit {
   ) {
     this.adminRole = localStorage.getItem('role');
 
-
     this.getAllServices();
     this.getAllEmployee();
     this.getCustomerDetails();
-    this.getMembershipDetails();
+    this.getPurchasedMemberList();
     this.getOfferDetails();
     this.getAllEnquiry();
     this.GetDailyTotal();
@@ -115,7 +130,29 @@ export class DashboardComponent implements OnInit {
   getAllEmployee() {
     this.employeeService.getAllEmployeeList().subscribe((data: any) => {
       this.employeeReg = data;
+      for (let i = 0; i < this.employeeReg.length; i++) {
+        this.employeeReg[i].index = i + 1;
+      }
     });
+  }
+
+  updateEmpProcessingActive(data) {
+    let valu = {
+      id: data.id,
+      isworking: this.isworking = false
+    }
+    this.employeeService.updateEmpActiveStatus(valu).subscribe((data: any) => {
+      this.getAllEmployee();
+    })
+  }
+  updateEmpProcessingDeActive(data) {
+    let valu = {
+      id: data.id,
+      isworking: this.isworking = true
+    }
+    this.employeeService.updateEmpActiveStatus(valu).subscribe((data: any) => {
+      this.getAllEmployee();
+    })
   }
   openEmployee() {
     this.router.navigate(['employee']);
@@ -147,32 +184,41 @@ export class DashboardComponent implements OnInit {
   openCustomer() {
     this.router.navigate(['customer']);
   }
-  getMembershipDetails() {
-    this.memberShipService.getAllMembershipList().subscribe((data: any) => {
-      this.membershipList = data;
-    });
+  // getMembershipDetails() {
+  //   this.membershipService.getAllMembershipList().subscribe((data: any) => {
+  //     this.membershipList = data;
+  //   });
+  // }
+  getPurchasedMemberList() {
+    this.purchsedMembership=[];
+    this.membershipService.getAllMemberPurchased().subscribe((data: any) => {
+      this.purchsedMembership = data;
+      for (let i = 0; i < this.purchsedMembership.length; i++) {
+        this.purchsedMembership[i].index = i + 1;
+      }
+    })
   }
   openMembership() {
-    this.router.navigate(['membership']);
+    this.router.navigate(['purchsed-membership']);
   }
   getAllEnquiry() {
     this.enquiryService.getAllEnquiryList().subscribe((data: any) => {
       this.enquiryList = data;
-      this.activePageDataChunk = this.enquiryList.slice(0, this.pageSize);
+      // this.activePageDataChunk = this.enquiryList.slice(0, this.pageSize);
       for (let i = 0; i < this.enquiryList.length; i++) {
         this.enquiryList[i].index = i + 1;
       }
     })
   }
-  setPageSizeOptions(setPageSizeOptionsInput: string) {
+  // setPageSizeOptions(setPageSizeOptionsInput: string) {
 
-    this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
-  }
-  onPageChangedEnquiry(e) {
-    let firstCut = e.pageIndex * e.pageSize;
-    let secondCut = firstCut + e.pageSize;
-    this.activePageDataChunk = this.enquiryList.slice(firstCut, secondCut);
-  }
+  //   this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
+  // }
+  // onPageChangedEnquiry(e) {
+  //   let firstCut = e.pageIndex * e.pageSize;
+  //   let secondCut = firstCut + e.pageSize;
+  //   this.activePageDataChunk = this.enquiryList.slice(firstCut, secondCut);
+  // }
 
   openExpenses() {
     this.router.navigate(['expenses']);
@@ -209,6 +255,10 @@ export class DashboardComponent implements OnInit {
   }
   openOffer() {
     this.router.navigate(['offer']);
+  }
+  openPendingOrder() {
+    this.router.navigate(['orderslist']);
+
   }
   getOfferDetails() {
     this.offerService.getAllOfferList().subscribe((data: any) => {
@@ -256,7 +306,7 @@ export class DashboardComponent implements OnInit {
   getAllAppointment() {
     this.customerService.getAllAppointmentList().subscribe((data: any) => {
       this.appointmentList = data;
-      this.activePageDataChunkAppo = this.appointmentList.slice(0, this.pageSize);
+      // this.activePageDataChunkAppo = this.appointmentList.slice(0, this.pageSize);
       for (let i = 0; i < this.appointmentList.length; i++) {
         this.appointmentList[i].index = i + 1;
         this.customerService.getServicesListUsingId(data[i].id).subscribe((data: any) => {
@@ -267,26 +317,27 @@ export class DashboardComponent implements OnInit {
         });
       }
     });
+
   }
-  onPageChangedAppoi(e) {
-    let firstCut = e.pageIndex * e.pageSize;
-    let secondCut = firstCut + e.pageSize;
-    this.activePageDataChunkAppo = this.enquiryList.slice(firstCut, secondCut);
-  }
+  // onPageChangedAppoi(e) {
+  //   let firstCut = e.pageIndex * e.pageSize;
+  //   let secondCut = firstCut + e.pageSize;
+  //   this.activePageDataChunkAppo = this.enquiryList.slice(firstCut, secondCut);
+  // }
   getAllCompletedAppointment() {
     this.customerService.getCompletedServices().subscribe((data: any) => {
       this.completedAppointment = data;
-      this.activePageDataChunkComApp = this.completedAppointment.slice(0, this.pageSize);
+      // this.activePageDataChunkComApp = this.completedAppointment.slice(0, this.pageSize);
       for (let i = 0; i < this.completedAppointment.length; i++) {
         this.completedAppointment[i].index = i + 1;
       }
     });
   }
-  onPageChangedComAp(e) {
-    let firstCut = e.pageIndex * e.pageSize;
-    let secondCut = firstCut + e.pageSize;
-    this.activePageDataChunkComApp = this.enquiryList.slice(firstCut, secondCut);
-  }
+  // onPageChangedComAp(e) {
+  //   let firstCut = e.pageIndex * e.pageSize;
+  //   let secondCut = firstCut + e.pageSize;
+  //   this.activePageDataChunkComApp = this.enquiryList.slice(firstCut, secondCut);
+  // }
   modeOfPayment(obj) {
     this.cContact = obj.contact;
     this.cEmail = obj.email;
@@ -380,6 +431,13 @@ export class DashboardComponent implements OnInit {
         }
       })
 
+    });
+  }
+  submitServiceRating(data) {
+    this.customerService.saveRatingsDetailsById(data).subscribe((data1: any) => {
+      if (data1 = 'success') {
+        this.apiService.showNotification('top', 'right', 'Ratings saved Successfully.', 'success');
+      }
     });
   }
 }

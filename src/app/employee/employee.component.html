@@ -159,9 +159,9 @@
                                         </label>
                                     </div>
                                 </div>
-                                <!-- <label class="col-md-2 col-form-label">Select Services</label>
+                                <label class="col-md-2 col-form-label">Selected Services</label>
                                 <div class="col-md-4">
-                                    <div class="btn-group bootstrap-select w-100">
+                                    <!-- <div class="btn-group bootstrap-select w-100">
                                         <div style="border: 1px #DDDDDD solid !important">
                                             <angular2-multiselect [ngModelOptions]="{standalone: true}"
                                                 [data]="serviceData" [(ngModel)]="selectedServices"
@@ -171,8 +171,19 @@
                                                 (onDeSelectAll)="onDeSelectAll($event)">
                                             </angular2-multiselect>
                                         </div>
+                                    </div> -->
+                                    <div class="form-group">
+                                        <mat-form-field appearance="fill">
+                                            <mat-label>Selected Services</mat-label>
+                                            <mat-select [formControl]="servicesForMulti" multiple
+                                                [(ngModel)]="updateEmployeeModel.service">
+                                                <mat-option *ngFor="let s of servicesList" [value]="s">
+                                                    {{s.name}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
                                     </div>
-                                </div> -->
+                                </div>
                             </div>
 
                         </form>
@@ -237,32 +248,32 @@
                 <div class="col-md-4">
                     <label class="col-form-label">Salary</label>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="fname"
-                            name="fname" [(ngModel)]="salaryModel.salary"/>
+                        <input type="text" class="form-control" id="fname" name="fname"
+                            [(ngModel)]="salaryModel.salary" />
                     </div>
                 </div>
                 <div class="col-md-4">
                     <label class="col-form-label">Date</label>
                     <div class="form-group">
-                        <input type="date" class="form-control" id="fname"
-                            name="fname" [(ngModel)]="salaryModel.paiddate"/>
+                        <input type="date" class="form-control" id="fname" name="fname"
+                            [(ngModel)]="salaryModel.paiddate" />
                     </div>
                 </div>
                 <div class="col-md-4">
                     <label class="col-form-label">Description</label>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="fname" 
-                            name="fname" [(ngModel)]="salaryModel.desc"/>
+                        <input type="text" class="form-control" id="fname" name="fname"
+                            [(ngModel)]="salaryModel.desc" />
                     </div>
                 </div>
                 <div class="ml-md-auto">
                     <br>
                     <button type="submit" class="btn btn-info btn-round" (click)="saveSalaryDetail(salaryModel)"
-                            data-dismiss="modal"> 
-                            <i class="fa fa-paper-plane" aria-hidden="true"></i> Submit
+                        data-dismiss="modal">
+                        <i class="fa fa-paper-plane" aria-hidden="true"></i> Submit
                     </button>
                 </div>
-                
+
                 <!-- <div class="ml-md-auto">
                     <button type="submit" class="btn btn-info btn-round"
                         (click)="saveServicesDetail(servicesModel)">
@@ -299,7 +310,8 @@
                             <th class="text-right">Actions</th>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let item of salaryList | paginate: { itemsPerPage: 5, currentPage: p }; let i = index">
+                            <tr
+                                *ngFor="let item of salaryList | paginate: { itemsPerPage: 5, currentPage: p }; let i = index">
                                 <td class="text-center">{{ i+1 }}</td>
                                 <!-- <td class="text-center">{{ item.emp}} </td>
                                 <td class="text-center">{{item.cont}}</td> -->
@@ -316,7 +328,7 @@
                                     &nbsp;
                                     <button type="button" rel="tooltip" class="btn btn-success btn-icon btn-sm">
                                         <i class="fa fa-edit" data-toggle="modal" data-target="#salaryModal"
-                                        (click)="viewSalDetails(item)"></i>
+                                            (click)="viewSalDetails(item)"></i>
                                     </button>
                                     &nbsp;
                                     <button type="button" rel="tooltip" class="btn btn-danger btn-icon btn-sm"
@@ -424,8 +436,9 @@
                     <div class="col-md-4">
                         <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
                             <textarea id="address" name="address" rows="4" cols="54" [(ngModel)]="employeeModel.address"
-                                placeholder="Enter Address" required value="" pattern="[#\d+ ([^,]+), ([A-Z]{2}) (\d{5})]"
-                                (focus)="focus = true" #address="ngModel"> </textarea>
+                                placeholder="Enter Address" required value=""
+                                pattern="[#\d+ ([^,]+), ([A-Z]{2}) (\d{5})]" (focus)="focus = true"
+                                #address="ngModel"> </textarea>
                         </div>
                         <div *ngIf="address.errors && (address.dirty || address.touched)" class="alert alert-danger">
                             <div *ngIf="address.errors.required">
@@ -492,25 +505,35 @@
                     <label class="col-md-2 col-form-label">Select Services</label>
                     <div class="col-md-4">
                         <div class="btn-group bootstrap-select w-100">
-                            <div style="border: 1px #DDDDDD solid !important">
+                            <mat-form-field appearance="fill">
+                                <mat-label>Select Services</mat-label>
+                                <mat-select [formControl]="servicesForMulti" multiple
+                                    [(ngModel)]="employeeModel.service">
+                                    <mat-option *ngFor="let s of servicesList" [value]="s">{{s.name}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <!-- <div style="border: 1px #DDDDDD solid !important">
                                 <angular2-multiselect [ngModelOptions]="{standalone: true}" [data]="serviceData"
                                     [(ngModel)]="selectedServices" [settings]="dropdownSettings"
                                     (onSelect)="onItemSelect($event)" (onDeSelect)="OnItemDeSelect($event)"
                                     (onSelectAll)="onSelectAll($event)" name="items"
                                     (onDeSelectAll)="onDeSelectAll($event)">
                                 </angular2-multiselect>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
-                </div>
+                    <div class="col-md-4">
 
+                    </div>
+                </div>
+                <!-- [disabled]="!employeeRegForm.form.valid" -->
             </form>
         </div>
         <div class="card-footer">
             <div class="row">
                 <div class="ml-md-auto">
-                    <button type="submit" class="btn btn-info btn-round" [disabled]="!employeeRegForm.form.valid"
-                        (click)="saveEmployeeDetail(employeeModel)">
+                    <button type="submit" class="btn btn-info btn-round" (click)="saveEmployeeDetail(employeeModel)">
                         <i class="fa fa-paper-plane" aria-hidden="true"></i> Submit
                     </button>
                     <button type="submit" class="btn btn-danger btn-round" (click)="closeEmpForm()">
@@ -557,7 +580,7 @@
                                             placeholder="Enter Contact Number" />
                                     </div>
                                 </div>
-                            
+
                             </div>
 
                         </form>

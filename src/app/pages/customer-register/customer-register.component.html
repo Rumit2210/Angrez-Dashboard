@@ -48,7 +48,7 @@
 </nav>
 <div class="wrapper wrapper-full-page">
   <div class="full-page register-page section-image" filter-color="black" data-image="./assets/img/bg/map-banner.jpg">
-    <div class="content">
+    <div class="content" style="padding-bottom: 5%;">
       <div class="container">
         <div class="row">
           <div class="col-lg-5 col-md-5 ml-auto">
@@ -202,12 +202,11 @@
               <div class="card-body">
                 <div class="input-group" [ngClass]="{ 'input-group-focus': focus === true }">
                   <input type="number" class="form-control" id="otp" name="otp" [(ngModel)]="customerModel.otp"
-                    placeholder="Enter six digit OTP" required value="" pattern="0-9" (focus)="focus = true"
-                    #otp="ngModel" />
+                    placeholder="Enter six digit OTP" required value="" pattern="0-9" (focus)="focus=true"
+                    (blur)="focus=false" #otp="ngModel" />
 
                   <div class="input-group-append">
-                    <span class="input-group-text" id="basic-addon1"><i class="fa fa-key"
-                        aria-hidden="true"></i></span>
+                    <span class="input-group-text" id="basic-addon1"><i class="fa fa-key" aria-hidden="true"></i></span>
                   </div>
 
                 </div>
@@ -220,15 +219,15 @@
                   </div>
                 </div>
               </div>
-              <div class="link d-flex justify-content-center" style="padding-top:10px ;color:blue;" >
-                <a >
-                    <strong>Resend OTP in: </strong>{{timeLeft}}
+              <div class="link d-flex justify-content-center" style="padding-top:10px ;color:blue;">
+                <a>
+                  <strong>Resend OTP in: </strong>{{timeLeft}} Sec.
                 </a>
-            </div>
+              </div>
               <div class="card-footer text-center">
                 <button class="btn btn-danger btn-block btn-round" id="registration-submit" *ngIf="timeLeft==0"
                   (click)="resendOTP()" value="Sign in"><i class="fa fa-sign-in"></i> Resend OTP</button>
-                  <br>
+                <br>
                 <button type="cancel" (click)="cancelIt()" class="btn btn-default btn-round">
                   <i class="fa fa-times" aria-hidden="true"></i> Cancel
                 </button>
@@ -243,7 +242,7 @@
         </div>
       </div>
     </div>
-    <footer class="footer footer-black  footer-white ">
+    <footer class="footer footer-black  footer-white " >
       <div class="container">
         <div class="row">
           <nav class="footer-nav">
@@ -275,4 +274,5 @@
       </div>
     </footer>
   </div>
+
 </div>

@@ -14,6 +14,8 @@ import { Router } from '@angular/router';
 import { Offer } from 'app/offer/offer.model';
 import { OfferService } from 'app/offer/offer.service';
 import { purchaseOffer } from './purchaseOffer.model';
+import { MembershipService } from 'app/membership/membership.service';
+import { ThemePalette } from '@angular/material/core';
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 @Component({
@@ -26,7 +28,7 @@ export class CustomerComponent implements OnInit {
   public appointmentModel: Appointment = new Appointment
   public appointment: Appointment[];
   public appointmentList: Appointment[];
-  public pur_off: purchaseOffer=new purchaseOffer;
+  public pur_off: purchaseOffer = new purchaseOffer;
   public customer: Customer[] = [];
   public customerList: Customer[];
   employeename: any;
@@ -50,7 +52,7 @@ export class CustomerComponent implements OnInit {
   customerData: any[];
   usedServices: any[];
   totalRecords: string;
-  vip: boolean = false;
+  vip: boolean;
   totalModelRecords: string;
   page: Number = 1;
   modelPage: number = 1;
@@ -66,15 +68,23 @@ export class CustomerComponent implements OnInit {
   selctedPer: any;
   offerData: any[];
   offerPrice: bigint;
-  offerEmpId:any;
-  selectedOfferEmpName:any;
+  offerEmpId: any;
+  selectedOfferEmpName: any;
+  membersActive: boolean;
+  activeMembership: any = [];
+  usedSer: any;
+
+  color: ThemePalette = 'accent';
+  checked = false;
+  disabled = false;
   constructor(
     private servicesService: ServicesService,
     private employeeService: EmployeeService,
     private customerService: CustomerService,
     private apiService: ApiService,
     private router: Router,
-    private offerService: OfferService
+    private offerService: OfferService,
+    private membershipService: MembershipService
   ) {
 
     this.getAllEmployee();
@@ -117,7 +127,7 @@ export class CustomerComponent implements OnInit {
       this.employeeReg = data;
     });
   }
-  selectEmpForOffer(id){
+  selectEmpForOffer(id) {
     this.offerEmpId = id;
     this.employeeReg.forEach(element => {
       if (element.id == id) {
@@ -158,7 +168,7 @@ export class CustomerComponent implements OnInit {
     })
   }
   addPoinInList() {
-     
+
     this.totalPoint = 0;
     // this.totalPrice = 0;
     this.totalTime = 0;
@@ -175,8 +185,8 @@ export class CustomerComponent implements OnInit {
         this.totalTime = this.totalTime + element.time;
       }
     });
-    if(this.selectedOffer && this.addService.length==0){
-      this.totalPrice=0;
+    if (this.selectedOffer && this.addService.length == 0) {
+      this.totalPrice = 0;
       this.totalPrice = this.offerPrice;
     }
   }
@@ -245,7 +255,20 @@ export class CustomerComponent implements OnInit {
       });
     });
   }
+  viewMembershipDetails() {
+    let data = {
+      id: this.selectedCustId
+    }
+    this.customerService.getActivatedMembershipDetail(data).subscribe((data: any) => {
+      this.activeMembership = data;
+      debugger
+      for (let i = 0; i < this.activeMembership.length; i++) {
+        this.activeMembership[i].index = i + 1;
+      }
+    })
+  }
   seletedCustomerDetails(data) {
+    this.membersActive = data.ismembership
     this.selectedCustId = data.id;
     this.customerModel = data;
     this.appointmentModel = data;
@@ -253,6 +276,7 @@ export class CustomerComponent implements OnInit {
     this.selectCustomer = true;
     this.getCustomerPoints();
     this.appointmentModel.redeempoints = 0;
+    this.viewMembershipDetails();
   }
   saveAppointmentDetails() {
     this.appointmentModel.lessPoints = 0;
@@ -269,29 +293,29 @@ export class CustomerComponent implements OnInit {
     this.appointmentModel.custid = this.appointmentModel.id;
 
 
-   
+
     if (this.appointmentModel.redeempoints > this.appointmentModel.tCustPoint) {
       this.apiService.showNotification('top', 'right', 'You can not redeem point more than total point.', 'danger');
     }
-    else if(this.selectedOffer){
-      this.pur_off.totalprice=this.totalPrice;
+    else if (this.selectedOffer) {
+      this.pur_off.totalprice = this.totalPrice;
       this.pur_off.empId = this.offerEmpId;
       this.appointmentModel.offerId = this.offerId;
       this.customerService.saveAppointmentList(this.appointmentModel).subscribe((data: any) => {
         this.pur_off.appointmentId = data.insertId;
-         debugger
-        this.customerService.savePurchasedOrder(this.pur_off).subscribe((res:any)=>{
-          
-          if(res =='success'){
+        debugger
+        this.customerService.savePurchasedOrder(this.pur_off).subscribe((res: any) => {
+
+          if (res == 'success') {
             this.router.navigate(['dashboard']);
             location.reload();
             this.apiService.showNotification('top', 'right', 'Appointment Successfully Booked.', 'success');
-          }else{
+          } else {
             this.apiService.showNotification('top', 'right', 'Error in booking appointment.', 'danger');
           }
-         
+
         });
-        
+
       })
     }
     else {
@@ -332,7 +356,7 @@ export class CustomerComponent implements OnInit {
       this.offerData.forEach(element => {
         this.offerPrice = element.offerprice;
       });
-      this.totalPrice = this.totalPrice+this.offerPrice;
+      this.totalPrice = this.totalPrice + this.offerPrice;
       for (let i = 0; i < this.offerData.length; i++) {
         this.offerData[i].index = i + 1;
       }
@@ -496,7 +520,19 @@ export class CustomerComponent implements OnInit {
     });
   }
   updateCustomerDetails() {
+    this.customerModel.vip;
+    debugger
     this.customerService.updateCustomerList(this.customerModel).subscribe((req) => {
+      this.getCustomerDetails();
+      this.apiService.showNotification('top', 'right', 'Customer Details Successfully Updated.', 'success');
+    })
+  }
+  updateVipTag() {
+    let data = {
+      id: this.customerModel.id,
+      vip: this.customerModel.vip
+    }
+    this.customerService.updateCustomerList(data).subscribe((req) => {
       this.getCustomerDetails();
       this.apiService.showNotification('top', 'right', 'Customer Details Successfully Updated.', 'success');
     })

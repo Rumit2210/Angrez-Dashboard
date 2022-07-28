@@ -29,5 +29,8 @@ export class EmployeeService {
     updateEmpList(admin: Employee): Observable<any> {
         return this.httpClient.post<any>(ApiService.updateEmployeeListURL, admin);
     }
+    updateEmpActiveStatus(admin:Employee):Observable<any>{
+        return this.httpClient.post<any>(ApiService.updateWorkingStatusURL,admin)
+    }
 
 }

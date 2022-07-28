@@ -15,7 +15,8 @@ export class Employee {
         public isactive?: boolean,
         public createddate?: Date,
         public updateddate?: Date,
-        public service?: any
+        public service?: any,
+        public isworking?:boolean
         // public dateofbirth?: string
     ) {
     }
