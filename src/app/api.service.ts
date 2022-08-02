@@ -33,7 +33,7 @@ export class ApiService {
   public static saveAppointmentListURL: string = ApiService.HOST_URL + '/admin/SaveAppointmentList';
   public static getAllAppointmentURL: string = ApiService.HOST_URL + '/admin/GetAllAppointment';
   public static getViewAppointmentURL: string = ApiService.HOST_URL + '/admin/GetViewAppointment';
-  public static getAllEnquiryListURL: string = ApiService.HOST_URL + '/admin/GetAllEnquiryList';
+  public static getAllEnquiryListURL: string = ApiService.HOST_URL + '/admin/GetAllAppointment';
   public static getDailyTotalURL: string = ApiService.HOST_URL + '/admin/GetDailyTotal';
   public static getMonthlyTotalURL: string = ApiService.HOST_URL + '/admin/GetMonthlyTotal';
   public static updateCustomerListURL: string = ApiService.HOST_URL + '/admin/UpdateCustomerList';

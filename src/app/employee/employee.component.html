@@ -115,7 +115,7 @@
                                 <label class="col-md-2 col-form-label">Address</label>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <textarea id="address" name="address" rows="3" cols="40"
+                                        <textarea id="address" class="form-control" name="address" rows="3" cols="40"
                                             [(ngModel)]="updateEmployeeModel.address"
                                             placeholder="Enter Address"> </textarea>
                                     </div>
@@ -435,7 +435,7 @@
                     <label class="col-md-2 col-form-label">Address</label>
                     <div class="col-md-4">
                         <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
-                            <textarea id="address" name="address" rows="4" cols="54" [(ngModel)]="employeeModel.address"
+                            <textarea id="address" name="address" rows="4" class="form-control" cols="54" [(ngModel)]="employeeModel.address"
                                 placeholder="Enter Address" required value=""
                                 pattern="[#\d+ ([^,]+), ([A-Z]{2}) (\d{5})]" (focus)="focus = true"
                                 #address="ngModel"> </textarea>

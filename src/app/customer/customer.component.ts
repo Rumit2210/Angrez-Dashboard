@@ -16,6 +16,7 @@ import { OfferService } from 'app/offer/offer.service';
 import { purchaseOffer } from './purchaseOffer.model';
 import { MembershipService } from 'app/membership/membership.service';
 import { ThemePalette } from '@angular/material/core';
+import { FormControl, Validators } from '@angular/forms';
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 @Component({
@@ -73,10 +74,13 @@ export class CustomerComponent implements OnInit {
   membersActive: boolean;
   activeMembership: any = [];
   usedSer: any;
-
+  formdate: Date = new Date();
+  bookingTimeInterval: any = [];
   color: ThemePalette = 'accent';
   checked = false;
   disabled = false;
+  timeSl: any;
+  timeControl = new FormControl(null, Validators.required);
   constructor(
     private servicesService: ServicesService,
     private employeeService: EmployeeService,
@@ -84,7 +88,6 @@ export class CustomerComponent implements OnInit {
     private apiService: ApiService,
     private router: Router,
     private offerService: OfferService,
-    private membershipService: MembershipService
   ) {
 
     this.getAllEmployee();
@@ -110,7 +113,11 @@ export class CustomerComponent implements OnInit {
       }]
     this.valu++;
     this.vip;
-
+  }
+  getTimeIntervalJson() {
+    this.customerService.getBookingTimeInterval().subscribe((data: any) => {
+      this.bookingTimeInterval = data;
+    })
   }
   addServiceList() {
 
@@ -261,13 +268,14 @@ export class CustomerComponent implements OnInit {
     }
     this.customerService.getActivatedMembershipDetail(data).subscribe((data: any) => {
       this.activeMembership = data;
-      debugger
+
       for (let i = 0; i < this.activeMembership.length; i++) {
         this.activeMembership[i].index = i + 1;
       }
     })
   }
   seletedCustomerDetails(data) {
+
     this.membersActive = data.ismembership
     this.selectedCustId = data.id;
     this.customerModel = data;
@@ -275,8 +283,17 @@ export class CustomerComponent implements OnInit {
     this.custAppointment = true;
     this.selectCustomer = true;
     this.getCustomerPoints();
+    this.getTimeIntervalJson();
     this.appointmentModel.redeempoints = 0;
     this.viewMembershipDetails();
+  }
+  bookingTimeSelcted(id) {
+    this.bookingTimeInterval.forEach(element => {
+      if (element.id == id) {
+        this.timeSl = element.time
+      }
+    });
+    // this.appointmentModel.timeSlot = this.timeSl;
   }
   saveAppointmentDetails() {
     this.appointmentModel.lessPoints = 0;
@@ -291,9 +308,8 @@ export class CustomerComponent implements OnInit {
     this.appointmentModel.totaltime = this.totalTime;
     this.appointmentModel.isactive = true;
     this.appointmentModel.custid = this.appointmentModel.id;
-
-
-
+    this.appointmentModel.timeSlot = this.timeSl;
+    
     if (this.appointmentModel.redeempoints > this.appointmentModel.tCustPoint) {
       this.apiService.showNotification('top', 'right', 'You can not redeem point more than total point.', 'danger');
     }
@@ -303,7 +319,7 @@ export class CustomerComponent implements OnInit {
       this.appointmentModel.offerId = this.offerId;
       this.customerService.saveAppointmentList(this.appointmentModel).subscribe((data: any) => {
         this.pur_off.appointmentId = data.insertId;
-        debugger
+
         this.customerService.savePurchasedOrder(this.pur_off).subscribe((res: any) => {
 
           if (res == 'success') {
@@ -521,7 +537,7 @@ export class CustomerComponent implements OnInit {
   }
   updateCustomerDetails() {
     this.customerModel.vip;
-    debugger
+
     this.customerService.updateCustomerList(this.customerModel).subscribe((req) => {
       this.getCustomerDetails();
       this.apiService.showNotification('top', 'right', 'Customer Details Successfully Updated.', 'success');

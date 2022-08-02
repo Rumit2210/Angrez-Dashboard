@@ -16,6 +16,8 @@ export class Appointment {
         public tCustPoint?: number,
         public offerId?:number,
         public ratings?:number,
+        public bookingdate?:Date,
+        public timeSlot?:string
     ) {
 
     }

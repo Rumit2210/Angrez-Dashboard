@@ -604,7 +604,7 @@
         </div>
         <div class="col-md-6">
             <div class="card">
-                <div class="card-header">
+                <div class="card-header" (click)="openEniquiry()">
                     <div class="row">
                         <div class="col-md-8">
                             <h4 class="card-title">Pending Enquiry List</h4>
@@ -613,24 +613,31 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table" (click)="openEniquiry()">
+                        <table class="table" >
                             <thead class="text-primary">
                                 <th class="text-center">#</th>
                                 <th class="text-center">Name</th>
                                 <th class="text-center">Contact</th>
-                                <th class="text-center">Services</th>
-                                <th class="text-center">Time</th>
-                                <th class="text-center">Date</th>
+                                <th class="text-center">Total Price</th>
+                                <th class="text-center">Total Time</th>
+                                <th class="text-center">Appointment Date</th>
+                                <th class="text-center">Action</th>
                             </thead>
                             <tbody>
                                 <tr
                                     *ngFor="let item of enquiryList | paginate: { id:'enquiry_pagination',itemsPerPage: 5, currentPage: epage,totalItems:totalERec }; ">
                                     <td class="text-center">{{ item.index }}</td>
-                                    <td class="text-center">{{ item.name}} </td>
+                                    <td class="text-center">{{ item.fname}} {{ item.lname}} </td>
                                     <td class="text-center">{{ item.contact }}</td>
-                                    <td class="text-center">{{ item.service }},{{item.service1}}</td>
-                                    <td class="text-center">{{ item.time }}</td>
-                                    <td class="text-center">{{ item.Createddate }}</td>
+                                    <td class="text-center">{{ item.totalprice }} ₹</td>
+                                    <td class="text-center">{{ item.totaltime }}</td>
+                                    <td class="text-center">{{ item.appointmentdate |date }}</td>
+                                    <td class="text-right">
+                                        <button type="button" rel="tooltip" class="btn btn-info btn-icon btn-sm">
+                                            <i class="fa fa-eye" data-toggle="modal" data-target="#customerServicesModal"
+                                                (click)="openUsedServiceList(item)"></i>
+                                        </button>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>

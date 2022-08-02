@@ -9,6 +9,7 @@ import { PagesRoutes } from './pages.routing';
 import { LoginComponent } from './login/login.component';
 import { ForgotPwdComponent } from './forgot-pwd/forgot-pwd.component';
 import { CustomerRegisterComponent } from './customer-register/customer-register.component';
+import { LandingSelectionComponent } from './landing-selection/landing-selection.component';
 
 @NgModule({
     imports: [
@@ -21,6 +22,7 @@ import { CustomerRegisterComponent } from './customer-register/customer-register
         LoginComponent,
         ForgotPwdComponent,
         CustomerRegisterComponent,
+        LandingSelectionComponent,
        
 
     ]

@@ -11,10 +11,14 @@ import { Payment } from './payment.model';
     providedIn: 'root'
 })
 export class CustomerService {
-
+    bookingTimeInterval: any = [];
     constructor(
         private httpClient: HttpClient
-    ) { }
+    ) {
+        this.getBookingTimeInterval().subscribe(data => {
+            this.bookingTimeInterval = data;
+        });
+    }
 
     saveCustomerList(admin: Customer): Observable<any> {
         return this.httpClient.post<any>(ApiService.saveCustomerListURL, admin);
@@ -112,5 +116,9 @@ export class CustomerService {
     }
     saveRatingsDetailsById(data): Observable<any> {
         return this.httpClient.post<any>(ApiService.saveRatingsDetailsURL, data);
+    }
+    getBookingTimeInterval(): Observable<any> {
+        return this.httpClient.get("./assets/json/Time-Interval.json");
+
     }
 }
