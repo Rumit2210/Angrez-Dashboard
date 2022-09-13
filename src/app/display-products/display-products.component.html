@@ -14,7 +14,7 @@
                             <div class=" page-carousel">
                                 <ngb-carousel>
                                     <ng-template ngbSlide *ngFor="let b of images">
-                                        <img src="http://localhost:8090{{b.listimages}}" alt="Random first slide">
+                                        <img src="http://localhost:8100{{b.listimages}}" alt="Random first slide">
                                         <div class="carousel-caption">
                                         </div>
                                     </ng-template>
@@ -25,13 +25,13 @@
 
                                     <div class="carousel-item active">
                                         <h6>
-                                            <img src="http://localhost:8090{{frontimage.listimages}}"
+                                            <img src="http://localhost:8100{{frontimage.listimages}}"
                                                 class="card-img-top" alt="Laptop " />
                                         </h6>
                                     </div>
                                     <div class="carousel-item" *ngFor="let b of images">
                                         <h6>
-                                            <img src="http://localhost:8090{{b.listimages}}" class="card-img-top"
+                                            <img src="http://localhost:8100{{b.listimages}}" class="card-img-top"
                                                 alt="Laptop " />
                                         </h6>
                                     </div>
@@ -289,7 +289,7 @@
                 <div class="card">
                     <div class="card-body " data-target="#noticeModal" data-toggle="modal" (click)="selectedProd(a,i)">
                         <div class="row justify-content-between d-flex ">
-                            <img src="http://localhost:8090{{a.image}}" class="card-img-top " alt="Laptop " />
+                            <img src="http://localhost:8100{{a.image}}" class="card-img-top " alt="Laptop " />
                             <div class="col-sm-8 col-xs-8">
                                 <h6>{{a.name}}</h6>
                             </div>
